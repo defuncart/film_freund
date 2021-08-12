@@ -1,3 +1,4 @@
+import 'package:film_freund/utils/sizes.dart';
 import 'package:flutter/material.dart';
 
 class Sidebar extends StatelessWidget {
@@ -39,8 +40,9 @@ class Sidebar extends StatelessWidget {
               leading: Icon(element.icon),
               title: Text(element.title),
               onTap: () {
-                // TODO do not pop when desktop
-                Navigator.of(context).pop();
+                if (isMobile(context)) {
+                  Navigator.of(context).pop();
+                }
                 element.onPressed?.call();
               },
             ),
