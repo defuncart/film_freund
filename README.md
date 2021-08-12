@@ -4,13 +4,32 @@ An application to discover new films and organize what to watch next.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+If you would like to build the app yourself, then you simply need:
 
-A few resources to get you started if this is your first Flutter project:
+- Flutter stable >= 2.2
+- Dart >= 2.13
+- macOS:
+    - Xcode >= 12.4
+    - CocoaPods >= 1.10.0
+- web:
+    - Chrome
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Code Generation
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Localizations
+
+To add new localizations, update `assets_dev/loca/loca.csv` and run
+
+```sh
+sh bin/pseudoloca_generate.sh
+```
+
+## Credits
+
+This application is designed for private use, and is inspired by Letterbox, iMDb and Filmweb.
+
+## Raising Issues and Contributing
+
+Please report bugs and issues, and raise feature requests [here](https://github.com/defuncart/film_freund/issues).
+
+To contribute, submit a PR with a detailed description and tests, if applicable.
