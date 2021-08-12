@@ -1,0 +1,8 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+    exclude:
+        - lib/**.g.dart
+
+rules:
+    lines_longer_than_80_chars: false
