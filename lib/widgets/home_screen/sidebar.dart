@@ -1,8 +1,16 @@
 import 'package:film_freund/utils/sizes.dart';
+import 'package:film_freund/widgets/home_screen/active_view.dart';
 import 'package:flutter/material.dart';
 
 class Sidebar extends StatelessWidget {
-  const Sidebar({Key? key}) : super(key: key);
+  const Sidebar({
+    required this.onViewChanged,
+    required this.onSignOut,
+    Key? key,
+  }) : super(key: key);
+
+  final void Function(ActiveView activeView) onViewChanged;
+  final VoidCallback onSignOut;
 
   @override
   Widget build(BuildContext context) {
@@ -38,14 +46,25 @@ class Sidebar extends StatelessWidget {
           for (final element in elements)
             ListTile(
               leading: Icon(element.icon),
-              title: Text(element.title),
+              title: Text(element.view.title),
               onTap: () {
                 if (isMobile(context)) {
                   Navigator.of(context).pop();
                 }
+                onViewChanged(element.view);
                 element.onPressed?.call();
               },
             ),
+          ListTile(
+            leading: const Icon(Icons.logout),
+            title: const Text('Sign Out'),
+            onTap: () {
+              if (isMobile(context)) {
+                Navigator.of(context).pop();
+              }
+              onSignOut();
+            },
+          ),
         ],
       ),
     );
@@ -56,42 +75,37 @@ class Sidebar extends StatelessWidget {
 const elements = [
   SidebarElement(
     icon: Icons.whatshot,
-    title: 'Popular',
+    view: ActiveView.popular,
     onPressed: null,
   ),
   SidebarElement(
     icon: Icons.search,
-    title: 'Search',
+    view: ActiveView.search,
     onPressed: null,
   ),
   SidebarElement(
     icon: Icons.check,
-    title: 'Watched',
+    view: ActiveView.watched,
     onPressed: null,
   ),
   SidebarElement(
     icon: Icons.favorite,
-    title: 'Liked',
+    view: ActiveView.liked,
     onPressed: null,
   ),
   SidebarElement(
     icon: Icons.watch_later,
-    title: 'Watchlist',
+    view: ActiveView.watchlist,
     onPressed: null,
   ),
   SidebarElement(
     icon: Icons.list,
-    title: 'Lists',
+    view: ActiveView.lists,
     onPressed: null,
   ),
   SidebarElement(
     icon: Icons.settings,
-    title: 'Settings',
-    onPressed: null,
-  ),
-  SidebarElement(
-    icon: Icons.logout,
-    title: 'Sign Out',
+    view: ActiveView.settings,
     onPressed: null,
   ),
 ];
@@ -100,11 +114,11 @@ const elements = [
 class SidebarElement {
   const SidebarElement({
     required this.icon,
-    required this.title,
+    required this.view,
     required this.onPressed,
   });
 
   final IconData icon;
-  final String title;
+  final ActiveView view;
   final VoidCallback? onPressed;
 }
