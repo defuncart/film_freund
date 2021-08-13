@@ -3,6 +3,12 @@ import 'package:film_freund/generated/l10n.dart';
 import 'package:film_freund/widgets/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 
+@visibleForTesting
+const emailTextFieldKey = Key('SigninScreenEmailTextField');
+
+@visibleForTesting
+const passwordTextFieldKey = Key('SigninScreenPasswordTextField');
+
 class SigninScreen extends StatefulWidget {
   static const routeName = 'LoginScreen';
 
@@ -51,6 +57,7 @@ class _SigninScreenState extends State<SigninScreen> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 TextField(
+                  key: emailTextFieldKey,
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
@@ -62,6 +69,7 @@ class _SigninScreenState extends State<SigninScreen> {
                 ),
                 const SizedBox(height: 8),
                 TextField(
+                  key: passwordTextFieldKey,
                   controller: _passwordController,
                   keyboardType: TextInputType.visiblePassword,
                   decoration: InputDecoration(
