@@ -28,46 +28,87 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
 
-    final content = HomePageContent(
-      activeView: _activeView,
-    );
-
     return isSinglePage(context)
-        ? Scaffold(
-            appBar: AppBar(
-              title: Text(_activeView.title),
-            ),
-            body: content,
-            // TODO only needed for web/desktop
-            drawer: SizedBox(
-              width: MediaQuery.of(context).size.width * 0.7,
-              child: sidebar,
-            ),
-            drawerEnableOpenDragGesture: false,
+        ? HomeScreenDetail(
+            activeView: _activeView,
+            sidebar: sidebar,
           )
-        : Scaffold(
-            body: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Row(
-                children: [
-                  ConstrainedBox(
-                    constraints: BoxConstraints(
-                      minWidth: 200,
-                      maxWidth: min(max(200, MediaQuery.of(context).size.width * 0.25), 300),
-                    ),
-                    child: sidebar,
-                  ),
-                  const VerticalDivider(width: 2),
-                  Expanded(
-                    child: content,
-                  ),
-                ],
-              ),
-            ),
+        : HomeScreenMasterDetail(
+            activeView: _activeView,
+            sidebar: sidebar,
           );
   }
 }
 
+@visibleForTesting
+class HomeScreenDetail extends StatelessWidget {
+  const HomeScreenDetail({
+    required this.activeView,
+    required this.sidebar,
+    Key? key,
+  }) : super(key: key);
+
+  final ActiveView activeView;
+  final Sidebar sidebar;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(activeView.title),
+      ),
+      body: HomePageContent(
+        activeView: activeView,
+      ),
+      // TODO only needed for web/desktop
+      drawer: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.7,
+        child: sidebar,
+      ),
+      drawerEnableOpenDragGesture: false,
+    );
+  }
+}
+
+@visibleForTesting
+class HomeScreenMasterDetail extends StatelessWidget {
+  const HomeScreenMasterDetail({
+    required this.activeView,
+    required this.sidebar,
+    Key? key,
+  }) : super(key: key);
+
+  final ActiveView activeView;
+  final Sidebar sidebar;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Row(
+          children: [
+            ConstrainedBox(
+              constraints: BoxConstraints(
+                minWidth: 200,
+                maxWidth: min(max(200, MediaQuery.of(context).size.width * 0.25), 300),
+              ),
+              child: sidebar,
+            ),
+            const VerticalDivider(width: 2),
+            Expanded(
+              child: HomePageContent(
+                activeView: activeView,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+@visibleForTesting
 class HomePageContent extends StatelessWidget {
   const HomePageContent({
     required this.activeView,
