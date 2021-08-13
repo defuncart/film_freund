@@ -41,8 +41,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "signOutConfirmationDialogDescriptionText":
             MessageLookupByLibrary.simpleMessage(
                 "Are you sure you want to sign out?"),
+        "signinScreenEmailErrorText":
+            MessageLookupByLibrary.simpleMessage("Invalid email"),
         "signinScreenEmailHintText":
             MessageLookupByLibrary.simpleMessage("Email"),
+        "signinScreenPasswordErrorText": MessageLookupByLibrary.simpleMessage(
+            "Password must have at least six characters"),
         "signinScreenPasswordHintText":
             MessageLookupByLibrary.simpleMessage("Password"),
         "signinScreenSigninButtonText":

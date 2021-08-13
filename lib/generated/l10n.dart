@@ -61,12 +61,32 @@ class AppLocalizations {
     );
   }
 
+  /// `Invalid email`
+  String get signinScreenEmailErrorText {
+    return Intl.message(
+      'Invalid email',
+      name: 'signinScreenEmailErrorText',
+      desc: 'Text when email input is invalid',
+      args: [],
+    );
+  }
+
   /// `Password`
   String get signinScreenPasswordHintText {
     return Intl.message(
       'Password',
       name: 'signinScreenPasswordHintText',
       desc: 'Hint text for password input field',
+      args: [],
+    );
+  }
+
+  /// `Password must have at least six characters`
+  String get signinScreenPasswordErrorText {
+    return Intl.message(
+      'Password must have at least six characters',
+      name: 'signinScreenPasswordErrorText',
+      desc: 'Text when password input is invalid',
       args: [],
     );
   }

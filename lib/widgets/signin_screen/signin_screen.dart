@@ -15,72 +15,78 @@ class SigninScreen extends StatefulWidget {
 class _SigninScreenState extends State<SigninScreen> {
   late TextEditingController _emailController;
   late TextEditingController _passwordController;
-  var _validEmail = false;
-  var _validPassword = false;
+  var _isValidEmail = false;
+  var _isValidPassword = false;
   var _shouldObscurePassword = true;
 
-  bool get _canSubmit => _validEmail && _validPassword;
+  bool get _canSubmit => _isValidEmail && _isValidPassword;
+  bool get _shouldShowEmailError => _emailController.text.isNotEmpty && !_isValidEmail;
+  bool get _shouldShowPasswordError => _passwordController.text.isNotEmpty && !_isValidPassword;
 
   @override
   void initState() {
     super.initState();
 
     _emailController = TextEditingController();
-    _passwordController = TextEditingController();
-
     _emailController.addListener(() {
-      final validEmail = EmailValidator.validate(_emailController.text);
-      if (validEmail != _validEmail) {
-        setState(() => _validEmail = validEmail);
-      }
+      setState(() => _isValidEmail = EmailValidator.validate(_emailController.text));
     });
+
+    _passwordController = TextEditingController();
     _passwordController.addListener(() {
-      final validPassword = _passwordController.text.length >= 6;
-      if (validPassword != _validPassword) {
-        setState(() => _validPassword = validPassword);
-      }
+      setState(() => _isValidPassword = _passwordController.text.length >= 6);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            TextField(
-              controller: _emailController,
-              decoration: InputDecoration(
-                hintText: AppLocalizations.of(context).signinScreenEmailHintText,
-              ),
-              autofocus: true,
-              autocorrect: false,
-            ),
-            const SizedBox(height: 8),
-            TextField(
-              controller: _passwordController,
-              decoration: InputDecoration(
-                hintText: AppLocalizations.of(context).signinScreenPasswordHintText,
-                suffixIcon: IconButton(
-                  icon: Icon(
-                    _shouldObscurePassword ? Icons.visibility : Icons.visibility_off,
-                    // color: Colors.black,
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 400),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                TextField(
+                  controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: InputDecoration(
+                    hintText: AppLocalizations.of(context).signinScreenEmailHintText,
+                    errorText: _shouldShowEmailError ? AppLocalizations.of(context).signinScreenEmailErrorText : null,
                   ),
-                  onPressed: () => setState(() => _shouldObscurePassword = !_shouldObscurePassword),
+                  autofocus: true,
+                  autocorrect: false,
                 ),
-              ),
-              obscureText: _shouldObscurePassword,
-              autocorrect: false,
+                const SizedBox(height: 8),
+                TextField(
+                  controller: _passwordController,
+                  keyboardType: TextInputType.visiblePassword,
+                  decoration: InputDecoration(
+                    hintText: AppLocalizations.of(context).signinScreenPasswordHintText,
+                    errorText:
+                        _shouldShowPasswordError ? AppLocalizations.of(context).signinScreenPasswordErrorText : null,
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _shouldObscurePassword ? Icons.visibility : Icons.visibility_off,
+                        // color: Colors.black,
+                      ),
+                      onPressed: () => setState(() => _shouldObscurePassword = !_shouldObscurePassword),
+                    ),
+                  ),
+                  obscureText: _shouldObscurePassword,
+                  autocorrect: false,
+                ),
+                const SizedBox(height: 8),
+                ElevatedButton(
+                  onPressed: _canSubmit ? () => _signin() : null,
+                  child: Text(AppLocalizations.of(context).signinScreenSigninButtonText),
+                ),
+              ],
             ),
-            const SizedBox(height: 8),
-            ElevatedButton(
-              onPressed: _canSubmit ? () => _signin() : null,
-              child: Text(AppLocalizations.of(context).signinScreenSigninButtonText),
-            ),
-          ],
+          ),
         ),
       ),
     );
