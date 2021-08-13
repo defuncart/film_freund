@@ -26,7 +26,7 @@ sh bin/loca_generate.sh
 
 ## Credits
 
-This application is designed for private use, and is inspired by Letterbox, iMDb and Filmweb.
+This application is developed for personal use, and is inspired by Letterbox, iMDb and Filmweb.
 
 ## Raising Issues and Contributing
 
