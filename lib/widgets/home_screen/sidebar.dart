@@ -48,7 +48,7 @@ class Sidebar extends StatelessWidget {
               leading: Icon(element.icon),
               title: Text(element.view.title),
               onTap: () {
-                if (isMobile(context)) {
+                if (isSinglePage(context)) {
                   Navigator.of(context).pop();
                 }
                 onViewChanged(element.view);
@@ -59,7 +59,7 @@ class Sidebar extends StatelessWidget {
             leading: const Icon(Icons.logout),
             title: const Text('Sign Out'),
             onTap: () {
-              if (isMobile(context)) {
+              if (isSinglePage(context)) {
                 Navigator.of(context).pop();
               }
               onSignOut();

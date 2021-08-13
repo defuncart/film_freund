@@ -32,9 +32,11 @@ class _HomeScreenState extends State<HomeScreen> {
       activeView: _activeView,
     );
 
-    return isMobile(context)
+    return isSinglePage(context)
         ? Scaffold(
-            appBar: AppBar(),
+            appBar: AppBar(
+              title: Text(_activeView.title),
+            ),
             body: content,
             // TODO only needed for web/desktop
             drawer: SizedBox(
