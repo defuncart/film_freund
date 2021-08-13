@@ -21,7 +21,7 @@ If you would like to build the app yourself, then you simply need:
 To add new localizations, update `assets_dev/loca/loca.csv` and run
 
 ```sh
-sh bin/pseudoloca_generate.sh
+sh bin/loca_generate.sh
 ```
 
 ## Credits

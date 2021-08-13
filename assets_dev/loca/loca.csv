@@ -1,2 +1,4 @@
 key;description;en
-test;A test key;Hello World!
+signOutConfirmationDialogDescriptionText;Description text for sign out dialog;Are you sure you want to sign out?
+signOutConfirmationDialogCancelButtonText;Cancel text for sign out dialog;Cancel
+signOutConfirmationDialogConfirmButtonText;Confirmation text for sign out dialog;Sign Out

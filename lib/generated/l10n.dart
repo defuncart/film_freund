@@ -51,12 +51,32 @@ class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  /// `Hello World!`
-  String get test {
+  /// `Are you sure you want to sign out?`
+  String get signOutConfirmationDialogDescriptionText {
     return Intl.message(
-      'Hello World!',
-      name: 'test',
-      desc: 'A test key',
+      'Are you sure you want to sign out?',
+      name: 'signOutConfirmationDialogDescriptionText',
+      desc: 'Description text for sign out dialog',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get signOutConfirmationDialogCancelButtonText {
+    return Intl.message(
+      'Cancel',
+      name: 'signOutConfirmationDialogCancelButtonText',
+      desc: 'Cancel text for sign out dialog',
+      args: [],
+    );
+  }
+
+  /// `Sign Out`
+  String get signOutConfirmationDialogConfirmButtonText {
+    return Intl.message(
+      'Sign Out',
+      name: 'signOutConfirmationDialogConfirmButtonText',
+      desc: 'Confirmation text for sign out dialog',
       args: [],
     );
   }
