@@ -4,6 +4,7 @@ import 'package:film_freund/utils/sizes.dart';
 import 'package:film_freund/widgets/home_screen/active_view.dart';
 import 'package:film_freund/widgets/home_screen/sidebar.dart';
 import 'package:film_freund/widgets/home_screen/sign_out_confirmation_dialog.dart';
+import 'package:film_freund/widgets/signin_screen/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -25,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
       onSignOut: () => showDialog(
         context: context,
         builder: (_) => SignOutConfirmationDialog(
-          onConfirm: () {},
+          onConfirm: () => Navigator.of(context).pushReplacementNamed(SigninScreen.routeName),
         ),
       ),
     );
