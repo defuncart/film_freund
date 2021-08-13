@@ -27,7 +27,10 @@ class MyApp extends StatelessWidget {
         ],
         supportedLocales: AppLocalizations.delegate.supportedLocales,
         theme: AppThemes.light,
-        home: const HomeScreen(),
+        initialRoute: HomeScreen.routeName,
+        routes: {
+          HomeScreen.routeName: (_) => const HomeScreen(),
+        },
       ),
     );
   }

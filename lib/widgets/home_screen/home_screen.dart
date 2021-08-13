@@ -7,6 +7,8 @@ import 'package:film_freund/widgets/home_screen/sign_out_confirmation_dialog.dar
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
+  static const routeName = 'HomeScreen';
+
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
