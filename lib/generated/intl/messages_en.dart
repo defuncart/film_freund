@@ -21,6 +21,19 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "activeViewLikedTitle": MessageLookupByLibrary.simpleMessage("Liked"),
+        "activeViewListsTitle": MessageLookupByLibrary.simpleMessage("Lists"),
+        "activeViewPopularTitle":
+            MessageLookupByLibrary.simpleMessage("Popular"),
+        "activeViewSearchTitle": MessageLookupByLibrary.simpleMessage("Search"),
+        "activeViewSettingsTitle":
+            MessageLookupByLibrary.simpleMessage("Settings"),
+        "activeViewWatchedTitle":
+            MessageLookupByLibrary.simpleMessage("Watched"),
+        "activeViewWatchlistTitle":
+            MessageLookupByLibrary.simpleMessage("Watchlist"),
+        "sidebarSignOutButtonText":
+            MessageLookupByLibrary.simpleMessage("Sign Out"),
         "signOutConfirmationDialogCancelButtonText":
             MessageLookupByLibrary.simpleMessage("Cancel"),
         "signOutConfirmationDialogConfirmButtonText":
