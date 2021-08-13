@@ -1,4 +1,7 @@
 key;description;en
+signinScreenEmailHintText;Hint text for email input field;Email
+signinScreenPasswordHintText;Hint text for password input field;Password
+signinScreenSigninButtonText;Text for signin button;Sign In
 activeViewPopularTitle;Title for ActiveView.popular;Popular
 activeViewSearchTitle;Title for ActiveView.search;Search
 activeViewWatchedTitle;Title for ActiveView.watched;Watched

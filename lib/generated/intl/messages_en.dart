@@ -40,6 +40,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sign Out"),
         "signOutConfirmationDialogDescriptionText":
             MessageLookupByLibrary.simpleMessage(
-                "Are you sure you want to sign out?")
+                "Are you sure you want to sign out?"),
+        "signinScreenEmailHintText":
+            MessageLookupByLibrary.simpleMessage("Email"),
+        "signinScreenPasswordHintText":
+            MessageLookupByLibrary.simpleMessage("Password"),
+        "signinScreenSigninButtonText":
+            MessageLookupByLibrary.simpleMessage("Sign In")
       };
 }
