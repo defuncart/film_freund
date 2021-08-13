@@ -27,12 +27,7 @@ class MyApp extends StatelessWidget {
         ],
         supportedLocales: AppLocalizations.delegate.supportedLocales,
         theme: AppThemes.light,
-        home: Scaffold(
-          appBar: AppBar(
-            title: const Text('Film Freund'),
-          ),
-          body: const HomeScreen(),
-        ),
+        home: const HomeScreen(),
       ),
     );
   }

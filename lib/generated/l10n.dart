@@ -51,12 +51,112 @@ class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  /// `Hello World!`
-  String get test {
+  /// `Popular`
+  String get activeViewPopularTitle {
     return Intl.message(
-      'Hello World!',
-      name: 'test',
-      desc: 'A test key',
+      'Popular',
+      name: 'activeViewPopularTitle',
+      desc: 'Title for ActiveView.popular',
+      args: [],
+    );
+  }
+
+  /// `Search`
+  String get activeViewSearchTitle {
+    return Intl.message(
+      'Search',
+      name: 'activeViewSearchTitle',
+      desc: 'Title for ActiveView.search',
+      args: [],
+    );
+  }
+
+  /// `Watched`
+  String get activeViewWatchedTitle {
+    return Intl.message(
+      'Watched',
+      name: 'activeViewWatchedTitle',
+      desc: 'Title for ActiveView.watched',
+      args: [],
+    );
+  }
+
+  /// `Liked`
+  String get activeViewLikedTitle {
+    return Intl.message(
+      'Liked',
+      name: 'activeViewLikedTitle',
+      desc: 'Title for ActiveView.liked',
+      args: [],
+    );
+  }
+
+  /// `Watchlist`
+  String get activeViewWatchlistTitle {
+    return Intl.message(
+      'Watchlist',
+      name: 'activeViewWatchlistTitle',
+      desc: 'Title for ActiveView.watchlist',
+      args: [],
+    );
+  }
+
+  /// `Lists`
+  String get activeViewListsTitle {
+    return Intl.message(
+      'Lists',
+      name: 'activeViewListsTitle',
+      desc: 'Title for ActiveView.lists',
+      args: [],
+    );
+  }
+
+  /// `Settings`
+  String get activeViewSettingsTitle {
+    return Intl.message(
+      'Settings',
+      name: 'activeViewSettingsTitle',
+      desc: 'Title for ActiveView.settings',
+      args: [],
+    );
+  }
+
+  /// `Sign Out`
+  String get sidebarSignOutButtonText {
+    return Intl.message(
+      'Sign Out',
+      name: 'sidebarSignOutButtonText',
+      desc: 'Text for sign out button',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to sign out?`
+  String get signOutConfirmationDialogDescriptionText {
+    return Intl.message(
+      'Are you sure you want to sign out?',
+      name: 'signOutConfirmationDialogDescriptionText',
+      desc: 'Description text for sign out dialog',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get signOutConfirmationDialogCancelButtonText {
+    return Intl.message(
+      'Cancel',
+      name: 'signOutConfirmationDialogCancelButtonText',
+      desc: 'Cancel text for sign out dialog',
+      args: [],
+    );
+  }
+
+  /// `Sign Out`
+  String get signOutConfirmationDialogConfirmButtonText {
+    return Intl.message(
+      'Sign Out',
+      name: 'signOutConfirmationDialogConfirmButtonText',
+      desc: 'Confirmation text for sign out dialog',
       args: [],
     );
   }
