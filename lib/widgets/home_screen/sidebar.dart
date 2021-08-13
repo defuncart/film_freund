@@ -53,7 +53,6 @@ class Sidebar extends StatelessWidget {
                   Navigator.of(context).pop();
                 }
                 onViewChanged(element.view);
-                element.onPressed?.call();
               },
             ),
           ListTile(
@@ -77,37 +76,30 @@ const elements = [
   SidebarElement(
     icon: Icons.whatshot,
     view: ActiveView.popular,
-    onPressed: null,
   ),
   SidebarElement(
     icon: Icons.search,
     view: ActiveView.search,
-    onPressed: null,
   ),
   SidebarElement(
     icon: Icons.check,
     view: ActiveView.watched,
-    onPressed: null,
   ),
   SidebarElement(
     icon: Icons.favorite,
     view: ActiveView.liked,
-    onPressed: null,
   ),
   SidebarElement(
     icon: Icons.watch_later,
     view: ActiveView.watchlist,
-    onPressed: null,
   ),
   SidebarElement(
     icon: Icons.list,
     view: ActiveView.lists,
-    onPressed: null,
   ),
   SidebarElement(
     icon: Icons.settings,
     view: ActiveView.settings,
-    onPressed: null,
   ),
 ];
 
@@ -116,10 +108,8 @@ class SidebarElement {
   const SidebarElement({
     required this.icon,
     required this.view,
-    required this.onPressed,
   });
 
   final IconData icon;
   final ActiveView view;
-  final VoidCallback? onPressed;
 }
