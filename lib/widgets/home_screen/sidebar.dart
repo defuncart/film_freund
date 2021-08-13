@@ -1,3 +1,4 @@
+import 'package:film_freund/generated/l10n.dart';
 import 'package:film_freund/utils/sizes.dart';
 import 'package:film_freund/widgets/home_screen/active_view.dart';
 import 'package:flutter/material.dart';
@@ -57,7 +58,7 @@ class Sidebar extends StatelessWidget {
             ),
           ListTile(
             leading: const Icon(Icons.logout),
-            title: const Text('Sign Out'),
+            title: Text(AppLocalizations.of(context).sidebarSignOutButtonText),
             onTap: () {
               if (isSinglePage(context)) {
                 Navigator.of(context).pop();

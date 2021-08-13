@@ -7,7 +7,7 @@ import '../../test_utils.dart';
 
 void main() {
   testWidgets('Ensure correct contents', (tester) async {
-    final widget = wrapWithMaterialApp(
+    final widget = wrapWithMaterialAppLocalizationDelegates(
       Sidebar(
         onViewChanged: (_) {},
         onSignOut: () {},
@@ -15,6 +15,8 @@ void main() {
     );
 
     await tester.pumpWidget(widget);
+
+    await tester.pumpAndSettle();
 
     expect(find.byType(Material), findsOneWidget);
     expect(find.byType(ListView), findsOneWidget);

@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart' show describeEnum;
+import 'package:film_freund/generated/l10n.dart';
 
 enum ActiveView {
   popular,
@@ -11,5 +11,22 @@ enum ActiveView {
 }
 
 extension ActiveViewExtensions on ActiveView {
-  String get title => describeEnum(this);
+  String get title {
+    switch (this) {
+      case ActiveView.popular:
+        return AppLocalizations.current.activeViewPopularTitle;
+      case ActiveView.search:
+        return AppLocalizations.current.activeViewSearchTitle;
+      case ActiveView.watched:
+        return AppLocalizations.current.activeViewWatchedTitle;
+      case ActiveView.liked:
+        return AppLocalizations.current.activeViewLikedTitle;
+      case ActiveView.watchlist:
+        return AppLocalizations.current.activeViewWatchlistTitle;
+      case ActiveView.lists:
+        return AppLocalizations.current.activeViewListsTitle;
+      case ActiveView.settings:
+        return AppLocalizations.current.activeViewSettingsTitle;
+    }
+  }
 }
