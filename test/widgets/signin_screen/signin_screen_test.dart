@@ -45,6 +45,10 @@ void main() {
         find.text(AppLocalizations.current.signinScreenEmailErrorText),
         findsOneWidget,
       );
+      expect(
+        tester.widget<TextField>(find.byKey(emailTextFieldKey)).decoration?.errorText,
+        isNotNull,
+      );
     });
 
     testWidgets('when email is valid, expect no error', (tester) async {
@@ -58,6 +62,10 @@ void main() {
       expect(
         find.text(AppLocalizations.current.signinScreenEmailErrorText),
         findsNothing,
+      );
+      expect(
+        tester.widget<TextField>(find.byKey(emailTextFieldKey)).decoration?.errorText,
+        isNull,
       );
     });
 
@@ -73,6 +81,10 @@ void main() {
         find.text(AppLocalizations.current.signinScreenPasswordErrorText),
         findsOneWidget,
       );
+      expect(
+        tester.widget<TextField>(find.byKey(passwordTextFieldKey)).decoration?.errorText,
+        isNotNull,
+      );
     });
 
     testWidgets('when password is valid, expect no error', (tester) async {
@@ -86,6 +98,10 @@ void main() {
       expect(
         find.text(AppLocalizations.current.signinScreenPasswordErrorText),
         findsNothing,
+      );
+      expect(
+        tester.widget<TextField>(find.byKey(passwordTextFieldKey)).decoration?.errorText,
+        isNull,
       );
     });
 

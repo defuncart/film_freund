@@ -82,7 +82,6 @@ class _SigninScreenState extends State<SigninScreen> {
                     suffixIcon: IconButton(
                       icon: Icon(
                         _shouldObscurePassword ? Icons.visibility : Icons.visibility_off,
-                        // color: Colors.black,
                       ),
                       onPressed: () => setState(() => _shouldObscurePassword = !_shouldObscurePassword),
                     ),
