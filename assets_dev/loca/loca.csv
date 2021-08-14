@@ -1,4 +1,9 @@
 key;description;en
+signinScreenEmailHintText;Hint text for email input field;Email
+signinScreenEmailErrorText;Text when email input is invalid;Invalid email
+signinScreenPasswordHintText;Hint text for password input field;Password
+signinScreenPasswordErrorText;Text when password input is invalid;Password must have at least six characters
+signinScreenSigninButtonText;Text for signin button;Sign In
 activeViewPopularTitle;Title for ActiveView.popular;Popular
 activeViewSearchTitle;Title for ActiveView.search;Search
 activeViewWatchedTitle;Title for ActiveView.watched;Watched

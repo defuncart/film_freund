@@ -1,6 +1,7 @@
 import 'package:film_freund/configs/app_themes.dart';
 import 'package:film_freund/generated/l10n.dart';
 import 'package:film_freund/widgets/home_screen/home_screen.dart';
+import 'package:film_freund/widgets/signin_screen/signin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show SystemUiOverlayStyle;
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -27,7 +28,11 @@ class MyApp extends StatelessWidget {
         ],
         supportedLocales: AppLocalizations.delegate.supportedLocales,
         theme: AppThemes.light,
-        home: const HomeScreen(),
+        initialRoute: SigninScreen.routeName,
+        routes: {
+          HomeScreen.routeName: (_) => const HomeScreen(),
+          SigninScreen.routeName: (_) => const SigninScreen(),
+        },
       ),
     );
   }
