@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-abstract class DIContainer {
+abstract class ServiceLocator {
   static late Reader _read;
 
   static void initialize(Reader read) => _read = read;

@@ -1,8 +1,8 @@
 import 'dart:developer' show log;
 
 import 'package:film_freund/configs/app_themes.dart';
-import 'package:film_freund/di_container.dart';
 import 'package:film_freund/generated/l10n.dart';
+import 'package:film_freund/services/service_locator.dart';
 import 'package:film_freund/widgets/home_screen/home_screen.dart';
 import 'package:film_freund/widgets/signin_screen/signin_screen.dart';
 import 'package:flutter/material.dart';
@@ -28,10 +28,10 @@ class _MyAppState extends ConsumerState<MyApp> {
   }
 
   Future<bool> _initApp() async {
-    DIContainer.initialize(ref.read);
+    ServiceLocator.initialize(ref.read);
 
     //TODO for testing
-    log(DIContainer.testService.myMethod().toString());
+    log(ServiceLocator.testService.myMethod().toString());
 
     return true;
   }
