@@ -9,6 +9,9 @@ const emailTextFieldKey = Key('SigninScreenEmailTextField');
 @visibleForTesting
 const passwordTextFieldKey = Key('SigninScreenPasswordTextField');
 
+@visibleForTesting
+const signinButtonKey = Key('SigninScreenSigninButton');
+
 class SigninScreen extends StatefulWidget {
   static const routeName = 'LoginScreen';
 
@@ -89,6 +92,7 @@ class _SigninScreenState extends State<SigninScreen> {
                 ),
                 const SizedBox(height: 8),
                 ElevatedButton(
+                  key: signinButtonKey,
                   onPressed: _canSubmit ? () => _signin() : null,
                   child: Text(AppLocalizations.of(context).signinScreenSigninButtonText),
                 ),
