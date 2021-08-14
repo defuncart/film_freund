@@ -25,6 +25,8 @@ dev_dependencies:
     git:
       url: https://github.com/defuncart/fork_intl_utils
       ref: feature/ignore-avoid_catches_without_on_clauses-always_use_package_imports-generated-code
+  mockito: ^5.0.14
+  build_runner: ^2.1.1  
 
 flutter:
   uses-material-design: true
