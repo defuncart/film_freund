@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 import 'i_auth_service.dart';
 
@@ -25,41 +26,48 @@ class FirebaseAuthService implements IAuthService {
   @override
   Future<AuthResult> signin({required String email, required String password}) async {
     try {
-      final response = await _firebaseAuth.signInWithEmailAndPassword(
+      await _firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
 
-      print(response);
-    } on FirebaseAuthException catch (e) {
-      print(e);
-
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
+      log('Signed in');
+      return AuthResult.success;
+    } on FirebaseAuthException catch (authException) {
+      if (authException.code.userNotFound) {
+        log('No user found for that email.');
 
         try {
-          final response = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
             email: email,
             password: password,
           );
-        } on FirebaseAuthException catch (e) {
-          if (e.code == 'weak-password') {
-            // TODO ignore
-            print('The password provided is too weak.');
-          } else if (e.code == 'email-already-in-use') {
-            // TODO should never happen
-            print('The account already exists for that email.');
-          }
-        } catch (e) {
-          print(e);
-        }
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
 
+          log('Created user account');
+          return AuthResult.success;
+        } catch (e) {
+          log(e.toString());
+        }
+      } else if (authException.code.wrongPassword) {
+        log('Wrong password provided for that user.');
         return AuthResult.incorrectPassword;
       }
     }
 
     return AuthResult.other;
   }
+
+  @override
+  Future<void> signout() => _firebaseAuth.signOut();
+}
+
+extension FirebaseErrorExtensions on String {
+  static const _userNotFound = 'user-not-found';
+  static const _wrongPassword = 'wrong-password';
+
+  @visibleForTesting
+  bool get userNotFound => this == _userNotFound;
+
+  @visibleForTesting
+  bool get wrongPassword => this == _wrongPassword;
 }
