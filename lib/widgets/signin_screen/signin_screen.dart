@@ -1,6 +1,9 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:film_freund/generated/l10n.dart';
+import 'package:film_freund/services/auth/firebase_auth_service.dart';
+import 'package:film_freund/services/auth/i_auth_service.dart';
 import 'package:film_freund/widgets/home_screen/home_screen.dart';
+import 'package:film_freund/widgets/signin_screen/signin_error_dialog.dart';
 import 'package:flutter/material.dart';
 
 @visibleForTesting
@@ -103,5 +106,24 @@ class _SigninScreenState extends State<SigninScreen> {
     );
   }
 
-  void _signin() => Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+  void _signin() async {
+    // TODO use ServiceLocator
+    final result = await FirebaseAuthService().signin(
+      email: _emailController.text,
+      password: _passwordController.text,
+    );
+
+    switch (result) {
+      case AuthResult.success:
+        Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+        break;
+      case AuthResult.incorrectPassword:
+      case AuthResult.noInternet:
+      case AuthResult.other:
+        showDialog(
+          context: context,
+          builder: (_) => const SignInErrorDialog(),
+        );
+    }
+  }
 }
