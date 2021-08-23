@@ -1,13 +1,72 @@
+import 'dart:developer' show log;
+
 import 'package:film_freund/configs/app_themes.dart';
 import 'package:film_freund/generated/l10n.dart';
+import 'package:film_freund/services/service_locator.dart';
 import 'package:film_freund/widgets/home_screen/home_screen.dart';
 import 'package:film_freund/widgets/signin_screen/signin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show SystemUiOverlayStyle;
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerStatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends ConsumerState<MyApp> {
+  late Future<bool> _initAppFuture;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _initAppFuture = _initApp();
+  }
+
+  Future<bool> _initApp() async {
+    ServiceLocator.initialize(ref.read);
+
+    //TODO for testing
+    log(ServiceLocator.testService.myMethod().toString());
+
+    return true;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      child: FutureBuilder(
+        future: _initAppFuture,
+        // ignore: avoid_types_on_closure_parameters
+        builder: (_, AsyncSnapshot<bool> snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.waiting:
+            case ConnectionState.active:
+              return Center(
+                child: CircularProgressIndicator(
+                  color: AppThemes.light.accentColor,
+                ),
+              );
+            default:
+              if (snapshot.connectionState == ConnectionState.done && snapshot.hasData && snapshot.data == true) {
+                return const _MyApp();
+              }
+            //TODO else show error
+          }
+
+          return const SizedBox.shrink();
+        },
+      ),
+    );
+  }
+}
+
+class _MyApp extends StatelessWidget {
+  const _MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
