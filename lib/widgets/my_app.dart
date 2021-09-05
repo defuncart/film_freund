@@ -1,5 +1,3 @@
-import 'dart:developer' show log;
-
 import 'package:film_freund/configs/app_themes.dart';
 import 'package:film_freund/generated/l10n.dart';
 import 'package:film_freund/services/service_locator.dart';
@@ -30,9 +28,6 @@ class _MyAppState extends ConsumerState<MyApp> {
 
   Future<bool> _initApp() async {
     ServiceLocator.initialize(ref.read);
-
-    //TODO for testing
-    log(ServiceLocator.testService.myMethod().toString());
 
     await Firebase.initializeApp();
 
