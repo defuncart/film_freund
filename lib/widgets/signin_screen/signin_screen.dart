@@ -2,6 +2,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:film_freund/generated/l10n.dart';
 import 'package:film_freund/services/auth/i_auth_service.dart';
 import 'package:film_freund/services/service_locator.dart';
+import 'package:film_freund/widgets/common/modal_progress_indicator.dart';
 import 'package:film_freund/widgets/home_screen/home_screen.dart';
 import 'package:film_freund/widgets/signin_screen/signin_error_dialog.dart';
 import 'package:flutter/material.dart';
@@ -107,10 +108,14 @@ class _SigninScreenState extends State<SigninScreen> {
   }
 
   void _signin() async {
+    ModalProgressIndicator.show(context);
+
     final result = await ServiceLocator.authService.signin(
       email: _emailController.text,
       password: _passwordController.text,
     );
+
+    ModalProgressIndicator.hide();
 
     switch (result) {
       case AuthResult.success:
