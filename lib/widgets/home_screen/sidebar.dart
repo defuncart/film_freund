@@ -25,7 +25,7 @@ class Sidebar extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 30,
-                  backgroundColor: Theme.of(context).accentColor,
+                  backgroundColor: Theme.of(context).colorScheme.secondary,
                   child: const Text(
                     'T',
                     style: TextStyle(

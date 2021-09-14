@@ -4,29 +4,29 @@ publish_to: 'none'
 version: 0.0.0+1
 
 environment:
-  sdk: ">=2.13.0 <3.0.0"
-  flutter: ">=2.2.0 < 3.0.0"
+  sdk: ">=2.14.0 <3.0.0"
+  flutter: ">=2.5.0 < 3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  cupertino_icons: ^1.0.2
-  email_validator: ^2.0.1
-  flutter_riverpod: ^1.0.0-dev.6
+  cupertino_icons:
+  email_validator:
+  flutter_riverpod:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.4
-  arb_generator: ^0.0.1
+  flutter_lints:
+  arb_generator:
   intl_utils: #^2.3.0
     git:
       url: https://github.com/defuncart/fork_intl_utils
       ref: feature/ignore-avoid_catches_without_on_clauses-always_use_package_imports-generated-code
-  mockito: ^5.0.14
-  build_runner: ^2.1.1  
+  mockito:
+  build_runner:
 
 flutter:
   uses-material-design: true

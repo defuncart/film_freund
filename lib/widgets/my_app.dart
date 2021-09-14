@@ -48,7 +48,7 @@ class _MyAppState extends ConsumerState<MyApp> {
             case ConnectionState.active:
               return Center(
                 child: CircularProgressIndicator(
-                  color: AppThemes.light.accentColor,
+                  color: AppThemes.light.colorScheme.secondary,
                 ),
               );
             default:
