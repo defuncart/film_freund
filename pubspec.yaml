@@ -15,8 +15,8 @@ dependencies:
   cupertino_icons:
   email_validator:
   flutter_riverpod:
-  firebase_core: ^1.4.0
-  firebase_auth: ^3.0.1
+  firebase_core:
+  firebase_auth:
 
 dev_dependencies:
   flutter_test:
