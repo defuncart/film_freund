@@ -22,7 +22,7 @@ class FirebaseAuthService implements IAuthService {
       );
 
       log('Signed in');
-      return AuthResult.success;
+      return AuthResult.signinSuccess;
     } on FirebaseAuthException catch (authException) {
       if (authException.code.userNotFound) {
         log('No user found for that email.');
@@ -34,13 +34,13 @@ class FirebaseAuthService implements IAuthService {
           );
 
           log('Created user account');
-          return AuthResult.success;
+          return AuthResult.createSuccess;
         } catch (e) {
           log(e.toString());
         }
       } else if (authException.code.wrongPassword) {
         log('Wrong password provided for that user.');
-        return AuthResult.incorrectPassword;
+        return AuthResult.signinIncorrectPassword;
       }
     }
 

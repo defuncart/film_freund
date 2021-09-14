@@ -7,8 +7,8 @@ abstract class IAuthService {
 }
 
 enum AuthResult {
-  success,
-  noInternet,
-  incorrectPassword,
+  createSuccess,
+  signinSuccess,
+  signinIncorrectPassword,
   other,
 }

@@ -118,11 +118,11 @@ class _SigninScreenState extends State<SigninScreen> {
     ModalProgressIndicator.hide();
 
     switch (result) {
-      case AuthResult.success:
+      case AuthResult.createSuccess:
+      case AuthResult.signinSuccess:
         Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
         break;
-      case AuthResult.incorrectPassword:
-      case AuthResult.noInternet:
+      case AuthResult.signinIncorrectPassword:
       case AuthResult.other:
         showDialog(
           context: context,
