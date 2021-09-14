@@ -14,7 +14,7 @@ If you would like to build the app yourself, then you simply need:
 - web:
     - Chrome
 
-Also you need to create a Firebase project and [integrate it](https://firebase.google.com/docs/flutter/setup) into this project.
+Also you need to create a Firebase project and [integrate it](https://firebase.google.com/docs/flutter/setup).
 
 ## Code Generation
 
