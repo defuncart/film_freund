@@ -47,3 +47,9 @@ app.*.map.json
 
 # dev assets
 assets_dev/l10n
+
+# firebase
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
+macos/Runner/GoogleService-Info.plist
+web/firebase-config.js

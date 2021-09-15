@@ -51,52 +51,22 @@ class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  /// `Email`
-  String get signinScreenEmailHintText {
+  /// `Liked`
+  String get activeViewLikedTitle {
     return Intl.message(
-      'Email',
-      name: 'signinScreenEmailHintText',
-      desc: 'Hint text for email input field',
+      'Liked',
+      name: 'activeViewLikedTitle',
+      desc: 'Title for ActiveView.liked',
       args: [],
     );
   }
 
-  /// `Invalid email`
-  String get signinScreenEmailErrorText {
+  /// `Lists`
+  String get activeViewListsTitle {
     return Intl.message(
-      'Invalid email',
-      name: 'signinScreenEmailErrorText',
-      desc: 'Text when email input is invalid',
-      args: [],
-    );
-  }
-
-  /// `Password`
-  String get signinScreenPasswordHintText {
-    return Intl.message(
-      'Password',
-      name: 'signinScreenPasswordHintText',
-      desc: 'Hint text for password input field',
-      args: [],
-    );
-  }
-
-  /// `Password must have at least six characters`
-  String get signinScreenPasswordErrorText {
-    return Intl.message(
-      'Password must have at least six characters',
-      name: 'signinScreenPasswordErrorText',
-      desc: 'Text when password input is invalid',
-      args: [],
-    );
-  }
-
-  /// `Sign In`
-  String get signinScreenSigninButtonText {
-    return Intl.message(
-      'Sign In',
-      name: 'signinScreenSigninButtonText',
-      desc: 'Text for signin button',
+      'Lists',
+      name: 'activeViewListsTitle',
+      desc: 'Title for ActiveView.lists',
       args: [],
     );
   }
@@ -121,22 +91,22 @@ class AppLocalizations {
     );
   }
 
+  /// `Settings`
+  String get activeViewSettingsTitle {
+    return Intl.message(
+      'Settings',
+      name: 'activeViewSettingsTitle',
+      desc: 'Title for ActiveView.settings',
+      args: [],
+    );
+  }
+
   /// `Watched`
   String get activeViewWatchedTitle {
     return Intl.message(
       'Watched',
       name: 'activeViewWatchedTitle',
       desc: 'Title for ActiveView.watched',
-      args: [],
-    );
-  }
-
-  /// `Liked`
-  String get activeViewLikedTitle {
-    return Intl.message(
-      'Liked',
-      name: 'activeViewLikedTitle',
-      desc: 'Title for ActiveView.liked',
       args: [],
     );
   }
@@ -151,42 +121,12 @@ class AppLocalizations {
     );
   }
 
-  /// `Lists`
-  String get activeViewListsTitle {
-    return Intl.message(
-      'Lists',
-      name: 'activeViewListsTitle',
-      desc: 'Title for ActiveView.lists',
-      args: [],
-    );
-  }
-
-  /// `Settings`
-  String get activeViewSettingsTitle {
-    return Intl.message(
-      'Settings',
-      name: 'activeViewSettingsTitle',
-      desc: 'Title for ActiveView.settings',
-      args: [],
-    );
-  }
-
   /// `Sign Out`
   String get sidebarSignOutButtonText {
     return Intl.message(
       'Sign Out',
       name: 'sidebarSignOutButtonText',
       desc: 'Text for sign out button',
-      args: [],
-    );
-  }
-
-  /// `Are you sure you want to sign out?`
-  String get signOutConfirmationDialogDescriptionText {
-    return Intl.message(
-      'Are you sure you want to sign out?',
-      name: 'signOutConfirmationDialogDescriptionText',
-      desc: 'Description text for sign out dialog',
       args: [],
     );
   }
@@ -207,6 +147,96 @@ class AppLocalizations {
       'Sign Out',
       name: 'signOutConfirmationDialogConfirmButtonText',
       desc: 'Confirmation text for sign out dialog',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to sign out?`
+  String get signOutConfirmationDialogDescriptionText {
+    return Intl.message(
+      'Are you sure you want to sign out?',
+      name: 'signOutConfirmationDialogDescriptionText',
+      desc: 'Description text for sign out dialog',
+      args: [],
+    );
+  }
+
+  /// `Ok`
+  String get signinErrorDialogButtonText {
+    return Intl.message(
+      'Ok',
+      name: 'signinErrorDialogButtonText',
+      desc: 'Button text for signin error dialog',
+      args: [],
+    );
+  }
+
+  /// `Please ensure that you are connected to the internet and that the password is correct.`
+  String get signinErrorDialogDescriptionText {
+    return Intl.message(
+      'Please ensure that you are connected to the internet and that the password is correct.',
+      name: 'signinErrorDialogDescriptionText',
+      desc: 'Description text for signin error dialog',
+      args: [],
+    );
+  }
+
+  /// `An error occured!`
+  String get signinErrorDialogTitleText {
+    return Intl.message(
+      'An error occured!',
+      name: 'signinErrorDialogTitleText',
+      desc: 'Title text for signin error dialog',
+      args: [],
+    );
+  }
+
+  /// `Invalid email`
+  String get signinScreenEmailErrorText {
+    return Intl.message(
+      'Invalid email',
+      name: 'signinScreenEmailErrorText',
+      desc: 'Text when email input is invalid',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get signinScreenEmailHintText {
+    return Intl.message(
+      'Email',
+      name: 'signinScreenEmailHintText',
+      desc: 'Hint text for email input field',
+      args: [],
+    );
+  }
+
+  /// `Password must have at least six characters`
+  String get signinScreenPasswordErrorText {
+    return Intl.message(
+      'Password must have at least six characters',
+      name: 'signinScreenPasswordErrorText',
+      desc: 'Text when password input is invalid',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get signinScreenPasswordHintText {
+    return Intl.message(
+      'Password',
+      name: 'signinScreenPasswordHintText',
+      desc: 'Hint text for password input field',
+      args: [],
+    );
+  }
+
+  /// `Sign In`
+  String get signinScreenSigninButtonText {
+    return Intl.message(
+      'Sign In',
+      name: 'signinScreenSigninButtonText',
+      desc: 'Text for signin button',
       args: [],
     );
   }

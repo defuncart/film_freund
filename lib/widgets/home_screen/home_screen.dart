@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:film_freund/services/service_locator.dart';
 import 'package:film_freund/utils/sizes.dart';
 import 'package:film_freund/widgets/home_screen/active_view.dart';
 import 'package:film_freund/widgets/home_screen/sidebar.dart';
@@ -26,7 +27,10 @@ class _HomeScreenState extends State<HomeScreen> {
       onSignOut: () => showDialog(
         context: context,
         builder: (_) => SignOutConfirmationDialog(
-          onConfirm: () => Navigator.of(context).pushReplacementNamed(SigninScreen.routeName),
+          onConfirm: () {
+            ServiceLocator.authService.signout();
+            Navigator.of(context).pushReplacementNamed(SigninScreen.routeName);
+          },
         ),
       ),
     );

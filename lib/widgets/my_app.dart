@@ -1,10 +1,9 @@
-import 'dart:developer' show log;
-
 import 'package:film_freund/configs/app_themes.dart';
 import 'package:film_freund/generated/l10n.dart';
 import 'package:film_freund/services/service_locator.dart';
 import 'package:film_freund/widgets/home_screen/home_screen.dart';
 import 'package:film_freund/widgets/signin_screen/signin_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show SystemUiOverlayStyle;
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -30,8 +29,7 @@ class _MyAppState extends ConsumerState<MyApp> {
   Future<bool> _initApp() async {
     ServiceLocator.initialize(ref.read);
 
-    //TODO for testing
-    log(ServiceLocator.testService.myMethod().toString());
+    await Firebase.initializeApp();
 
     return true;
   }
@@ -87,7 +85,7 @@ class _MyApp extends StatelessWidget {
         ],
         supportedLocales: AppLocalizations.delegate.supportedLocales,
         theme: AppThemes.light,
-        initialRoute: SigninScreen.routeName,
+        initialRoute: ServiceLocator.authService.isUserAuthenicated ? HomeScreen.routeName : SigninScreen.routeName,
         routes: {
           HomeScreen.routeName: (_) => const HomeScreen(),
           SigninScreen.routeName: (_) => const SigninScreen(),
