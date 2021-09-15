@@ -6,12 +6,17 @@ import 'package:flutter/material.dart';
 import 'i_auth_service.dart';
 
 class FirebaseAuthService implements IAuthService {
-  FirebaseAuthService([FirebaseAuth? firebaseAuth]) : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
+  FirebaseAuthService([
+    FirebaseAuth? firebaseAuth,
+  ]) : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
 
   final FirebaseAuth _firebaseAuth;
 
   @override
   bool get isUserAuthenicated => _firebaseAuth.currentUser != null;
+
+  @override
+  String? get authenicatedUserId => _firebaseAuth.currentUser?.uid;
 
   @override
   Future<AuthResult> signin({required String email, required String password}) async {
