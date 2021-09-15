@@ -18,6 +18,7 @@ dependencies:
   freezed_annotation:
   firebase_core:
   firebase_auth:
+  cloud_firestore:
 
 dev_dependencies:
   flutter_test:
