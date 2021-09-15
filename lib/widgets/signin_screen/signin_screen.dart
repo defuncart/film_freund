@@ -115,6 +115,13 @@ class _SigninScreenState extends State<SigninScreen> {
       password: _passwordController.text,
     );
 
+    // if user was created, create user db object
+    if (result == AuthResult.createSuccess) {
+      await ServiceLocator.userService.createUser(
+        id: ServiceLocator.authService.authenicatedUserId!,
+      );
+    }
+
     ModalProgressIndicator.hide();
 
     switch (result) {
