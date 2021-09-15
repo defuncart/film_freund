@@ -15,6 +15,7 @@ dependencies:
   cupertino_icons:
   email_validator:
   flutter_riverpod:
+  freezed_annotation:
   firebase_core:
   firebase_auth:
 
@@ -29,6 +30,7 @@ dev_dependencies:
       ref: feature/ignore-avoid_catches_without_on_clauses-always_use_package_imports-generated-code
   mockito:
   build_runner:
+  freezed:
 
 flutter:
   uses-material-design: true

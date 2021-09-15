@@ -3,7 +3,10 @@ include: package:flutter_lints/flutter.yaml
 analyzer:
     exclude:
         - lib/**.g.dart
+        - "**/*.freezed.dart"
         - test/**.mocks.dart
+    errors:
+        invalid_annotation_target: ignore
 
 rules:
     lines_longer_than_80_chars: false
