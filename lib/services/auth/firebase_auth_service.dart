@@ -6,12 +6,14 @@ import 'package:flutter/material.dart';
 import 'i_auth_service.dart';
 
 class FirebaseAuthService implements IAuthService {
-  FirebaseAuthService([FirebaseAuth? firebaseAuth]) : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
+  FirebaseAuthService([
+    FirebaseAuth? firebaseAuth,
+  ]) : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
 
   final FirebaseAuth _firebaseAuth;
 
   @override
-  bool get isUserAuthenicated => _firebaseAuth.currentUser != null;
+  bool get isUserAuthenticated => _firebaseAuth.currentUser != null;
 
   @override
   Future<AuthResult> signin({required String email, required String password}) async {
@@ -51,7 +53,7 @@ class FirebaseAuthService implements IAuthService {
   Future<void> signout() => _firebaseAuth.signOut();
 }
 
-extension FirebaseErrorExtensions on String {
+extension on String {
   static const _userNotFound = 'user-not-found';
   static const _wrongPassword = 'wrong-password';
 
