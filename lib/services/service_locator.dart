@@ -1,5 +1,6 @@
 import 'package:film_freund/services/auth/firebase_auth_service.dart';
 import 'package:film_freund/services/auth/i_auth_service.dart';
+import 'package:film_freund/services/date_time.dart/date_time_service.dart';
 import 'package:film_freund/services/user/firebase_user_service.dart';
 import 'package:film_freund/services/user/i_user_service.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,8 @@ abstract class ServiceLocator {
   static late Reader _read;
 
   static void initialize(Reader read) => _read = read;
+
+  static DateTimeService get dateTimeService => _read(dateTimeServiceProvider);
 
   static IAuthService get authService => _read(authServiceProvider);
 
@@ -33,6 +36,11 @@ class TestService implements ITestService {
 @visibleForTesting
 final testServiceProvider = Provider<ITestService>(
   (_) => TestService(),
+);
+
+@visibleForTesting
+final dateTimeServiceProvider = Provider<DateTimeService>(
+  (_) => DateTimeService(),
 );
 
 @visibleForTesting

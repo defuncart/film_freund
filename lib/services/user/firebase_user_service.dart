@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:film_freund/services/service_locator.dart';
 import 'package:film_freund/services/user/user.dart';
 
 import 'i_user_service.dart';
@@ -18,7 +19,7 @@ class FirebaseUserService implements IUserService {
     String firstName = 'FirstName',
     String lastName = 'LastName',
   }) async {
-    final now = DateTime.now().toUtc();
+    final now = ServiceLocator.dateTimeService.nowUtc;
     final user = User(
       id: id,
       firstName: firstName,
