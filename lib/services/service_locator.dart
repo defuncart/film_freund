@@ -16,27 +16,7 @@ abstract class ServiceLocator {
   static IAuthService get authService => _read(authServiceProvider);
 
   static IUserService get userService => _read(userServiceProvider);
-
-  //TODO Remove, presently for testing
-  static ITestService get testService => _read(testServiceProvider);
 }
-
-//TODO Remove, presently for testing
-abstract class ITestService {
-  int myMethod();
-}
-
-//TODO Remove, presently for testing
-class TestService implements ITestService {
-  @override
-  int myMethod() => 1;
-}
-
-//TODO Remove, presently for testing
-@visibleForTesting
-final testServiceProvider = Provider<ITestService>(
-  (_) => TestService(),
-);
 
 @visibleForTesting
 final dateTimeServiceProvider = Provider<DateTimeService>(

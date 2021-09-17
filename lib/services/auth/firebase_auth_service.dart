@@ -13,7 +13,7 @@ class FirebaseAuthService implements IAuthService {
   final FirebaseAuth _firebaseAuth;
 
   @override
-  bool get isUserAuthenicated => _firebaseAuth.currentUser != null;
+  bool get isUserAuthenticated => _firebaseAuth.currentUser != null;
 
   @override
   String? get authenicatedUserId => _firebaseAuth.currentUser?.uid;
@@ -56,7 +56,7 @@ class FirebaseAuthService implements IAuthService {
   Future<void> signout() => _firebaseAuth.signOut();
 }
 
-extension FirebaseErrorExtensions on String {
+extension on String {
   static const _userNotFound = 'user-not-found';
   static const _wrongPassword = 'wrong-password';
 

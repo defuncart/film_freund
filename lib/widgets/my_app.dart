@@ -51,7 +51,7 @@ class _MyAppState extends ConsumerState<MyApp> {
               );
             default:
               if (snapshot.connectionState == ConnectionState.done && snapshot.hasData && snapshot.data == true) {
-                return const _MyApp();
+                return const MyAppContent();
               }
             //TODO else show error
           }
@@ -63,8 +63,9 @@ class _MyAppState extends ConsumerState<MyApp> {
   }
 }
 
-class _MyApp extends StatelessWidget {
-  const _MyApp({Key? key}) : super(key: key);
+@visibleForTesting
+class MyAppContent extends StatelessWidget {
+  const MyAppContent({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +86,7 @@ class _MyApp extends StatelessWidget {
         ],
         supportedLocales: AppLocalizations.delegate.supportedLocales,
         theme: AppThemes.light,
-        initialRoute: ServiceLocator.authService.isUserAuthenicated ? HomeScreen.routeName : SigninScreen.routeName,
+        initialRoute: ServiceLocator.authService.isUserAuthenticated ? HomeScreen.routeName : SigninScreen.routeName,
         routes: {
           HomeScreen.routeName: (_) => const HomeScreen(),
           SigninScreen.routeName: (_) => const SigninScreen(),
