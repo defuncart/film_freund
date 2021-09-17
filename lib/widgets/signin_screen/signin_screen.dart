@@ -117,7 +117,7 @@ class _SigninScreenState extends State<SigninScreen> {
 
     // if user was created, create user db object
     if (result == AuthResult.createSuccess) {
-      await ServiceLocator.userService.createUser(
+      await ServiceLocator.userDatabase.createUser(
         id: ServiceLocator.authService.authenicatedUserId!,
       );
     }

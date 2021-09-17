@@ -3,10 +3,10 @@ import 'package:film_freund/services/date_time.dart/date_time_service.dart';
 import 'package:film_freund/services/service_locator.dart';
 import 'package:film_freund/services/user/user.dart';
 
-import 'i_user_service.dart';
+import 'i_user_database.dart';
 
-class FirebaseUserService implements IUserService {
-  FirebaseUserService([
+class FirebaseUserDatabase implements IUserDatabase {
+  FirebaseUserDatabase([
     FirebaseFirestore? firebaseFirestore,
     DateTimeService? dateTimeService,
   ])  : _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance,
