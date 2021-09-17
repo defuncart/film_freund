@@ -2,9 +2,10 @@ import 'package:film_freund/services/user/user.dart';
 
 /// A service to perform operations on the [User] database
 abstract class IUserDatabase {
-  /// Creates a user with [id]
+  /// Creates a user with [id] and [email]
   Future<void> createUser({
     required String id,
+    required String email,
     String firstName,
     String lastName,
   });

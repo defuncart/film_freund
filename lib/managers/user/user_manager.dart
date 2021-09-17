@@ -29,8 +29,10 @@ class UserManager {
 
     // if user was created, create user db object
     if (result == AuthResult.createSuccess) {
+      final authenicatedUser = _authService.authenicatedUser!;
       await _userDatabase.createUser(
-        id: _authService.authenicatedUserId!,
+        id: authenicatedUser.id,
+        email: authenicatedUser.email,
       );
     }
 

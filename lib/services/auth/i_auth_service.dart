@@ -1,10 +1,11 @@
+import 'package:film_freund/services/auth/models/authenticated_user.dart';
+
 abstract class IAuthService {
   /// Returns whether a user is currently authenicated on the device
   bool get isUserAuthenticated;
 
-  // TODO This could be part of an AuthResult model
-  /// When [isUserAuthenticated] is true, returns the user's id, otherwise null
-  String? get authenicatedUserId;
+  /// When [isUserAuthenticated] is true, returns [AuthenticatedUser], otherwise null
+  AuthenticatedUser? get authenicatedUser;
 
   /// Attempts to signing a user with [email] and [password]
   ///

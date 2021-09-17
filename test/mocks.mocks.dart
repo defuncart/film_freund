@@ -108,10 +108,14 @@ class MockIUserDatabase extends _i1.Mock implements _i6.IUserDatabase {
 
   @override
   _i3.Future<void> createUser(
-          {String? id, String? firstName, String? lastName}) =>
+          {String? id, String? email, String? firstName, String? lastName}) =>
       (super.noSuchMethod(
-          Invocation.method(#createUser, [],
-              {#id: id, #firstName: firstName, #lastName: lastName}),
+          Invocation.method(#createUser, [], {
+            #id: id,
+            #email: email,
+            #firstName: firstName,
+            #lastName: lastName
+          }),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i3.Future<void>);
   @override

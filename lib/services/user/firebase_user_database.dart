@@ -20,12 +20,14 @@ class FirebaseUserDatabase implements IUserDatabase {
   @override
   Future<void> createUser({
     required String id,
+    required String email,
     String firstName = 'FirstName',
     String lastName = 'LastName',
   }) async {
     final now = _dateTimeService.nowUtc;
     final user = User(
       id: id,
+      email: email,
       firstName: firstName,
       lastName: lastName,
       createdAt: now,

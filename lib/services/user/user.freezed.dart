@@ -22,22 +22,24 @@ class _$UserTearOff {
 
   _User call(
       {required String id,
+      required String email,
       String firstName = '',
       String lastName = '',
+      required DateTime createdAt,
+      required DateTime updatedAt,
       List<String> watched = const [],
       List<String> watchlist = const [],
-      List<String> lists = const [],
-      required DateTime createdAt,
-      required DateTime updatedAt}) {
+      List<String> lists = const []}) {
     return _User(
       id: id,
+      email: email,
       firstName: firstName,
       lastName: lastName,
+      createdAt: createdAt,
+      updatedAt: updatedAt,
       watched: watched,
       watchlist: watchlist,
       lists: lists,
-      createdAt: createdAt,
-      updatedAt: updatedAt,
     );
   }
 
@@ -52,13 +54,14 @@ const $User = _$UserTearOff();
 /// @nodoc
 mixin _$User {
   String get id => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
   String get firstName => throw _privateConstructorUsedError;
   String get lastName => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  DateTime get updatedAt => throw _privateConstructorUsedError;
   List<String> get watched => throw _privateConstructorUsedError;
   List<String> get watchlist => throw _privateConstructorUsedError;
   List<String> get lists => throw _privateConstructorUsedError;
-  DateTime get createdAt => throw _privateConstructorUsedError;
-  DateTime get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -71,13 +74,14 @@ abstract class $UserCopyWith<$Res> {
       _$UserCopyWithImpl<$Res>;
   $Res call(
       {String id,
+      String email,
       String firstName,
       String lastName,
+      DateTime createdAt,
+      DateTime updatedAt,
       List<String> watched,
       List<String> watchlist,
-      List<String> lists,
-      DateTime createdAt,
-      DateTime updatedAt});
+      List<String> lists});
 }
 
 /// @nodoc
@@ -91,18 +95,23 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
   @override
   $Res call({
     Object? id = freezed,
+    Object? email = freezed,
     Object? firstName = freezed,
     Object? lastName = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
     Object? watched = freezed,
     Object? watchlist = freezed,
     Object? lists = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String,
       firstName: firstName == freezed
           ? _value.firstName
@@ -112,6 +121,14 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String,
+      createdAt: createdAt == freezed
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: updatedAt == freezed
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       watched: watched == freezed
           ? _value.watched
           : watched // ignore: cast_nullable_to_non_nullable
@@ -124,14 +141,6 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _value.lists
           : lists // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      createdAt: createdAt == freezed
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updatedAt: updatedAt == freezed
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
     ));
   }
 }
@@ -143,13 +152,14 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   @override
   $Res call(
       {String id,
+      String email,
       String firstName,
       String lastName,
+      DateTime createdAt,
+      DateTime updatedAt,
       List<String> watched,
       List<String> watchlist,
-      List<String> lists,
-      DateTime createdAt,
-      DateTime updatedAt});
+      List<String> lists});
 }
 
 /// @nodoc
@@ -164,18 +174,23 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? email = freezed,
     Object? firstName = freezed,
     Object? lastName = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
     Object? watched = freezed,
     Object? watchlist = freezed,
     Object? lists = freezed,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
   }) {
     return _then(_User(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String,
       firstName: firstName == freezed
           ? _value.firstName
@@ -185,6 +200,14 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
               as String,
+      createdAt: createdAt == freezed
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: updatedAt == freezed
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       watched: watched == freezed
           ? _value.watched
           : watched // ignore: cast_nullable_to_non_nullable
@@ -197,14 +220,6 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           ? _value.lists
           : lists // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      createdAt: createdAt == freezed
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updatedAt: updatedAt == freezed
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
     ));
   }
 }
@@ -214,25 +229,32 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 class _$_User implements _User {
   _$_User(
       {required this.id,
+      required this.email,
       this.firstName = '',
       this.lastName = '',
+      required this.createdAt,
+      required this.updatedAt,
       this.watched = const [],
       this.watchlist = const [],
-      this.lists = const [],
-      required this.createdAt,
-      required this.updatedAt});
+      this.lists = const []});
 
   factory _$_User.fromJson(Map<String, dynamic> json) =>
       _$_$_UserFromJson(json);
 
   @override
   final String id;
+  @override
+  final String email;
   @JsonKey(defaultValue: '')
   @override
   final String firstName;
   @JsonKey(defaultValue: '')
   @override
   final String lastName;
+  @override
+  final DateTime createdAt;
+  @override
+  final DateTime updatedAt;
   @JsonKey(defaultValue: const [])
   @override
   final List<String> watched;
@@ -242,14 +264,10 @@ class _$_User implements _User {
   @JsonKey(defaultValue: const [])
   @override
   final List<String> lists;
-  @override
-  final DateTime createdAt;
-  @override
-  final DateTime updatedAt;
 
   @override
   String toString() {
-    return 'User(id: $id, firstName: $firstName, lastName: $lastName, watched: $watched, watchlist: $watchlist, lists: $lists, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'User(id: $id, email: $email, firstName: $firstName, lastName: $lastName, createdAt: $createdAt, updatedAt: $updatedAt, watched: $watched, watchlist: $watchlist, lists: $lists)';
   }
 
   @override
@@ -258,12 +276,20 @@ class _$_User implements _User {
         (other is _User &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.email, email) ||
+                const DeepCollectionEquality().equals(other.email, email)) &&
             (identical(other.firstName, firstName) ||
                 const DeepCollectionEquality()
                     .equals(other.firstName, firstName)) &&
             (identical(other.lastName, lastName) ||
                 const DeepCollectionEquality()
                     .equals(other.lastName, lastName)) &&
+            (identical(other.createdAt, createdAt) ||
+                const DeepCollectionEquality()
+                    .equals(other.createdAt, createdAt)) &&
+            (identical(other.updatedAt, updatedAt) ||
+                const DeepCollectionEquality()
+                    .equals(other.updatedAt, updatedAt)) &&
             (identical(other.watched, watched) ||
                 const DeepCollectionEquality()
                     .equals(other.watched, watched)) &&
@@ -271,26 +297,21 @@ class _$_User implements _User {
                 const DeepCollectionEquality()
                     .equals(other.watchlist, watchlist)) &&
             (identical(other.lists, lists) ||
-                const DeepCollectionEquality().equals(other.lists, lists)) &&
-            (identical(other.createdAt, createdAt) ||
-                const DeepCollectionEquality()
-                    .equals(other.createdAt, createdAt)) &&
-            (identical(other.updatedAt, updatedAt) ||
-                const DeepCollectionEquality()
-                    .equals(other.updatedAt, updatedAt)));
+                const DeepCollectionEquality().equals(other.lists, lists)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(email) ^
       const DeepCollectionEquality().hash(firstName) ^
       const DeepCollectionEquality().hash(lastName) ^
+      const DeepCollectionEquality().hash(createdAt) ^
+      const DeepCollectionEquality().hash(updatedAt) ^
       const DeepCollectionEquality().hash(watched) ^
       const DeepCollectionEquality().hash(watchlist) ^
-      const DeepCollectionEquality().hash(lists) ^
-      const DeepCollectionEquality().hash(createdAt) ^
-      const DeepCollectionEquality().hash(updatedAt);
+      const DeepCollectionEquality().hash(lists);
 
   @JsonKey(ignore: true)
   @override
@@ -306,32 +327,35 @@ class _$_User implements _User {
 abstract class _User implements User {
   factory _User(
       {required String id,
+      required String email,
       String firstName,
       String lastName,
+      required DateTime createdAt,
+      required DateTime updatedAt,
       List<String> watched,
       List<String> watchlist,
-      List<String> lists,
-      required DateTime createdAt,
-      required DateTime updatedAt}) = _$_User;
+      List<String> lists}) = _$_User;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
   @override
   String get id => throw _privateConstructorUsedError;
   @override
+  String get email => throw _privateConstructorUsedError;
+  @override
   String get firstName => throw _privateConstructorUsedError;
   @override
   String get lastName => throw _privateConstructorUsedError;
+  @override
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  @override
+  DateTime get updatedAt => throw _privateConstructorUsedError;
   @override
   List<String> get watched => throw _privateConstructorUsedError;
   @override
   List<String> get watchlist => throw _privateConstructorUsedError;
   @override
   List<String> get lists => throw _privateConstructorUsedError;
-  @override
-  DateTime get createdAt => throw _privateConstructorUsedError;
-  @override
-  DateTime get updatedAt => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$UserCopyWith<_User> get copyWith => throw _privateConstructorUsedError;
