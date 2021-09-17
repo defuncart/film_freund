@@ -17,7 +17,7 @@ abstract class IAuthService {
   /// Otherwise returns [AuthResult.other] (i.e. no internet, password too weak on account creation)
   Future<AuthResult> signin({required String email, required String password});
 
-  /// Signs a user out
+  /// Signs out a user
   ///
   /// [isUserAuthenticated] will thereafter be false
   Future<void> signout();

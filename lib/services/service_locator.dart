@@ -1,3 +1,4 @@
+import 'package:film_freund/managers/user/user_manager.dart';
 import 'package:film_freund/services/auth/firebase_auth_service.dart';
 import 'package:film_freund/services/auth/i_auth_service.dart';
 import 'package:film_freund/services/date_time.dart/date_time_service.dart';
@@ -13,6 +14,8 @@ abstract class ServiceLocator {
 
   static DateTimeService get dateTimeService => _read(dateTimeServiceProvider);
 
+  static UserManager get userManager => _read(userManagerProvider);
+
   static IAuthService get authService => _read(authServiceProvider);
 
   static IUserDatabase get userDatabase => _read(userDatabaseProvider);
@@ -21,6 +24,14 @@ abstract class ServiceLocator {
 @visibleForTesting
 final dateTimeServiceProvider = Provider<DateTimeService>(
   (_) => DateTimeService(),
+);
+
+@visibleForTesting
+final userManagerProvider = Provider<UserManager>(
+  (_) => UserManager(
+    authService: FirebaseAuthService(),
+    userDatabase: FirebaseUserDatabase(),
+  ),
 );
 
 @visibleForTesting
