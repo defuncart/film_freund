@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
         context: context,
         builder: (_) => SignOutConfirmationDialog(
           onConfirm: () {
-            ServiceLocator.authService.signout();
+            ServiceLocator.userManager.signout();
             Navigator.of(context).pushReplacementNamed(SigninScreen.routeName);
           },
         ),
