@@ -58,6 +58,14 @@ class MockUserManager extends _i1.Mock implements _i3.UserManager {
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
   @override
+  _i4.Future<_i5.DeleteResult> deleteUser({String? email, String? password}) =>
+      (super.noSuchMethod(
+              Invocation.method(
+                  #deleteUser, [], {#email: email, #password: password}),
+              returnValue:
+                  Future<_i5.DeleteResult>.value(_i5.DeleteResult.success))
+          as _i4.Future<_i5.DeleteResult>);
+  @override
   String toString() => super.toString();
 }
 
@@ -101,10 +109,12 @@ class MockIAuthService extends _i1.Mock implements _i5.IAuthService {
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
   @override
-  _i4.Future<void> delete() =>
-      (super.noSuchMethod(Invocation.method(#delete, []),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+  _i4.Future<_i5.DeleteResult> delete({String? email, String? password}) =>
+      (super.noSuchMethod(
+          Invocation.method(#delete, [], {#email: email, #password: password}),
+          returnValue:
+              Future<_i5.DeleteResult>.value(_i5.DeleteResult.success)) as _i4
+          .Future<_i5.DeleteResult>);
   @override
   String toString() => super.toString();
 }

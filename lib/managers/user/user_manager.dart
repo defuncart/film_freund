@@ -62,4 +62,25 @@ class UserManager {
 
   /// Signs out a user
   Future<void> signout() => _authService.signout();
+
+  /// Deletes the current user's authentication using [email] and [password]
+  ///
+  /// See [IAuthService] for more info
+  Future<DeleteResult> deleteUser({required String email, required String password}) async {
+    final userId = _authService.authenticatedUserId;
+
+    final result = await _authService.delete(
+      email: email,
+      password: password,
+    );
+
+    // if user was deleted, remove user db object
+    if (result == DeleteResult.success) {
+      await _userDatabase.deleteUser(
+        id: userId!,
+      );
+    }
+
+    return result;
+  }
 }

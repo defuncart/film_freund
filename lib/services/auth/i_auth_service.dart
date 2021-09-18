@@ -20,6 +20,15 @@ abstract class IAuthService {
   ///
   /// [isUserAuthenticated] will thereafter be false
   Future<void> signout();
+
+  /// Deletes the current user's authentication using [email] and [password]
+  ///
+  /// Returns [DeleteResult.success] if an account exists for [email] and [password] was correct
+  ///
+  /// Returns [DeleteResult.incorrectPassword] if an account exists for [email] but [password] was incorrect
+  ///
+  /// Otherwise returns [DeleteResult.other] (i.e. no internet, no user for [email])
+  Future<DeleteResult> delete({required String email, required String password});
 }
 
 /// An enum describing the types of authenication results for a signin action
@@ -27,5 +36,12 @@ enum AuthResult {
   createSuccess,
   signinSuccess,
   signinIncorrectPassword,
+  other,
+}
+
+/// An enum describing the types of results for a delete action
+enum DeleteResult {
+  success,
+  incorrectPassword,
   other,
 }
