@@ -98,5 +98,53 @@ void main() {
         );
       });
     });
+
+    group('signin', () {
+      const email = 'email';
+      const password = 'password';
+
+      test('when IAuthService.signin AuthResult.createSuccess, expect user is created on database', () async {
+        const id = 'id';
+
+        when(mockAuthService.signin(email: email, password: password))
+            .thenAnswer((_) => Future.value(AuthResult.createSuccess));
+        when(mockAuthService.authenticatedUserId).thenReturn(id);
+
+        final result = await userManager.signin(email: email, password: password);
+        expect(result, AuthResult.createSuccess);
+
+        verify(mockUserDatabase.createUser(id: id, email: email));
+      });
+
+      test('IAuthService.signin AuthResult.signinSuccess', () async {
+        when(mockAuthService.signin(email: email, password: password))
+            .thenAnswer((_) => Future.value(AuthResult.signinSuccess));
+
+        expect(
+          await userManager.signin(email: email, password: password),
+          AuthResult.signinSuccess,
+        );
+      });
+
+      test('IAuthService.signin AuthResult.signinIncorrectPassword', () async {
+        when(mockAuthService.signin(email: email, password: password))
+            .thenAnswer((_) => Future.value(AuthResult.signinIncorrectPassword));
+
+        expect(
+          await userManager.signin(email: email, password: password),
+          AuthResult.signinIncorrectPassword,
+        );
+      });
+
+      test('IAuthService.signin AuthResult.other', () async {
+        when(mockAuthService.signin(email: email, password: password))
+            .thenAnswer((_) => Future.value(AuthResult.other));
+
+        expect(
+          await userManager.signin(email: email, password: password),
+          AuthResult.other,
+        );
+      });
+    });
   });
 }
