@@ -1,5 +1,6 @@
 import 'package:film_freund/services/auth/i_auth_service.dart';
 import 'package:film_freund/services/user/i_user_database.dart';
+import 'package:film_freund/services/user/models/user.dart';
 
 /// A manager which handles user authentication and performs database operations
 class UserManager {
@@ -15,6 +16,27 @@ class UserManager {
   /// Returns whether a user is currently authenicated on the device
   bool get isAuthenticated => _authService.isUserAuthenticated;
 
+  /// Returns the current user
+  ///
+  /// Throws an error if no user is authenticated
+  Future<User> get currentUser async {
+    assert(isAuthenticated, 'User should be authenticated');
+
+    final id = _authService.authenticatedUserId;
+    if (id != null) {
+      final user = await _userDatabase.getUser(id: id);
+
+      if (user != null) {
+        return user;
+      }
+    }
+
+    throw ArgumentError('User should be authenticated');
+  }
+
+  /// Returns a user with [id]. If no such user exists, null is returned.
+  Future<User?> getUser({required String id}) => _userDatabase.getUser(id: id);
+
   /// Attempts to signing a user with [email] and [password]
   ///
   /// See [IAuthService] for more info
@@ -29,10 +51,9 @@ class UserManager {
 
     // if user was created, create user db object
     if (result == AuthResult.createSuccess) {
-      final authenicatedUser = _authService.authenicatedUser!;
       await _userDatabase.createUser(
-        id: authenicatedUser.id,
-        email: authenicatedUser.email,
+        id: _authService.authenticatedUserId!,
+        email: email,
       );
     }
 

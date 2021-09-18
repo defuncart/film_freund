@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:film_freund/services/auth/models/authenticated_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -17,12 +16,7 @@ class FirebaseAuthService implements IAuthService {
   bool get isUserAuthenticated => _firebaseAuth.currentUser != null;
 
   @override
-  AuthenticatedUser? get authenicatedUser => _firebaseAuth.currentUser != null
-      ? AuthenticatedUser(
-          id: _firebaseAuth.currentUser!.uid,
-          email: _firebaseAuth.currentUser!.email!,
-        )
-      : null;
+  String? get authenticatedUserId => _firebaseAuth.currentUser?.uid;
 
   @override
   Future<AuthResult> signin({required String email, required String password}) async {
