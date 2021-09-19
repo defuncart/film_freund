@@ -91,26 +91,7 @@ class MovieDatabase implements IMovieDatabase {
   Future<List<MovieTeaser>> getPopular() async {
     final response = await _get('$_baseUrl/movie/popular?api_key=$apiKey&language=$_language&page=1&region=$_region');
     final parsedResponse = PopularResponse.fromJson(jsonDecode(response.body));
-    final movieTeasers = parsedResponse.results
-        .map(
-          (result) => MovieTeaser(
-            adult: result.adult,
-            backdropPath: _composeImagePath(result.backdropPath),
-            genres: result.genreIds.map((id) => _genres[id]!).toList(),
-            id: result.id,
-            originalLanguage: result.originalLanguage,
-            originalTitle: result.originalTitle,
-            overview: result.overview,
-            popularity: result.popularity,
-            posterPath: _composeImagePath(result.posterPath),
-            releaseDate: result.releaseDate,
-            title: result.title,
-            video: result.video,
-            voteAverage: result.voteAverage,
-            voteCount: result.voteCount,
-          ),
-        )
-        .toList();
+    final movieTeasers = parsedResponse.results.map((result) => _movieListResultToMovieTeaser(result)).toList();
 
     return movieTeasers;
   }
@@ -119,30 +100,29 @@ class MovieDatabase implements IMovieDatabase {
   Future<List<MovieTeaser>> getUpcoming() async {
     final response = await _get('$_baseUrl/movie/upcoming?api_key=$apiKey&language=$_language&page=1&region=$_region');
     final parsedResponse = PopularResponse.fromJson(jsonDecode(response.body));
-    final movieTeasers = parsedResponse.results
-        .map(
-          (result) => MovieTeaser(
-            adult: result.adult,
-            backdropPath: _composeImagePath(result.backdropPath),
-            genres: result.genreIds.map((id) => _genres[id]!).toList(),
-            id: result.id,
-            originalLanguage: result.originalLanguage,
-            originalTitle: result.originalTitle,
-            overview: result.overview,
-            popularity: result.popularity,
-            posterPath: _composeImagePath(result.posterPath),
-            releaseDate: result.releaseDate,
-            title: result.title,
-            video: result.video,
-            voteAverage: result.voteAverage,
-            voteCount: result.voteCount,
-          ),
-        )
-        .toList();
+    final movieTeasers = parsedResponse.results.map((result) => _movieListResultToMovieTeaser(result)).toList();
 
     return movieTeasers;
   }
 
   /// Returns a full image path for a given relative [path]
   String? _composeImagePath(String? path) => path != null ? 'https://image.tmdb.org/t/p/w500/$path' : null;
+
+  /// Maps a [MovieListResult] to a [MovieTeaser]
+  MovieTeaser _movieListResultToMovieTeaser(MovieListResult result) => MovieTeaser(
+        adult: result.adult,
+        backdropPath: _composeImagePath(result.backdropPath),
+        genres: result.genreIds.map((id) => _genres[id]!).toList(),
+        id: result.id,
+        originalLanguage: result.originalLanguage,
+        originalTitle: result.originalTitle,
+        overview: result.overview,
+        popularity: result.popularity,
+        posterPath: _composeImagePath(result.posterPath),
+        releaseDate: result.releaseDate,
+        title: result.title,
+        video: result.video,
+        voteAverage: result.voteAverage,
+        voteCount: result.voteCount,
+      );
 }
