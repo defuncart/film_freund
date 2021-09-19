@@ -13,10 +13,7 @@ jobs:
         with:
           channel: 'stable'
       - name: Generate fake TMDB api key
-        run: |
-          pwd
-          ls
-          echo "part of 'movie_database.dart'; const apiKey = 'apiKey';" >lib/services/movies/movie_database.secrets.dart
+        run: echo "part of 'movie_database.dart'; const apiKey = 'apiKey';" >lib/services/movies/movie_database.secrets.dart
       - name: Install packages
         run: flutter pub get
       - name: Lint
