@@ -1,25 +1,6 @@
 part of 'movie_database.dart';
 
 @visibleForTesting
-class GenreResponse {
-  GenreResponse({
-    required this.genres,
-  });
-
-  final Map<int, String> genres;
-
-  factory GenreResponse.fromJson(Map<String, dynamic> json) {
-    final rawValue = List<Map<String, dynamic>>.from(json['genres']);
-    final genres = <int, String>{};
-    for (final element in rawValue) {
-      genres[element['id']] = element['name'];
-    }
-
-    return GenreResponse(genres: genres);
-  }
-}
-
-@visibleForTesting
 class PopularResponse {
   PopularResponse({
     required this.page,

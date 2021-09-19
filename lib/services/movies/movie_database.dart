@@ -21,7 +21,29 @@ class MovieDatabase implements IMovieDatabase {
   static const _language = 'en-US';
   static const _region = 'de';
 
-  late Map<int, String> _genres;
+  /// TODO if multi-language, then retrieve using
+  /// $_baseUrl/genre/movie/list?api_key=$apiKey&language=$_language
+  static const _genres = {
+    28: 'Action',
+    12: 'Adventure',
+    16: 'Animation',
+    35: 'Comedy',
+    80: 'Crime',
+    99: 'Documentary',
+    18: 'Drama',
+    10751: 'Family',
+    14: 'Fantasy',
+    36: 'History',
+    27: 'Horror',
+    10402: 'Music',
+    9648: 'Mystery',
+    10749: 'Romance',
+    878: 'Science Fiction',
+    10770: 'TV Movie',
+    53: 'Thriller',
+    10752: 'War',
+    37: 'Western',
+  };
 
   Future<http.Response> _get(String url) async {
     log('get\n$url');
@@ -32,19 +54,6 @@ class MovieDatabase implements IMovieDatabase {
       log(e.toString());
       rethrow;
     }
-  }
-
-  @override
-  Future<bool> initialize() async {
-    await _determineGenres();
-
-    return true;
-  }
-
-  Future<void> _determineGenres() async {
-    final response = await _get('$_baseUrl/genre/movie/list?api_key=$apiKey&language=$_language');
-    final parsedResponse = GenreResponse.fromJson(json.decode(response.body));
-    _genres = parsedResponse.genres;
   }
 
   @override
