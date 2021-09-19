@@ -16,6 +16,7 @@ dependencies:
   email_validator:
   flutter_riverpod:
   equatable:
+  http:
   firebase_core:
   firebase_auth:
   cloud_firestore:
