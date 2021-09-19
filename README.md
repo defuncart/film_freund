@@ -16,9 +16,11 @@ To build the app locally, the following tools are required:
 
 A Firebase project needs to be created and [integrated](https://firebase.google.com/docs/flutter/setup). Note that to speed up development build times, a [pre-compiled version of Firestore](https://github.com/invertase/firestore-ios-sdk-frameworks#supported-firebase-ios-sdk-versions) on iOS and macOS is used.
 
-An [API key](https://developers.themoviedb.org/3/getting-started/introduction) is needed to query TMDB. Once a key is obtained, create the file `lib/services/movies/configs/tmdb_config.dart` with the content:
+An [API key](https://developers.themoviedb.org/3/getting-started/introduction) is needed to query TMDB. Once a key is obtained, create the file `lib/services/movies/movie_database.secrets.dart` with the content:
 
 ```dart
+part of 'movie_database.dart';
+
 const apiKey = 'apiKey';
 ```
 

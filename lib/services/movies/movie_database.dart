@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:film_freund/services/movies/configs/tmdb_config.dart';
 import 'package:film_freund/services/movies/i_movie_database.dart';
 import 'package:film_freund/services/movies/models/movie.dart';
 import 'package:film_freund/services/movies/models/movie_teaser.dart';
@@ -9,6 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 
 part 'movie_database.responses.dart';
+part 'movie_database.secrets.dart';
 
 class MovieDatabase implements IMovieDatabase {
   MovieDatabase({

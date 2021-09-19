@@ -16,10 +16,7 @@ jobs:
         run: |
           pwd
           ls
-          cd lib/services/movies/configs
-          pwd
-          ls
-          echo "const apiKey = 'apiKey';" >./tmdb_config.dart
+          echo "part of 'movie_database.dart';\nconst apiKey = 'apiKey';" >lib/services/movies/movie_database.secrets.dart
       - name: Install packages
         run: flutter pub get
       - name: Lint

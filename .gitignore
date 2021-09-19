@@ -55,4 +55,4 @@ macos/Runner/GoogleService-Info.plist
 web/firebase-config.js
 
 # api keys
-lib/services/movies/configs/tmdb_config.dart
+lib/services/movies/movie_database.secrets.dart
