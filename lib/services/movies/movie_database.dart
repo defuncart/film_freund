@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:film_freund/services/movies/configs/tmdb_config.dart';
 import 'package:film_freund/services/movies/i_movie_database.dart';
+import 'package:film_freund/services/movies/models/movie.dart';
 import 'package:film_freund/services/movies/models/movie_teaser.dart';
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
@@ -54,14 +55,14 @@ class MovieDatabase implements IMovieDatabase {
         .map(
           (result) => MovieTeaser(
             adult: result.adult,
-            backdropPath: result.backdropPath != null ? 'https://image.tmdb.org/t/p/w500/${result.backdropPath}' : null,
+            backdropPath: _composeImagePath(result.backdropPath),
             genres: result.genreIds.map((id) => _genres[id]!).toList(),
             id: result.id,
             originalLanguage: result.originalLanguage,
             originalTitle: result.originalTitle,
             overview: result.overview,
             popularity: result.popularity,
-            posterPath: result.posterPath != null ? 'https://image.tmdb.org/t/p/w500/${result.posterPath}' : null,
+            posterPath: _composeImagePath(result.posterPath),
             releaseDate: result.releaseDate,
             title: result.title,
             video: result.video,
@@ -73,4 +74,38 @@ class MovieDatabase implements IMovieDatabase {
 
     return movieTeasers;
   }
+
+  @override
+  Future<Movie?> getMovie(String id) async {
+    final response = await _get('$_baseUrl/movie/$id?api_key=$apiKey&language=$_language');
+    if (response.statusCode == 200) {
+      final parsedResponse = MovieResponse.fromJson(jsonDecode(response.body));
+      return Movie(
+        adult: parsedResponse.adult,
+        backdropPath: _composeImagePath(parsedResponse.backdropPath),
+        budget: parsedResponse.budget,
+        genres: parsedResponse.genres.map((g) => g.name).toList(),
+        homepage: parsedResponse.homepage,
+        id: parsedResponse.id,
+        originalLanguage: parsedResponse.originalLanguage,
+        originalTitle: parsedResponse.originalTitle,
+        overview: parsedResponse.overview,
+        popularity: parsedResponse.popularity,
+        posterPath: _composeImagePath(parsedResponse.posterPath),
+        releaseDate: parsedResponse.releaseDate,
+        revenue: parsedResponse.revenue,
+        runtime: parsedResponse.runtime,
+        tagline: parsedResponse.tagline,
+        title: parsedResponse.title,
+        video: parsedResponse.video,
+        voteAverage: parsedResponse.voteAverage,
+        voteCount: parsedResponse.voteCount,
+      );
+    }
+
+    return null;
+  }
+
+  /// Returns a full image path for a given relative [path]
+  String? _composeImagePath(String? path) => path != null ? 'https://image.tmdb.org/t/p/w500/$path' : null;
 }
