@@ -14,9 +14,9 @@ jobs:
           channel: 'stable'
       - name: Generate fake TMDB api key
         run: |
-        pwd
-        ls
-        echo "const apiKey = 'apiKey';" > lib/services/movies/configs/tmdb_config.dart
+          pwd
+          ls
+          echo "const apiKey = 'apiKey';" > lib/services/movies/configs/tmdb_config.dart
       - name: Install packages
         run: flutter pub get
       - name: Lint
