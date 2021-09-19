@@ -31,4 +31,7 @@ class MovieTeaser {
   final bool video;
   final double voteAverage;
   final int voteCount;
+
+  @override
+  String toString() => '$MovieTeaser{id: $id, title: $title}';
 }
