@@ -16,7 +16,7 @@ jobs:
         run: |
           pwd
           ls
-          echo "part of 'movie_database.dart';\nconst apiKey = 'apiKey';" >lib/services/movies/movie_database.secrets.dart
+          echo "part of 'movie_database.dart'; const apiKey = 'apiKey';" >lib/services/movies/movie_database.secrets.dart
       - name: Install packages
         run: flutter pub get
       - name: Lint
