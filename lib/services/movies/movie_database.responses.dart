@@ -2,7 +2,7 @@ part of 'movie_database.dart';
 
 @visibleForTesting
 class MovieResponse {
-  MovieResponse({
+  const MovieResponse({
     required this.adult,
     required this.backdropPath,
     required this.belongsToCollection,
@@ -92,7 +92,7 @@ class MovieResponse {
 
 @visibleForTesting
 class BelongsToCollection {
-  BelongsToCollection({
+  const BelongsToCollection({
     required this.id,
     required this.name,
     required this.posterPath,
@@ -114,7 +114,7 @@ class BelongsToCollection {
 
 @visibleForTesting
 class Genre {
-  Genre({
+  const Genre({
     required this.id,
     required this.name,
   });
@@ -130,7 +130,7 @@ class Genre {
 
 @visibleForTesting
 class ProductionCompany {
-  ProductionCompany({
+  const ProductionCompany({
     required this.id,
     required this.logoPath,
     required this.name,
@@ -152,7 +152,7 @@ class ProductionCompany {
 
 @visibleForTesting
 class ProductionCountry {
-  ProductionCountry({
+  const ProductionCountry({
     required this.iso31661,
     required this.name,
   });
@@ -168,7 +168,7 @@ class ProductionCountry {
 
 @visibleForTesting
 class SpokenLanguage {
-  SpokenLanguage({
+  const SpokenLanguage({
     required this.englishName,
     required this.iso6391,
     required this.name,
@@ -187,7 +187,7 @@ class SpokenLanguage {
 
 @visibleForTesting
 class PopularResponse {
-  PopularResponse({
+  const PopularResponse({
     required this.page,
     required this.results,
     required this.totalPages,
@@ -260,7 +260,7 @@ class MovieListResult {
 }
 
 class UpcomingResponse {
-  UpcomingResponse({
+  const UpcomingResponse({
     required this.dates,
     required this.page,
     required this.results,
@@ -284,7 +284,7 @@ class UpcomingResponse {
 }
 
 class Dates {
-  Dates({
+  const Dates({
     required this.maximum,
     required this.minimum,
   });
