@@ -13,7 +13,11 @@ jobs:
         with:
           channel: 'stable'
       - name: Install packages
-        run: flutter pub get
+        run: flutter pub 
+      - name: Generate fake TMDB api key
+        run: |
+          echo 'const apiKey = 'apiKey';' > lib/services/movies/configs/tmdb_config.dart
+          cat lib/services/movies/configs/tmdb_config.dart
       - name: Lint
         run: flutter analyze
       - name: Unit tests
