@@ -41,6 +41,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "signOutConfirmationDialogDescriptionText":
             MessageLookupByLibrary.simpleMessage(
                 "Are you sure you want to sign out?"),
+        "signinErrorDialogButtonText":
+            MessageLookupByLibrary.simpleMessage("Ok"),
+        "signinErrorDialogDescriptionText": MessageLookupByLibrary.simpleMessage(
+            "Please ensure that you are connected to the internet and that the password is correct."),
+        "signinErrorDialogTitleText":
+            MessageLookupByLibrary.simpleMessage("An error occured!"),
         "signinScreenEmailErrorText":
             MessageLookupByLibrary.simpleMessage("Invalid email"),
         "signinScreenEmailHintText":

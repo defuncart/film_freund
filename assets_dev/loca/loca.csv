@@ -4,6 +4,9 @@ signinScreenEmailErrorText;Text when email input is invalid;Invalid email
 signinScreenPasswordHintText;Hint text for password input field;Password
 signinScreenPasswordErrorText;Text when password input is invalid;Password must have at least six characters
 signinScreenSigninButtonText;Text for signin button;Sign In
+signinErrorDialogTitleText;Title text for signin error dialog;An error occured!
+signinErrorDialogDescriptionText;Description text for signin error dialog;Please ensure that you are connected to the internet and that the password is correct.
+signinErrorDialogButtonText;Button text for signin error dialog;Ok
 activeViewPopularTitle;Title for ActiveView.popular;Popular
 activeViewSearchTitle;Title for ActiveView.search;Search
 activeViewWatchedTitle;Title for ActiveView.watched;Watched

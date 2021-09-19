@@ -1,3 +1,5 @@
+import 'package:film_freund/services/auth/firebase_auth_service.dart';
+import 'package:film_freund/services/auth/i_auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -6,23 +8,10 @@ abstract class ServiceLocator {
 
   static void initialize(Reader read) => _read = read;
 
-  //TODO Remove, presently for testing
-  static ITestService get testService => _read(testServiceProvider);
+  static IAuthService get authService => _read(authServiceProvider);
 }
 
-//TODO Remove, presently for testing
-abstract class ITestService {
-  int myMethod();
-}
-
-//TODO Remove, presently for testing
-class TestService implements ITestService {
-  @override
-  int myMethod() => 1;
-}
-
-//TODO Remove, presently for testing
 @visibleForTesting
-final testServiceProvider = Provider<ITestService>(
-  (_) => TestService(),
+final authServiceProvider = Provider<IAuthService>(
+  (_) => FirebaseAuthService(),
 );
