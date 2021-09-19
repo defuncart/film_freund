@@ -1,7 +1,10 @@
-/// A teaser for a movie
+import 'movie.dart';
+
+/// A model repesenting short information about a movie
+///
+/// For full movie info, see [Movie]
 class MovieTeaser {
   const MovieTeaser({
-    required this.adult,
     required this.backdropPath,
     required this.genres,
     required this.id,
@@ -12,12 +15,10 @@ class MovieTeaser {
     required this.posterPath,
     required this.releaseDate,
     required this.title,
-    required this.video,
     required this.voteAverage,
     required this.voteCount,
   });
 
-  final bool adult;
   final String? backdropPath;
   final List<String> genres;
   final int id;
@@ -28,7 +29,6 @@ class MovieTeaser {
   final String? posterPath;
   final DateTime releaseDate;
   final String title;
-  final bool video;
   final double voteAverage;
   final int voteCount;
 

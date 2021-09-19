@@ -62,7 +62,6 @@ class MovieDatabase implements IMovieDatabase {
     if (response.statusCode == 200) {
       final parsedResponse = MovieResponse.fromJson(jsonDecode(response.body));
       return Movie(
-        adult: parsedResponse.adult,
         backdropPath: _composeImagePath(parsedResponse.backdropPath),
         budget: parsedResponse.budget,
         genres: parsedResponse.genres.map((g) => g.name).toList(),
@@ -78,7 +77,6 @@ class MovieDatabase implements IMovieDatabase {
         runtime: parsedResponse.runtime,
         tagline: parsedResponse.tagline,
         title: parsedResponse.title,
-        video: parsedResponse.video,
         voteAverage: parsedResponse.voteAverage,
         voteCount: parsedResponse.voteCount,
       );
@@ -110,7 +108,6 @@ class MovieDatabase implements IMovieDatabase {
 
   /// Maps a [MovieListResult] to a [MovieTeaser]
   MovieTeaser _movieListResultToMovieTeaser(MovieListResult result) => MovieTeaser(
-        adult: result.adult,
         backdropPath: _composeImagePath(result.backdropPath),
         genres: result.genreIds.map((id) => _genres[id]!).toList(),
         id: result.id,
@@ -121,7 +118,6 @@ class MovieDatabase implements IMovieDatabase {
         posterPath: _composeImagePath(result.posterPath),
         releaseDate: result.releaseDate,
         title: result.title,
-        video: result.video,
         voteAverage: result.voteAverage,
         voteCount: result.voteCount,
       );

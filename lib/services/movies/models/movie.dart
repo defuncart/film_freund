@@ -1,7 +1,6 @@
 /// A model representing full information about a movie
 class Movie {
   const Movie({
-    required this.adult,
     required this.backdropPath,
     required this.budget,
     required this.genres,
@@ -17,12 +16,10 @@ class Movie {
     required this.runtime,
     required this.tagline,
     required this.title,
-    required this.video,
     required this.voteAverage,
     required this.voteCount,
   });
 
-  final bool adult;
   final String? backdropPath;
   final int budget;
   final List<String> genres;
@@ -38,10 +35,9 @@ class Movie {
   final int? runtime;
   final String? tagline;
   final String title;
-  final bool video;
   final double voteAverage;
   final int voteCount;
 
   @override
-  String toString() => '{id: $id, title: $title}';
+  String toString() => '$Movie{id: $id, title: $title}';
 }
