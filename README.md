@@ -16,7 +16,7 @@ If you would like to build the app yourself, then you simply need:
 
 Also you need to create a Firebase project and [integrate it](https://firebase.google.com/docs/flutter/setup).
 
-Note that to speed up development build times, a [pre-compiled version of Firestore](https://github.com/invertase/firestore-ios-sdk-frameworks#supported-firebase-ios-sdk-versions) is used.
+Note that to speed up development build times, a [pre-compiled version of Firestore](https://github.com/invertase/firestore-ios-sdk-frameworks#supported-firebase-ios-sdk-versions) on iOS and macOS is used.
 
 ## Code Generation
 
