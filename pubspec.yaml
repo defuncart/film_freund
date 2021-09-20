@@ -15,7 +15,7 @@ dependencies:
   cupertino_icons:
   email_validator:
   flutter_riverpod:
-  freezed_annotation:
+  equatable:
   firebase_core:
   firebase_auth:
   cloud_firestore:
@@ -29,9 +29,8 @@ dev_dependencies:
     git:
       url: https://github.com/defuncart/fork_intl_utils
       ref: feature/ignore-avoid_catches_without_on_clauses-always_use_package_imports-generated-code
-  mockito:
   build_runner:
-  freezed:
+  mockito:
   json_serializable:
 
 flutter:
