@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:film_freund/services/service_locator.dart';
 import 'package:film_freund/utils/sizes.dart';
 import 'package:film_freund/widgets/home_screen/active_view.dart';
+import 'package:film_freund/widgets/home_screen/settings/settings_view.dart';
 import 'package:film_freund/widgets/home_screen/sidebar.dart';
 import 'package:film_freund/widgets/home_screen/sign_out_confirmation_dialog.dart';
 import 'package:film_freund/widgets/signin_screen/signin_screen.dart';
@@ -104,8 +105,11 @@ class HomeScreenMasterDetail extends StatelessWidget {
             ),
             const VerticalDivider(width: 2),
             Expanded(
-              child: HomePageContent(
-                activeView: activeView,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: HomePageContent(
+                  activeView: activeView,
+                ),
               ),
             ),
           ],
@@ -126,10 +130,15 @@ class HomePageContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        activeView.title,
-      ),
-    );
+    switch (activeView) {
+      case ActiveView.settings:
+        return const SettingsView();
+      default:
+        return Center(
+          child: Text(
+            activeView.title,
+          ),
+        );
+    }
   }
 }
