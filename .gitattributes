@@ -1,0 +1,5 @@
+# Determine waht files GitHub will mark as generated in PRs
+# https://thoughtbot.com/blog/github-diff-supression
+lib/**.g.dart linguist-generated=true
+lib/generated/**.dart linguist-generated=true
+test/**.mocks.dart linguist-generated=true
