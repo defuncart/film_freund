@@ -1,9 +1,9 @@
 import 'package:film_freund/generated/l10n.dart';
-import 'package:film_freund/widgets/home_screen/sign_out_confirmation_dialog.dart';
+import 'package:film_freund/widgets/home_screen/settings/sign_out_confirmation_dialog.dart';
 import 'package:flutter/material.dart' show Text;
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../test_utils.dart';
+import '../../../test_utils.dart';
 
 void main() {
   group('$SignOutConfirmationDialog', () {

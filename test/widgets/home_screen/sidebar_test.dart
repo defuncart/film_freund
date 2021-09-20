@@ -11,7 +11,6 @@ void main() {
     final widget = wrapWithMaterialAppLocalizationDelegates(
       Sidebar(
         onViewChanged: (_) {},
-        onSignOut: () {},
       ),
     );
 
@@ -36,7 +35,6 @@ void main() {
     final widget = wrapWithMaterialAppLocalizationDelegates(
       Sidebar(
         onViewChanged: (newView) => activeView = newView,
-        onSignOut: () {},
       ),
     );
 
@@ -52,26 +50,4 @@ void main() {
 
     expect(activeView, ActiveView.search);
   });
-
-  // testWidgets('Ensure onSignOut can be invoked', (tester) async {
-  //   var isPressed = false;
-  //   final widget = wrapWithMaterialAppLocalizationDelegates(
-  //     Sidebar(
-  //       onViewChanged: (_) {},
-  //       onSignOut: () => isPressed = true,
-  //     ),
-  //   );
-
-  //   await tester.pumpWidget(widget);
-
-  //   await tester.pumpAndSettle();
-
-  //   expect(isPressed, isFalse);
-
-  //   await tester.tap(
-  //     find.text(AppLocalizations.current.sidebarSignOutButtonText),
-  //   );
-
-  //   expect(isPressed, isTrue);
-  // });
 }

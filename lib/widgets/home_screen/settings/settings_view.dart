@@ -1,11 +1,17 @@
 import 'package:film_freund/generated/l10n.dart';
 import 'package:film_freund/services/service_locator.dart';
 import 'package:film_freund/services/user/models/user.dart';
+import 'package:film_freund/widgets/home_screen/settings/sign_out_confirmation_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SettingsView extends ConsumerWidget {
-  const SettingsView({Key? key}) : super(key: key);
+  const SettingsView({
+    required this.onSignOutConfirmed,
+    Key? key,
+  }) : super(key: key);
+
+  final VoidCallback onSignOutConfirmed;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -14,7 +20,10 @@ class SettingsView extends ConsumerWidget {
     return user.when(
       loading: () => const CircularProgressIndicator(),
       error: (err, stack) => Text('Error: $err'),
-      data: (user) => SettingsViewContent(user: user),
+      data: (user) => SettingsViewContent(
+        user: user,
+        onSignOutConfirmed: onSignOutConfirmed,
+      ),
     );
   }
 }
@@ -26,10 +35,12 @@ const displayNameTextFieldKey = Key('SettingsViewDisplayNameTextField');
 class SettingsViewContent extends StatelessWidget {
   const SettingsViewContent({
     required this.user,
+    required this.onSignOutConfirmed,
     Key? key,
   }) : super(key: key);
 
   final User user;
+  final VoidCallback onSignOutConfirmed;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +60,12 @@ class SettingsViewContent extends StatelessWidget {
               ),
             ),
             TextButton(
-              onPressed: null,
+              onPressed: () => showDialog(
+                context: context,
+                builder: (_) => SignOutConfirmationDialog(
+                  onConfirm: onSignOutConfirmed,
+                ),
+              ),
               child: Text(
                 AppLocalizations.of(context).settingsViewSignOutButtonText.toUpperCase(),
               ),

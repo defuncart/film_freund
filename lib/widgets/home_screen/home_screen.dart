@@ -5,7 +5,6 @@ import 'package:film_freund/utils/sizes.dart';
 import 'package:film_freund/widgets/home_screen/active_view.dart';
 import 'package:film_freund/widgets/home_screen/settings/settings_view.dart';
 import 'package:film_freund/widgets/home_screen/sidebar.dart';
-import 'package:film_freund/widgets/home_screen/sign_out_confirmation_dialog.dart';
 import 'package:film_freund/widgets/signin_screen/signin_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -25,15 +24,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final sidebar = Sidebar(
       onViewChanged: (activeView) => setState(() => _activeView = activeView),
-      onSignOut: () => showDialog(
-        context: context,
-        builder: (_) => SignOutConfirmationDialog(
-          onConfirm: () {
-            ServiceLocator.userManager.signout();
-            Navigator.of(context).pushReplacementNamed(SigninScreen.routeName);
-          },
-        ),
-      ),
     );
 
     return isSinglePage(context)
@@ -132,7 +122,12 @@ class HomePageContent extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (activeView) {
       case ActiveView.settings:
-        return const SettingsView();
+        return SettingsView(
+          onSignOutConfirmed: () {
+            ServiceLocator.userManager.signout();
+            Navigator.of(context).pushReplacementNamed(SigninScreen.routeName);
+          },
+        );
       default:
         return Center(
           child: Text(
