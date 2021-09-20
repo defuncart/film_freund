@@ -13,6 +13,17 @@ abstract class IUserDatabase {
   /// Returns a user with [id]. If no such user exists, null is returned.
   Future<User?> getUser({required String id});
 
+  /// Updates a user with given overriden parameters [firstName],
+  /// [lastName], [watched], [watchlist] and/or [lists]
+  Future<void> updateUser({
+    required User user,
+    String? firstName,
+    String? lastName,
+    List<String>? watched,
+    List<String>? watchlist,
+    List<String>? lists,
+  });
+
   /// Deletes a user by [id].
   ///
   /// Note that if no such user exists, no warning is returned.

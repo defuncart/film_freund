@@ -1,3 +1,5 @@
+import 'dart:developer' show log;
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:film_freund/services/date_time.dart/date_time_service.dart';
 import 'package:film_freund/services/service_locator.dart';
@@ -17,6 +19,14 @@ class FirebaseUserDatabase implements IUserDatabase {
 
   static const _collection = 'users';
 
+  /// Saves a user to db
+  ///
+  /// If the user does not exist, it is created, otherwise existing user overwritten
+  Future<void> _saveUser(User user) async {
+    await _firebaseFirestore.collection(_collection).doc(user.id).set(user.toJson());
+    log('FirebaseUserDatabase saved user ${user.toString()}');
+  }
+
   @override
   Future<void> createUser({
     required String id,
@@ -34,7 +44,7 @@ class FirebaseUserDatabase implements IUserDatabase {
       updatedAt: now,
     );
 
-    await _firebaseFirestore.collection(_collection).doc(id).set(user.toJson());
+    await _saveUser(user);
   }
 
   @override
@@ -45,6 +55,33 @@ class FirebaseUserDatabase implements IUserDatabase {
     }
 
     return null;
+  }
+
+  @override
+  Future<void> updateUser({
+    required User user,
+    String? firstName,
+    String? lastName,
+    List<String>? watched,
+    List<String>? watchlist,
+    List<String>? lists,
+  }) async {
+    var updatedUser = user.copyWith(
+      firstName: firstName,
+      lastName: lastName,
+      watched: watched,
+      watchlist: watchlist,
+      lists: lists,
+    );
+
+    if (updatedUser == user) {
+      log('Warning! FirebaseUserDatabase.update nothing to update!');
+      log('firstName: $firstName, lastName: $lastName, watched: $watched, watchlist: $watchlist, lists: $lists');
+    }
+
+    updatedUser = updatedUser.setUpdatedAt(_dateTimeService.nowUtc);
+
+    await _saveUser(updatedUser);
   }
 
   @override

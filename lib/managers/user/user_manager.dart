@@ -63,6 +63,26 @@ class UserManager {
   /// Signs out a user
   Future<void> signout() => _authService.signout();
 
+  /// Updates a user
+  ///
+  /// See [IUserDatabase] for more info
+  Future<void> updateUser({
+    required User user,
+    String? firstName,
+    String? lastName,
+    List<String>? watched,
+    List<String>? watchlist,
+    List<String>? lists,
+  }) =>
+      _userDatabase.updateUser(
+        user: user,
+        firstName: firstName,
+        lastName: lastName,
+        watched: watched,
+        watchlist: watchlist,
+        lists: lists,
+      );
+
   /// Deletes the current user's authentication using [email] and [password]
   ///
   /// See [IAuthService] for more info
