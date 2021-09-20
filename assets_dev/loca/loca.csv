@@ -14,7 +14,10 @@ activeViewLikedTitle;Title for ActiveView.liked;Liked
 activeViewWatchlistTitle;Title for ActiveView.watchlist;Watchlist
 activeViewListsTitle;Title for ActiveView.lists;Lists
 activeViewSettingsTitle;Title for ActiveView.settings;Settings
-sidebarSignOutButtonText;Text for sign out button;Sign Out
+settingsViewSignedInAsText;Text to denote which email user is signed in with;Signed in with {email}
+settingsViewChangePasswordButtonText;Text for change password button;Change Password
+settingsViewSignOutButtonText;Text for sign out button;Sign Out
+settingsViewDisplayNameHintText;Hint text for display name input field;Display Name
 signOutConfirmationDialogDescriptionText;Description text for sign out dialog;Are you sure you want to sign out?
 signOutConfirmationDialogCancelButtonText;Cancel text for sign out dialog;Cancel
 signOutConfirmationDialogConfirmButtonText;Confirmation text for sign out dialog;Sign Out

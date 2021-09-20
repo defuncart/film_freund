@@ -121,13 +121,43 @@ class AppLocalizations {
     );
   }
 
+  /// `Change Password`
+  String get settingsViewChangePasswordButtonText {
+    return Intl.message(
+      'Change Password',
+      name: 'settingsViewChangePasswordButtonText',
+      desc: 'Text for change password button',
+      args: [],
+    );
+  }
+
+  /// `Display Name`
+  String get settingsViewDisplayNameHintText {
+    return Intl.message(
+      'Display Name',
+      name: 'settingsViewDisplayNameHintText',
+      desc: 'Hint text for display name input field',
+      args: [],
+    );
+  }
+
   /// `Sign Out`
-  String get sidebarSignOutButtonText {
+  String get settingsViewSignOutButtonText {
     return Intl.message(
       'Sign Out',
-      name: 'sidebarSignOutButtonText',
+      name: 'settingsViewSignOutButtonText',
       desc: 'Text for sign out button',
       args: [],
+    );
+  }
+
+  /// `Signed in with {email}`
+  String settingsViewSignedInAsText(Object email) {
+    return Intl.message(
+      'Signed in with $email',
+      name: 'settingsViewSignedInAsText',
+      desc: 'Text to denote which email user is signed in with',
+      args: [email],
     );
   }
 

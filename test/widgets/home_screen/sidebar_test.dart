@@ -53,25 +53,25 @@ void main() {
     expect(activeView, ActiveView.search);
   });
 
-  testWidgets('Ensure onSignOut can be invoked', (tester) async {
-    var isPressed = false;
-    final widget = wrapWithMaterialAppLocalizationDelegates(
-      Sidebar(
-        onViewChanged: (_) {},
-        onSignOut: () => isPressed = true,
-      ),
-    );
+  // testWidgets('Ensure onSignOut can be invoked', (tester) async {
+  //   var isPressed = false;
+  //   final widget = wrapWithMaterialAppLocalizationDelegates(
+  //     Sidebar(
+  //       onViewChanged: (_) {},
+  //       onSignOut: () => isPressed = true,
+  //     ),
+  //   );
 
-    await tester.pumpWidget(widget);
+  //   await tester.pumpWidget(widget);
 
-    await tester.pumpAndSettle();
+  //   await tester.pumpAndSettle();
 
-    expect(isPressed, isFalse);
+  //   expect(isPressed, isFalse);
 
-    await tester.tap(
-      find.text(AppLocalizations.current.sidebarSignOutButtonText),
-    );
+  //   await tester.tap(
+  //     find.text(AppLocalizations.current.sidebarSignOutButtonText),
+  //   );
 
-    expect(isPressed, isTrue);
-  });
+  //   expect(isPressed, isTrue);
+  // });
 }

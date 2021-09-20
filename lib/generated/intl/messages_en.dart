@@ -19,6 +19,8 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(email) => "Signed in with ${email}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "activeViewLikedTitle": MessageLookupByLibrary.simpleMessage("Liked"),
@@ -32,8 +34,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Watched"),
         "activeViewWatchlistTitle":
             MessageLookupByLibrary.simpleMessage("Watchlist"),
-        "sidebarSignOutButtonText":
+        "settingsViewChangePasswordButtonText":
+            MessageLookupByLibrary.simpleMessage("Change Password"),
+        "settingsViewDisplayNameHintText":
+            MessageLookupByLibrary.simpleMessage("Display Name"),
+        "settingsViewSignOutButtonText":
             MessageLookupByLibrary.simpleMessage("Sign Out"),
+        "settingsViewSignedInAsText": m0,
         "signOutConfirmationDialogCancelButtonText":
             MessageLookupByLibrary.simpleMessage("Cancel"),
         "signOutConfirmationDialogConfirmButtonText":
