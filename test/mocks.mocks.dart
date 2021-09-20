@@ -63,16 +63,14 @@ class MockUserManager extends _i1.Mock implements _i3.UserManager {
   @override
   _i4.Future<void> updateUser(
           {_i2.User? user,
-          String? firstName,
-          String? lastName,
+          String? displayName,
           List<String>? watched,
           List<String>? watchlist,
           List<String>? lists}) =>
       (super.noSuchMethod(
           Invocation.method(#updateUser, [], {
             #user: user,
-            #firstName: firstName,
-            #lastName: lastName,
+            #displayName: displayName,
             #watched: watched,
             #watchlist: watchlist,
             #lists: lists
@@ -151,14 +149,10 @@ class MockIUserDatabase extends _i1.Mock implements _i7.IUserDatabase {
 
   @override
   _i4.Future<void> createUser(
-          {String? id, String? email, String? firstName, String? lastName}) =>
+          {String? id, String? email, String? displayName}) =>
       (super.noSuchMethod(
-          Invocation.method(#createUser, [], {
-            #id: id,
-            #email: email,
-            #firstName: firstName,
-            #lastName: lastName
-          }),
+          Invocation.method(#createUser, [],
+              {#id: id, #email: email, #displayName: displayName}),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
   @override
@@ -168,16 +162,14 @@ class MockIUserDatabase extends _i1.Mock implements _i7.IUserDatabase {
   @override
   _i4.Future<void> updateUser(
           {_i2.User? user,
-          String? firstName,
-          String? lastName,
+          String? displayName,
           List<String>? watched,
           List<String>? watchlist,
           List<String>? lists}) =>
       (super.noSuchMethod(
           Invocation.method(#updateUser, [], {
             #user: user,
-            #firstName: firstName,
-            #lastName: lastName,
+            #displayName: displayName,
             #watched: watched,
             #watchlist: watchlist,
             #lists: lists

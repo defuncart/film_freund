@@ -68,16 +68,14 @@ class UserManager {
   /// See [IUserDatabase] for more info
   Future<void> updateUser({
     required User user,
-    String? firstName,
-    String? lastName,
+    String? displayName,
     List<String>? watched,
     List<String>? watchlist,
     List<String>? lists,
   }) =>
       _userDatabase.updateUser(
         user: user,
-        firstName: firstName,
-        lastName: lastName,
+        displayName: displayName,
         watched: watched,
         watchlist: watchlist,
         lists: lists,

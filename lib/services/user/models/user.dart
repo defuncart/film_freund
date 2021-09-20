@@ -10,8 +10,7 @@ class User extends Equatable {
   const User({
     required this.id,
     required this.email,
-    this.firstName = '',
-    this.lastName = '',
+    this.displayName = '',
     required this.createdAt,
     required this.updatedAt,
     this.watched = const [],
@@ -21,8 +20,7 @@ class User extends Equatable {
 
   final String id;
   final String email;
-  final String firstName;
-  final String lastName;
+  final String displayName;
   final DateTime createdAt;
   final DateTime updatedAt;
   final List<String> watched;
@@ -35,7 +33,7 @@ class User extends Equatable {
 
   /// Returns a copy of current instance with overriden params
   User copyWith({
-    String? firstName,
+    String? displayName,
     String? lastName,
     List<String>? watched,
     List<String>? watchlist,
@@ -44,8 +42,7 @@ class User extends Equatable {
       User(
         id: id,
         email: email,
-        firstName: firstName ?? this.firstName,
-        lastName: lastName ?? this.lastName,
+        displayName: displayName ?? this.displayName,
         createdAt: createdAt,
         updatedAt: updatedAt,
         watched: watched ?? this.watched,
@@ -57,8 +54,7 @@ class User extends Equatable {
   User setUpdatedAt(DateTime updatedAt) => User(
         id: id,
         email: email,
-        firstName: firstName,
-        lastName: lastName,
+        displayName: displayName,
         createdAt: createdAt,
         updatedAt: updatedAt,
         watched: watched,
@@ -70,8 +66,7 @@ class User extends Equatable {
   List<Object?> get props => [
         id,
         email,
-        firstName,
-        lastName,
+        displayName,
         createdAt,
         updatedAt,
         watched,
