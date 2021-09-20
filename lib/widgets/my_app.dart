@@ -86,7 +86,7 @@ class MyAppContent extends StatelessWidget {
         ],
         supportedLocales: AppLocalizations.delegate.supportedLocales,
         theme: AppThemes.light,
-        initialRoute: ServiceLocator.authService.isUserAuthenticated ? HomeScreen.routeName : SigninScreen.routeName,
+        initialRoute: ServiceLocator.userManager.isAuthenticated ? HomeScreen.routeName : SigninScreen.routeName,
         routes: {
           HomeScreen.routeName: (_) => const HomeScreen(),
           SigninScreen.routeName: (_) => const SigninScreen(),

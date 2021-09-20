@@ -16,6 +16,9 @@ class FirebaseAuthService implements IAuthService {
   bool get isUserAuthenticated => _firebaseAuth.currentUser != null;
 
   @override
+  String? get authenticatedUserId => _firebaseAuth.currentUser?.uid;
+
+  @override
   Future<AuthResult> signin({required String email, required String password}) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
@@ -51,6 +54,29 @@ class FirebaseAuthService implements IAuthService {
 
   @override
   Future<void> signout() => _firebaseAuth.signOut();
+
+  @override
+  Future<DeleteResult> delete({required String email, required String password}) async {
+    assert(isUserAuthenticated, 'No signed-in user to delete');
+
+    final user = _firebaseAuth.currentUser;
+    final credentials = EmailAuthProvider.credential(email: email, password: password);
+
+    try {
+      final result = await user?.reauthenticateWithCredential(credentials);
+
+      await result?.user?.delete();
+
+      return DeleteResult.success;
+    } on FirebaseAuthException catch (authException) {
+      if (authException.code.wrongPassword) {
+        log('FirebaseAuthService.delete: Wrong password provided for user.');
+        return DeleteResult.incorrectPassword;
+      }
+    }
+
+    return DeleteResult.other;
+  }
 }
 
 extension on String {

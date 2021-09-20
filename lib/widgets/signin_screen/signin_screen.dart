@@ -110,7 +110,7 @@ class _SigninScreenState extends State<SigninScreen> {
   void _signin() async {
     ModalProgressIndicator.show(context);
 
-    final result = await ServiceLocator.authService.signin(
+    final result = await ServiceLocator.userManager.signin(
       email: _emailController.text,
       password: _passwordController.text,
     );

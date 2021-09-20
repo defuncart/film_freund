@@ -1,4 +1,4 @@
-import 'package:film_freund/services/auth/i_auth_service.dart';
+import 'package:film_freund/services/date_time.dart/date_time_service.dart';
 import 'package:film_freund/services/service_locator.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -7,12 +7,12 @@ import '../test_service_locator.dart';
 
 void main() {
   group('$ServiceLocator', () {
-    late IAuthService mockAuthService;
+    late DateTimeService mockDateTimeService;
 
     setUp(() {
-      mockAuthService = MockIAuthService();
+      mockDateTimeService = MockDateTimeService();
       TestServiceLocator.register(
-        authService: mockAuthService,
+        dateTimeService: mockDateTimeService,
       );
     });
 
@@ -20,7 +20,7 @@ void main() {
 
     test('When $ServiceLocator is initialized, expect access to services', () {
       expect(
-        () => ServiceLocator.authService,
+        () => ServiceLocator.dateTimeService,
         returnsNormally,
       );
     });

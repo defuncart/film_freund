@@ -2,9 +2,14 @@
 // in film_freund/test/mocks.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i3;
+import 'dart:async' as _i4;
 
-import 'package:film_freund/services/auth/i_auth_service.dart' as _i2;
+import 'package:film_freund/managers/user/user_manager.dart' as _i3;
+import 'package:film_freund/services/auth/i_auth_service.dart' as _i5;
+import 'package:film_freund/services/date_time.dart/date_time_service.dart'
+    as _i6;
+import 'package:film_freund/services/user/i_user_database.dart' as _i7;
+import 'package:film_freund/services/user/models/user.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: avoid_redundant_argument_values
@@ -15,10 +20,93 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: prefer_const_constructors
 // ignore_for_file: unnecessary_parenthesis
 
+class _FakeUser_0 extends _i1.Fake implements _i2.User {}
+
+class _FakeDateTime_1 extends _i1.Fake implements DateTime {}
+
+/// A class which mocks [UserManager].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockUserManager extends _i1.Mock implements _i3.UserManager {
+  MockUserManager() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  bool get isAuthenticated => (super
+          .noSuchMethod(Invocation.getter(#isAuthenticated), returnValue: false)
+      as bool);
+  @override
+  _i4.Future<_i2.User> get currentUser =>
+      (super.noSuchMethod(Invocation.getter(#currentUser),
+              returnValue: Future<_i2.User>.value(_FakeUser_0()))
+          as _i4.Future<_i2.User>);
+  @override
+  _i4.Future<_i2.User?> getUser({String? id}) =>
+      (super.noSuchMethod(Invocation.method(#getUser, [], {#id: id}),
+          returnValue: Future<_i2.User?>.value()) as _i4.Future<_i2.User?>);
+  @override
+  _i4.Future<_i5.AuthResult> signin({String? email, String? password}) =>
+      (super.noSuchMethod(
+          Invocation.method(#signin, [], {#email: email, #password: password}),
+          returnValue:
+              Future<_i5.AuthResult>.value(_i5.AuthResult.createSuccess)) as _i4
+          .Future<_i5.AuthResult>);
+  @override
+  _i4.Future<void> signout() =>
+      (super.noSuchMethod(Invocation.method(#signout, []),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+  @override
+  _i4.Future<void> updateUser(
+          {_i2.User? user,
+          String? firstName,
+          String? lastName,
+          List<String>? watched,
+          List<String>? watchlist,
+          List<String>? lists}) =>
+      (super.noSuchMethod(
+          Invocation.method(#updateUser, [], {
+            #user: user,
+            #firstName: firstName,
+            #lastName: lastName,
+            #watched: watched,
+            #watchlist: watchlist,
+            #lists: lists
+          }),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+  @override
+  _i4.Future<_i5.DeleteResult> deleteUser({String? email, String? password}) =>
+      (super.noSuchMethod(
+              Invocation.method(
+                  #deleteUser, [], {#email: email, #password: password}),
+              returnValue:
+                  Future<_i5.DeleteResult>.value(_i5.DeleteResult.success))
+          as _i4.Future<_i5.DeleteResult>);
+  @override
+  String toString() => super.toString();
+}
+
+/// A class which mocks [DateTimeService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockDateTimeService extends _i1.Mock implements _i6.DateTimeService {
+  MockDateTimeService() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  DateTime get nowUtc => (super.noSuchMethod(Invocation.getter(#nowUtc),
+      returnValue: _FakeDateTime_1()) as DateTime);
+  @override
+  String toString() => super.toString();
+}
+
 /// A class which mocks [IAuthService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIAuthService extends _i1.Mock implements _i2.IAuthService {
+class MockIAuthService extends _i1.Mock implements _i5.IAuthService {
   MockIAuthService() {
     _i1.throwOnMissingStub(this);
   }
@@ -28,17 +116,76 @@ class MockIAuthService extends _i1.Mock implements _i2.IAuthService {
       (super.noSuchMethod(Invocation.getter(#isUserAuthenticated),
           returnValue: false) as bool);
   @override
-  _i3.Future<_i2.AuthResult> signin({String? email, String? password}) =>
+  _i4.Future<_i5.AuthResult> signin({String? email, String? password}) =>
       (super.noSuchMethod(
           Invocation.method(#signin, [], {#email: email, #password: password}),
           returnValue:
-              Future<_i2.AuthResult>.value(_i2.AuthResult.createSuccess)) as _i3
-          .Future<_i2.AuthResult>);
+              Future<_i5.AuthResult>.value(_i5.AuthResult.createSuccess)) as _i4
+          .Future<_i5.AuthResult>);
   @override
-  _i3.Future<void> signout() =>
+  _i4.Future<void> signout() =>
       (super.noSuchMethod(Invocation.method(#signout, []),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i3.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+  @override
+  _i4.Future<_i5.DeleteResult> delete({String? email, String? password}) =>
+      (super.noSuchMethod(
+          Invocation.method(#delete, [], {#email: email, #password: password}),
+          returnValue:
+              Future<_i5.DeleteResult>.value(_i5.DeleteResult.success)) as _i4
+          .Future<_i5.DeleteResult>);
+  @override
+  String toString() => super.toString();
+}
+
+/// A class which mocks [IUserDatabase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockIUserDatabase extends _i1.Mock implements _i7.IUserDatabase {
+  MockIUserDatabase() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.Future<void> createUser(
+          {String? id, String? email, String? firstName, String? lastName}) =>
+      (super.noSuchMethod(
+          Invocation.method(#createUser, [], {
+            #id: id,
+            #email: email,
+            #firstName: firstName,
+            #lastName: lastName
+          }),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+  @override
+  _i4.Future<_i2.User?> getUser({String? id}) =>
+      (super.noSuchMethod(Invocation.method(#getUser, [], {#id: id}),
+          returnValue: Future<_i2.User?>.value()) as _i4.Future<_i2.User?>);
+  @override
+  _i4.Future<void> updateUser(
+          {_i2.User? user,
+          String? firstName,
+          String? lastName,
+          List<String>? watched,
+          List<String>? watchlist,
+          List<String>? lists}) =>
+      (super.noSuchMethod(
+          Invocation.method(#updateUser, [], {
+            #user: user,
+            #firstName: firstName,
+            #lastName: lastName,
+            #watched: watched,
+            #watchlist: watchlist,
+            #lists: lists
+          }),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+  @override
+  _i4.Future<void> deleteUser({String? id}) =>
+      (super.noSuchMethod(Invocation.method(#deleteUser, [], {#id: id}),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
   @override
   String toString() => super.toString();
 }

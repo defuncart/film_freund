@@ -1,4 +1,4 @@
-import 'package:film_freund/services/auth/i_auth_service.dart';
+import 'package:film_freund/managers/user/user_manager.dart';
 import 'package:film_freund/widgets/home_screen/home_screen.dart';
 import 'package:film_freund/widgets/my_app.dart';
 import 'package:film_freund/widgets/signin_screen/signin_screen.dart';
@@ -11,19 +11,19 @@ import '../test_service_locator.dart';
 
 void main() {
   group('$MyAppContent', () {
-    late IAuthService mockAuthService;
+    late UserManager mockUserManager;
 
     setUp(() {
-      mockAuthService = MockIAuthService();
+      mockUserManager = MockUserManager();
       TestServiceLocator.register(
-        authService: mockAuthService,
+        userManager: mockUserManager,
       );
     });
 
     tearDown(TestServiceLocator.rest);
 
     testWidgets('When user is not authenticated, expect $SigninScreen', (tester) async {
-      when(mockAuthService.isUserAuthenticated).thenReturn(false);
+      when(mockUserManager.isAuthenticated).thenReturn(false);
 
       await tester.pumpWidget(
         TestServiceLocator.providerScope(
@@ -40,7 +40,7 @@ void main() {
     });
 
     testWidgets('When user is authenticated, expect $HomeScreen', (tester) async {
-      when(mockAuthService.isUserAuthenticated).thenReturn(true);
+      when(mockUserManager.isAuthenticated).thenReturn(true);
 
       await tester.pumpWidget(
         TestServiceLocator.providerScope(

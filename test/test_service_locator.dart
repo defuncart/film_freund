@@ -1,4 +1,5 @@
-import 'package:film_freund/services/auth/i_auth_service.dart';
+import 'package:film_freund/managers/user/user_manager.dart';
+import 'package:film_freund/services/date_time.dart/date_time_service.dart';
 import 'package:film_freund/services/service_locator.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,14 +12,19 @@ class TestServiceLocator {
 
   /// Register services for tests. This is generally called in `setUp`
   static void register({
-    IAuthService? authService,
+    DateTimeService? dateTimeService,
+    UserManager? userManager,
   }) {
     _container = ProviderContainer(
       overrides: [
-        if (authService != null)
-          authServiceProvider.overrideWithValue(
-            authService,
-          )
+        if (dateTimeService != null)
+          dateTimeServiceProvider.overrideWithValue(
+            dateTimeService,
+          ),
+        if (userManager != null)
+          userManagerProvider.overrideWithValue(
+            userManager,
+          ),
       ],
     );
     ServiceLocator.initialize(_container.read);
