@@ -58,6 +58,25 @@ class MockUserManager extends _i1.Mock implements _i3.UserManager {
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
   @override
+  _i4.Future<void> updateUser(
+          {_i2.User? user,
+          String? firstName,
+          String? lastName,
+          List<String>? watched,
+          List<String>? watchlist,
+          List<String>? lists}) =>
+      (super.noSuchMethod(
+          Invocation.method(#updateUser, [], {
+            #user: user,
+            #firstName: firstName,
+            #lastName: lastName,
+            #watched: watched,
+            #watchlist: watchlist,
+            #lists: lists
+          }),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+  @override
   _i4.Future<_i5.DeleteResult> deleteUser({String? email, String? password}) =>
       (super.noSuchMethod(
               Invocation.method(
@@ -143,6 +162,25 @@ class MockIUserDatabase extends _i1.Mock implements _i7.IUserDatabase {
   _i4.Future<_i2.User?> getUser({String? id}) =>
       (super.noSuchMethod(Invocation.method(#getUser, [], {#id: id}),
           returnValue: Future<_i2.User?>.value()) as _i4.Future<_i2.User?>);
+  @override
+  _i4.Future<void> updateUser(
+          {_i2.User? user,
+          String? firstName,
+          String? lastName,
+          List<String>? watched,
+          List<String>? watchlist,
+          List<String>? lists}) =>
+      (super.noSuchMethod(
+          Invocation.method(#updateUser, [], {
+            #user: user,
+            #firstName: firstName,
+            #lastName: lastName,
+            #watched: watched,
+            #watchlist: watchlist,
+            #lists: lists
+          }),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
   @override
   _i4.Future<void> deleteUser({String? id}) =>
       (super.noSuchMethod(Invocation.method(#deleteUser, [], {#id: id}),

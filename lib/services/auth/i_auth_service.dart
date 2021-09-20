@@ -5,7 +5,7 @@ abstract class IAuthService {
   /// When [isUserAuthenticated] is true, returns the user's id, otherwise null
   String? get authenticatedUserId;
 
-  /// Attempts to signing a user with [email] and [password]
+  /// Attempts to sign in a user with [email] and [password]
   ///
   /// Returns [AuthResult.createSuccess] if no account exists for [email] but one was successfully created
   ///

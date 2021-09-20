@@ -3,9 +3,9 @@ import 'dart:developer' show log;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:film_freund/services/date_time.dart/date_time_service.dart';
 import 'package:film_freund/services/service_locator.dart';
-import 'package:film_freund/services/user/models/user.dart';
 
 import 'i_user_database.dart';
+import 'models/user.dart';
 
 class FirebaseUserDatabase implements IUserDatabase {
   FirebaseUserDatabase([
@@ -77,6 +77,8 @@ class FirebaseUserDatabase implements IUserDatabase {
     if (updatedUser == user) {
       log('Warning! FirebaseUserDatabase.update nothing to update!');
       log('firstName: $firstName, lastName: $lastName, watched: $watched, watchlist: $watchlist, lists: $lists');
+
+      return;
     }
 
     updatedUser = updatedUser.setUpdatedAt(_dateTimeService.nowUtc);

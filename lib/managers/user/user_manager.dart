@@ -2,7 +2,7 @@ import 'package:film_freund/services/auth/i_auth_service.dart';
 import 'package:film_freund/services/user/i_user_database.dart';
 import 'package:film_freund/services/user/models/user.dart';
 
-/// A manager which handles user authentication and performs database operations
+/// A manager which handles user authentication and performs user database operations
 class UserManager {
   UserManager({
     required IAuthService authService,
@@ -37,7 +37,7 @@ class UserManager {
   /// Returns a user with [id]. If no such user exists, null is returned.
   Future<User?> getUser({required String id}) => _userDatabase.getUser(id: id);
 
-  /// Attempts to signing a user with [email] and [password]
+  /// Attempts to sign in a user with [email] and [password]
   ///
   /// See [IAuthService] for more info
   Future<AuthResult> signin({
