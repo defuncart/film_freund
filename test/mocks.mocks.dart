@@ -8,6 +8,9 @@ import 'package:film_freund/managers/user/user_manager.dart' as _i3;
 import 'package:film_freund/services/auth/i_auth_service.dart' as _i5;
 import 'package:film_freund/services/date_time.dart/date_time_service.dart'
     as _i6;
+import 'package:film_freund/services/movies/i_movie_database.dart' as _i8;
+import 'package:film_freund/services/movies/models/movie.dart' as _i9;
+import 'package:film_freund/services/movies/models/movie_teaser.dart' as _i10;
 import 'package:film_freund/services/user/i_user_database.dart' as _i7;
 import 'package:film_freund/services/user/models/user.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
@@ -186,6 +189,34 @@ class MockIUserDatabase extends _i1.Mock implements _i7.IUserDatabase {
       (super.noSuchMethod(Invocation.method(#deleteUser, [], {#id: id}),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+  @override
+  String toString() => super.toString();
+}
+
+/// A class which mocks [IMovieDatabase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockIMovieDatabase extends _i1.Mock implements _i8.IMovieDatabase {
+  MockIMovieDatabase() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.Future<_i9.Movie?> getMovie(String? id) =>
+      (super.noSuchMethod(Invocation.method(#getMovie, [id]),
+          returnValue: Future<_i9.Movie?>.value()) as _i4.Future<_i9.Movie?>);
+  @override
+  _i4.Future<List<_i10.MovieTeaser>> getPopular() =>
+      (super.noSuchMethod(Invocation.method(#getPopular, []),
+              returnValue:
+                  Future<List<_i10.MovieTeaser>>.value(<_i10.MovieTeaser>[]))
+          as _i4.Future<List<_i10.MovieTeaser>>);
+  @override
+  _i4.Future<List<_i10.MovieTeaser>> getUpcoming() =>
+      (super.noSuchMethod(Invocation.method(#getUpcoming, []),
+              returnValue:
+                  Future<List<_i10.MovieTeaser>>.value(<_i10.MovieTeaser>[]))
+          as _i4.Future<List<_i10.MovieTeaser>>);
   @override
   String toString() => super.toString();
 }
