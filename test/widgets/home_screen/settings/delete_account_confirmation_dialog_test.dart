@@ -13,11 +13,11 @@ import '../../../test_utils.dart';
 
 void main() {
   group('$DeleteAccountConfirmationDialog', () {
-    var isPressed = false;
+    final mockVoidCallback = MockVoidCallback();
 
     final widget = wrapWithMaterialAppLocalizationDelegates(
       DeleteAccountConfirmationDialog(
-        onAccountDeleted: () => isPressed = true,
+        onAccountDeleted: mockVoidCallback,
       ),
     );
 
@@ -35,34 +35,34 @@ void main() {
         find.text(AppLocalizations.current.deleteAccountConfirmationDialogTitleText),
         findsOneWidget,
       );
-
       expect(
         find.text(AppLocalizations.current.deleteAccountConfirmationDialogDescriptionText),
         findsOneWidget,
       );
-
       expect(
         find.byKey(DeleteAccountConfirmationDialog.passwordTextFieldKey),
         findsOneWidget,
       );
-
       expect(
         find.text(AppLocalizations.current.generalPasswordHint),
         findsOneWidget,
       );
-
       expect(
         find.text(AppLocalizations.current.generalCancel.toUpperCase()),
         findsOneWidget,
       );
-
       expect(
         find.text(AppLocalizations.current.deleteAccountConfirmationDialogConfirmButtonText.toUpperCase()),
         findsOneWidget,
       );
+
+      expect(
+        tester.widget<TextButton>(find.byKey(DeleteAccountConfirmationDialog.deleteButtonKey)).enabled,
+        isFalse,
+      );
     });
 
-    testWidgets('when password is not valid, expect error text', (tester) async {
+    testWidgets('when password is not valid, expect error', (tester) async {
       await tester.pumpWidget(widget);
       await tester.pumpAndSettle();
 
@@ -73,6 +73,10 @@ void main() {
       expect(
         find.text(AppLocalizations.current.generalInvalidPassword),
         findsOneWidget,
+      );
+      expect(
+        tester.widget<TextButton>(find.byKey(DeleteAccountConfirmationDialog.deleteButtonKey)).enabled,
+        isFalse,
       );
     });
 
@@ -88,10 +92,14 @@ void main() {
         await tester.pump();
       });
 
-      testUI('expect no error text', (tester) async {
+      testUI('expect no error', (tester) async {
         expect(
           find.text(AppLocalizations.current.generalInvalidPassword),
           findsNothing,
+        );
+        expect(
+          tester.widget<TextButton>(find.byKey(DeleteAccountConfirmationDialog.deleteButtonKey)).enabled,
+          isTrue,
         );
       });
 
@@ -99,13 +107,11 @@ void main() {
 
       group('when cancel button is pressed', () {
         testUI('ensure no callbacks are invoked', (tester) async {
-          expect(isPressed, isFalse);
-
           await tester.tap(find.text(
             AppLocalizations.current.generalCancel.toUpperCase(),
           ));
 
-          expect(isPressed, isFalse);
+          verifyNever(mockVoidCallback.call());
           verifyNever(mockUserManager.currentUser);
           verifyNever(mockUserManager.deleteUser(email: email, password: password));
         });
@@ -116,8 +122,6 @@ void main() {
         when(mockUserManager.currentUser).thenAnswer((_) => Future.value(user));
 
         testUI('and ${DeleteResult.success}, ensure callback is invoked', (tester) async {
-          expect(isPressed, isFalse);
-
           when(mockUserManager.deleteUser(email: email, password: password))
               .thenAnswer((_) => Future.value(DeleteResult.success));
 
@@ -125,13 +129,10 @@ void main() {
             AppLocalizations.current.deleteAccountConfirmationDialogConfirmButtonText.toUpperCase(),
           ));
 
-          expect(isPressed, isTrue);
-          isPressed = false; // reset otherwise subsequent tests will fail
+          verify(mockVoidCallback.call()).called(1);
         });
 
-        testUI('and ${DeleteResult.incorrectPassword}, ensure error text', (tester) async {
-          expect(isPressed, isFalse);
-
+        testUI('and ${DeleteResult.incorrectPassword}, ensure incorrect password error', (tester) async {
           when(mockUserManager.deleteUser(email: email, password: password))
               .thenAnswer((_) => Future.value(DeleteResult.incorrectPassword));
 
@@ -145,12 +146,10 @@ void main() {
             find.text(AppLocalizations.current.generalIncorrectPassword),
             findsOneWidget,
           );
-          expect(isPressed, isFalse);
+          verifyNever(mockVoidCallback.call());
         });
 
-        testUI('and ${DeleteResult.other}, ensure error text', (tester) async {
-          expect(isPressed, isFalse);
-
+        testUI('and ${DeleteResult.other}, ensure general error', (tester) async {
           when(mockUserManager.deleteUser(email: email, password: password))
               .thenAnswer((_) => Future.value(DeleteResult.other));
 
@@ -164,7 +163,7 @@ void main() {
             find.text(AppLocalizations.current.generalErrorOccured),
             findsOneWidget,
           );
-          expect(isPressed, isFalse);
+          verifyNever(mockVoidCallback.call());
         });
       });
     });

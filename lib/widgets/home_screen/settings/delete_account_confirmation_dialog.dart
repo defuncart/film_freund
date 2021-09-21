@@ -16,6 +16,9 @@ class DeleteAccountConfirmationDialog extends StatefulWidget {
   @visibleForTesting
   static const passwordTextFieldKey = Key('DeleteAccountPasswordTextField');
 
+  @visibleForTesting
+  static const deleteButtonKey = Key('SigninScreenDeleteButton');
+
   @override
   State<DeleteAccountConfirmationDialog> createState() => _DeleteAccountConfirmationDialogState();
 }
@@ -79,6 +82,7 @@ class _DeleteAccountConfirmationDialogState extends State<DeleteAccountConfirmat
           ),
         ),
         TextButton(
+          key: DeleteAccountConfirmationDialog.deleteButtonKey,
           onPressed: _isValidPassword
               ? () async {
                   ModalProgressIndicator.show(context);
