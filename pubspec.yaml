@@ -13,6 +13,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   cupertino_icons:
+  gap:
   email_validator:
   flutter_riverpod:
   equatable:
