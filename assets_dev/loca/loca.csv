@@ -1,4 +1,8 @@
 key;description;en
+generalPasswordHintText;Hint text for password input field;Password
+generalInvalidPassword;Error text when password is invalid;Password must have at least six characters
+generalIncorrectPassword;Error text when password is incorrect;Incorrect password
+generalErrorOccured;Error text when something went wrong;An error occured!
 signinScreenEmailHintText;Hint text for email input field;Email
 signinScreenEmailErrorText;Text when email input is invalid;Invalid email
 signinScreenPasswordHintText;Hint text for password input field;Password
@@ -14,10 +18,14 @@ activeViewLikedTitle;Title for ActiveView.liked;Liked
 activeViewWatchlistTitle;Title for ActiveView.watchlist;Watchlist
 activeViewListsTitle;Title for ActiveView.lists;Lists
 activeViewSettingsTitle;Title for ActiveView.settings;Settings
-settingsViewSignedInAsText;Text to denote which email user is signed in with;Signed in with {email}
+settingsViewSignedInAsText;Text to denote which email user is signed in as;Signed in as {email}
 settingsViewChangePasswordButtonText;Text for change password button;Change Password
 settingsViewSignOutButtonText;Text for sign out button;Sign Out
 settingsViewDisplayNameHintText;Hint text for display name input field;Display Name
 signOutConfirmationDialogDescriptionText;Description text for sign out dialog;Are you sure you want to sign out?
 signOutConfirmationDialogCancelButtonText;Cancel text for sign out dialog;Cancel
 signOutConfirmationDialogConfirmButtonText;Confirmation text for sign out dialog;Sign Out
+deleteAccountConfirmationDialogTitleText;Title text for delete account dialog;Delete Account
+deleteAccountConfirmationDialogDescriptionText;Description text for delete account dialog;Once your account is deleted, there is no way to get it back.
+deleteAccountConfirmationDialogCancelButtonText;Cancel text for delete account dialog;Cancel
+deleteAccountConfirmationDialogConfirmButtonText;Confirmation text for delete account dialog;Delete

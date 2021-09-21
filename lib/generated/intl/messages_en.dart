@@ -19,7 +19,7 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(email) => "Signed in with ${email}";
+  static String m0(email) => "Signed in as ${email}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -34,6 +34,23 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Watched"),
         "activeViewWatchlistTitle":
             MessageLookupByLibrary.simpleMessage("Watchlist"),
+        "deleteAccountConfirmationDialogCancelButtonText":
+            MessageLookupByLibrary.simpleMessage("Cancel"),
+        "deleteAccountConfirmationDialogConfirmButtonText":
+            MessageLookupByLibrary.simpleMessage("Delete"),
+        "deleteAccountConfirmationDialogDescriptionText":
+            MessageLookupByLibrary.simpleMessage(
+                "Once your account is deleted, there is no way to get it back."),
+        "deleteAccountConfirmationDialogTitleText":
+            MessageLookupByLibrary.simpleMessage("Delete Account"),
+        "generalErrorOccured":
+            MessageLookupByLibrary.simpleMessage("An error occured!"),
+        "generalIncorrectPassword":
+            MessageLookupByLibrary.simpleMessage("Incorrect password"),
+        "generalInvalidPassword": MessageLookupByLibrary.simpleMessage(
+            "Password must have at least six characters"),
+        "generalPasswordHintText":
+            MessageLookupByLibrary.simpleMessage("Password"),
         "settingsViewChangePasswordButtonText":
             MessageLookupByLibrary.simpleMessage("Change Password"),
         "settingsViewDisplayNameHintText":
