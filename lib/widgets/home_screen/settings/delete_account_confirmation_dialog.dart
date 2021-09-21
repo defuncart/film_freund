@@ -57,7 +57,7 @@ class _DeleteAccountConfirmationDialogState extends State<DeleteAccountConfirmat
             controller: _passwordController,
             keyboardType: TextInputType.visiblePassword,
             decoration: InputDecoration(
-              hintText: AppLocalizations.of(context).generalPasswordHintText,
+              hintText: AppLocalizations.of(context).generalPasswordHint,
               errorText: _passwordErrorText,
               suffixIcon: IconButton(
                 icon: Icon(
@@ -75,7 +75,7 @@ class _DeleteAccountConfirmationDialogState extends State<DeleteAccountConfirmat
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
           child: Text(
-            AppLocalizations.of(context).deleteAccountConfirmationDialogCancelButtonText.toUpperCase(),
+            AppLocalizations.of(context).generalCancel.toUpperCase(),
           ),
         ),
         TextButton(

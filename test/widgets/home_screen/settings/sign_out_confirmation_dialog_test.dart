@@ -28,7 +28,7 @@ void main() {
       );
 
       expect(
-        find.text(AppLocalizations.current.signOutConfirmationDialogCancelButtonText.toUpperCase()),
+        find.text(AppLocalizations.current.generalCancel.toUpperCase()),
         findsOneWidget,
       );
 

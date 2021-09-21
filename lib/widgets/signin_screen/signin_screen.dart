@@ -80,9 +80,8 @@ class _SigninScreenState extends State<SigninScreen> {
                   controller: _passwordController,
                   keyboardType: TextInputType.visiblePassword,
                   decoration: InputDecoration(
-                    hintText: AppLocalizations.of(context).signinScreenPasswordHintText,
-                    errorText:
-                        _shouldShowPasswordError ? AppLocalizations.of(context).signinScreenPasswordErrorText : null,
+                    hintText: AppLocalizations.of(context).generalPasswordHint,
+                    errorText: _shouldShowPasswordError ? AppLocalizations.of(context).generalInvalidPassword : null,
                     suffixIcon: IconButton(
                       icon: Icon(
                         _shouldObscurePassword ? Icons.visibility : Icons.visibility_off,

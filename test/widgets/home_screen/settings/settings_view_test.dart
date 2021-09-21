@@ -33,5 +33,5 @@ void main() {
 
       expect(isPressed, isTrue);
     });
-  });
+  }, skip: true);
 }

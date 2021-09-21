@@ -34,8 +34,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Watched"),
         "activeViewWatchlistTitle":
             MessageLookupByLibrary.simpleMessage("Watchlist"),
-        "deleteAccountConfirmationDialogCancelButtonText":
-            MessageLookupByLibrary.simpleMessage("Cancel"),
         "deleteAccountConfirmationDialogConfirmButtonText":
             MessageLookupByLibrary.simpleMessage("Delete"),
         "deleteAccountConfirmationDialogDescriptionText":
@@ -43,14 +41,14 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Once your account is deleted, there is no way to get it back."),
         "deleteAccountConfirmationDialogTitleText":
             MessageLookupByLibrary.simpleMessage("Delete Account"),
+        "generalCancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "generalErrorOccured":
             MessageLookupByLibrary.simpleMessage("An error occured!"),
         "generalIncorrectPassword":
             MessageLookupByLibrary.simpleMessage("Incorrect password"),
         "generalInvalidPassword": MessageLookupByLibrary.simpleMessage(
             "Password must have at least six characters"),
-        "generalPasswordHintText":
-            MessageLookupByLibrary.simpleMessage("Password"),
+        "generalPasswordHint": MessageLookupByLibrary.simpleMessage("Password"),
         "settingsViewChangePasswordButtonText":
             MessageLookupByLibrary.simpleMessage("Change Password"),
         "settingsViewDisplayNameHintText":
@@ -58,8 +56,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "settingsViewSignOutButtonText":
             MessageLookupByLibrary.simpleMessage("Sign Out"),
         "settingsViewSignedInAsText": m0,
-        "signOutConfirmationDialogCancelButtonText":
-            MessageLookupByLibrary.simpleMessage("Cancel"),
         "signOutConfirmationDialogConfirmButtonText":
             MessageLookupByLibrary.simpleMessage("Sign Out"),
         "signOutConfirmationDialogDescriptionText":
@@ -75,10 +71,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Invalid email"),
         "signinScreenEmailHintText":
             MessageLookupByLibrary.simpleMessage("Email"),
-        "signinScreenPasswordErrorText": MessageLookupByLibrary.simpleMessage(
-            "Password must have at least six characters"),
-        "signinScreenPasswordHintText":
-            MessageLookupByLibrary.simpleMessage("Password"),
         "signinScreenSigninButtonText":
             MessageLookupByLibrary.simpleMessage("Sign In")
       };

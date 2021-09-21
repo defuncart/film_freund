@@ -1,12 +1,11 @@
 key;description;en
-generalPasswordHintText;Hint text for password input field;Password
+generalCancel;Text for a general cancel action;Cancel
+generalPasswordHint;Hint text for password input field;Password
 generalInvalidPassword;Error text when password is invalid;Password must have at least six characters
 generalIncorrectPassword;Error text when password is incorrect;Incorrect password
 generalErrorOccured;Error text when something went wrong;An error occured!
 signinScreenEmailHintText;Hint text for email input field;Email
 signinScreenEmailErrorText;Text when email input is invalid;Invalid email
-signinScreenPasswordHintText;Hint text for password input field;Password
-signinScreenPasswordErrorText;Text when password input is invalid;Password must have at least six characters
 signinScreenSigninButtonText;Text for signin button;Sign In
 signinErrorDialogTitleText;Title text for signin error dialog;An error occured!
 signinErrorDialogDescriptionText;Description text for signin error dialog;Please ensure that you are connected to the internet and that the password is correct.
@@ -23,9 +22,7 @@ settingsViewChangePasswordButtonText;Text for change password button;Change Pass
 settingsViewSignOutButtonText;Text for sign out button;Sign Out
 settingsViewDisplayNameHintText;Hint text for display name input field;Display Name
 signOutConfirmationDialogDescriptionText;Description text for sign out dialog;Are you sure you want to sign out?
-signOutConfirmationDialogCancelButtonText;Cancel text for sign out dialog;Cancel
 signOutConfirmationDialogConfirmButtonText;Confirmation text for sign out dialog;Sign Out
 deleteAccountConfirmationDialogTitleText;Title text for delete account dialog;Delete Account
 deleteAccountConfirmationDialogDescriptionText;Description text for delete account dialog;Once your account is deleted, there is no way to get it back.
-deleteAccountConfirmationDialogCancelButtonText;Cancel text for delete account dialog;Cancel
 deleteAccountConfirmationDialogConfirmButtonText;Confirmation text for delete account dialog;Delete

@@ -46,12 +46,12 @@ void main() {
       );
 
       expect(
-        find.text(AppLocalizations.current.generalPasswordHintText),
+        find.text(AppLocalizations.current.generalPasswordHint),
         findsOneWidget,
       );
 
       expect(
-        find.text(AppLocalizations.current.deleteAccountConfirmationDialogCancelButtonText.toUpperCase()),
+        find.text(AppLocalizations.current.generalCancel.toUpperCase()),
         findsOneWidget,
       );
 

@@ -121,16 +121,6 @@ class AppLocalizations {
     );
   }
 
-  /// `Cancel`
-  String get deleteAccountConfirmationDialogCancelButtonText {
-    return Intl.message(
-      'Cancel',
-      name: 'deleteAccountConfirmationDialogCancelButtonText',
-      desc: 'Cancel text for delete account dialog',
-      args: [],
-    );
-  }
-
   /// `Delete`
   String get deleteAccountConfirmationDialogConfirmButtonText {
     return Intl.message(
@@ -157,6 +147,16 @@ class AppLocalizations {
       'Delete Account',
       name: 'deleteAccountConfirmationDialogTitleText',
       desc: 'Title text for delete account dialog',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get generalCancel {
+    return Intl.message(
+      'Cancel',
+      name: 'generalCancel',
+      desc: 'Text for a general cancel action',
       args: [],
     );
   }
@@ -192,10 +192,10 @@ class AppLocalizations {
   }
 
   /// `Password`
-  String get generalPasswordHintText {
+  String get generalPasswordHint {
     return Intl.message(
       'Password',
-      name: 'generalPasswordHintText',
+      name: 'generalPasswordHint',
       desc: 'Hint text for password input field',
       args: [],
     );
@@ -238,16 +238,6 @@ class AppLocalizations {
       name: 'settingsViewSignedInAsText',
       desc: 'Text to denote which email user is signed in as',
       args: [email],
-    );
-  }
-
-  /// `Cancel`
-  String get signOutConfirmationDialogCancelButtonText {
-    return Intl.message(
-      'Cancel',
-      name: 'signOutConfirmationDialogCancelButtonText',
-      desc: 'Cancel text for sign out dialog',
-      args: [],
     );
   }
 
@@ -317,26 +307,6 @@ class AppLocalizations {
       'Email',
       name: 'signinScreenEmailHintText',
       desc: 'Hint text for email input field',
-      args: [],
-    );
-  }
-
-  /// `Password must have at least six characters`
-  String get signinScreenPasswordErrorText {
-    return Intl.message(
-      'Password must have at least six characters',
-      name: 'signinScreenPasswordErrorText',
-      desc: 'Text when password input is invalid',
-      args: [],
-    );
-  }
-
-  /// `Password`
-  String get signinScreenPasswordHintText {
-    return Intl.message(
-      'Password',
-      name: 'signinScreenPasswordHintText',
-      desc: 'Hint text for password input field',
       args: [],
     );
   }

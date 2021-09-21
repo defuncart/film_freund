@@ -17,7 +17,7 @@ class SignOutConfirmationDialog extends StatelessWidget {
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
           child: Text(
-            AppLocalizations.of(context).signOutConfirmationDialogCancelButtonText.toUpperCase(),
+            AppLocalizations.of(context).generalCancel.toUpperCase(),
           ),
         ),
         TextButton(

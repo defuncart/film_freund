@@ -24,7 +24,7 @@ void main() {
         findsOneWidget,
       );
       expect(
-        find.text(AppLocalizations.current.signinScreenPasswordHintText),
+        find.text(AppLocalizations.current.generalPasswordHint),
         findsOneWidget,
       );
       expect(
@@ -78,7 +78,7 @@ void main() {
       await tester.pump();
 
       expect(
-        find.text(AppLocalizations.current.signinScreenPasswordErrorText),
+        find.text(AppLocalizations.current.generalInvalidPassword),
         findsOneWidget,
       );
       expect(
@@ -96,7 +96,7 @@ void main() {
       await tester.pump();
 
       expect(
-        find.text(AppLocalizations.current.signinScreenPasswordErrorText),
+        find.text(AppLocalizations.current.generalInvalidPassword),
         findsNothing,
       );
       expect(
