@@ -8,13 +8,18 @@ import 'package:film_freund/widgets/signin_screen/signin_error_dialog.dart';
 import 'package:flutter/material.dart';
 
 @visibleForTesting
-const emailTextFieldKey = Key('SigninScreenEmailTextField');
+class SigninScreenKeys {
+  SigninScreenKeys._();
 
-@visibleForTesting
-const passwordTextFieldKey = Key('SigninScreenPasswordTextField');
+  @visibleForTesting
+  static const emailTextField = Key('SigninScreenEmailTextField');
 
-@visibleForTesting
-const signinButtonKey = Key('SigninScreenSigninButton');
+  @visibleForTesting
+  static const passwordTextField = Key('SigninScreenPasswordTextField');
+
+  @visibleForTesting
+  static const signinButton = Key('SigninScreenSigninButton');
+}
 
 class SigninScreen extends StatefulWidget {
   static const routeName = 'LoginScreen';
@@ -64,7 +69,7 @@ class _SigninScreenState extends State<SigninScreen> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 TextField(
-                  key: emailTextFieldKey,
+                  key: SigninScreenKeys.emailTextField,
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
@@ -76,7 +81,7 @@ class _SigninScreenState extends State<SigninScreen> {
                 ),
                 const SizedBox(height: 8),
                 TextField(
-                  key: passwordTextFieldKey,
+                  key: SigninScreenKeys.passwordTextField,
                   controller: _passwordController,
                   keyboardType: TextInputType.visiblePassword,
                   decoration: InputDecoration(
@@ -94,7 +99,7 @@ class _SigninScreenState extends State<SigninScreen> {
                 ),
                 const SizedBox(height: 8),
                 ElevatedButton(
-                  key: signinButtonKey,
+                  key: SigninScreenKeys.signinButton,
                   onPressed: _canSubmit ? () => _signin() : null,
                   child: Text(AppLocalizations.of(context).signinScreenSigninButtonText),
                 ),

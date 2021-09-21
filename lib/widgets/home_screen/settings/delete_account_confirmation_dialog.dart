@@ -5,6 +5,17 @@ import 'package:film_freund/widgets/common/modal_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
+@visibleForTesting
+class DeleteAccountConfirmationDialogKeys {
+  DeleteAccountConfirmationDialogKeys._();
+
+  @visibleForTesting
+  static const passwordTextField = Key('DeleteAccountPasswordTextField');
+
+  @visibleForTesting
+  static const deleteButton = Key('SigninScreenDeleteButton');
+}
+
 class DeleteAccountConfirmationDialog extends StatefulWidget {
   const DeleteAccountConfirmationDialog({
     required this.onAccountDeleted,
@@ -12,12 +23,6 @@ class DeleteAccountConfirmationDialog extends StatefulWidget {
   }) : super(key: key);
 
   final VoidCallback onAccountDeleted;
-
-  @visibleForTesting
-  static const passwordTextFieldKey = Key('DeleteAccountPasswordTextField');
-
-  @visibleForTesting
-  static const deleteButtonKey = Key('SigninScreenDeleteButton');
 
   @override
   State<DeleteAccountConfirmationDialog> createState() => _DeleteAccountConfirmationDialogState();
@@ -56,7 +61,7 @@ class _DeleteAccountConfirmationDialogState extends State<DeleteAccountConfirmat
           Text(AppLocalizations.of(context).deleteAccountConfirmationDialogDescriptionText),
           const Gap(16),
           TextField(
-            key: DeleteAccountConfirmationDialog.passwordTextFieldKey,
+            key: DeleteAccountConfirmationDialogKeys.passwordTextField,
             controller: _passwordController,
             keyboardType: TextInputType.visiblePassword,
             decoration: InputDecoration(
@@ -82,7 +87,7 @@ class _DeleteAccountConfirmationDialogState extends State<DeleteAccountConfirmat
           ),
         ),
         TextButton(
-          key: DeleteAccountConfirmationDialog.deleteButtonKey,
+          key: DeleteAccountConfirmationDialogKeys.deleteButton,
           onPressed: _isValidPassword
               ? () async {
                   ModalProgressIndicator.show(context);

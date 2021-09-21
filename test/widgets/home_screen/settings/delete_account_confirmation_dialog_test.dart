@@ -40,7 +40,7 @@ void main() {
         findsOneWidget,
       );
       expect(
-        find.byKey(DeleteAccountConfirmationDialog.passwordTextFieldKey),
+        find.byKey(DeleteAccountConfirmationDialogKeys.passwordTextField),
         findsOneWidget,
       );
       expect(
@@ -57,7 +57,7 @@ void main() {
       );
 
       expect(
-        tester.widget<TextButton>(find.byKey(DeleteAccountConfirmationDialog.deleteButtonKey)).enabled,
+        tester.widget<TextButton>(find.byKey(DeleteAccountConfirmationDialogKeys.deleteButton)).enabled,
         isFalse,
       );
     });
@@ -66,7 +66,7 @@ void main() {
       await tester.pumpWidget(widget);
       await tester.pumpAndSettle();
 
-      await tester.enterText(find.byKey(DeleteAccountConfirmationDialog.passwordTextFieldKey), 'bla');
+      await tester.enterText(find.byKey(DeleteAccountConfirmationDialogKeys.passwordTextField), 'bla');
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
 
@@ -75,7 +75,7 @@ void main() {
         findsOneWidget,
       );
       expect(
-        tester.widget<TextButton>(find.byKey(DeleteAccountConfirmationDialog.deleteButtonKey)).enabled,
+        tester.widget<TextButton>(find.byKey(DeleteAccountConfirmationDialogKeys.deleteButton)).enabled,
         isFalse,
       );
     });
@@ -87,7 +87,7 @@ void main() {
         await tester.pumpWidget(widget);
         await tester.pumpAndSettle();
 
-        await tester.enterText(find.byKey(DeleteAccountConfirmationDialog.passwordTextFieldKey), password);
+        await tester.enterText(find.byKey(DeleteAccountConfirmationDialogKeys.passwordTextField), password);
         await tester.testTextInput.receiveAction(TextInputAction.done);
         await tester.pump();
       });
@@ -98,7 +98,7 @@ void main() {
           findsNothing,
         );
         expect(
-          tester.widget<TextButton>(find.byKey(DeleteAccountConfirmationDialog.deleteButtonKey)).enabled,
+          tester.widget<TextButton>(find.byKey(DeleteAccountConfirmationDialogKeys.deleteButton)).enabled,
           isTrue,
         );
       });
