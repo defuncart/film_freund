@@ -1,7 +1,9 @@
 import 'package:film_freund/generated/l10n.dart';
 import 'package:film_freund/services/service_locator.dart';
 import 'package:film_freund/services/user/models/user.dart';
+import 'package:film_freund/widgets/home_screen/settings/delete_account_confirmation_dialog.dart';
 import 'package:film_freund/widgets/home_screen/settings/sign_out_confirmation_dialog.dart';
+import 'package:film_freund/widgets/signin_screen/signin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -85,7 +87,14 @@ class SettingsViewContent extends StatelessWidget {
         ),
         SizedBox(height: 16),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () => showDialog(
+            context: context,
+            builder: (_) => DeleteAccountConfirmationDialog(
+              onAccountDeleted: () {
+                Navigator.of(context).pushReplacementNamed(SigninScreen.routeName);
+              },
+            ),
+          ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
