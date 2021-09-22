@@ -51,6 +51,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "generalPasswordHint": MessageLookupByLibrary.simpleMessage("Password"),
         "settingsViewChangePasswordButtonText":
             MessageLookupByLibrary.simpleMessage("Change Password"),
+        "settingsViewDeleteAccountButtonText":
+            MessageLookupByLibrary.simpleMessage("Delete Account"),
+        "settingsViewDisplayNameErrorText":
+            MessageLookupByLibrary.simpleMessage(
+                "Display Name must have at least one character"),
         "settingsViewDisplayNameHintText":
             MessageLookupByLibrary.simpleMessage("Display Name"),
         "settingsViewSignOutButtonText":

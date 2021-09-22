@@ -6,6 +6,7 @@ import 'package:film_freund/widgets/home_screen/settings/sign_out_confirmation_d
 import 'package:film_freund/widgets/signin_screen/signin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gap/gap.dart';
 
 class SettingsView extends ConsumerWidget {
   const SettingsView({
@@ -34,7 +35,7 @@ class SettingsView extends ConsumerWidget {
 const displayNameTextFieldKey = Key('SettingsViewDisplayNameTextField');
 
 @visibleForTesting
-class SettingsViewContent extends StatelessWidget {
+class SettingsViewContent extends StatefulWidget {
   const SettingsViewContent({
     required this.user,
     required this.onSignOutConfirmed,
@@ -45,12 +46,33 @@ class SettingsViewContent extends StatelessWidget {
   final VoidCallback onSignOutConfirmed;
 
   @override
+  State<SettingsViewContent> createState() => _SettingsViewContentState();
+}
+
+class _SettingsViewContentState extends State<SettingsViewContent> {
+  late TextEditingController _displayNameController;
+  late bool _isValidDisplayName;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _displayNameController = TextEditingController(text: widget.user.displayName);
+    _isValidDisplayName = _displayNameController.text.isNotEmpty;
+    _displayNameController.addListener(() {
+      setState(() {
+        _isValidDisplayName = _displayNameController.text.isNotEmpty;
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          AppLocalizations.of(context).settingsViewSignedInAsText(user.email),
+          AppLocalizations.of(context).settingsViewSignedInAsText(widget.user.email),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -65,7 +87,7 @@ class SettingsViewContent extends StatelessWidget {
               onPressed: () => showDialog(
                 context: context,
                 builder: (_) => SignOutConfirmationDialog(
-                  onConfirm: onSignOutConfirmed,
+                  onConfirm: widget.onSignOutConfirmed,
                 ),
               ),
               child: Text(
@@ -74,18 +96,20 @@ class SettingsViewContent extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 16),
+        const Gap(16),
         TextField(
           key: displayNameTextFieldKey,
-          // controller: _emailController,
+          controller: _displayNameController,
           keyboardType: TextInputType.name,
           decoration: InputDecoration(
+            labelText: AppLocalizations.of(context).settingsViewDisplayNameHintText,
             hintText: AppLocalizations.of(context).settingsViewDisplayNameHintText,
-            // errorText: _shouldShowEmailError ? AppLocalizations.of(context).signinScreenEmailErrorText : null,
+            floatingLabelBehavior: FloatingLabelBehavior.never,
+            errorText: !_isValidDisplayName ? AppLocalizations.of(context).settingsViewDisplayNameErrorText : null,
           ),
           autocorrect: false,
         ),
-        SizedBox(height: 16),
+        const Gap(16),
         ElevatedButton(
           onPressed: () => showDialog(
             context: context,
@@ -99,9 +123,9 @@ class SettingsViewContent extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.delete_forever),
-              SizedBox(width: 4),
-              Text('Delete Account'),
+              const Icon(Icons.delete_forever),
+              const Gap(4),
+              Text(AppLocalizations.of(context).settingsViewDeleteAccountButtonText),
             ],
           ),
         ),

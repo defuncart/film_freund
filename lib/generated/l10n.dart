@@ -211,6 +211,26 @@ class AppLocalizations {
     );
   }
 
+  /// `Delete Account`
+  String get settingsViewDeleteAccountButtonText {
+    return Intl.message(
+      'Delete Account',
+      name: 'settingsViewDeleteAccountButtonText',
+      desc: 'Button text for delete account dialog',
+      args: [],
+    );
+  }
+
+  /// `Display Name must have at least one character`
+  String get settingsViewDisplayNameErrorText {
+    return Intl.message(
+      'Display Name must have at least one character',
+      name: 'settingsViewDisplayNameErrorText',
+      desc: 'Error text when display name is invalid',
+      args: [],
+    );
+  }
+
   /// `Display Name`
   String get settingsViewDisplayNameHintText {
     return Intl.message(
