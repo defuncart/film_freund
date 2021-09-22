@@ -81,9 +81,7 @@ class _SettingsViewContentState extends State<SettingsViewContent> {
             TextButton(
               onPressed: () => showDialog(
                 context: context,
-                builder: (_) => ChangePasswordDialog(
-                    // onConfirm: widget.onSignOutConfirmed,
-                    ),
+                builder: (_) => const ChangePasswordDialog(),
               ),
               child: Text(
                 AppLocalizations.of(context).settingsViewChangePasswordButtonText.toUpperCase(),
@@ -114,6 +112,14 @@ class _SettingsViewContentState extends State<SettingsViewContent> {
             errorText: !_isValidDisplayName ? AppLocalizations.of(context).settingsViewDisplayNameErrorText : null,
           ),
           autocorrect: false,
+          onEditingComplete: () {
+            if (_isValidDisplayName) {
+              ServiceLocator.userManager.updateUser(
+                user: widget.user,
+                displayName: _displayNameController.text,
+              );
+            }
+          },
         ),
         const Gap(16),
         ElevatedButton(
@@ -140,7 +146,6 @@ class _SettingsViewContentState extends State<SettingsViewContent> {
   }
 }
 
-// TODO autoDispose
-final currentUserProvider = FutureProvider<User>((ref) async {
+final currentUserProvider = FutureProvider.autoDispose<User>((ref) async {
   return ServiceLocator.userManager.currentUser;
 });
