@@ -45,6 +45,9 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+# code coverage
+coverage/
+
 # dev assets
 assets_dev/l10n
 

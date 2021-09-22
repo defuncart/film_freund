@@ -1,8 +1,11 @@
-name: ci_pull_request
-on: pull_request
+name: publish_codecov
+on:
+  push:
+    branches:
+      - main
 jobs:
-  lint-unit-test:
-    name: Lint + Unit Tests
+  build:
+    name: Generate + Publish Code Coverage Report
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -16,8 +19,6 @@ jobs:
         run: echo "part of 'movie_database.dart'; const apiKey = 'apiKey';" >lib/services/movies/movie_database.secrets.dart
       - name: Install packages
         run: flutter pub get
-      - name: Lint
-        run: flutter analyze
       - name: Unit tests
         run: flutter test --coverage
       - name: Publish codecov report
