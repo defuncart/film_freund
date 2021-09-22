@@ -147,6 +147,23 @@ void main() {
       });
     });
 
+    test('signout', () {
+      userManager.signout();
+
+      verify(mockAuthService.signout());
+    });
+
+    test('updateUser', () {
+      final user = TestInstance.user();
+      userManager.updateUser(
+        user: user,
+      );
+
+      verify(mockUserDatabase.updateUser(
+        user: user,
+      ));
+    });
+
     group('delete', () {
       const id = 'id';
       const email = 'email';
