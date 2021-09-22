@@ -95,11 +95,8 @@ class HomeScreenMasterDetail extends StatelessWidget {
             ),
             const VerticalDivider(width: 2),
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: HomePageContent(
-                  activeView: activeView,
-                ),
+              child: HomePageContent(
+                activeView: activeView,
               ),
             ),
           ],
@@ -119,21 +116,28 @@ class HomePageContent extends StatelessWidget {
   final ActiveView activeView;
 
   @override
-  Widget build(BuildContext context) {
-    switch (activeView) {
-      case ActiveView.settings:
-        return SettingsView(
-          onSignOutConfirmed: () {
-            ServiceLocator.userManager.signout();
-            Navigator.of(context).pushReplacementNamed(SigninScreen.routeName);
-          },
-        );
-      default:
-        return Center(
-          child: Text(
-            activeView.title,
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+          child: Builder(
+            builder: (_) {
+              switch (activeView) {
+                case ActiveView.settings:
+                  return SettingsView(
+                    onSignOutConfirmed: () {
+                      ServiceLocator.userManager.signout();
+                      Navigator.of(context).pushReplacementNamed(SigninScreen.routeName);
+                    },
+                  );
+                default:
+                  return Center(
+                    child: Text(
+                      activeView.title,
+                    ),
+                  );
+              }
+            },
           ),
-        );
-    }
-  }
+        ),
+      );
 }
