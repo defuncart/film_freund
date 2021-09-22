@@ -1,4 +1,5 @@
 import 'package:film_freund/generated/l10n.dart';
+import 'package:film_freund/widgets/common/input_fields/password_input.dart';
 import 'package:film_freund/widgets/signin_screen/signin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -18,6 +19,7 @@ void main() {
       expect(find.byType(Scaffold), findsOneWidget);
       expect(find.byType(Column), findsOneWidget);
       expect(find.byType(TextField), findsNWidgets(2));
+      expect(find.byType(PasswordInput), findsOneWidget);
       expect(find.byType(ElevatedButton), findsOneWidget);
       expect(
         find.text(AppLocalizations.current.signinScreenEmailHintText),
@@ -81,10 +83,6 @@ void main() {
         find.text(AppLocalizations.current.generalInvalidPassword),
         findsOneWidget,
       );
-      expect(
-        tester.widget<TextField>(find.byKey(SigninScreenKeys.passwordTextField)).decoration?.errorText,
-        isNotNull,
-      );
     });
 
     testWidgets('when password is valid, expect no error', (tester) async {
@@ -98,10 +96,6 @@ void main() {
       expect(
         find.text(AppLocalizations.current.generalInvalidPassword),
         findsNothing,
-      );
-      expect(
-        tester.widget<TextField>(find.byKey(SigninScreenKeys.passwordTextField)).decoration?.errorText,
-        isNull,
       );
     });
 
