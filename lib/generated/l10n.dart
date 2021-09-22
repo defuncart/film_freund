@@ -121,6 +121,76 @@ class AppLocalizations {
     );
   }
 
+  /// `Continue`
+  String get changePasswordDialogConfirmButtonText {
+    return Intl.message(
+      'Continue',
+      name: 'changePasswordDialogConfirmButtonText',
+      desc: 'Confirmation text for change password dialog',
+      args: [],
+    );
+  }
+
+  /// `Current Password`
+  String get changePasswordDialogCurrentPasswordHintText {
+    return Intl.message(
+      'Current Password',
+      name: 'changePasswordDialogCurrentPasswordHintText',
+      desc: 'Hint text for current password text field',
+      args: [],
+    );
+  }
+
+  /// `New password should not be identical to existing`
+  String get changePasswordDialogNewPasswordErrorText {
+    return Intl.message(
+      'New password should not be identical to existing',
+      name: 'changePasswordDialogNewPasswordErrorText',
+      desc: 'Error text for new password text field',
+      args: [],
+    );
+  }
+
+  /// `New Password`
+  String get changePasswordDialogNewPasswordHintText {
+    return Intl.message(
+      'New Password',
+      name: 'changePasswordDialogNewPasswordHintText',
+      desc: 'Hint text for new password text field',
+      args: [],
+    );
+  }
+
+  /// `Must match new password`
+  String get changePasswordDialogRepeatNewPasswordErrorText {
+    return Intl.message(
+      'Must match new password',
+      name: 'changePasswordDialogRepeatNewPasswordErrorText',
+      desc: 'Error text for repeat password text field',
+      args: [],
+    );
+  }
+
+  /// `Repeat Password`
+  String get changePasswordDialogRepeatNewPasswordHintText {
+    return Intl.message(
+      'Repeat Password',
+      name: 'changePasswordDialogRepeatNewPasswordHintText',
+      desc: 'Hint text for repeat password text field',
+      args: [],
+    );
+  }
+
+  /// `Change Password`
+  String get changePasswordDialogTitleText {
+    return Intl.message(
+      'Change Password',
+      name: 'changePasswordDialogTitleText',
+      desc: 'Title text for change password dialog',
+      args: [],
+    );
+  }
+
   /// `Delete`
   String get deleteAccountConfirmationDialogConfirmButtonText {
     return Intl.message(

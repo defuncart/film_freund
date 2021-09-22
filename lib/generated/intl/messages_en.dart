@@ -34,6 +34,21 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Watched"),
         "activeViewWatchlistTitle":
             MessageLookupByLibrary.simpleMessage("Watchlist"),
+        "changePasswordDialogConfirmButtonText":
+            MessageLookupByLibrary.simpleMessage("Continue"),
+        "changePasswordDialogCurrentPasswordHintText":
+            MessageLookupByLibrary.simpleMessage("Current Password"),
+        "changePasswordDialogNewPasswordErrorText":
+            MessageLookupByLibrary.simpleMessage(
+                "New password should not be identical to existing"),
+        "changePasswordDialogNewPasswordHintText":
+            MessageLookupByLibrary.simpleMessage("New Password"),
+        "changePasswordDialogRepeatNewPasswordErrorText":
+            MessageLookupByLibrary.simpleMessage("Must match new password"),
+        "changePasswordDialogRepeatNewPasswordHintText":
+            MessageLookupByLibrary.simpleMessage("Repeat Password"),
+        "changePasswordDialogTitleText":
+            MessageLookupByLibrary.simpleMessage("Change Password"),
         "deleteAccountConfirmationDialogConfirmButtonText":
             MessageLookupByLibrary.simpleMessage("Delete"),
         "deleteAccountConfirmationDialogDescriptionText":

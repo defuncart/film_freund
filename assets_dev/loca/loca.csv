@@ -28,3 +28,10 @@ signOutConfirmationDialogConfirmButtonText;Confirmation text for sign out dialog
 deleteAccountConfirmationDialogTitleText;Title text for delete account dialog;Delete Account
 deleteAccountConfirmationDialogDescriptionText;Description text for delete account dialog;Once your account is deleted, there is no way to get it back.
 deleteAccountConfirmationDialogConfirmButtonText;Confirmation text for delete account dialog;Delete
+changePasswordDialogTitleText;Title text for change password dialog;Change Password
+changePasswordDialogCurrentPasswordHintText;Hint text for current password text field;Current Password
+changePasswordDialogNewPasswordHintText;Hint text for new password text field;New Password
+changePasswordDialogRepeatNewPasswordHintText;Hint text for repeat password text field;Repeat Password
+changePasswordDialogNewPasswordErrorText;Error text for new password text field;New password should not be identical to existing
+changePasswordDialogRepeatNewPasswordErrorText;Error text for repeat password text field;Must match new password
+changePasswordDialogConfirmButtonText;Confirmation text for change password dialog;Continue
