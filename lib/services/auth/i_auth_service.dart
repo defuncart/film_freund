@@ -21,6 +21,18 @@ abstract class IAuthService {
   /// [isUserAuthenticated] will thereafter be false
   Future<void> signout();
 
+  /// Changes the current user's password for [email] from [currentPassword] to [newPassword]
+  ///
+  /// Returns [ChangePasswordResult.success] if an account exists for [email] and [currentPassword] was correct
+  ///
+  /// Returns [ChangePasswordResult.incorrectPassword] if an account exists for [email] but [currentPassword] was incorrect
+  ///
+  /// Otherwise returns [ChangePasswordResult.other] (i.e. no internet, no user for [email], weak new password)
+  Future<ChangePasswordResult> changePassword({
+    required String currentPassword,
+    required String newPassword,
+  });
+
   /// Deletes the current user's authentication using [email] and [password]
   ///
   /// Returns [DeleteResult.success] if an account exists for [email] and [password] was correct
@@ -36,6 +48,13 @@ enum AuthResult {
   createSuccess,
   signinSuccess,
   signinIncorrectPassword,
+  other,
+}
+
+/// An enum describing the types of results for a change password action
+enum ChangePasswordResult {
+  success,
+  incorrectPassword,
   other,
 }
 

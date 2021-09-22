@@ -56,22 +56,53 @@ class FirebaseAuthService implements IAuthService {
   Future<void> signout() => _firebaseAuth.signOut();
 
   @override
+  Future<ChangePasswordResult> changePassword({required String currentPassword, required String newPassword}) async {
+    assert(isUserAuthenticated, 'No signed-in user to delete');
+
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      final credentials = EmailAuthProvider.credential(email: user.email!, password: currentPassword);
+
+      try {
+        final result = await user.reauthenticateWithCredential(credentials);
+
+        try {
+          await result.user?.updatePassword(newPassword);
+          return ChangePasswordResult.success;
+        } on FirebaseAuthException catch (authException) {
+          log(authException.toString());
+        }
+      } on FirebaseAuthException catch (authException) {
+        if (authException.code.wrongPassword) {
+          log('FirebaseAuthService.delete: Wrong password provided for user.');
+          return ChangePasswordResult.incorrectPassword;
+        }
+        log(authException.toString());
+      }
+    }
+
+    return ChangePasswordResult.other;
+  }
+
+  @override
   Future<DeleteResult> delete({required String email, required String password}) async {
     assert(isUserAuthenticated, 'No signed-in user to delete');
 
     final user = _firebaseAuth.currentUser;
-    final credentials = EmailAuthProvider.credential(email: email, password: password);
+    if (user != null) {
+      final credentials = EmailAuthProvider.credential(email: email, password: password);
 
-    try {
-      final result = await user?.reauthenticateWithCredential(credentials);
+      try {
+        final result = await user.reauthenticateWithCredential(credentials);
 
-      await result?.user?.delete();
+        await result.user?.delete();
 
-      return DeleteResult.success;
-    } on FirebaseAuthException catch (authException) {
-      if (authException.code.wrongPassword) {
-        log('FirebaseAuthService.delete: Wrong password provided for user.');
-        return DeleteResult.incorrectPassword;
+        return DeleteResult.success;
+      } on FirebaseAuthException catch (authException) {
+        if (authException.code.wrongPassword) {
+          log('FirebaseAuthService.delete: Wrong password provided for user.');
+          return DeleteResult.incorrectPassword;
+        }
       }
     }
 

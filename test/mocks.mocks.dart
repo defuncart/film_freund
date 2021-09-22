@@ -78,6 +78,17 @@ class MockUserManager extends _i1.Mock implements _i3.UserManager {
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
   @override
+  _i4.Future<_i5.ChangePasswordResult> changePassword(
+          {String? currentPassword, String? newPassword}) =>
+      (super.noSuchMethod(
+              Invocation.method(#changePassword, [], {
+                #currentPassword: currentPassword,
+                #newPassword: newPassword
+              }),
+              returnValue: Future<_i5.ChangePasswordResult>.value(
+                  _i5.ChangePasswordResult.success))
+          as _i4.Future<_i5.ChangePasswordResult>);
+  @override
   _i4.Future<_i5.DeleteResult> deleteUser({String? email, String? password}) =>
       (super.noSuchMethod(
               Invocation.method(
@@ -128,6 +139,17 @@ class MockIAuthService extends _i1.Mock implements _i5.IAuthService {
       (super.noSuchMethod(Invocation.method(#signout, []),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+  @override
+  _i4.Future<_i5.ChangePasswordResult> changePassword(
+          {String? currentPassword, String? newPassword}) =>
+      (super.noSuchMethod(
+              Invocation.method(#changePassword, [], {
+                #currentPassword: currentPassword,
+                #newPassword: newPassword
+              }),
+              returnValue: Future<_i5.ChangePasswordResult>.value(
+                  _i5.ChangePasswordResult.success))
+          as _i4.Future<_i5.ChangePasswordResult>);
   @override
   _i4.Future<_i5.DeleteResult> delete({String? email, String? password}) =>
       (super.noSuchMethod(

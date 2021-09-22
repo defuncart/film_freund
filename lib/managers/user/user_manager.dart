@@ -81,6 +81,12 @@ class UserManager {
         lists: lists,
       );
 
+  /// Changes the current user's password from [currentPassword] to [newPassword]
+  ///
+  /// See [IAuthService] for more info
+  Future<ChangePasswordResult> changePassword({required String currentPassword, required String newPassword}) =>
+      _authService.changePassword(currentPassword: currentPassword, newPassword: newPassword);
+
   /// Deletes the current user's authentication using [email] and [password]
   ///
   /// See [IAuthService] for more info
