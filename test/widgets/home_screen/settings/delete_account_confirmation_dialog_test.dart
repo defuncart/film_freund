@@ -1,6 +1,7 @@
 import 'package:film_freund/generated/l10n.dart';
 import 'package:film_freund/managers/user/user_manager.dart';
 import 'package:film_freund/services/auth/i_auth_service.dart';
+import 'package:film_freund/widgets/common/input_fields/password_input.dart';
 import 'package:film_freund/widgets/home_screen/settings/delete_account_confirmation_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -30,6 +31,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.byType(Text), findsNWidgets(5));
+      expect(find.byType(PasswordInput), findsOneWidget);
 
       expect(
         find.text(AppLocalizations.current.deleteAccountConfirmationDialogTitleText),

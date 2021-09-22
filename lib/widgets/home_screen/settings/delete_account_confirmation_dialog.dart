@@ -1,6 +1,7 @@
 import 'package:film_freund/generated/l10n.dart';
 import 'package:film_freund/services/auth/i_auth_service.dart';
 import 'package:film_freund/services/service_locator.dart';
+import 'package:film_freund/widgets/common/input_fields/password_input.dart';
 import 'package:film_freund/widgets/common/modal_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -31,7 +32,6 @@ class DeleteAccountConfirmationDialog extends StatefulWidget {
 class _DeleteAccountConfirmationDialogState extends State<DeleteAccountConfirmationDialog> {
   late TextEditingController _passwordController;
   var _isValidPassword = false;
-  var _shouldObscurePassword = true;
   String? _passwordErrorText;
 
   @override
@@ -60,22 +60,11 @@ class _DeleteAccountConfirmationDialogState extends State<DeleteAccountConfirmat
         children: [
           Text(AppLocalizations.of(context).deleteAccountConfirmationDialogDescriptionText),
           const Gap(16),
-          TextField(
+          PasswordInput(
             key: DeleteAccountConfirmationDialogKeys.passwordTextField,
             controller: _passwordController,
-            keyboardType: TextInputType.visiblePassword,
-            decoration: InputDecoration(
-              hintText: AppLocalizations.of(context).generalPasswordHint,
-              errorText: _passwordErrorText,
-              suffixIcon: IconButton(
-                icon: Icon(
-                  _shouldObscurePassword ? Icons.visibility : Icons.visibility_off,
-                ),
-                onPressed: () => setState(() => _shouldObscurePassword = !_shouldObscurePassword),
-              ),
-            ),
-            obscureText: _shouldObscurePassword,
-            autocorrect: false,
+            hintText: AppLocalizations.of(context).generalPasswordHint,
+            errorText: _passwordErrorText,
           ),
         ],
       ),
