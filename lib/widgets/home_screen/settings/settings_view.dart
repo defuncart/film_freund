@@ -1,6 +1,7 @@
 import 'package:film_freund/generated/l10n.dart';
 import 'package:film_freund/services/service_locator.dart';
 import 'package:film_freund/services/user/models/user.dart';
+import 'package:film_freund/widgets/home_screen/settings/change_password_dialog.dart';
 import 'package:film_freund/widgets/home_screen/settings/delete_account_confirmation_dialog.dart';
 import 'package:film_freund/widgets/home_screen/settings/sign_out_confirmation_dialog.dart';
 import 'package:film_freund/widgets/signin_screen/signin_screen.dart';
@@ -78,7 +79,12 @@ class _SettingsViewContentState extends State<SettingsViewContent> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextButton(
-              onPressed: null,
+              onPressed: () => showDialog(
+                context: context,
+                builder: (_) => ChangePasswordDialog(
+                    // onConfirm: widget.onSignOutConfirmed,
+                    ),
+              ),
               child: Text(
                 AppLocalizations.of(context).settingsViewChangePasswordButtonText.toUpperCase(),
               ),
