@@ -164,6 +164,20 @@ void main() {
       ));
     });
 
+    test('changePassword', () {
+      const currentPassword = 'currentPassword';
+      const newPassword = 'newPassword';
+      userManager.changePassword(
+        currentPassword: currentPassword,
+        newPassword: newPassword,
+      );
+
+      verify(mockAuthService.changePassword(
+        currentPassword: currentPassword,
+        newPassword: newPassword,
+      ));
+    });
+
     group('delete', () {
       const id = 'id';
       const email = 'email';
