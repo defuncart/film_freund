@@ -100,5 +100,50 @@ void main() {
         findsNothing,
       );
     });
+
+    testWidgets('when change password button is tapped, expect dialog', (tester) async {
+      await tester.pumpWidget(widget);
+      await tester.pumpAndSettle();
+
+      await tester.tap(
+        find.text(AppLocalizations.current.settingsViewChangePasswordButtonText.toUpperCase()),
+      );
+      await tester.pumpAndSettle();
+
+      expect(
+        find.byType(ChangePasswordDialog),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('when sign out button is tapped, expect dialog', (tester) async {
+      await tester.pumpWidget(widget);
+      await tester.pumpAndSettle();
+
+      await tester.tap(
+        find.text(AppLocalizations.current.settingsViewSignOutButtonText.toUpperCase()),
+      );
+      await tester.pumpAndSettle();
+
+      expect(
+        find.byType(SignOutConfirmationDialog),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('when delete account button is tapped, expect dialog', (tester) async {
+      await tester.pumpWidget(widget);
+      await tester.pumpAndSettle();
+
+      await tester.tap(
+        find.byType(ElevatedButton),
+      );
+      await tester.pumpAndSettle();
+
+      expect(
+        find.byType(DeleteAccountConfirmationDialog),
+        findsOneWidget,
+      );
+    });
   });
 }
