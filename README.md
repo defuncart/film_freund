@@ -1,5 +1,7 @@
 # film_freund
 
+[![codecov](https://codecov.io/gh/defuncart/film_freund/branch/main/graph/badge.svg?token=ZQFZ936H4D)](https://codecov.io/gh/defuncart/film_freund)
+
 An application to discover new films and organize what to watch next.
 
 ## Getting Started
