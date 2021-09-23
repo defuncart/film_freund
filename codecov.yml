@@ -8,8 +8,14 @@ coverage:
   # TODO bump up higher once core components are written
   range: "40...100"
   status:
+    # how well the project as a whole is tested
     project:
       default:
         # TODO use auto once core components are written
         target: 40
         threshold: 5%
+    # how well the PR is tested
+    patch:
+      default:
+        # TODO use auto once core components are written
+        target: 40%
