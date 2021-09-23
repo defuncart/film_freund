@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:film_freund/services/user/models/user.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -91,6 +93,51 @@ void main() {
       expect(user2.watchlist, user1.watchlist);
       expect(user2.lists, user1.lists);
       expect(user1 == user2, isFalse);
+    });
+
+    group('Serialization', () {
+      final expectedUser = TestInstance.user(
+        id: 'id',
+        email: 'max@test.de',
+        displayName: 'max@test.de',
+        createdAt: DateTime.utc(2021),
+        updatedAt: DateTime.utc(2021, 2),
+        watched: [
+          '1',
+          '2',
+        ],
+        watchlist: ['3'],
+        lists: ['4'],
+      );
+
+      const jsonString = '''
+{
+  "id": "id",
+  "email": "max@test.de",
+  "displayName": "max@test.de",
+  "createdAt": "2021-01-01T00:00:00.000Z",
+  "updatedAt": "2021-02-01T00:00:00.000Z",
+  "watched": [
+    "1",
+    "2"
+  ],
+  "watchlist": [
+    "3"
+  ],
+  "lists": [
+    "4"
+  ]
+}
+''';
+      final expectedJson = jsonDecode(jsonString);
+
+      test('fromJson', () {
+        expect(User.fromJson(expectedJson), expectedUser);
+      });
+
+      test('toJson', () {
+        expect(expectedUser.toJson(), expectedJson);
+      });
     });
   });
 }
