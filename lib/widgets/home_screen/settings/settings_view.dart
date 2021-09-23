@@ -33,7 +33,12 @@ class SettingsView extends ConsumerWidget {
 }
 
 @visibleForTesting
-const displayNameTextFieldKey = Key('SettingsViewDisplayNameTextField');
+class SettingsViewContentKeys {
+  SettingsViewContentKeys._();
+
+  @visibleForTesting
+  static const displayNameTextField = Key('SettingsViewContentDisplayNameTextField');
+}
 
 @visibleForTesting
 class SettingsViewContent extends StatefulWidget {
@@ -102,7 +107,7 @@ class _SettingsViewContentState extends State<SettingsViewContent> {
         ),
         const Gap(16),
         TextField(
-          key: displayNameTextFieldKey,
+          key: SettingsViewContentKeys.displayNameTextField,
           controller: _displayNameController,
           keyboardType: TextInputType.name,
           decoration: InputDecoration(
