@@ -164,13 +164,21 @@ void main() {
       ));
     });
 
-    test('changePassword', () {
+    test('changePassword', () async {
       const currentPassword = 'currentPassword';
       const newPassword = 'newPassword';
-      userManager.changePassword(
+      const changePasswordResult = ChangePasswordResult.success;
+
+      when(mockAuthService.changePassword(
+        currentPassword: currentPassword,
+        newPassword: newPassword,
+      )).thenAnswer((_) => Future.value(changePasswordResult));
+
+      final result = await userManager.changePassword(
         currentPassword: currentPassword,
         newPassword: newPassword,
       );
+      expect(result, changePasswordResult);
 
       verify(mockAuthService.changePassword(
         currentPassword: currentPassword,
