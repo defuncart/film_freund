@@ -1,6 +1,7 @@
 import 'package:film_freund/generated/l10n.dart';
 import 'package:film_freund/services/service_locator.dart';
 import 'package:film_freund/services/user/models/user.dart';
+import 'package:film_freund/state/current_user_provider.dart';
 import 'package:film_freund/widgets/home_screen/settings/change_password_dialog.dart';
 import 'package:film_freund/widgets/home_screen/settings/delete_account_confirmation_dialog.dart';
 import 'package:film_freund/widgets/home_screen/settings/sign_out_confirmation_dialog.dart';
@@ -23,7 +24,7 @@ class SettingsView extends ConsumerWidget {
 
     return user.when(
       loading: () => const CircularProgressIndicator(),
-      error: (err, stack) => Text('Error: $err'),
+      error: (err, stack) => Text(err.toString()),
       data: (user) => SettingsViewContent(
         user: user,
         onSignOutConfirmed: onSignOutConfirmed,
@@ -150,7 +151,3 @@ class _SettingsViewContentState extends State<SettingsViewContent> {
     );
   }
 }
-
-final currentUserProvider = FutureProvider.autoDispose<User>((ref) async {
-  return ServiceLocator.userManager.currentUser;
-});

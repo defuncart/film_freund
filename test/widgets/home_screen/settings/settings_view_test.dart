@@ -1,7 +1,12 @@
 import 'package:film_freund/generated/l10n.dart';
 import 'package:film_freund/managers/user/user_manager.dart';
+import 'package:film_freund/state/current_user_provider.dart';
+import 'package:film_freund/widgets/home_screen/settings/change_password_dialog.dart';
+import 'package:film_freund/widgets/home_screen/settings/delete_account_confirmation_dialog.dart';
 import 'package:film_freund/widgets/home_screen/settings/settings_view.dart';
+import 'package:film_freund/widgets/home_screen/settings/sign_out_confirmation_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../mocks.dart';
@@ -10,7 +15,71 @@ import '../../../test_utils.dart';
 
 void main() {
   group('$SettingsView', () {
-    // TODO
+    testWidgets('SettingsView loading', (tester) async {
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            currentUserProvider.overrideWithProvider(
+              FutureProvider.autoDispose((_) => Future.error('')),
+            ),
+          ],
+          child: SettingsView(
+            onSignOutConfirmed: () {},
+          ),
+        ),
+      );
+
+      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+    });
+
+    testWidgets('SettingsView error', (tester) async {
+      const error = 'error';
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            currentUserProvider.overrideWithProvider(
+              FutureProvider.autoDispose((_) => Future.error(error)),
+            )
+          ],
+          child: MaterialApp(
+            home: Scaffold(
+              body: SettingsView(
+                onSignOutConfirmed: () {},
+              ),
+            ),
+          ),
+        ),
+      );
+
+      await tester.pumpAndSettle();
+
+      expect(find.byType(Text), findsOneWidget);
+      expect(find.text(error), findsOneWidget);
+    }, skip: false);
+
+    testWidgets('SettingsView user', (tester) async {
+      final user = TestInstance.user();
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            currentUserProvider.overrideWithProvider(
+              FutureProvider.autoDispose((_) => Future.value(user)),
+            )
+          ],
+          child: wrapWithMaterialAppLocalizationDelegates(
+            Scaffold(
+              body: SettingsView(
+                onSignOutConfirmed: () {},
+              ),
+            ),
+          ),
+        ),
+      );
+
+      await tester.pumpAndSettle();
+
+      expect(find.byType(SettingsViewContent), findsOneWidget);
+    });
   });
 
   group('$SettingsViewContent', () {
@@ -23,12 +92,6 @@ void main() {
           onSignOutConfirmed: mockOnSignOutConfirmed,
         ),
       ),
-    );
-
-    // TODO maybe only for certain tests
-    final UserManager mockUserManager = MockUserManager();
-    TestServiceLocator.register(
-      userManager: mockUserManager,
     );
 
     testWidgets('ensure widget tree is correct', (tester) async {
@@ -88,6 +151,11 @@ void main() {
     });
 
     testWidgets('when display name is valid, expect no error', (tester) async {
+      final UserManager mockUserManager = MockUserManager();
+      TestServiceLocator.register(
+        userManager: mockUserManager,
+      );
+
       await tester.pumpWidget(widget);
       await tester.pumpAndSettle();
 
