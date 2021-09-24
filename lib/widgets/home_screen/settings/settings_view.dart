@@ -34,9 +34,7 @@ class SettingsView extends ConsumerWidget {
 }
 
 @visibleForTesting
-class SettingsViewContentKeys {
-  SettingsViewContentKeys._();
-
+abstract class SettingsViewContentKeys {
   @visibleForTesting
   static const displayNameTextField = Key('SettingsViewContentDisplayNameTextField');
 }

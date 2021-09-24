@@ -9,9 +9,7 @@ import 'package:film_freund/widgets/signin_screen/signin_error_dialog.dart';
 import 'package:flutter/material.dart';
 
 @visibleForTesting
-class SigninScreenKeys {
-  SigninScreenKeys._();
-
+abstract class SigninScreenKeys {
   @visibleForTesting
   static const emailTextField = Key('SigninScreenEmailTextField');
 

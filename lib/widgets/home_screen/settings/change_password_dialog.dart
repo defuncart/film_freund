@@ -7,9 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 @visibleForTesting
-class ChangePasswordDialogKeys {
-  ChangePasswordDialogKeys._();
-
+abstract class ChangePasswordDialogKeys {
   @visibleForTesting
   static const currentPasswordTextField = Key('ChangePasswordCurrentPasswordTextField');
 

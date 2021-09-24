@@ -7,9 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 @visibleForTesting
-class DeleteAccountConfirmationDialogKeys {
-  DeleteAccountConfirmationDialogKeys._();
-
+abstract class DeleteAccountConfirmationDialogKeys {
   @visibleForTesting
   static const passwordTextField = Key('DeleteAccountPasswordTextField');
 
