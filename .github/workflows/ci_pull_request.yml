@@ -18,6 +18,8 @@ jobs:
         run: flutter pub get
       - name: Lint
         run: flutter analyze
+      - name: Generate coverage helper
+        run: sh bin/test_include_all_files.sh film_freund
       - name: Unit tests
         run: flutter test --coverage
       - name: Publish codecov report

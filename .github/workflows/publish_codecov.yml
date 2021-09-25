@@ -19,6 +19,8 @@ jobs:
         run: echo "part of 'movie_database.dart'; const apiKey = 'apiKey';" >lib/services/movies/movie_database.secrets.dart
       - name: Install packages
         run: flutter pub get
+      - name: Generate coverage helper
+        run: sh bin/test_include_all_files.sh film_freund
       - name: Unit tests
         run: flutter test --coverage
       - name: Publish codecov report
