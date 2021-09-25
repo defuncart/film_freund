@@ -47,6 +47,7 @@ app.*.map.json
 
 # code coverage
 coverage/
+test/coverage_helper_test.dart
 
 # dev assets
 assets_dev/l10n
