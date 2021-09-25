@@ -63,7 +63,7 @@ class _ChangePasswordDialogState extends State<ChangePasswordDialog> {
               _newPasswordController.text == _currentPasswordController.text) {
             _newPasswordErrorText = AppLocalizations.of(context).changePasswordDialogNewPasswordErrorText;
             _isNewPasswordValid = false;
-          } else if (_currentPasswordController.text.isNotEmpty && _newPasswordController.text.length < 6) {
+          } else if (_newPasswordController.text.isNotEmpty && _newPasswordController.text.length < 6) {
             _newPasswordErrorText = AppLocalizations.of(context).generalInvalidPassword;
             _isNewPasswordValid = false;
           } else {
@@ -88,18 +88,21 @@ class _ChangePasswordDialogState extends State<ChangePasswordDialog> {
         mainAxisSize: MainAxisSize.min,
         children: [
           PasswordInput(
+            key: ChangePasswordDialogKeys.currentPasswordTextField,
             controller: _currentPasswordController,
             hintText: AppLocalizations.of(context).changePasswordDialogCurrentPasswordHintText,
             errorText: _currentPasswordErrorText,
           ),
           const Gap(16),
           PasswordInput(
+            key: ChangePasswordDialogKeys.newPasswordTextField,
             controller: _newPasswordController,
             hintText: AppLocalizations.of(context).changePasswordDialogNewPasswordHintText,
             errorText: _newPasswordErrorText,
           ),
           const Gap(16),
           PasswordInput(
+            key: ChangePasswordDialogKeys.repeatNewPasswordTextField,
             controller: _repeatNewPasswordController,
             hintText: AppLocalizations.of(context).changePasswordDialogRepeatNewPasswordHintText,
             errorText: _shouldShowRepeatNewPasswordError
