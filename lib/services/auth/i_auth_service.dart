@@ -21,13 +21,13 @@ abstract class IAuthService {
   /// [isUserAuthenticated] will thereafter be false
   Future<void> signout();
 
-  /// Changes the current user's password for [email] from [currentPassword] to [newPassword]
+  /// Changes the current user's password from [currentPassword] to [newPassword]
   ///
-  /// Returns [ChangePasswordResult.success] if an account exists for [email] and [currentPassword] was correct
+  /// Returns [ChangePasswordResult.success] if an account exists for user's email and [currentPassword] was correct
   ///
-  /// Returns [ChangePasswordResult.incorrectPassword] if an account exists for [email] but [currentPassword] was incorrect
+  /// Returns [ChangePasswordResult.incorrectPassword] if an account exists for user's email but [currentPassword] was incorrect
   ///
-  /// Otherwise returns [ChangePasswordResult.other] (i.e. no internet, no user for [email], weak new password)
+  /// Otherwise returns [ChangePasswordResult.other] (i.e. no internet, weak new password)
   Future<ChangePasswordResult> changePassword({
     required String currentPassword,
     required String newPassword,
