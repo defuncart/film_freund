@@ -2,19 +2,23 @@ import 'package:email_validator/email_validator.dart';
 import 'package:film_freund/generated/l10n.dart';
 import 'package:film_freund/services/auth/i_auth_service.dart';
 import 'package:film_freund/services/service_locator.dart';
+import 'package:film_freund/widgets/common/input_fields/password_input.dart';
 import 'package:film_freund/widgets/common/modal_progress_indicator.dart';
 import 'package:film_freund/widgets/home_screen/home_screen.dart';
 import 'package:film_freund/widgets/signin_screen/signin_error_dialog.dart';
 import 'package:flutter/material.dart';
 
 @visibleForTesting
-const emailTextFieldKey = Key('SigninScreenEmailTextField');
+abstract class SigninScreenKeys {
+  @visibleForTesting
+  static const emailTextField = Key('SigninScreenEmailTextField');
 
-@visibleForTesting
-const passwordTextFieldKey = Key('SigninScreenPasswordTextField');
+  @visibleForTesting
+  static const passwordTextField = Key('SigninScreenPasswordTextField');
 
-@visibleForTesting
-const signinButtonKey = Key('SigninScreenSigninButton');
+  @visibleForTesting
+  static const signinButton = Key('SigninScreenSigninButton');
+}
 
 class SigninScreen extends StatefulWidget {
   static const routeName = 'LoginScreen';
@@ -30,7 +34,6 @@ class _SigninScreenState extends State<SigninScreen> {
   late TextEditingController _passwordController;
   var _isValidEmail = false;
   var _isValidPassword = false;
-  var _shouldObscurePassword = true;
 
   bool get _canSubmit => _isValidEmail && _isValidPassword;
   bool get _shouldShowEmailError => _emailController.text.isNotEmpty && !_isValidEmail;
@@ -64,7 +67,7 @@ class _SigninScreenState extends State<SigninScreen> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 TextField(
-                  key: emailTextFieldKey,
+                  key: SigninScreenKeys.emailTextField,
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
@@ -75,27 +78,15 @@ class _SigninScreenState extends State<SigninScreen> {
                   autocorrect: false,
                 ),
                 const SizedBox(height: 8),
-                TextField(
-                  key: passwordTextFieldKey,
+                PasswordInput(
+                  key: SigninScreenKeys.passwordTextField,
                   controller: _passwordController,
-                  keyboardType: TextInputType.visiblePassword,
-                  decoration: InputDecoration(
-                    hintText: AppLocalizations.of(context).signinScreenPasswordHintText,
-                    errorText:
-                        _shouldShowPasswordError ? AppLocalizations.of(context).signinScreenPasswordErrorText : null,
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _shouldObscurePassword ? Icons.visibility : Icons.visibility_off,
-                      ),
-                      onPressed: () => setState(() => _shouldObscurePassword = !_shouldObscurePassword),
-                    ),
-                  ),
-                  obscureText: _shouldObscurePassword,
-                  autocorrect: false,
+                  hintText: AppLocalizations.of(context).generalPasswordHint,
+                  errorText: _shouldShowPasswordError ? AppLocalizations.of(context).generalInvalidPassword : null,
                 ),
                 const SizedBox(height: 8),
                 ElevatedButton(
-                  key: signinButtonKey,
+                  key: SigninScreenKeys.signinButton,
                   onPressed: _canSubmit ? () => _signin() : null,
                   child: Text(AppLocalizations.of(context).signinScreenSigninButtonText),
                 ),

@@ -1,4 +1,3 @@
-import 'package:film_freund/generated/l10n.dart';
 import 'package:film_freund/utils/sizes.dart';
 import 'package:film_freund/widgets/home_screen/active_view.dart';
 import 'package:flutter/material.dart';
@@ -6,12 +5,10 @@ import 'package:flutter/material.dart';
 class Sidebar extends StatelessWidget {
   const Sidebar({
     required this.onViewChanged,
-    required this.onSignOut,
     Key? key,
   }) : super(key: key);
 
   final void Function(ActiveView activeView) onViewChanged;
-  final VoidCallback onSignOut;
 
   @override
   Widget build(BuildContext context) {
@@ -55,16 +52,6 @@ class Sidebar extends StatelessWidget {
                 onViewChanged(element.view);
               },
             ),
-          ListTile(
-            leading: const Icon(Icons.logout),
-            title: Text(AppLocalizations.of(context).sidebarSignOutButtonText),
-            onTap: () {
-              if (isSinglePage(context)) {
-                Navigator.of(context).pop();
-              }
-              onSignOut();
-            },
-          ),
         ],
       ),
     );

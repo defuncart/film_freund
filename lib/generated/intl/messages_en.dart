@@ -19,6 +19,8 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(email) => "Signed in as ${email}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "activeViewLikedTitle": MessageLookupByLibrary.simpleMessage("Liked"),
@@ -32,10 +34,48 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Watched"),
         "activeViewWatchlistTitle":
             MessageLookupByLibrary.simpleMessage("Watchlist"),
-        "sidebarSignOutButtonText":
+        "changePasswordDialogConfirmButtonText":
+            MessageLookupByLibrary.simpleMessage("Continue"),
+        "changePasswordDialogCurrentPasswordHintText":
+            MessageLookupByLibrary.simpleMessage("Current Password"),
+        "changePasswordDialogNewPasswordErrorText":
+            MessageLookupByLibrary.simpleMessage(
+                "New password should not be identical to existing"),
+        "changePasswordDialogNewPasswordHintText":
+            MessageLookupByLibrary.simpleMessage("New Password"),
+        "changePasswordDialogRepeatNewPasswordErrorText":
+            MessageLookupByLibrary.simpleMessage("Must match new password"),
+        "changePasswordDialogRepeatNewPasswordHintText":
+            MessageLookupByLibrary.simpleMessage("Repeat Password"),
+        "changePasswordDialogTitleText":
+            MessageLookupByLibrary.simpleMessage("Change Password"),
+        "deleteAccountConfirmationDialogConfirmButtonText":
+            MessageLookupByLibrary.simpleMessage("Delete"),
+        "deleteAccountConfirmationDialogDescriptionText":
+            MessageLookupByLibrary.simpleMessage(
+                "Once your account is deleted, there is no way to get it back."),
+        "deleteAccountConfirmationDialogTitleText":
+            MessageLookupByLibrary.simpleMessage("Delete Account"),
+        "generalCancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "generalErrorOccured":
+            MessageLookupByLibrary.simpleMessage("An error occured!"),
+        "generalIncorrectPassword":
+            MessageLookupByLibrary.simpleMessage("Incorrect password"),
+        "generalInvalidPassword": MessageLookupByLibrary.simpleMessage(
+            "Password must have at least six characters"),
+        "generalPasswordHint": MessageLookupByLibrary.simpleMessage("Password"),
+        "settingsViewChangePasswordButtonText":
+            MessageLookupByLibrary.simpleMessage("Change Password"),
+        "settingsViewDeleteAccountButtonText":
+            MessageLookupByLibrary.simpleMessage("Delete Account"),
+        "settingsViewDisplayNameErrorText":
+            MessageLookupByLibrary.simpleMessage(
+                "Display Name must have at least one character"),
+        "settingsViewDisplayNameHintText":
+            MessageLookupByLibrary.simpleMessage("Display Name"),
+        "settingsViewSignOutButtonText":
             MessageLookupByLibrary.simpleMessage("Sign Out"),
-        "signOutConfirmationDialogCancelButtonText":
-            MessageLookupByLibrary.simpleMessage("Cancel"),
+        "settingsViewSignedInAsText": m0,
         "signOutConfirmationDialogConfirmButtonText":
             MessageLookupByLibrary.simpleMessage("Sign Out"),
         "signOutConfirmationDialogDescriptionText":
@@ -51,10 +91,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Invalid email"),
         "signinScreenEmailHintText":
             MessageLookupByLibrary.simpleMessage("Email"),
-        "signinScreenPasswordErrorText": MessageLookupByLibrary.simpleMessage(
-            "Password must have at least six characters"),
-        "signinScreenPasswordHintText":
-            MessageLookupByLibrary.simpleMessage("Password"),
         "signinScreenSigninButtonText":
             MessageLookupByLibrary.simpleMessage("Sign In")
       };

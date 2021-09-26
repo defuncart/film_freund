@@ -13,6 +13,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   cupertino_icons:
+  gap:
   email_validator:
   flutter_riverpod:
   equatable:
@@ -33,6 +34,7 @@ dev_dependencies:
   build_runner:
   mockito:
   json_serializable:
+  flutter_test_ui:
 
 flutter:
   uses-material-design: true

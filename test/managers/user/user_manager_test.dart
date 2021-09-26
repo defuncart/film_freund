@@ -164,9 +164,30 @@ void main() {
       ));
     });
 
+    test('changePassword', () async {
+      const currentPassword = 'currentPassword';
+      const newPassword = 'newPassword';
+      const changePasswordResult = ChangePasswordResult.success;
+
+      when(mockAuthService.changePassword(
+        currentPassword: currentPassword,
+        newPassword: newPassword,
+      )).thenAnswer((_) => Future.value(changePasswordResult));
+
+      final result = await userManager.changePassword(
+        currentPassword: currentPassword,
+        newPassword: newPassword,
+      );
+      expect(result, changePasswordResult);
+
+      verify(mockAuthService.changePassword(
+        currentPassword: currentPassword,
+        newPassword: newPassword,
+      ));
+    });
+
     group('delete', () {
       const id = 'id';
-      const email = 'email';
       const password = 'password';
 
       setUp(() {
@@ -174,11 +195,10 @@ void main() {
       });
 
       test('IAuthService.delete ${DeleteResult.success}, expect IUserDatabase delete', () async {
-        when(mockAuthService.delete(email: email, password: password))
-            .thenAnswer((_) => Future.value(DeleteResult.success));
+        when(mockAuthService.delete(password: password)).thenAnswer((_) => Future.value(DeleteResult.success));
 
         expect(
-          await userManager.deleteUser(email: email, password: password),
+          await userManager.deleteUser(password: password),
           DeleteResult.success,
         );
 
@@ -186,21 +206,20 @@ void main() {
       });
 
       test('IAuthService.delete ${DeleteResult.incorrectPassword}', () async {
-        when(mockAuthService.delete(email: email, password: password))
+        when(mockAuthService.delete(password: password))
             .thenAnswer((_) => Future.value(DeleteResult.incorrectPassword));
 
         expect(
-          await userManager.deleteUser(email: email, password: password),
+          await userManager.deleteUser(password: password),
           DeleteResult.incorrectPassword,
         );
       });
 
       test('IAuthService.delete ${DeleteResult.other}', () async {
-        when(mockAuthService.delete(email: email, password: password))
-            .thenAnswer((_) => Future.value(DeleteResult.other));
+        when(mockAuthService.delete(password: password)).thenAnswer((_) => Future.value(DeleteResult.other));
 
         expect(
-          await userManager.deleteUser(email: email, password: password),
+          await userManager.deleteUser(password: password),
           DeleteResult.other,
         );
       });

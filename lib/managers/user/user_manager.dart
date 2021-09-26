@@ -68,31 +68,32 @@ class UserManager {
   /// See [IUserDatabase] for more info
   Future<void> updateUser({
     required User user,
-    String? firstName,
-    String? lastName,
+    String? displayName,
     List<String>? watched,
     List<String>? watchlist,
     List<String>? lists,
   }) =>
       _userDatabase.updateUser(
         user: user,
-        firstName: firstName,
-        lastName: lastName,
+        displayName: displayName,
         watched: watched,
         watchlist: watchlist,
         lists: lists,
       );
 
+  /// Changes the current user's password from [currentPassword] to [newPassword]
+  ///
+  /// See [IAuthService] for more info
+  Future<ChangePasswordResult> changePassword({required String currentPassword, required String newPassword}) =>
+      _authService.changePassword(currentPassword: currentPassword, newPassword: newPassword);
+
   /// Deletes the current user's authentication using [email] and [password]
   ///
   /// See [IAuthService] for more info
-  Future<DeleteResult> deleteUser({required String email, required String password}) async {
+  Future<DeleteResult> deleteUser({required String password}) async {
     final userId = _authService.authenticatedUserId;
 
-    final result = await _authService.delete(
-      email: email,
-      password: password,
-    );
+    final result = await _authService.delete(password: password);
 
     // if user was deleted, remove user db object
     if (result == DeleteResult.success) {

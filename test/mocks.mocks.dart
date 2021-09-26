@@ -63,22 +63,31 @@ class MockUserManager extends _i1.Mock implements _i3.UserManager {
   @override
   _i4.Future<void> updateUser(
           {_i2.User? user,
-          String? firstName,
-          String? lastName,
+          String? displayName,
           List<String>? watched,
           List<String>? watchlist,
           List<String>? lists}) =>
       (super.noSuchMethod(
           Invocation.method(#updateUser, [], {
             #user: user,
-            #firstName: firstName,
-            #lastName: lastName,
+            #displayName: displayName,
             #watched: watched,
             #watchlist: watchlist,
             #lists: lists
           }),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+  @override
+  _i4.Future<_i5.ChangePasswordResult> changePassword(
+          {String? currentPassword, String? newPassword}) =>
+      (super.noSuchMethod(
+              Invocation.method(#changePassword, [], {
+                #currentPassword: currentPassword,
+                #newPassword: newPassword
+              }),
+              returnValue: Future<_i5.ChangePasswordResult>.value(
+                  _i5.ChangePasswordResult.success))
+          as _i4.Future<_i5.ChangePasswordResult>);
   @override
   _i4.Future<_i5.DeleteResult> deleteUser({String? email, String? password}) =>
       (super.noSuchMethod(
@@ -131,6 +140,17 @@ class MockIAuthService extends _i1.Mock implements _i5.IAuthService {
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
   @override
+  _i4.Future<_i5.ChangePasswordResult> changePassword(
+          {String? currentPassword, String? newPassword}) =>
+      (super.noSuchMethod(
+              Invocation.method(#changePassword, [], {
+                #currentPassword: currentPassword,
+                #newPassword: newPassword
+              }),
+              returnValue: Future<_i5.ChangePasswordResult>.value(
+                  _i5.ChangePasswordResult.success))
+          as _i4.Future<_i5.ChangePasswordResult>);
+  @override
   _i4.Future<_i5.DeleteResult> delete({String? email, String? password}) =>
       (super.noSuchMethod(
           Invocation.method(#delete, [], {#email: email, #password: password}),
@@ -151,14 +171,10 @@ class MockIUserDatabase extends _i1.Mock implements _i7.IUserDatabase {
 
   @override
   _i4.Future<void> createUser(
-          {String? id, String? email, String? firstName, String? lastName}) =>
+          {String? id, String? email, String? displayName}) =>
       (super.noSuchMethod(
-          Invocation.method(#createUser, [], {
-            #id: id,
-            #email: email,
-            #firstName: firstName,
-            #lastName: lastName
-          }),
+          Invocation.method(#createUser, [],
+              {#id: id, #email: email, #displayName: displayName}),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
   @override
@@ -168,16 +184,14 @@ class MockIUserDatabase extends _i1.Mock implements _i7.IUserDatabase {
   @override
   _i4.Future<void> updateUser(
           {_i2.User? user,
-          String? firstName,
-          String? lastName,
+          String? displayName,
           List<String>? watched,
           List<String>? watchlist,
           List<String>? lists}) =>
       (super.noSuchMethod(
           Invocation.method(#updateUser, [], {
             #user: user,
-            #firstName: firstName,
-            #lastName: lastName,
+            #displayName: displayName,
             #watched: watched,
             #watchlist: watchlist,
             #lists: lists

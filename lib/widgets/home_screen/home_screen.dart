@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:film_freund/services/service_locator.dart';
 import 'package:film_freund/utils/sizes.dart';
 import 'package:film_freund/widgets/home_screen/active_view.dart';
+import 'package:film_freund/widgets/home_screen/settings/settings_view.dart';
 import 'package:film_freund/widgets/home_screen/sidebar.dart';
-import 'package:film_freund/widgets/home_screen/sign_out_confirmation_dialog.dart';
 import 'package:film_freund/widgets/signin_screen/signin_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -24,15 +24,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final sidebar = Sidebar(
       onViewChanged: (activeView) => setState(() => _activeView = activeView),
-      onSignOut: () => showDialog(
-        context: context,
-        builder: (_) => SignOutConfirmationDialog(
-          onConfirm: () {
-            ServiceLocator.userManager.signout();
-            Navigator.of(context).pushReplacementNamed(SigninScreen.routeName);
-          },
-        ),
-      ),
     );
 
     return isSinglePage(context)
@@ -125,11 +116,28 @@ class HomePageContent extends StatelessWidget {
   final ActiveView activeView;
 
   @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        activeView.title,
-      ),
-    );
-  }
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+          child: Builder(
+            builder: (_) {
+              switch (activeView) {
+                case ActiveView.settings:
+                  return SettingsView(
+                    onSignOutConfirmed: () {
+                      ServiceLocator.userManager.signout();
+                      Navigator.of(context).pushReplacementNamed(SigninScreen.routeName);
+                    },
+                  );
+                default:
+                  return Center(
+                    child: Text(
+                      activeView.title,
+                    ),
+                  );
+              }
+            },
+          ),
+        ),
+      );
 }

@@ -29,8 +29,7 @@ class TestInstance {
   static User user({
     String? id,
     String? email,
-    String? firstName,
-    String? lastName,
+    String? displayName,
     DateTime? createdAt,
     DateTime? updatedAt,
     List<String>? watched,
@@ -40,8 +39,7 @@ class TestInstance {
       User(
         id: id ?? 'id',
         email: email ?? 'email',
-        firstName: firstName ?? 'firstName',
-        lastName: lastName ?? 'lastName',
+        displayName: displayName ?? 'displayName',
         createdAt: createdAt ?? DateTime(1),
         updatedAt: updatedAt ?? DateTime(1),
         watched: watched ?? [],

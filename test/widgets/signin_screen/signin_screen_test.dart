@@ -1,4 +1,5 @@
 import 'package:film_freund/generated/l10n.dart';
+import 'package:film_freund/widgets/common/input_fields/password_input.dart';
 import 'package:film_freund/widgets/signin_screen/signin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -18,13 +19,14 @@ void main() {
       expect(find.byType(Scaffold), findsOneWidget);
       expect(find.byType(Column), findsOneWidget);
       expect(find.byType(TextField), findsNWidgets(2));
+      expect(find.byType(PasswordInput), findsOneWidget);
       expect(find.byType(ElevatedButton), findsOneWidget);
       expect(
         find.text(AppLocalizations.current.signinScreenEmailHintText),
         findsOneWidget,
       );
       expect(
-        find.text(AppLocalizations.current.signinScreenPasswordHintText),
+        find.text(AppLocalizations.current.generalPasswordHint),
         findsOneWidget,
       );
       expect(
@@ -37,7 +39,7 @@ void main() {
       await tester.pumpWidget(widget);
       await tester.pumpAndSettle();
 
-      await tester.enterText(find.byKey(emailTextFieldKey), 'bla');
+      await tester.enterText(find.byKey(SigninScreenKeys.emailTextField), 'bla');
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
 
@@ -46,7 +48,7 @@ void main() {
         findsOneWidget,
       );
       expect(
-        tester.widget<TextField>(find.byKey(emailTextFieldKey)).decoration?.errorText,
+        tester.widget<TextField>(find.byKey(SigninScreenKeys.emailTextField)).decoration?.errorText,
         isNotNull,
       );
     });
@@ -55,7 +57,7 @@ void main() {
       await tester.pumpWidget(widget);
       await tester.pumpAndSettle();
 
-      await tester.enterText(find.byKey(emailTextFieldKey), 'a@a.a');
+      await tester.enterText(find.byKey(SigninScreenKeys.emailTextField), 'a@a.a');
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
 
@@ -64,7 +66,7 @@ void main() {
         findsNothing,
       );
       expect(
-        tester.widget<TextField>(find.byKey(emailTextFieldKey)).decoration?.errorText,
+        tester.widget<TextField>(find.byKey(SigninScreenKeys.emailTextField)).decoration?.errorText,
         isNull,
       );
     });
@@ -73,17 +75,13 @@ void main() {
       await tester.pumpWidget(widget);
       await tester.pumpAndSettle();
 
-      await tester.enterText(find.byKey(passwordTextFieldKey), 'bla');
+      await tester.enterText(find.byKey(SigninScreenKeys.passwordTextField), 'bla');
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
 
       expect(
-        find.text(AppLocalizations.current.signinScreenPasswordErrorText),
+        find.text(AppLocalizations.current.generalInvalidPassword),
         findsOneWidget,
-      );
-      expect(
-        tester.widget<TextField>(find.byKey(passwordTextFieldKey)).decoration?.errorText,
-        isNotNull,
       );
     });
 
@@ -91,17 +89,13 @@ void main() {
       await tester.pumpWidget(widget);
       await tester.pumpAndSettle();
 
-      await tester.enterText(find.byKey(passwordTextFieldKey), '123456');
+      await tester.enterText(find.byKey(SigninScreenKeys.passwordTextField), '123456');
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
 
       expect(
-        find.text(AppLocalizations.current.signinScreenPasswordErrorText),
+        find.text(AppLocalizations.current.generalInvalidPassword),
         findsNothing,
-      );
-      expect(
-        tester.widget<TextField>(find.byKey(passwordTextFieldKey)).decoration?.errorText,
-        isNull,
       );
     });
 
@@ -109,14 +103,14 @@ void main() {
       await tester.pumpWidget(widget);
       await tester.pumpAndSettle();
 
-      await tester.enterText(find.byKey(emailTextFieldKey), 'bla');
+      await tester.enterText(find.byKey(SigninScreenKeys.emailTextField), 'bla');
       await tester.testTextInput.receiveAction(TextInputAction.done);
-      await tester.enterText(find.byKey(passwordTextFieldKey), 'bla');
+      await tester.enterText(find.byKey(SigninScreenKeys.passwordTextField), 'bla');
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
 
       expect(
-        tester.widget<ElevatedButton>(find.byKey(signinButtonKey)).enabled,
+        tester.widget<ElevatedButton>(find.byKey(SigninScreenKeys.signinButton)).enabled,
         isFalse,
       );
     });
@@ -125,14 +119,14 @@ void main() {
       await tester.pumpWidget(widget);
       await tester.pumpAndSettle();
 
-      await tester.enterText(find.byKey(emailTextFieldKey), 'a@a.aa');
+      await tester.enterText(find.byKey(SigninScreenKeys.emailTextField), 'a@a.aa');
       await tester.testTextInput.receiveAction(TextInputAction.done);
-      await tester.enterText(find.byKey(passwordTextFieldKey), '123456');
+      await tester.enterText(find.byKey(SigninScreenKeys.passwordTextField), '123456');
       await tester.testTextInput.receiveAction(TextInputAction.done);
       await tester.pump();
 
       expect(
-        tester.widget<ElevatedButton>(find.byKey(signinButtonKey)).enabled,
+        tester.widget<ElevatedButton>(find.byKey(SigninScreenKeys.signinButton)).enabled,
         isTrue,
       );
     });

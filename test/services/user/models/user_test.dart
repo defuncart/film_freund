@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:film_freund/services/user/models/user.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -15,30 +17,14 @@ void main() {
 
     group('copyWith', () {
       final user1 = TestInstance.user();
-      test('firstName', () {
-        const firstName = 'Max';
-        final user2 = user1.copyWith(firstName: firstName);
+
+      test('displayName', () {
+        const displayName = 'Max';
+        final user2 = user1.copyWith(displayName: displayName);
 
         expect(user2.id, user1.id);
         expect(user2.email, user1.email);
-        expect(user2.firstName, firstName);
-        expect(user2.lastName, user1.lastName);
-        expect(user2.createdAt, user1.createdAt);
-        expect(user2.updatedAt, user1.updatedAt);
-        expect(user2.watched, user1.watched);
-        expect(user2.watchlist, user1.watchlist);
-        expect(user2.lists, user1.lists);
-        expect(user1 == user2, isFalse);
-      });
-
-      test('lastName', () {
-        const lastName = 'Mustermann';
-        final user2 = user1.copyWith(lastName: lastName);
-
-        expect(user2.id, user1.id);
-        expect(user2.email, user1.email);
-        expect(user2.firstName, user1.firstName);
-        expect(user2.lastName, lastName);
+        expect(user2.displayName, displayName);
         expect(user2.createdAt, user1.createdAt);
         expect(user2.updatedAt, user1.updatedAt);
         expect(user2.watched, user1.watched);
@@ -53,8 +39,7 @@ void main() {
 
         expect(user2.id, user1.id);
         expect(user2.email, user1.email);
-        expect(user2.firstName, user1.firstName);
-        expect(user2.lastName, user1.lastName);
+        expect(user2.displayName, user1.displayName);
         expect(user2.createdAt, user1.createdAt);
         expect(user2.updatedAt, user1.updatedAt);
         expect(user2.watched, watched);
@@ -69,8 +54,7 @@ void main() {
 
         expect(user2.id, user1.id);
         expect(user2.email, user1.email);
-        expect(user2.firstName, user1.firstName);
-        expect(user2.lastName, user1.lastName);
+        expect(user2.displayName, user1.displayName);
         expect(user2.createdAt, user1.createdAt);
         expect(user2.updatedAt, user1.updatedAt);
         expect(user2.watched, user1.watched);
@@ -85,8 +69,7 @@ void main() {
 
         expect(user2.id, user1.id);
         expect(user2.email, user1.email);
-        expect(user2.firstName, user1.firstName);
-        expect(user2.lastName, user1.lastName);
+        expect(user2.displayName, user1.displayName);
         expect(user2.createdAt, user1.createdAt);
         expect(user2.updatedAt, user1.updatedAt);
         expect(user2.watched, user1.watched);
@@ -103,14 +86,58 @@ void main() {
 
       expect(user2.id, user1.id);
       expect(user2.email, user1.email);
-      expect(user2.firstName, user1.firstName);
-      expect(user2.lastName, user1.lastName);
+      expect(user2.displayName, user1.displayName);
       expect(user2.createdAt, user1.createdAt);
       expect(user2.updatedAt, updatedAt);
       expect(user2.watched, user1.watched);
       expect(user2.watchlist, user1.watchlist);
       expect(user2.lists, user1.lists);
       expect(user1 == user2, isFalse);
+    });
+
+    group('Serialization', () {
+      final expectedUser = TestInstance.user(
+        id: 'id',
+        email: 'max@test.de',
+        displayName: 'max@test.de',
+        createdAt: DateTime.utc(2021),
+        updatedAt: DateTime.utc(2021, 2),
+        watched: [
+          '1',
+          '2',
+        ],
+        watchlist: ['3'],
+        lists: ['4'],
+      );
+
+      const jsonString = '''
+{
+  "id": "id",
+  "email": "max@test.de",
+  "displayName": "max@test.de",
+  "createdAt": "2021-01-01T00:00:00.000Z",
+  "updatedAt": "2021-02-01T00:00:00.000Z",
+  "watched": [
+    "1",
+    "2"
+  ],
+  "watchlist": [
+    "3"
+  ],
+  "lists": [
+    "4"
+  ]
+}
+''';
+      final expectedJson = jsonDecode(jsonString);
+
+      test('fromJson', () {
+        expect(User.fromJson(expectedJson), expectedUser);
+      });
+
+      test('toJson', () {
+        expect(expectedUser.toJson(), expectedJson);
+      });
     });
   });
 }

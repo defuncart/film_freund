@@ -6,19 +6,17 @@ abstract class IUserDatabase {
   Future<void> createUser({
     required String id,
     required String email,
-    String firstName,
-    String lastName,
+    String? displayName,
   });
 
   /// Returns a user with [id]. If no such user exists, null is returned.
   Future<User?> getUser({required String id});
 
-  /// Updates a user with given overriden parameters [firstName],
-  /// [lastName], [watched], [watchlist] and/or [lists]
+  /// Updates a user with given overriden parameters [displayName],
+  /// [watched], [watchlist] and/or [lists]
   Future<void> updateUser({
     required User user,
-    String? firstName,
-    String? lastName,
+    String? displayName,
     List<String>? watched,
     List<String>? watchlist,
     List<String>? lists,

@@ -121,23 +121,213 @@ class AppLocalizations {
     );
   }
 
-  /// `Sign Out`
-  String get sidebarSignOutButtonText {
+  /// `Continue`
+  String get changePasswordDialogConfirmButtonText {
     return Intl.message(
-      'Sign Out',
-      name: 'sidebarSignOutButtonText',
-      desc: 'Text for sign out button',
+      'Continue',
+      name: 'changePasswordDialogConfirmButtonText',
+      desc: 'Confirmation text for change password dialog',
+      args: [],
+    );
+  }
+
+  /// `Current Password`
+  String get changePasswordDialogCurrentPasswordHintText {
+    return Intl.message(
+      'Current Password',
+      name: 'changePasswordDialogCurrentPasswordHintText',
+      desc: 'Hint text for current password text field',
+      args: [],
+    );
+  }
+
+  /// `New password should not be identical to existing`
+  String get changePasswordDialogNewPasswordErrorText {
+    return Intl.message(
+      'New password should not be identical to existing',
+      name: 'changePasswordDialogNewPasswordErrorText',
+      desc: 'Error text for new password text field',
+      args: [],
+    );
+  }
+
+  /// `New Password`
+  String get changePasswordDialogNewPasswordHintText {
+    return Intl.message(
+      'New Password',
+      name: 'changePasswordDialogNewPasswordHintText',
+      desc: 'Hint text for new password text field',
+      args: [],
+    );
+  }
+
+  /// `Must match new password`
+  String get changePasswordDialogRepeatNewPasswordErrorText {
+    return Intl.message(
+      'Must match new password',
+      name: 'changePasswordDialogRepeatNewPasswordErrorText',
+      desc: 'Error text for repeat password text field',
+      args: [],
+    );
+  }
+
+  /// `Repeat Password`
+  String get changePasswordDialogRepeatNewPasswordHintText {
+    return Intl.message(
+      'Repeat Password',
+      name: 'changePasswordDialogRepeatNewPasswordHintText',
+      desc: 'Hint text for repeat password text field',
+      args: [],
+    );
+  }
+
+  /// `Change Password`
+  String get changePasswordDialogTitleText {
+    return Intl.message(
+      'Change Password',
+      name: 'changePasswordDialogTitleText',
+      desc: 'Title text for change password dialog',
+      args: [],
+    );
+  }
+
+  /// `Delete`
+  String get deleteAccountConfirmationDialogConfirmButtonText {
+    return Intl.message(
+      'Delete',
+      name: 'deleteAccountConfirmationDialogConfirmButtonText',
+      desc: 'Confirmation text for delete account dialog',
+      args: [],
+    );
+  }
+
+  /// `Once your account is deleted, there is no way to get it back.`
+  String get deleteAccountConfirmationDialogDescriptionText {
+    return Intl.message(
+      'Once your account is deleted, there is no way to get it back.',
+      name: 'deleteAccountConfirmationDialogDescriptionText',
+      desc: 'Description text for delete account dialog',
+      args: [],
+    );
+  }
+
+  /// `Delete Account`
+  String get deleteAccountConfirmationDialogTitleText {
+    return Intl.message(
+      'Delete Account',
+      name: 'deleteAccountConfirmationDialogTitleText',
+      desc: 'Title text for delete account dialog',
       args: [],
     );
   }
 
   /// `Cancel`
-  String get signOutConfirmationDialogCancelButtonText {
+  String get generalCancel {
     return Intl.message(
       'Cancel',
-      name: 'signOutConfirmationDialogCancelButtonText',
-      desc: 'Cancel text for sign out dialog',
+      name: 'generalCancel',
+      desc: 'Text for a general cancel action',
       args: [],
+    );
+  }
+
+  /// `An error occured!`
+  String get generalErrorOccured {
+    return Intl.message(
+      'An error occured!',
+      name: 'generalErrorOccured',
+      desc: 'Error text when something went wrong',
+      args: [],
+    );
+  }
+
+  /// `Incorrect password`
+  String get generalIncorrectPassword {
+    return Intl.message(
+      'Incorrect password',
+      name: 'generalIncorrectPassword',
+      desc: 'Error text when password is incorrect',
+      args: [],
+    );
+  }
+
+  /// `Password must have at least six characters`
+  String get generalInvalidPassword {
+    return Intl.message(
+      'Password must have at least six characters',
+      name: 'generalInvalidPassword',
+      desc: 'Error text when password is invalid',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get generalPasswordHint {
+    return Intl.message(
+      'Password',
+      name: 'generalPasswordHint',
+      desc: 'Hint text for password input field',
+      args: [],
+    );
+  }
+
+  /// `Change Password`
+  String get settingsViewChangePasswordButtonText {
+    return Intl.message(
+      'Change Password',
+      name: 'settingsViewChangePasswordButtonText',
+      desc: 'Text for change password button',
+      args: [],
+    );
+  }
+
+  /// `Delete Account`
+  String get settingsViewDeleteAccountButtonText {
+    return Intl.message(
+      'Delete Account',
+      name: 'settingsViewDeleteAccountButtonText',
+      desc: 'Button text for delete account dialog',
+      args: [],
+    );
+  }
+
+  /// `Display Name must have at least one character`
+  String get settingsViewDisplayNameErrorText {
+    return Intl.message(
+      'Display Name must have at least one character',
+      name: 'settingsViewDisplayNameErrorText',
+      desc: 'Error text when display name is invalid',
+      args: [],
+    );
+  }
+
+  /// `Display Name`
+  String get settingsViewDisplayNameHintText {
+    return Intl.message(
+      'Display Name',
+      name: 'settingsViewDisplayNameHintText',
+      desc: 'Hint text for display name input field',
+      args: [],
+    );
+  }
+
+  /// `Sign Out`
+  String get settingsViewSignOutButtonText {
+    return Intl.message(
+      'Sign Out',
+      name: 'settingsViewSignOutButtonText',
+      desc: 'Text for sign out button',
+      args: [],
+    );
+  }
+
+  /// `Signed in as {email}`
+  String settingsViewSignedInAsText(Object email) {
+    return Intl.message(
+      'Signed in as $email',
+      name: 'settingsViewSignedInAsText',
+      desc: 'Text to denote which email user is signed in as',
+      args: [email],
     );
   }
 
@@ -207,26 +397,6 @@ class AppLocalizations {
       'Email',
       name: 'signinScreenEmailHintText',
       desc: 'Hint text for email input field',
-      args: [],
-    );
-  }
-
-  /// `Password must have at least six characters`
-  String get signinScreenPasswordErrorText {
-    return Intl.message(
-      'Password must have at least six characters',
-      name: 'signinScreenPasswordErrorText',
-      desc: 'Text when password input is invalid',
-      args: [],
-    );
-  }
-
-  /// `Password`
-  String get signinScreenPasswordHintText {
-    return Intl.message(
-      'Password',
-      name: 'signinScreenPasswordHintText',
-      desc: 'Hint text for password input field',
       args: [],
     );
   }

@@ -31,15 +31,13 @@ class FirebaseUserDatabase implements IUserDatabase {
   Future<void> createUser({
     required String id,
     required String email,
-    String firstName = 'FirstName',
-    String lastName = 'LastName',
+    String? displayName,
   }) async {
     final now = _dateTimeService.nowUtc;
     final user = User(
       id: id,
       email: email,
-      firstName: firstName,
-      lastName: lastName,
+      displayName: displayName ?? email.split('@').first,
       createdAt: now,
       updatedAt: now,
     );
@@ -60,15 +58,13 @@ class FirebaseUserDatabase implements IUserDatabase {
   @override
   Future<void> updateUser({
     required User user,
-    String? firstName,
-    String? lastName,
+    String? displayName,
     List<String>? watched,
     List<String>? watchlist,
     List<String>? lists,
   }) async {
     var updatedUser = user.copyWith(
-      firstName: firstName,
-      lastName: lastName,
+      displayName: displayName,
       watched: watched,
       watchlist: watchlist,
       lists: lists,
@@ -76,7 +72,7 @@ class FirebaseUserDatabase implements IUserDatabase {
 
     if (updatedUser == user) {
       log('Warning! FirebaseUserDatabase.update nothing to update!');
-      log('firstName: $firstName, lastName: $lastName, watched: $watched, watchlist: $watchlist, lists: $lists');
+      log('displayName: $displayName, watched: $watched, watchlist: $watchlist, lists: $lists');
 
       return;
     }
