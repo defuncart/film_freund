@@ -27,20 +27,17 @@ abstract class IAuthService {
   ///
   /// Returns [ChangePasswordResult.incorrectPassword] if an account exists for user's email but [currentPassword] was incorrect
   ///
-  /// Otherwise returns [ChangePasswordResult.other] (i.e. no internet, weak new password)
-  Future<ChangePasswordResult> changePassword({
-    required String currentPassword,
-    required String newPassword,
-  });
+  /// Otherwise returns [ChangePasswordResult.other] (i.e. no internet, no user for user's email, weak new password)
+  Future<ChangePasswordResult> changePassword({required String currentPassword, required String newPassword});
 
-  /// Deletes the current user's authentication using [email] and [password]
+  /// Deletes the current user's authentication using [password]
   ///
-  /// Returns [DeleteResult.success] if an account exists for [email] and [password] was correct
+  /// Returns [DeleteResult.success] if an account exists for user's email and [password] was correct
   ///
-  /// Returns [DeleteResult.incorrectPassword] if an account exists for [email] but [password] was incorrect
+  /// Returns [DeleteResult.incorrectPassword] if an account exists for user's email but [password] was incorrect
   ///
-  /// Otherwise returns [DeleteResult.other] (i.e. no internet, no user for [email])
-  Future<DeleteResult> delete({required String email, required String password});
+  /// Otherwise returns [DeleteResult.other] (i.e. no internet, no user for user's email)
+  Future<DeleteResult> delete({required String password});
 }
 
 /// An enum describing the types of authenication results for a signin action

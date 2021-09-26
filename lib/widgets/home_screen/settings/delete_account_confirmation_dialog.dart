@@ -79,9 +79,7 @@ class _DeleteAccountConfirmationDialogState extends State<DeleteAccountConfirmat
               ? () async {
                   ModalProgressIndicator.show(context);
 
-                  final currentUser = await ServiceLocator.userManager.currentUser;
                   final result = await ServiceLocator.userManager.deleteUser(
-                    email: currentUser.email,
                     password: _passwordController.text,
                   );
 

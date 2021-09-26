@@ -115,7 +115,7 @@ void main() {
 
           verifyNever(mockVoidCallback.call());
           verifyNever(mockUserManager.currentUser);
-          verifyNever(mockUserManager.deleteUser(email: email, password: password));
+          verifyNever(mockUserManager.deleteUser(password: password));
         });
       });
 
@@ -124,8 +124,7 @@ void main() {
         when(mockUserManager.currentUser).thenAnswer((_) => Future.value(user));
 
         testUI('and ${DeleteResult.success}, ensure callback is invoked', (tester) async {
-          when(mockUserManager.deleteUser(email: email, password: password))
-              .thenAnswer((_) => Future.value(DeleteResult.success));
+          when(mockUserManager.deleteUser(password: password)).thenAnswer((_) => Future.value(DeleteResult.success));
 
           await tester.tap(find.text(
             AppLocalizations.current.deleteAccountConfirmationDialogConfirmButtonText.toUpperCase(),
@@ -135,7 +134,7 @@ void main() {
         });
 
         testUI('and ${DeleteResult.incorrectPassword}, ensure incorrect password error', (tester) async {
-          when(mockUserManager.deleteUser(email: email, password: password))
+          when(mockUserManager.deleteUser(password: password))
               .thenAnswer((_) => Future.value(DeleteResult.incorrectPassword));
 
           await tester.tap(find.text(
@@ -152,8 +151,7 @@ void main() {
         });
 
         testUI('and ${DeleteResult.other}, ensure general error', (tester) async {
-          when(mockUserManager.deleteUser(email: email, password: password))
-              .thenAnswer((_) => Future.value(DeleteResult.other));
+          when(mockUserManager.deleteUser(password: password)).thenAnswer((_) => Future.value(DeleteResult.other));
 
           await tester.tap(find.text(
             AppLocalizations.current.deleteAccountConfirmationDialogConfirmButtonText.toUpperCase(),

@@ -60,7 +60,7 @@ class FirebaseAuthService implements IAuthService {
     assert(isUserAuthenticated, 'No signed-in user to delete');
 
     final user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
+    if (user != null && user.email != null) {
       final credentials = EmailAuthProvider.credential(email: user.email!, password: currentPassword);
 
       try {
@@ -85,12 +85,12 @@ class FirebaseAuthService implements IAuthService {
   }
 
   @override
-  Future<DeleteResult> delete({required String email, required String password}) async {
+  Future<DeleteResult> delete({required String password}) async {
     assert(isUserAuthenticated, 'No signed-in user to delete');
 
     final user = _firebaseAuth.currentUser;
-    if (user != null) {
-      final credentials = EmailAuthProvider.credential(email: email, password: password);
+    if (user != null && user.email != null) {
+      final credentials = EmailAuthProvider.credential(email: user.email!, password: password);
 
       try {
         final result = await user.reauthenticateWithCredential(credentials);
