@@ -21,6 +21,7 @@ class UpcomingView extends ConsumerWidget {
   }
 }
 
+@visibleForTesting
 final upcomingMoviesProvider = FutureProvider.autoDispose<List<MovieTeaser>>(
   (ref) => ServiceLocator.movieDatabase.getUpcoming(),
 );

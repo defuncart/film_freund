@@ -57,7 +57,7 @@ class HomeScreenDetail extends StatelessWidget {
       appBar: AppBar(
         title: Text(activeView.title),
       ),
-      body: HomePageContent(
+      body: HomeScreenContent(
         activeView: activeView,
       ),
       // TODO only needed for web/desktop
@@ -97,7 +97,7 @@ class HomeScreenMasterDetail extends StatelessWidget {
             ),
             const VerticalDivider(width: 2),
             Expanded(
-              child: HomePageContent(
+              child: HomeScreenContent(
                 activeView: activeView,
               ),
             ),
@@ -109,8 +109,8 @@ class HomeScreenMasterDetail extends StatelessWidget {
 }
 
 @visibleForTesting
-class HomePageContent extends StatelessWidget {
-  const HomePageContent({
+class HomeScreenContent extends StatelessWidget {
+  const HomeScreenContent({
     required this.activeView,
     Key? key,
   }) : super(key: key);
@@ -136,14 +136,29 @@ class HomePageContent extends StatelessWidget {
                     },
                   );
                 default:
-                  return Center(
-                    child: Text(
-                      activeView.title,
-                    ),
+                  return ActiveViewPlaceholder(
+                    activeView: activeView,
                   );
               }
             },
           ),
+        ),
+      );
+}
+
+@visibleForTesting
+class ActiveViewPlaceholder extends StatelessWidget {
+  const ActiveViewPlaceholder({
+    required this.activeView,
+    Key? key,
+  }) : super(key: key);
+
+  final ActiveView activeView;
+
+  @override
+  Widget build(BuildContext context) => Center(
+        child: Text(
+          activeView.title,
         ),
       );
 }

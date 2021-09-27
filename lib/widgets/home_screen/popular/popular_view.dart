@@ -21,6 +21,7 @@ class PopularView extends ConsumerWidget {
   }
 }
 
+@visibleForTesting
 final popularMoviesProvider = FutureProvider.autoDispose<List<MovieTeaser>>((ref) async {
   return ServiceLocator.movieDatabase.getPopular();
 });
