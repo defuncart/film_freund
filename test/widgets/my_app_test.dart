@@ -32,7 +32,7 @@ void main() {
       );
     });
 
-    tearDown(TestServiceLocator.rest);
+    tearDown(TestServiceLocator.reset);
 
     testWidgets('When user is not authenticated, expect $SigninScreen', (tester) async {
       when(mockUserManager.isAuthenticated).thenReturn(false);

@@ -16,7 +16,7 @@ void main() {
       );
     });
 
-    tearDown(TestServiceLocator.rest);
+    tearDown(TestServiceLocator.reset);
 
     test('When $ServiceLocator is initialized, expect access to services', () {
       expect(

@@ -37,7 +37,7 @@ class TestServiceLocator {
   }
 
   /// Reset all services. This is generally called in `tearDown`
-  static void rest() => _container.dispose();
+  static void reset() => _container.dispose();
 
   /// Returns a [ProviderScope] widget containing a container of overrided services
   ///
