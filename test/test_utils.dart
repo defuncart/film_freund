@@ -65,7 +65,7 @@ class TestInstance {
     int? runtime,
     String? tagline,
     String? title,
-    double? voteAverage,
+    int? voteAverage,
     int? voteCount,
   }) =>
       Movie(
@@ -99,7 +99,7 @@ class TestInstance {
     String? posterPath,
     DateTime? releaseDate,
     String? title,
-    double? voteAverage,
+    int? voteAverage,
     int? voteCount,
   }) =>
       MovieTeaser(
