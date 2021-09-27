@@ -64,6 +64,7 @@ const elements = [
     icon: Icons.whatshot,
     view: ActiveView.popular,
   ),
+  SidebarElement(icon: Icons.new_releases, view: ActiveView.upcoming),
   SidebarElement(
     icon: Icons.search,
     view: ActiveView.search,
@@ -71,10 +72,6 @@ const elements = [
   SidebarElement(
     icon: Icons.check,
     view: ActiveView.watched,
-  ),
-  SidebarElement(
-    icon: Icons.favorite,
-    view: ActiveView.liked,
   ),
   SidebarElement(
     icon: Icons.watch_later,

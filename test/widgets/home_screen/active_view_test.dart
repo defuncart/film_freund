@@ -13,9 +13,9 @@ void main() {
       );
 
       expect(ActiveView.popular.title, AppLocalizations.current.activeViewPopularTitle);
+      expect(ActiveView.upcoming.title, AppLocalizations.current.activeViewUpcomingTitle);
       expect(ActiveView.search.title, AppLocalizations.current.activeViewSearchTitle);
       expect(ActiveView.watched.title, AppLocalizations.current.activeViewWatchedTitle);
-      expect(ActiveView.liked.title, AppLocalizations.current.activeViewLikedTitle);
       expect(ActiveView.watchlist.title, AppLocalizations.current.activeViewWatchlistTitle);
       expect(ActiveView.lists.title, AppLocalizations.current.activeViewListsTitle);
       expect(ActiveView.settings.title, AppLocalizations.current.activeViewSettingsTitle);
