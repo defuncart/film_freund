@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:film_freund/services/service_locator.dart';
 import 'package:film_freund/utils/sizes.dart';
 import 'package:film_freund/widgets/home_screen/active_view.dart';
+import 'package:film_freund/widgets/home_screen/popular/popular_view.dart';
 import 'package:film_freund/widgets/home_screen/settings/settings_view.dart';
 import 'package:film_freund/widgets/home_screen/sidebar.dart';
 import 'package:film_freund/widgets/signin_screen/signin_screen.dart';
@@ -129,6 +130,8 @@ class HomePageContent extends StatelessWidget {
                       Navigator.of(context).pushReplacementNamed(SigninScreen.routeName);
                     },
                   );
+                case ActiveView.popular:
+                  return const PopularView();
                 default:
                   return Center(
                     child: Text(
