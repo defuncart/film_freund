@@ -13,24 +13,44 @@ void main() {
 
     testWidgets('Ensure content is correct', (tester) async {
       await tester.pumpWidget(widget);
-
       await tester.pumpAndSettle();
 
+      expect(
+        find.byType(SignInErrorDialog),
+        findsOneWidget,
+      );
       expect(find.byType(Text), findsNWidgets(3));
-
       expect(
         find.text(AppLocalizations.current.signinErrorDialogTitleText),
         findsOneWidget,
       );
-
       expect(
         find.text(AppLocalizations.current.signinErrorDialogDescriptionText),
         findsOneWidget,
       );
-
       expect(
         find.text(AppLocalizations.current.signinErrorDialogButtonText.toUpperCase()),
         findsOneWidget,
+      );
+    });
+
+    testWidgets('When button is pressed, expect dialog is closed', (tester) async {
+      await tester.pumpWidget(widget);
+      await tester.pumpAndSettle();
+
+      expect(
+        find.byType(SignInErrorDialog),
+        findsOneWidget,
+      );
+
+      await tester.tap(
+        find.text(AppLocalizations.current.signinErrorDialogButtonText.toUpperCase()),
+      );
+      await tester.pumpAndSettle();
+
+      expect(
+        find.byType(SignInErrorDialog),
+        findsNothing,
       );
     });
   });
