@@ -35,7 +35,7 @@ class Movie {
   final int? runtime;
   final String? tagline;
   final String title;
-  final double voteAverage;
+  final int voteAverage;
   final int voteCount;
 
   @override

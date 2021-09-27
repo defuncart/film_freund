@@ -29,7 +29,7 @@ class MovieTeaser {
   final String? posterPath;
   final DateTime releaseDate;
   final String title;
-  final double voteAverage;
+  final int voteAverage;
   final int voteCount;
 
   @override

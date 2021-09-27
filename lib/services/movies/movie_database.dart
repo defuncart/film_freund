@@ -77,7 +77,7 @@ class MovieDatabase implements IMovieDatabase {
         runtime: parsedResponse.runtime,
         tagline: parsedResponse.tagline,
         title: parsedResponse.title,
-        voteAverage: parsedResponse.voteAverage,
+        voteAverage: _convertVoteAverage(parsedResponse.voteAverage),
         voteCount: parsedResponse.voteCount,
       );
     }
@@ -106,6 +106,9 @@ class MovieDatabase implements IMovieDatabase {
   /// Returns a full image path for a given relative [path]
   String? _composeImagePath(String? path) => path != null ? 'https://image.tmdb.org/t/p/w500/$path' : null;
 
+  /// Returns [voteAverage] as percentage, i.e. 6.8 => 68
+  int _convertVoteAverage(double voteAverage) => (voteAverage * 10).floor();
+
   /// Maps a [MovieListResult] to a [MovieTeaser]
   MovieTeaser _movieListResultToMovieTeaser(MovieListResult result) => MovieTeaser(
         backdropPath: _composeImagePath(result.backdropPath),
@@ -118,7 +121,7 @@ class MovieDatabase implements IMovieDatabase {
         posterPath: _composeImagePath(result.posterPath),
         releaseDate: result.releaseDate,
         title: result.title,
-        voteAverage: result.voteAverage,
+        voteAverage: _convertVoteAverage(result.voteAverage),
         voteCount: result.voteCount,
       );
 }

@@ -54,7 +54,7 @@ class MovieTeaserCard extends StatelessWidget {
                 right: 4,
                 bottom: 4,
                 child: MovieRating(
-                  percentage: (movieTeaser.voteAverage * 10).floor(),
+                  percentage: movieTeaser.voteAverage,
                   // percentage: 20,
                 ),
               ),
