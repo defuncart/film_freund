@@ -10,6 +10,18 @@ import '../mocks.dart';
 import '../test_service_locator.dart';
 
 void main() {
+  group('$MyApp', () {
+    testWidgets('Ensure initial loading state', (tester) async {
+      await tester.pumpWidget(
+        const MyApp(),
+      );
+
+      expect(find.byType(MyApp), findsOneWidget);
+      expect(find.byType(Material), findsOneWidget);
+      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+    });
+  });
+
   group('$MyAppContent', () {
     late UserManager mockUserManager;
 
