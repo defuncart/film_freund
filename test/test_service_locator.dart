@@ -1,5 +1,5 @@
 import 'package:film_freund/managers/user/user_manager.dart';
-import 'package:film_freund/services/date_time.dart/date_time_service.dart';
+import 'package:film_freund/services/date_time/date_time_service.dart';
 import 'package:film_freund/services/movies/i_movie_database.dart';
 import 'package:film_freund/services/service_locator.dart';
 import 'package:flutter/widgets.dart';
@@ -37,7 +37,7 @@ class TestServiceLocator {
   }
 
   /// Reset all services. This is generally called in `tearDown`
-  static void rest() => _container.dispose();
+  static void reset() => _container.dispose();
 
   /// Returns a [ProviderScope] widget containing a container of overrided services
   ///

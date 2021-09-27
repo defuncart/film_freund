@@ -1,7 +1,7 @@
 import 'dart:developer' show log;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:film_freund/services/date_time.dart/date_time_service.dart';
+import 'package:film_freund/services/date_time/date_time_service.dart';
 import 'package:film_freund/services/service_locator.dart';
 
 import 'i_user_database.dart';

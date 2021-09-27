@@ -1,6 +1,6 @@
 import 'package:film_freund/managers/user/user_manager.dart';
 import 'package:film_freund/services/auth/firebase_auth_service.dart';
-import 'package:film_freund/services/date_time.dart/date_time_service.dart';
+import 'package:film_freund/services/date_time/date_time_service.dart';
 import 'package:film_freund/services/movies/i_movie_database.dart';
 import 'package:film_freund/services/movies/movie_database.dart';
 import 'package:film_freund/services/user/firebase_user_database.dart';

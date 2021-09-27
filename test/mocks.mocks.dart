@@ -6,8 +6,7 @@ import 'dart:async' as _i4;
 
 import 'package:film_freund/managers/user/user_manager.dart' as _i3;
 import 'package:film_freund/services/auth/i_auth_service.dart' as _i5;
-import 'package:film_freund/services/date_time.dart/date_time_service.dart'
-    as _i6;
+import 'package:film_freund/services/date_time/date_time_service.dart' as _i6;
 import 'package:film_freund/services/movies/i_movie_database.dart' as _i8;
 import 'package:film_freund/services/movies/models/movie.dart' as _i9;
 import 'package:film_freund/services/movies/models/movie_teaser.dart' as _i10;
@@ -89,13 +88,11 @@ class MockUserManager extends _i1.Mock implements _i3.UserManager {
                   _i5.ChangePasswordResult.success))
           as _i4.Future<_i5.ChangePasswordResult>);
   @override
-  _i4.Future<_i5.DeleteResult> deleteUser({String? email, String? password}) =>
-      (super.noSuchMethod(
-              Invocation.method(
-                  #deleteUser, [], {#email: email, #password: password}),
-              returnValue:
-                  Future<_i5.DeleteResult>.value(_i5.DeleteResult.success))
-          as _i4.Future<_i5.DeleteResult>);
+  _i4.Future<_i5.DeleteResult> deleteUser({String? password}) => (super
+      .noSuchMethod(Invocation.method(#deleteUser, [], {#password: password}),
+          returnValue:
+              Future<_i5.DeleteResult>.value(_i5.DeleteResult.success)) as _i4
+      .Future<_i5.DeleteResult>);
   @override
   String toString() => super.toString();
 }
@@ -151,12 +148,11 @@ class MockIAuthService extends _i1.Mock implements _i5.IAuthService {
                   _i5.ChangePasswordResult.success))
           as _i4.Future<_i5.ChangePasswordResult>);
   @override
-  _i4.Future<_i5.DeleteResult> delete({String? email, String? password}) =>
-      (super.noSuchMethod(
-          Invocation.method(#delete, [], {#email: email, #password: password}),
-          returnValue:
-              Future<_i5.DeleteResult>.value(_i5.DeleteResult.success)) as _i4
-          .Future<_i5.DeleteResult>);
+  _i4.Future<_i5.DeleteResult> delete({String? password}) =>
+      (super.noSuchMethod(Invocation.method(#delete, [], {#password: password}),
+              returnValue:
+                  Future<_i5.DeleteResult>.value(_i5.DeleteResult.success))
+          as _i4.Future<_i5.DeleteResult>);
   @override
   String toString() => super.toString();
 }
