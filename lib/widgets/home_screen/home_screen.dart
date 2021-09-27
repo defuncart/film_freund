@@ -4,6 +4,7 @@ import 'package:film_freund/services/service_locator.dart';
 import 'package:film_freund/utils/sizes.dart';
 import 'package:film_freund/widgets/home_screen/active_view.dart';
 import 'package:film_freund/widgets/home_screen/popular/popular_view.dart';
+import 'package:film_freund/widgets/home_screen/popular/upcoming_view.dart';
 import 'package:film_freund/widgets/home_screen/settings/settings_view.dart';
 import 'package:film_freund/widgets/home_screen/sidebar.dart';
 import 'package:film_freund/widgets/signin_screen/signin_screen.dart';
@@ -123,6 +124,10 @@ class HomePageContent extends StatelessWidget {
           child: Builder(
             builder: (_) {
               switch (activeView) {
+                case ActiveView.popular:
+                  return const PopularView();
+                case ActiveView.upcoming:
+                  return const UpcomingView();
                 case ActiveView.settings:
                   return SettingsView(
                     onSignOutConfirmed: () {
@@ -130,8 +135,6 @@ class HomePageContent extends StatelessWidget {
                       Navigator.of(context).pushReplacementNamed(SigninScreen.routeName);
                     },
                   );
-                case ActiveView.popular:
-                  return const PopularView();
                 default:
                   return Center(
                     child: Text(
