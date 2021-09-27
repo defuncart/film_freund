@@ -43,9 +43,8 @@ class MovieTeaserCard extends StatelessWidget {
                     width: width,
                     height: width * 1.5,
                     child: Image.network(
-                      // TODO account for null case
-                      movieTeaser.posterPath!,
-                      // loadingBuilder: (_, __, ___) => Container(color: Colors.grey),
+                      // TODO display loading and error states
+                      movieTeaser.posterPath ?? '',
                     ),
                   ),
                 ),
