@@ -1,9 +1,17 @@
 import 'package:film_freund/generated/l10n.dart';
+import 'package:film_freund/managers/user/user_manager.dart';
+import 'package:film_freund/services/auth/i_auth_service.dart';
 import 'package:film_freund/widgets/common/input_fields/password_input.dart';
+import 'package:film_freund/widgets/home_screen/home_screen.dart';
+import 'package:film_freund/widgets/signin_screen/signin_error_dialog.dart';
 import 'package:film_freund/widgets/signin_screen/signin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_test_ui/flutter_test_ui.dart';
+import 'package:mockito/mockito.dart';
 
+import '../../mocks.dart';
+import '../../test_service_locator.dart';
 import '../../test_utils.dart';
 
 void main() {
@@ -115,20 +123,105 @@ void main() {
       );
     });
 
-    testWidgets('when email and password are valid, signin button is enabled', (tester) async {
-      await tester.pumpWidget(widget);
-      await tester.pumpAndSettle();
-
-      await tester.enterText(find.byKey(SigninScreenKeys.emailTextField), 'a@a.aa');
-      await tester.testTextInput.receiveAction(TextInputAction.done);
-      await tester.enterText(find.byKey(SigninScreenKeys.passwordTextField), '123456');
-      await tester.testTextInput.receiveAction(TextInputAction.done);
-      await tester.pump();
-
-      expect(
-        tester.widget<ElevatedButton>(find.byKey(SigninScreenKeys.signinButton)).enabled,
-        isTrue,
+    group('when email and password are valid, signin button is enabled', () {
+      const email = 'a@a.aa';
+      const password = '123456';
+      final UserManager mockUserManager = MockUserManager();
+      TestServiceLocator.register(
+        userManager: mockUserManager,
       );
+
+      setUpUI((tester) async {
+        await tester.pumpWidget(widget);
+        await tester.pumpAndSettle();
+
+        await tester.enterText(find.byKey(SigninScreenKeys.emailTextField), email);
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.enterText(find.byKey(SigninScreenKeys.passwordTextField), password);
+        await tester.testTextInput.receiveAction(TextInputAction.done);
+        await tester.pump();
+      });
+
+      testUI('expect no error', (tester) async {
+        expect(
+          find.text(AppLocalizations.current.signinScreenEmailErrorText),
+          findsNothing,
+        );
+        expect(
+          find.text(AppLocalizations.current.generalInvalidPassword),
+          findsNothing,
+        );
+      });
+
+      testUI('expect signin button is enabled', (tester) async {
+        final buttonFinder = find.ancestor(
+          of: find.text(
+            AppLocalizations.current.signinScreenSigninButtonText,
+          ),
+          matching: find.byType(ElevatedButton),
+        );
+
+        expect(
+          tester.widget<ElevatedButton>(buttonFinder).enabled,
+          isTrue,
+        );
+      });
+
+      group('when signin button is pressed', () {
+        testUI('and ${AuthResult.createSuccess}, ensure callback is invoked', (tester) async {
+          when(mockUserManager.signin(email: email, password: password))
+              .thenAnswer((_) => Future.value(AuthResult.createSuccess));
+
+          await tester.tap(find.text(
+            AppLocalizations.current.signinScreenSigninButtonText,
+          ));
+          await tester.pumpAndSettle();
+
+          expect(find.byType(SigninScreen), findsNothing);
+          expect(find.byType(HomeScreen), findsOneWidget);
+        });
+
+        testUI('and ${AuthResult.signinSuccess}, ensure callback is invoked', (tester) async {
+          when(mockUserManager.signin(email: email, password: password))
+              .thenAnswer((_) => Future.value(AuthResult.signinSuccess));
+
+          await tester.tap(find.text(
+            AppLocalizations.current.signinScreenSigninButtonText,
+          ));
+          await tester.pumpAndSettle();
+
+          expect(find.byType(SigninScreen), findsNothing);
+          expect(find.byType(HomeScreen), findsOneWidget);
+        });
+
+        testUI('and ${AuthResult.signinIncorrectPassword}, ensure callback is invoked', (tester) async {
+          when(mockUserManager.signin(email: email, password: password))
+              .thenAnswer((_) => Future.value(AuthResult.signinIncorrectPassword));
+
+          await tester.tap(find.text(
+            AppLocalizations.current.signinScreenSigninButtonText,
+          ));
+          await tester.pumpAndSettle();
+
+          expect(find.byType(SigninScreen), findsOneWidget);
+          expect(find.byType(SignInErrorDialog), findsOneWidget);
+          expect(find.byType(HomeScreen), findsNothing);
+        });
+
+        testUI('and ${AuthResult.other}, ensure callback is invoked', (tester) async {
+          when(mockUserManager.signin(email: email, password: password))
+              .thenAnswer((_) => Future.value(AuthResult.other));
+
+          await tester.tap(find.text(
+            AppLocalizations.current.signinScreenSigninButtonText,
+          ));
+          await tester.pumpAndSettle();
+
+          expect(find.byType(SigninScreen), findsOneWidget);
+          expect(find.byType(SignInErrorDialog), findsOneWidget);
+          expect(find.byType(HomeScreen), findsNothing);
+        });
+      });
     });
   });
 }
