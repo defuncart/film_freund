@@ -2,6 +2,7 @@ import 'package:film_freund/generated/l10n.dart';
 import 'package:film_freund/services/movies/models/movie.dart';
 import 'package:film_freund/services/movies/models/movie_teaser.dart';
 import 'package:film_freund/services/user/models/user.dart';
+import 'package:film_freund/widgets/my_app.dart' show routes;
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -19,6 +20,7 @@ Widget wrapWithMaterialAppLocalizationDelegates(Widget widget) => MaterialApp(
       supportedLocales: AppLocalizations.delegate.supportedLocales,
       locale: const Locale('en'),
       home: widget,
+      routes: routes,
     );
 
 /// A test util to create model instances for testing
