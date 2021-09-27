@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../firebase_auth_mock.dart';
+import '../firebase_mocks.dart';
 import '../mocks.dart';
 import '../test_service_locator.dart';
 
@@ -23,7 +23,7 @@ void main() {
     });
 
     testWidgets('Ensure data state', (tester) async {
-      setupFirebaseAuthMocks();
+      setupFirebaseMocks();
 
       final UserManager mockUserManager = MockUserManager();
       TestServiceLocator.register(
