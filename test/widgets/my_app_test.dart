@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
+import '../firebase_auth_mock.dart';
 import '../mocks.dart';
 import '../test_service_locator.dart';
 
@@ -19,6 +20,27 @@ void main() {
       expect(find.byType(MyApp), findsOneWidget);
       expect(find.byType(Material), findsOneWidget);
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
+    });
+
+    testWidgets('Ensure data state', (tester) async {
+      setupFirebaseAuthMocks();
+
+      final UserManager mockUserManager = MockUserManager();
+      TestServiceLocator.register(
+        userManager: mockUserManager,
+      );
+      when(mockUserManager.isAuthenticated).thenReturn(false);
+
+      await tester.pumpWidget(
+        TestServiceLocator.providerScope(
+          child: const MyApp(),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.byType(MyApp), findsOneWidget);
+      expect(find.byType(CircularProgressIndicator), findsNothing);
+      expect(find.byType(MyAppContent), findsOneWidget);
     });
   });
 
