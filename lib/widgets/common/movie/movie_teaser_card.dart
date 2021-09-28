@@ -74,16 +74,23 @@ class MovieRating extends StatelessWidget {
 
   final int percentage;
 
+  /// Returns a [Color] depending on [percentage]
+  ///
+  /// `>=70 green`, `>= 40 yellow`, `<40 red`
+  @visibleForTesting
+  static Color colorForPercentage(int percentage) {
+    if (percentage >= 70) {
+      return Colors.green;
+    } else if (percentage >= 40) {
+      return Colors.yellow;
+    } else {
+      return Colors.red;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    late Color color;
-    if (percentage >= 70) {
-      color = Colors.green;
-    } else if (percentage >= 40) {
-      color = Colors.yellow;
-    } else {
-      color = Colors.red;
-    }
+    final color = MovieRating.colorForPercentage(percentage);
 
     return SizedBox(
       width: 24,
