@@ -2,7 +2,7 @@ import 'package:film_freund/widgets/common/input_fields/password_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../test_utils.dart';
+import '../../../test_utils.dart';
 
 void main() {
   group('$PasswordInput', () {

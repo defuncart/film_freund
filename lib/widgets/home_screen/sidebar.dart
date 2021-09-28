@@ -64,7 +64,10 @@ const elements = [
     icon: Icons.whatshot,
     view: ActiveView.popular,
   ),
-  SidebarElement(icon: Icons.new_releases, view: ActiveView.upcoming),
+  SidebarElement(
+    icon: Icons.new_releases,
+    view: ActiveView.upcoming,
+  ),
   SidebarElement(
     icon: Icons.search,
     view: ActiveView.search,
