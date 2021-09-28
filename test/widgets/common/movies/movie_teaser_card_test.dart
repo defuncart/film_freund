@@ -222,6 +222,17 @@ void main() {
           returnsNormally,
         );
       });
+
+      test('should repaint is always true', () {
+        const ring = Ring(
+          percentage: 50,
+          backgroundColor: Colors.transparent,
+          normalColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+        );
+
+        expect(ring.shouldRepaint(ring), isTrue);
+      });
     });
   });
 }
