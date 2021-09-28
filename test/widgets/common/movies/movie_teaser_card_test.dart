@@ -147,7 +147,7 @@ void main() {
         find.byType(MovieRating),
         matchesGoldenFile('goldens/common/movies/movie_teaser_card/movie_rating_green.png'),
       );
-    }, skip: true);
+    }, tags: 'goldens', skip: true);
 
     testWidgets('when percentage >= 40, expect match golden', (tester) async {
       final widget = wrapWithMaterialApp(
@@ -165,7 +165,7 @@ void main() {
         find.byType(MovieRating),
         matchesGoldenFile('goldens/common/movies/movie_teaser_card/movie_rating_yellow.png'),
       );
-    }, skip: true);
+    }, tags: 'goldens', skip: true);
 
     testWidgets('when percentage < 40, expect match golden', (tester) async {
       final widget = wrapWithMaterialApp(
@@ -183,7 +183,7 @@ void main() {
         find.byType(MovieRating),
         matchesGoldenFile('goldens/common/movies/movie_teaser_card/movie_rating_red.png'),
       );
-    }, skip: true);
+    }, tags: 'goldens', skip: true);
   });
 
   group('$Ring', () {
