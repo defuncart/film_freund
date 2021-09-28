@@ -54,7 +54,6 @@ class MovieTeaserCard extends StatelessWidget {
                 bottom: 4,
                 child: MovieRating(
                   percentage: movieTeaser.voteAverage,
-                  // percentage: 20,
                 ),
               ),
             ],
@@ -78,9 +77,9 @@ class MovieRating extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     late Color color;
-    if (percentage >= 80) {
+    if (percentage >= 70) {
       color = Colors.green;
-    } else if (percentage >= 60) {
+    } else if (percentage >= 40) {
       color = Colors.yellow;
     } else {
       color = Colors.red;
