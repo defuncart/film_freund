@@ -11,6 +11,7 @@ import 'package:flutter_test_ui/flutter_test_ui.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../mocks.dart';
+import '../../riverpod_overrides.dart';
 import '../../test_service_locator.dart';
 import '../../test_utils.dart';
 
@@ -132,7 +133,10 @@ void main() {
       );
 
       setUpUI((tester) async {
-        await tester.pumpWidget(widget);
+        await tester.pumpWidget(
+          // need to wrap with popular provider in the event of transitioning to HomeScreen
+          RiverpodOverrides.popularMovies(widget),
+        );
         await tester.pumpAndSettle();
 
         await tester.enterText(find.byKey(SigninScreenKeys.emailTextField), email);

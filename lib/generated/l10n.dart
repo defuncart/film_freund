@@ -51,16 +51,6 @@ class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  /// `Liked`
-  String get activeViewLikedTitle {
-    return Intl.message(
-      'Liked',
-      name: 'activeViewLikedTitle',
-      desc: 'Title for ActiveView.liked',
-      args: [],
-    );
-  }
-
   /// `Lists`
   String get activeViewListsTitle {
     return Intl.message(
@@ -97,6 +87,16 @@ class AppLocalizations {
       'Settings',
       name: 'activeViewSettingsTitle',
       desc: 'Title for ActiveView.settings',
+      args: [],
+    );
+  }
+
+  /// `Upcoming`
+  String get activeViewUpcomingTitle {
+    return Intl.message(
+      'Upcoming',
+      name: 'activeViewUpcomingTitle',
+      desc: 'Title for ActiveView.upcoming',
       args: [],
     );
   }

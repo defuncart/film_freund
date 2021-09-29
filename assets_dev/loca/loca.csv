@@ -11,9 +11,9 @@ signinErrorDialogTitleText;Title text for signin error dialog;An error occured!
 signinErrorDialogDescriptionText;Description text for signin error dialog;Please ensure that you are connected to the internet and that the password is correct.
 signinErrorDialogButtonText;Button text for signin error dialog;Ok
 activeViewPopularTitle;Title for ActiveView.popular;Popular
+activeViewUpcomingTitle;Title for ActiveView.upcoming;Upcoming
 activeViewSearchTitle;Title for ActiveView.search;Search
 activeViewWatchedTitle;Title for ActiveView.watched;Watched
-activeViewLikedTitle;Title for ActiveView.liked;Liked
 activeViewWatchlistTitle;Title for ActiveView.watchlist;Watchlist
 activeViewListsTitle;Title for ActiveView.lists;Lists
 activeViewSettingsTitle;Title for ActiveView.settings;Settings

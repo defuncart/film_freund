@@ -3,8 +3,10 @@ import 'dart:math';
 import 'package:film_freund/services/service_locator.dart';
 import 'package:film_freund/utils/sizes.dart';
 import 'package:film_freund/widgets/home_screen/active_view.dart';
+import 'package:film_freund/widgets/home_screen/popular/popular_view.dart';
 import 'package:film_freund/widgets/home_screen/settings/settings_view.dart';
 import 'package:film_freund/widgets/home_screen/sidebar.dart';
+import 'package:film_freund/widgets/home_screen/upcoming/upcoming_view.dart';
 import 'package:film_freund/widgets/signin_screen/signin_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -55,7 +57,7 @@ class HomeScreenDetail extends StatelessWidget {
       appBar: AppBar(
         title: Text(activeView.title),
       ),
-      body: HomePageContent(
+      body: HomeScreenContent(
         activeView: activeView,
       ),
       // TODO only needed for web/desktop
@@ -95,7 +97,7 @@ class HomeScreenMasterDetail extends StatelessWidget {
             ),
             const VerticalDivider(width: 2),
             Expanded(
-              child: HomePageContent(
+              child: HomeScreenContent(
                 activeView: activeView,
               ),
             ),
@@ -107,8 +109,8 @@ class HomeScreenMasterDetail extends StatelessWidget {
 }
 
 @visibleForTesting
-class HomePageContent extends StatelessWidget {
-  const HomePageContent({
+class HomeScreenContent extends StatelessWidget {
+  const HomeScreenContent({
     required this.activeView,
     Key? key,
   }) : super(key: key);
@@ -122,6 +124,10 @@ class HomePageContent extends StatelessWidget {
           child: Builder(
             builder: (_) {
               switch (activeView) {
+                case ActiveView.popular:
+                  return const PopularView();
+                case ActiveView.upcoming:
+                  return const UpcomingView();
                 case ActiveView.settings:
                   return SettingsView(
                     onSignOutConfirmed: () {
@@ -130,14 +136,29 @@ class HomePageContent extends StatelessWidget {
                     },
                   );
                 default:
-                  return Center(
-                    child: Text(
-                      activeView.title,
-                    ),
+                  return ActiveViewPlaceholder(
+                    activeView: activeView,
                   );
               }
             },
           ),
+        ),
+      );
+}
+
+@visibleForTesting
+class ActiveViewPlaceholder extends StatelessWidget {
+  const ActiveViewPlaceholder({
+    required this.activeView,
+    Key? key,
+  }) : super(key: key);
+
+  final ActiveView activeView;
+
+  @override
+  Widget build(BuildContext context) => Center(
+        child: Text(
+          activeView.title,
         ),
       );
 }

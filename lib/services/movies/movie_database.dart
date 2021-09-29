@@ -69,15 +69,15 @@ class MovieDatabase implements IMovieDatabase {
         id: parsedResponse.id,
         originalLanguage: parsedResponse.originalLanguage,
         originalTitle: parsedResponse.originalTitle,
-        overview: parsedResponse.overview,
+        overview: parsedResponse.overview ?? '',
         popularity: parsedResponse.popularity,
-        posterPath: _composeImagePath(parsedResponse.posterPath),
+        posterPath: _composeImagePath(parsedResponse.posterPath!)!,
         releaseDate: parsedResponse.releaseDate,
         revenue: parsedResponse.revenue,
         runtime: parsedResponse.runtime,
         tagline: parsedResponse.tagline,
         title: parsedResponse.title,
-        voteAverage: parsedResponse.voteAverage,
+        voteAverage: _convertVoteAverage(parsedResponse.voteAverage),
         voteCount: parsedResponse.voteCount,
       );
     }
@@ -89,7 +89,10 @@ class MovieDatabase implements IMovieDatabase {
   Future<List<MovieTeaser>> getPopular() async {
     final response = await _get('$_baseUrl/movie/popular?api_key=$apiKey&language=$_language&page=1&region=$_region');
     final parsedResponse = PopularResponse.fromJson(jsonDecode(response.body));
-    final movieTeasers = parsedResponse.results.map((result) => _movieListResultToMovieTeaser(result)).toList();
+    final movieTeasers = parsedResponse.results
+        .where((result) => result.posterPath != null)
+        .map((result) => _movieListResultToMovieTeaser(result))
+        .toList();
 
     return movieTeasers;
   }
@@ -97,14 +100,20 @@ class MovieDatabase implements IMovieDatabase {
   @override
   Future<List<MovieTeaser>> getUpcoming() async {
     final response = await _get('$_baseUrl/movie/upcoming?api_key=$apiKey&language=$_language&page=1&region=$_region');
-    final parsedResponse = PopularResponse.fromJson(jsonDecode(response.body));
-    final movieTeasers = parsedResponse.results.map((result) => _movieListResultToMovieTeaser(result)).toList();
+    final parsedResponse = UpcomingResponse.fromJson(jsonDecode(response.body));
+    final movieTeasers = parsedResponse.results
+        .where((result) => result.posterPath != null)
+        .map((result) => _movieListResultToMovieTeaser(result))
+        .toList();
 
     return movieTeasers;
   }
 
   /// Returns a full image path for a given relative [path]
   String? _composeImagePath(String? path) => path != null ? 'https://image.tmdb.org/t/p/w500/$path' : null;
+
+  /// Returns [voteAverage] as percentage, i.e. 6.8 => 68
+  int _convertVoteAverage(double voteAverage) => (voteAverage * 10).floor();
 
   /// Maps a [MovieListResult] to a [MovieTeaser]
   MovieTeaser _movieListResultToMovieTeaser(MovieListResult result) => MovieTeaser(
@@ -115,10 +124,10 @@ class MovieDatabase implements IMovieDatabase {
         originalTitle: result.originalTitle,
         overview: result.overview,
         popularity: result.popularity,
-        posterPath: _composeImagePath(result.posterPath),
+        posterPath: _composeImagePath(result.posterPath!)!,
         releaseDate: result.releaseDate,
         title: result.title,
-        voteAverage: result.voteAverage,
+        voteAverage: _convertVoteAverage(result.voteAverage),
         voteCount: result.voteCount,
       );
 }

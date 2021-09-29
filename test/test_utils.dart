@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:film_freund/generated/l10n.dart';
 import 'package:film_freund/services/movies/models/movie.dart';
 import 'package:film_freund/services/movies/models/movie_teaser.dart';
@@ -65,7 +67,7 @@ class TestInstance {
     int? runtime,
     String? tagline,
     String? title,
-    double? voteAverage,
+    int? voteAverage,
     int? voteCount,
   }) =>
       Movie(
@@ -99,7 +101,7 @@ class TestInstance {
     String? posterPath,
     DateTime? releaseDate,
     String? title,
-    double? voteAverage,
+    int? voteAverage,
     int? voteCount,
   }) =>
       MovieTeaser(
@@ -116,4 +118,17 @@ class TestInstance {
         voteAverage: voteAverage ?? 0,
         voteCount: voteCount ?? 0,
       );
+}
+
+/// Utils for golden tests
+abstract class GoldenUtils {
+  /// A tag to mark a test as a golden test
+  static const tag = 'goldens';
+
+  /// Generates a filepath for a golden for a [testFilepath] and [imageName]
+  static String generateFilepath({
+    required String testFilepath,
+    required String imageName,
+  }) =>
+      '${Directory.current.path}/test/goldens/$testFilepath/$imageName.png';
 }

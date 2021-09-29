@@ -55,7 +55,7 @@ void main() {
 
       expect(find.byType(Text), findsOneWidget);
       expect(find.text(error), findsOneWidget);
-    }, skip: false);
+    });
 
     testWidgets('SettingsView user', (tester) async {
       final user = TestInstance.user();

@@ -65,16 +65,16 @@ const elements = [
     view: ActiveView.popular,
   ),
   SidebarElement(
+    icon: Icons.new_releases,
+    view: ActiveView.upcoming,
+  ),
+  SidebarElement(
     icon: Icons.search,
     view: ActiveView.search,
   ),
   SidebarElement(
     icon: Icons.check,
     view: ActiveView.watched,
-  ),
-  SidebarElement(
-    icon: Icons.favorite,
-    view: ActiveView.liked,
   ),
   SidebarElement(
     icon: Icons.watch_later,

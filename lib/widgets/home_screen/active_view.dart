@@ -2,9 +2,9 @@ import 'package:film_freund/generated/l10n.dart';
 
 enum ActiveView {
   popular,
+  upcoming,
   search,
   watched,
-  liked,
   watchlist,
   lists,
   settings,
@@ -15,12 +15,12 @@ extension ActiveViewExtensions on ActiveView {
     switch (this) {
       case ActiveView.popular:
         return AppLocalizations.current.activeViewPopularTitle;
+      case ActiveView.upcoming:
+        return AppLocalizations.current.activeViewUpcomingTitle;
       case ActiveView.search:
         return AppLocalizations.current.activeViewSearchTitle;
       case ActiveView.watched:
         return AppLocalizations.current.activeViewWatchedTitle;
-      case ActiveView.liked:
-        return AppLocalizations.current.activeViewLikedTitle;
       case ActiveView.watchlist:
         return AppLocalizations.current.activeViewWatchlistTitle;
       case ActiveView.lists:
