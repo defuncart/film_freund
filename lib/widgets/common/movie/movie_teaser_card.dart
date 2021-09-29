@@ -29,10 +29,7 @@ class _MovieTeaserCardState extends State<MovieTeaserCard> {
   void initState() {
     super.initState();
 
-    _image = Image.network(
-      // TODO null case
-      widget.movieTeaser.posterPath ?? '',
-    );
+    _image = Image.network(widget.movieTeaser.posterPath);
     _image.image.resolve(const ImageConfiguration()).addListener(ImageStreamListener((_, __) {
       if (mounted) {
         setState(() => _isImageLoaded = true);

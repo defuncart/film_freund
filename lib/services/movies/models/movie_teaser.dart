@@ -14,7 +14,7 @@ class MovieTeaser extends BaseMovie {
     required String originalTitle,
     required String overview,
     required double popularity,
-    required String? posterPath,
+    required String posterPath,
     required DateTime releaseDate,
     required String title,
     required int voteAverage,
