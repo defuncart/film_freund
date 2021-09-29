@@ -1,3 +1,4 @@
+import 'package:film_freund/widgets/common/movie/movie_rating.dart';
 import 'package:film_freund/widgets/common/movie/movie_teaser_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -7,21 +8,19 @@ import '../../../test_utils.dart';
 
 void main() {
   group('$MovieTeaserCard', () {
-    final movieTeaser = TestInstance.movieTeaser();
-
     group('width', () {
       test('when width <= 0, expect assertion', () {
         expect(
           () => MovieTeaserCard(
             width: 0,
-            movieTeaser: movieTeaser,
+            movieTeaser: TestInstance.movieTeaser(),
           ),
           throwsAssertionError,
         );
         expect(
           () => MovieTeaserCard(
             width: -100,
-            movieTeaser: movieTeaser,
+            movieTeaser: TestInstance.movieTeaser(),
           ),
           throwsAssertionError,
         );
@@ -31,7 +30,7 @@ void main() {
         expect(
           () => MovieTeaserCard(
             width: 50,
-            movieTeaser: movieTeaser,
+            movieTeaser: TestInstance.movieTeaser(),
           ),
           returnsNormally,
         );
@@ -40,6 +39,7 @@ void main() {
 
     testWidgets('ensure widget tree is correct', (tester) async {
       mockNetworkImagesFor(() async {
+        final movieTeaser = TestInstance.movieTeaser(voteCount: 100);
         final widget = wrapWithMaterialApp(
           MovieTeaserCard(
             movieTeaser: movieTeaser,
@@ -52,12 +52,10 @@ void main() {
         expect(find.byType(MovieTeaserCard), findsOneWidget);
         expect(find.byType(GestureDetector), findsOneWidget);
         expect(find.descendant(of: find.byType(MovieTeaserCard), matching: find.byType(MouseRegion)), findsOneWidget);
-        // expect(find.descendant(of: find.byType(MovieTeaserCard), matching: find.byType(Stack)), findsOneWidget);
         expect(find.byType(DecoratedBox), findsOneWidget);
         expect(find.byType(ClipRRect), findsOneWidget);
-        expect(find.byType(Image), findsOneWidget);
-        // expect(find.byType(SizedBox), findsOneWidget);
-        // expect(find.byType(Positioned), findsOneWidget);
+        expect(find.byType(Image), findsNothing);
+        expect(find.byType(MovieRating), findsNothing);
       });
     });
   });

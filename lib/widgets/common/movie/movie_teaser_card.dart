@@ -42,7 +42,6 @@ class _MovieTeaserCardState extends State<MovieTeaserCard> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.movieTeaser.voteCount);
     return GestureDetector(
       // TODO: open movie details
       onTap: () {},
