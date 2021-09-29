@@ -69,7 +69,7 @@ class MovieDatabase implements IMovieDatabase {
         id: parsedResponse.id,
         originalLanguage: parsedResponse.originalLanguage,
         originalTitle: parsedResponse.originalTitle,
-        overview: parsedResponse.overview,
+        overview: parsedResponse.overview ?? '',
         popularity: parsedResponse.popularity,
         posterPath: _composeImagePath(parsedResponse.posterPath),
         releaseDate: parsedResponse.releaseDate,
