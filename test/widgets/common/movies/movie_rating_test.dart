@@ -10,7 +10,8 @@ void main() {
       test('when percentage < 0, expect assertion', () {
         expect(
           () => MovieRating(
-            percentage: -1,
+            showRating: true,
+            rating: -1,
           ),
           throwsAssertionError,
         );
@@ -18,7 +19,8 @@ void main() {
       test('when percentage > 100, expect assertion', () {
         expect(
           () => MovieRating(
-            percentage: 101,
+            showRating: true,
+            rating: 101,
           ),
           throwsAssertionError,
         );
@@ -27,7 +29,8 @@ void main() {
       test('when 0 <= percentage <= 100, expect no assertion', () {
         expect(
           () => const MovieRating(
-            percentage: 50,
+            showRating: true,
+            rating: 50,
           ),
           returnsNormally,
         );
@@ -37,21 +40,21 @@ void main() {
     group('colorForPercentage', () {
       test('when >= 70, expect green', () {
         expect(
-          MovieRating.colorForPercentage(70),
+          MovieRating.ratingRingColor(70),
           Colors.green,
         );
       });
 
       test('when >= 40, expect green', () {
         expect(
-          MovieRating.colorForPercentage(40),
+          MovieRating.ratingRingColor(40),
           Colors.yellow,
         );
       });
 
       test('when < 40, expect red', () {
         expect(
-          MovieRating.colorForPercentage(30),
+          MovieRating.ratingRingColor(30),
           Colors.red,
         );
       });
@@ -60,7 +63,8 @@ void main() {
     testWidgets('ensure widget tree is correct', (tester) async {
       final widget = wrapWithMaterialApp(
         const MovieRating(
-          percentage: 50,
+          showRating: true,
+          rating: 50,
         ),
       );
       await tester.pumpWidget(widget);
@@ -74,11 +78,12 @@ void main() {
       expect(find.text('50'), findsOneWidget);
     });
 
-    testWidgets('when percentage >= 70, expect match golden', (tester) async {
+    testWidgets('when showRating && percentage >= 70, expect match golden', (tester) async {
       final widget = wrapWithMaterialApp(
         const RepaintBoundary(
           child: MovieRating(
-            percentage: 70,
+            showRating: true,
+            rating: 70,
           ),
         ),
       );
@@ -95,11 +100,12 @@ void main() {
       );
     }, tags: GoldenUtils.tag);
 
-    testWidgets('when percentage >= 40, expect match golden', (tester) async {
+    testWidgets('when showRating && percentage >= 40, expect match golden', (tester) async {
       final widget = wrapWithMaterialApp(
         const RepaintBoundary(
           child: MovieRating(
-            percentage: 40,
+            showRating: true,
+            rating: 40,
           ),
         ),
       );
@@ -116,11 +122,12 @@ void main() {
       );
     }, tags: GoldenUtils.tag);
 
-    testWidgets('when percentage < 40, expect match golden', (tester) async {
+    testWidgets('when showRating && percentage < 40, expect match golden', (tester) async {
       final widget = wrapWithMaterialApp(
         const RepaintBoundary(
           child: MovieRating(
-            percentage: 30,
+            showRating: true,
+            rating: 30,
           ),
         ),
       );
@@ -133,6 +140,28 @@ void main() {
         matchesGoldenFile(GoldenUtils.generateFilepath(
           testFilepath: 'common/movies/movie_rating',
           imageName: 'red',
+        )),
+      );
+    }, tags: GoldenUtils.tag);
+
+    testWidgets('when !showRating, expect match golden', (tester) async {
+      final widget = wrapWithMaterialApp(
+        const RepaintBoundary(
+          child: MovieRating(
+            showRating: false,
+            rating: 30,
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(widget);
+      await tester.pumpAndSettle();
+
+      await expectLater(
+        find.byType(MovieRating),
+        matchesGoldenFile(GoldenUtils.generateFilepath(
+          testFilepath: 'common/movies/movie_rating',
+          imageName: 'gray',
         )),
       );
     }, tags: GoldenUtils.tag);

@@ -3,23 +3,30 @@ import 'dart:math' show pi;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+/// Displays the rating for a movie
+///
+/// [showRating] is used to either show a placeholder or [rating]. This is useful for new movies.
+///
+/// [rating] is expected to be a percentage between 0 and 100
 class MovieRating extends StatelessWidget {
   const MovieRating({
-    required this.percentage,
+    required this.showRating,
+    required this.rating,
     Key? key,
-  })  : assert(percentage >= 0 && percentage <= 100),
+  })  : assert(rating >= 0 && rating <= 100),
         super(key: key);
 
-  final int percentage;
+  final bool showRating;
+  final int rating;
 
-  /// Returns a [Color] depending on [percentage]
+  /// Returns a [Color] depending on [rating]
   ///
   /// `>=70 green`, `>= 40 yellow`, `<40 red`
   @visibleForTesting
-  static Color colorForPercentage(int percentage) {
-    if (percentage >= 70) {
+  static Color ratingRingColor(int rating) {
+    if (rating >= 70) {
       return Colors.green;
-    } else if (percentage >= 40) {
+    } else if (rating >= 40) {
       return Colors.yellow;
     } else {
       return Colors.red;
@@ -28,21 +35,23 @@ class MovieRating extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = MovieRating.colorForPercentage(percentage);
+    final color = MovieRating.ratingRingColor(rating);
+    final ring = Ring(
+      backgroundColor: showRating ? Colors.black : Colors.grey,
+      highlightColor: showRating ? color : Colors.transparent,
+      normalColor: showRating ? color.withOpacity(0.5) : Colors.transparent,
+      percentage: showRating ? rating : 0,
+    );
+    final text = showRating ? rating.toString() : 'tbd';
 
     return SizedBox(
       width: 24,
       height: 24,
       child: CustomPaint(
-        painter: Ring(
-          backgroundColor: Colors.black,
-          highlightColor: color,
-          normalColor: color.withOpacity(0.5),
-          percentage: percentage,
-        ),
+        painter: ring,
         child: Center(
           child: Text(
-            percentage.toString(),
+            text,
             style: Theme.of(context).textTheme.caption?.copyWith(
                   fontSize: 10,
                   color: Colors.white,

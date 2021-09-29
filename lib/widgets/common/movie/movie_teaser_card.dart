@@ -78,7 +78,8 @@ class _MovieTeaserCardState extends State<MovieTeaserCard> {
                   right: 4,
                   bottom: 4,
                   child: MovieRating(
-                    percentage: widget.movieTeaser.voteAverage,
+                    showRating: widget.movieTeaser.hasEnoughVotes,
+                    rating: widget.movieTeaser.voteAverage,
                   ),
                 ),
             ],
