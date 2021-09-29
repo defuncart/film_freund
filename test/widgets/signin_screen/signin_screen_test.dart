@@ -135,7 +135,7 @@ void main() {
       setUpUI((tester) async {
         await tester.pumpWidget(
           // need to wrap with popular provider in the event of transitioning to HomeScreen
-          popularProvider(widget),
+          RiverpodOverrides.popularMovies(widget),
         );
         await tester.pumpAndSettle();
 

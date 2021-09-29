@@ -30,7 +30,7 @@ void main() {
         tester.binding.window.clearDevicePixelRatioTestValue();
       });
 
-      final widget = popularProvider(
+      final widget = RiverpodOverrides.popularMovies(
         wrapWithMaterialAppLocalizationDelegates(
           const HomeScreen(),
         ),
@@ -56,7 +56,7 @@ void main() {
         tester.binding.window.clearDevicePixelRatioTestValue();
       });
 
-      final widget = popularProvider(
+      final widget = RiverpodOverrides.popularMovies(
         wrapWithMaterialAppLocalizationDelegates(
           const HomeScreen(),
         ),
@@ -73,7 +73,7 @@ void main() {
 
   group('$HomeScreenContent', () {
     testWidgets('When ${ActiveView.popular}, expect $PopularView', (tester) async {
-      final widget = popularProvider(
+      final widget = RiverpodOverrides.popularMovies(
         wrapWithMaterialAppLocalizationDelegates(
           const HomeScreenContent(
             activeView: ActiveView.popular,
