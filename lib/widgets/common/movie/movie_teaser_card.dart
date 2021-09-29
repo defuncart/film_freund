@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 /// A card to tease a movie
 ///
 /// [width] must be greater than 0. Height is automatically calculated as 1.5 * [width]
-class MovieTeaserCard extends StatelessWidget {
+class MovieTeaserCard extends StatefulWidget {
   const MovieTeaserCard({
     required this.movieTeaser,
     required this.width,
@@ -18,7 +18,31 @@ class MovieTeaserCard extends StatelessWidget {
   final double width;
 
   @override
+  State<MovieTeaserCard> createState() => _MovieTeaserCardState();
+}
+
+class _MovieTeaserCardState extends State<MovieTeaserCard> {
+  late Image _image;
+  var _isImageLoaded = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _image = Image.network(
+      // TODO null case
+      widget.movieTeaser.posterPath ?? '',
+    );
+    _image.image.resolve(const ImageConfiguration()).addListener(ImageStreamListener((_, __) {
+      if (mounted) {
+        setState(() => _isImageLoaded = true);
+      }
+    }));
+  }
+
+  @override
   Widget build(BuildContext context) {
+    print(widget.movieTeaser.voteCount);
     return GestureDetector(
       // TODO: open movie details
       onTap: () {},
@@ -39,22 +63,24 @@ class MovieTeaserCard extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(8)),
                   child: SizedBox(
-                    width: width,
-                    height: width * 1.5,
-                    child: Image.network(
-                      // TODO display loading and error states
-                      movieTeaser.posterPath ?? '',
-                    ),
+                    width: widget.width,
+                    height: widget.width * 1.5,
+                    child: _isImageLoaded
+                        ? _image
+                        : Container(
+                            color: Colors.grey.withOpacity(0.25),
+                          ),
                   ),
                 ),
               ),
-              Positioned(
-                right: 4,
-                bottom: 4,
-                child: MovieRating(
-                  percentage: movieTeaser.voteAverage,
+              if (_isImageLoaded)
+                Positioned(
+                  right: 4,
+                  bottom: 4,
+                  child: MovieRating(
+                    percentage: widget.movieTeaser.voteAverage,
+                  ),
                 ),
-              ),
             ],
           ),
         ),
