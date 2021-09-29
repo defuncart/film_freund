@@ -88,9 +88,12 @@ void main() {
 
       await expectLater(
         find.byType(MovieRating),
-        matchesGoldenFile('goldens/common/movies/movie_teaser_card/movie_rating_green.png'),
+        matchesGoldenFile(GoldenUtils.generateFilepath(
+          testFilepath: 'common/movies/movie_rating',
+          imageName: 'green',
+        )),
       );
-    }, tags: 'goldens', skip: true);
+    }, tags: GoldenUtils.tag);
 
     testWidgets('when percentage >= 40, expect match golden', (tester) async {
       final widget = wrapWithMaterialApp(
@@ -106,9 +109,12 @@ void main() {
 
       await expectLater(
         find.byType(MovieRating),
-        matchesGoldenFile('goldens/common/movies/movie_teaser_card/movie_rating_yellow.png'),
+        matchesGoldenFile(GoldenUtils.generateFilepath(
+          testFilepath: 'common/movies/movie_rating',
+          imageName: 'yellow',
+        )),
       );
-    }, tags: 'goldens', skip: true);
+    }, tags: GoldenUtils.tag);
 
     testWidgets('when percentage < 40, expect match golden', (tester) async {
       final widget = wrapWithMaterialApp(
@@ -124,9 +130,12 @@ void main() {
 
       await expectLater(
         find.byType(MovieRating),
-        matchesGoldenFile('goldens/common/movies/movie_teaser_card/movie_rating_red.png'),
+        matchesGoldenFile(GoldenUtils.generateFilepath(
+          testFilepath: 'common/movies/movie_rating',
+          imageName: 'red',
+        )),
       );
-    }, tags: 'goldens', skip: true);
+    }, tags: GoldenUtils.tag);
   });
 
   group('$Ring', () {
