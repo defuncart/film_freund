@@ -21,6 +21,8 @@ dependencies:
   firebase_core:
   firebase_auth:
   cloud_firestore:
+  hive:
+  path_provider:
 
 dev_dependencies:
   flutter_test:
