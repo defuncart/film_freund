@@ -1,5 +1,6 @@
 import 'package:film_freund/managers/user/user_manager.dart';
 import 'package:film_freund/services/auth/i_auth_service.dart';
+import 'package:film_freund/services/local_settings/i_local_settings_database.dart';
 import 'package:film_freund/services/user/i_user_database.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -11,14 +12,17 @@ void main() {
   group('$UserManager', () {
     late IAuthService mockAuthService;
     late IUserDatabase mockUserDatabase;
+    late ILocalSettingsDatabase mockLocalSettings;
     late UserManager userManager;
 
     setUp(() {
       mockAuthService = MockIAuthService();
       mockUserDatabase = MockIUserDatabase();
+      mockLocalSettings = MockILocalSettingsDatabase();
       userManager = UserManager(
         authService: mockAuthService,
         userDatabase: mockUserDatabase,
+        localSettings: mockLocalSettings,
       );
     });
 
