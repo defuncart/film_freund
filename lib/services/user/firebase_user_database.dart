@@ -46,15 +46,24 @@ class FirebaseUserDatabase implements IUserDatabase {
     return user;
   }
 
-  @override
-  Future<User?> getUser({required String id}) async {
-    final snapshot = await _firebaseFirestore.collection(_collection).doc(id).get();
+  /// Maps [DocumentSnapshot] to [User]
+  User? _snapshotToUser(DocumentSnapshot<Map<String, dynamic>> snapshot) {
     if (snapshot.exists) {
       return User.fromJson(snapshot.data()!);
     }
 
     return null;
   }
+
+  @override
+  Future<User?> getUser({required String id}) async {
+    final snapshot = await _firebaseFirestore.collection(_collection).doc(id).get();
+    return _snapshotToUser(snapshot);
+  }
+
+  @override
+  Stream<User?> watchUser({required String id}) =>
+      _firebaseFirestore.collection(_collection).doc(id).snapshots().map(_snapshotToUser);
 
   @override
   Future<void> updateUser({
