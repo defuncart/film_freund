@@ -1,4 +1,5 @@
 import 'package:film_freund/utils/sizes.dart';
+import 'package:film_freund/widgets/common/user/user_avatar.dart';
 import 'package:film_freund/widgets/home_screen/active_view.dart';
 import 'package:flutter/material.dart';
 
@@ -20,16 +21,8 @@ class Sidebar extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
-                CircleAvatar(
-                  radius: 30,
-                  backgroundColor: Theme.of(context).colorScheme.secondary,
-                  child: const Text(
-                    'T',
-                    style: TextStyle(
-                      fontSize: 40.0,
-                      color: Colors.white,
-                    ),
-                  ),
+                const UserAvatar(
+                  initial: 'T',
                 ),
                 const SizedBox(width: 16),
                 Expanded(
