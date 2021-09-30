@@ -120,9 +120,8 @@ class _SettingsViewContentState extends State<SettingsViewContent> {
           autocorrect: false,
           onEditingComplete: () {
             if (_isValidDisplayName) {
-              ServiceLocator.userManager.updateUser(
-                user: widget.user,
-                displayName: _displayNameController.text,
+              ServiceLocator.userManager.updateDisplayName(
+                _displayNameController.text,
               );
             }
           },

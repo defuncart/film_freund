@@ -96,26 +96,15 @@ class UserManager {
   /// Signs out a user
   Future<void> signout() => _authService.signout();
 
-  /// Updates a user
-  ///
-  /// See [IUserDatabase] for more info
-  Future<void> updateUser({
-    required User user,
-    String? displayName,
-    List<String>? watched,
-    List<String>? watchlist,
-    List<String>? lists,
-  }) async {
+  /// Updates [displayName] for the current user
+  Future<void> updateDisplayName(
+    String displayName,
+  ) async {
     await _userDatabase.updateUser(
-      user: user,
-      displayName: displayName,
-      watched: watched,
-      watchlist: watchlist,
-      lists: lists,
+      user: await currentUser,
     );
-    if (displayName != null) {
-      _localSettings.displayName = displayName;
-    }
+
+    _localSettings.displayName = displayName;
   }
 
   /// Changes the current user's password from [currentPassword] to [newPassword]

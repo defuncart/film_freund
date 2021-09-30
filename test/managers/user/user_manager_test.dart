@@ -157,14 +157,21 @@ void main() {
       verify(mockAuthService.signout());
     });
 
-    test('updateUser', () {
+    test('updateDisplayName', () {
+      const id = 'id';
       final user = TestInstance.user();
-      userManager.updateUser(
-        user: user,
-      );
+
+      when(mockAuthService.isUserAuthenticated).thenReturn(true);
+      when(mockAuthService.authenticatedUserId).thenReturn(id);
+      when(mockUserDatabase.getUser(id: id)).thenAnswer((_) => Future.value(user));
+
+      const updatedDisplayName = 'updatedDisplayName';
+      final updatedUser = user.copyWith(displayName: updatedDisplayName);
+
+      userManager.updateDisplayName(updatedDisplayName);
 
       verify(mockUserDatabase.updateUser(
-        user: user,
+        user: updatedUser,
       ));
     });
 

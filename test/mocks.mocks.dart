@@ -65,20 +65,8 @@ class MockUserManager extends _i1.Mock implements _i3.UserManager {
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
   @override
-  _i4.Future<void> updateUser(
-          {_i2.User? user,
-          String? displayName,
-          List<String>? watched,
-          List<String>? watchlist,
-          List<String>? lists}) =>
-      (super.noSuchMethod(
-          Invocation.method(#updateUser, [], {
-            #user: user,
-            #displayName: displayName,
-            #watched: watched,
-            #watchlist: watchlist,
-            #lists: lists
-          }),
+  _i4.Future<void> updateDisplayName(String? displayName) =>
+      (super.noSuchMethod(Invocation.method(#updateDisplayName, [displayName]),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
   @override
