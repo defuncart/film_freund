@@ -50,8 +50,11 @@ void main() {
         await tester.pumpAndSettle();
 
         expect(find.byType(MovieTeaserCard), findsOneWidget);
-        expect(find.byType(GestureDetector), findsOneWidget);
+        // expect(find.byType(GestureDetector), findsOneWidget);
+        // expect(
+        // find.descendant(of: find.byType(MovieTeaserCard), matching: find.byType(GestureDetector)), findsOneWidget);
         expect(find.descendant(of: find.byType(MovieTeaserCard), matching: find.byType(MouseRegion)), findsOneWidget);
+        expect(find.descendant(of: find.byType(MovieTeaserCard), matching: find.byType(Tooltip)), findsOneWidget);
         expect(find.byType(DecoratedBox), findsOneWidget);
         expect(find.byType(ClipRRect), findsOneWidget);
         expect(find.byType(Image), findsNothing);
