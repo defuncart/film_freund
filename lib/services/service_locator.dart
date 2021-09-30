@@ -41,7 +41,10 @@ final userManagerProvider = Provider<UserManager>(
 
 @visibleForTesting
 final movieManagerProvider = Provider<MovieManager>(
-  (_) => MovieManager(movieDatabase: MovieDatabase()),
+  (ref) => MovieManager(
+    movieDatabase: MovieDatabase(),
+    localSettings: ref.read(localSettingsDatabaseProvider),
+  ),
 );
 
 @visibleForTesting

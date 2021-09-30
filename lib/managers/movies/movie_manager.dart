@@ -1,3 +1,4 @@
+import 'package:film_freund/services/local_settings/i_local_settings_database.dart';
 import 'package:film_freund/services/movies/i_movie_database.dart';
 import 'package:film_freund/services/movies/models/movie_teaser.dart';
 
@@ -5,13 +6,20 @@ import 'package:film_freund/services/movies/models/movie_teaser.dart';
 class MovieManager {
   const MovieManager({
     required IMovieDatabase movieDatabase,
-  }) : _movieDatabase = movieDatabase;
+    required ILocalSettingsDatabase localSettings,
+  })  : _movieDatabase = movieDatabase,
+        _localSettings = localSettings;
 
   final IMovieDatabase _movieDatabase;
+  final ILocalSettingsDatabase _localSettings;
 
   /// Returns a list of the 20 most popular movies
-  Future<List<MovieTeaser>> getPopular() => _movieDatabase.getPopular(region: 'de');
+  Future<List<MovieTeaser>> getPopular() => _movieDatabase.getPopular(
+        region: _localSettings.region,
+      );
 
   /// Returns a list of upcoming movies
-  Future<List<MovieTeaser>> getUpcoming() => _movieDatabase.getUpcoming(region: 'de');
+  Future<List<MovieTeaser>> getUpcoming() => _movieDatabase.getUpcoming(
+        region: _localSettings.region,
+      );
 }
