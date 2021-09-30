@@ -1,6 +1,6 @@
+import 'package:film_freund/managers/movies/movie_manager.dart';
 import 'package:film_freund/managers/user/user_manager.dart';
 import 'package:film_freund/services/date_time/date_time_service.dart';
-import 'package:film_freund/services/movies/i_movie_database.dart';
 import 'package:film_freund/services/service_locator.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -27,7 +27,7 @@ void main() {
         returnsNormally,
       );
       expect(
-        () => ServiceLocator.movieDatabase,
+        () => ServiceLocator.movieManager,
         returnsNormally,
       );
     });
@@ -35,16 +35,16 @@ void main() {
     group('ensure services can be mocked', () {
       late DateTimeService mockDateTimeService;
       late UserManager mockUserManager;
-      late IMovieDatabase mockMovieDatabase;
+      late MovieManager mockMovieManager;
 
       setUp(() {
         mockDateTimeService = MockDateTimeService();
         mockUserManager = MockUserManager();
-        mockMovieDatabase = MockIMovieDatabase();
+        mockMovieManager = MockMovieManager();
         TestServiceLocator.register(
           dateTimeService: mockDateTimeService,
           userManager: mockUserManager,
-          movieDatabase: mockMovieDatabase,
+          movieManager: mockMovieManager,
         );
       });
 
@@ -60,7 +60,7 @@ void main() {
           returnsNormally,
         );
         expect(
-          () => ServiceLocator.movieDatabase,
+          () => ServiceLocator.movieManager,
           returnsNormally,
         );
       });

@@ -1,6 +1,6 @@
+import 'package:film_freund/managers/movies/movie_manager.dart';
 import 'package:film_freund/managers/user/user_manager.dart';
 import 'package:film_freund/services/date_time/date_time_service.dart';
-import 'package:film_freund/services/movies/i_movie_database.dart';
 import 'package:film_freund/services/service_locator.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,7 +15,7 @@ class TestServiceLocator {
   static void register({
     DateTimeService? dateTimeService,
     UserManager? userManager,
-    IMovieDatabase? movieDatabase,
+    MovieManager? movieManager,
   }) {
     _container = ProviderContainer(
       overrides: [
@@ -27,9 +27,9 @@ class TestServiceLocator {
           userManagerProvider.overrideWithValue(
             userManager,
           ),
-        if (movieDatabase != null)
-          movieDatabaseProvider.overrideWithValue(
-            movieDatabase,
+        if (movieManager != null)
+          movieManagerProvider.overrideWithValue(
+            movieManager,
           ),
       ],
     );

@@ -17,5 +17,5 @@ class PopularView extends StatelessWidget {
 
 @visibleForTesting
 final popularMoviesProvider = FutureProvider.autoDispose<List<MovieTeaser>>(
-  (ref) => ServiceLocator.movieDatabase.getPopular(),
+  (ref) => ServiceLocator.movieManager.getPopular(),
 );
