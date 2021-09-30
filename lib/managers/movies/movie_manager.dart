@@ -10,8 +10,8 @@ class MovieManager {
   final IMovieDatabase _movieDatabase;
 
   /// Returns a list of the 20 most popular movies
-  Future<List<MovieTeaser>> getPopular() => _movieDatabase.getPopular();
+  Future<List<MovieTeaser>> getPopular() => _movieDatabase.getPopular(region: 'de');
 
   /// Returns a list of upcoming movies
-  Future<List<MovieTeaser>> getUpcoming() => _movieDatabase.getUpcoming();
+  Future<List<MovieTeaser>> getUpcoming() => _movieDatabase.getUpcoming(region: 'de');
 }

@@ -240,14 +240,16 @@ class MockIMovieDatabase extends _i1.Mock implements _i10.IMovieDatabase {
       (super.noSuchMethod(Invocation.method(#getMovie, [id]),
           returnValue: Future<_i11.Movie?>.value()) as _i4.Future<_i11.Movie?>);
   @override
-  _i4.Future<List<_i7.MovieTeaser>> getPopular() => (super.noSuchMethod(
-          Invocation.method(#getPopular, []),
-          returnValue: Future<List<_i7.MovieTeaser>>.value(<_i7.MovieTeaser>[]))
-      as _i4.Future<List<_i7.MovieTeaser>>);
+  _i4.Future<List<_i7.MovieTeaser>> getPopular({String? region}) =>
+      (super.noSuchMethod(Invocation.method(#getPopular, [], {#region: region}),
+              returnValue:
+                  Future<List<_i7.MovieTeaser>>.value(<_i7.MovieTeaser>[]))
+          as _i4.Future<List<_i7.MovieTeaser>>);
   @override
-  _i4.Future<List<_i7.MovieTeaser>> getUpcoming() => (super.noSuchMethod(
-          Invocation.method(#getUpcoming, []),
-          returnValue: Future<List<_i7.MovieTeaser>>.value(<_i7.MovieTeaser>[]))
+  _i4.Future<List<_i7.MovieTeaser>> getUpcoming({String? region}) => (super
+          .noSuchMethod(Invocation.method(#getUpcoming, [], {#region: region}),
+              returnValue:
+                  Future<List<_i7.MovieTeaser>>.value(<_i7.MovieTeaser>[]))
       as _i4.Future<List<_i7.MovieTeaser>>);
   @override
   String toString() => super.toString();
