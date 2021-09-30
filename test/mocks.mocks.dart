@@ -7,6 +7,8 @@ import 'dart:async' as _i4;
 import 'package:film_freund/managers/user/user_manager.dart' as _i3;
 import 'package:film_freund/services/auth/i_auth_service.dart' as _i5;
 import 'package:film_freund/services/date_time/date_time_service.dart' as _i6;
+import 'package:film_freund/services/local_settings/i_local_settings_database.dart'
+    as _i11;
 import 'package:film_freund/services/movies/i_movie_database.dart' as _i8;
 import 'package:film_freund/services/movies/models/movie.dart' as _i9;
 import 'package:film_freund/services/movies/models/movie_teaser.dart' as _i10;
@@ -43,6 +45,9 @@ class MockUserManager extends _i1.Mock implements _i3.UserManager {
       (super.noSuchMethod(Invocation.getter(#currentUser),
               returnValue: Future<_i2.User>.value(_FakeUser_0()))
           as _i4.Future<_i2.User>);
+  @override
+  void setUp() => super.noSuchMethod(Invocation.method(#setUp, []),
+      returnValueForMissingStub: null);
   @override
   _i4.Future<_i2.User?> getUser({String? id}) =>
       (super.noSuchMethod(Invocation.method(#getUser, [], {#id: id}),
@@ -125,6 +130,10 @@ class MockIAuthService extends _i1.Mock implements _i5.IAuthService {
       (super.noSuchMethod(Invocation.getter(#isUserAuthenticated),
           returnValue: false) as bool);
   @override
+  _i4.Stream<bool> watchIsUserAuthenticated() =>
+      (super.noSuchMethod(Invocation.method(#watchIsUserAuthenticated, []),
+          returnValue: Stream<bool>.empty()) as _i4.Stream<bool>);
+  @override
   _i4.Future<_i5.AuthResult> signin({String? email, String? password}) =>
       (super.noSuchMethod(
           Invocation.method(#signin, [], {#email: email, #password: password}),
@@ -166,17 +175,21 @@ class MockIUserDatabase extends _i1.Mock implements _i7.IUserDatabase {
   }
 
   @override
-  _i4.Future<void> createUser(
+  _i4.Future<_i2.User> createUser(
           {String? id, String? email, String? displayName}) =>
       (super.noSuchMethod(
-          Invocation.method(#createUser, [],
-              {#id: id, #email: email, #displayName: displayName}),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+              Invocation.method(#createUser, [],
+                  {#id: id, #email: email, #displayName: displayName}),
+              returnValue: Future<_i2.User>.value(_FakeUser_0()))
+          as _i4.Future<_i2.User>);
   @override
   _i4.Future<_i2.User?> getUser({String? id}) =>
       (super.noSuchMethod(Invocation.method(#getUser, [], {#id: id}),
           returnValue: Future<_i2.User?>.value()) as _i4.Future<_i2.User?>);
+  @override
+  _i4.Stream<_i2.User?> watchUser({String? id}) =>
+      (super.noSuchMethod(Invocation.method(#watchUser, [], {#id: id}),
+          returnValue: Stream<_i2.User?>.empty()) as _i4.Stream<_i2.User?>);
   @override
   _i4.Future<void> updateUser(
           {_i2.User? user,
@@ -227,6 +240,44 @@ class MockIMovieDatabase extends _i1.Mock implements _i8.IMovieDatabase {
               returnValue:
                   Future<List<_i10.MovieTeaser>>.value(<_i10.MovieTeaser>[]))
           as _i4.Future<List<_i10.MovieTeaser>>);
+  @override
+  String toString() => super.toString();
+}
+
+/// A class which mocks [ILocalSettingsDatabase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockILocalSettingsDatabase extends _i1.Mock
+    implements _i11.ILocalSettingsDatabase {
+  MockILocalSettingsDatabase() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  String get region =>
+      (super.noSuchMethod(Invocation.getter(#region), returnValue: '')
+          as String);
+  @override
+  set region(String? value) =>
+      super.noSuchMethod(Invocation.setter(#region, value),
+          returnValueForMissingStub: null);
+  @override
+  String get displayName =>
+      (super.noSuchMethod(Invocation.getter(#displayName), returnValue: '')
+          as String);
+  @override
+  set displayName(String? value) =>
+      super.noSuchMethod(Invocation.setter(#displayName, value),
+          returnValueForMissingStub: null);
+  @override
+  _i4.Future<void> initialize() =>
+      (super.noSuchMethod(Invocation.method(#initialize, []),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+  @override
+  _i4.Future<void> reset() => (super.noSuchMethod(Invocation.method(#reset, []),
+      returnValue: Future<void>.value(),
+      returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
   @override
   String toString() => super.toString();
 }
