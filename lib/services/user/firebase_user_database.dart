@@ -28,7 +28,7 @@ class FirebaseUserDatabase implements IUserDatabase {
   }
 
   @override
-  Future<void> createUser({
+  Future<User> createUser({
     required String id,
     required String email,
     String? displayName,
@@ -43,6 +43,7 @@ class FirebaseUserDatabase implements IUserDatabase {
     );
 
     await _saveUser(user);
+    return user;
   }
 
   @override
