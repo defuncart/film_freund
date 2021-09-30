@@ -75,12 +75,15 @@ class UserManager {
 
     // if user was created, create user db object
     if (result == AuthResult.createSuccess) {
-      final user = await _userDatabase.createUser(
+      await _userDatabase.createUser(
         id: _authService.authenticatedUserId!,
         email: email,
       );
-      // immediantely update local settings (i.e. dont wait on watchUser stream)
-      _localSettings.displayName = user.displayName;
+    }
+
+    // immediantely update local settings (i.e. dont wait on watchUser stream)
+    if (result == AuthResult.createSuccess || result == AuthResult.signinSuccess) {
+      _localSettings.displayName = (await currentUser).displayName;
     }
 
     return result;

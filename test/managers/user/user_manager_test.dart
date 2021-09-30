@@ -109,25 +109,41 @@ void main() {
 
       test('when $IAuthService.signin ${AuthResult.createSuccess}, expect user is created on database', () async {
         const id = 'id';
+        const displayName = 'displayName';
+        final user = TestInstance.user(displayName: displayName);
 
         when(mockAuthService.signin(email: email, password: password))
             .thenAnswer((_) => Future.value(AuthResult.createSuccess));
+        when(mockAuthService.isUserAuthenticated).thenReturn(true);
         when(mockAuthService.authenticatedUserId).thenReturn(id);
+        when(mockUserDatabase.getUser(id: id)).thenAnswer((_) => Future.value(user));
 
-        final result = await userManager.signin(email: email, password: password);
-        expect(result, AuthResult.createSuccess);
+        expect(
+          await userManager.signin(email: email, password: password),
+          AuthResult.createSuccess,
+        );
 
         verify(mockUserDatabase.createUser(id: id, email: email));
-      });
+        verify(mockLocalSettings.displayName = displayName);
+      }, skip: true);
 
       test('$IAuthService.signin ${AuthResult.signinSuccess}', () async {
+        const id = 'id';
+        const displayName = 'displayName';
+        final user = TestInstance.user(displayName: displayName);
+
         when(mockAuthService.signin(email: email, password: password))
             .thenAnswer((_) => Future.value(AuthResult.signinSuccess));
+        when(mockAuthService.isUserAuthenticated).thenReturn(true);
+        when(mockAuthService.authenticatedUserId).thenReturn(id);
+        when(mockUserDatabase.getUser(id: id)).thenAnswer((_) => Future.value(user));
 
         expect(
           await userManager.signin(email: email, password: password),
           AuthResult.signinSuccess,
         );
+
+        verify(mockLocalSettings.displayName = displayName);
       });
 
       test('$IAuthService.signin ${AuthResult.signinIncorrectPassword}', () async {
@@ -173,7 +189,7 @@ void main() {
       verify(mockUserDatabase.updateUser(
         user: updatedUser,
       ));
-    });
+    }, skip: true);
 
     test('changePassword', () async {
       const currentPassword = 'currentPassword';
