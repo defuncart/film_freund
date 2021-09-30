@@ -1,5 +1,4 @@
 import 'package:film_freund/services/movies/models/movie_teaser.dart';
-import 'package:film_freund/utils/sizes.dart';
 import 'package:film_freund/widgets/common/movie/movie_rating.dart';
 import 'package:film_freund/widgets/common/movie/movie_teaser_bottom_sheet.dart';
 import 'package:flutter/material.dart';
@@ -46,52 +45,48 @@ class _MovieTeaserCardState extends State<MovieTeaserCard> {
       onTap: () {},
       // TODO: Desktop open options menu
       onSecondaryTap: () {},
-      onLongPress: isSinglePage(context)
-          ? () => showModalBottomSheet(
-                context: context,
-                builder: (_) => MovieTeaserBottomSheet(
-                  movieId: widget.movieTeaser.id,
-                  movieTitle: widget.movieTeaser.title,
-                  movieYear: widget.movieTeaser.releaseDate.year.toString(),
-                ),
-              )
-          : null,
+      // TODO: Only show on mobile when desktop context menu integrated
+      onLongPress: () => showModalBottomSheet(
+        context: context,
+        builder: (_) => MovieTeaserBottomSheet(
+          movieId: widget.movieTeaser.id,
+          movieTitle: widget.movieTeaser.title,
+          movieYear: widget.movieTeaser.releaseDate.year.toString(),
+        ),
+      ),
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
-        child: Tooltip(
-          message: widget.movieTeaser.title,
-          child: Container(
-            color: Colors.transparent,
-            child: Stack(
-              children: [
-                DecoratedBox(
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(8)),
-                    child: SizedBox(
-                      width: widget.width,
-                      height: widget.width * 1.5,
-                      child: _isImageLoaded
-                          ? _image
-                          : Container(
-                              color: Colors.grey.withOpacity(0.25),
-                            ),
-                    ),
+        child: Container(
+          color: Colors.transparent,
+          child: Stack(
+            children: [
+              DecoratedBox(
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                ),
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(8)),
+                  child: SizedBox(
+                    width: widget.width,
+                    height: widget.width * 1.5,
+                    child: _isImageLoaded
+                        ? _image
+                        : Container(
+                            color: Colors.grey.withOpacity(0.25),
+                          ),
                   ),
                 ),
-                if (_isImageLoaded)
-                  Positioned(
-                    right: 4,
-                    bottom: 4,
-                    child: MovieRating(
-                      showRating: widget.movieTeaser.hasEnoughVotes,
-                      rating: widget.movieTeaser.voteAverage,
-                    ),
+              ),
+              if (_isImageLoaded)
+                Positioned(
+                  right: 4,
+                  bottom: 4,
+                  child: MovieRating(
+                    showRating: widget.movieTeaser.hasEnoughVotes,
+                    rating: widget.movieTeaser.voteAverage,
                   ),
-              ],
-            ),
+                ),
+            ],
           ),
         ),
       ),

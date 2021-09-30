@@ -1,3 +1,4 @@
+import 'package:film_freund/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -35,14 +36,14 @@ class MovieTeaserBottomSheet extends StatelessWidget {
               children: [
                 IconOptionButton(
                   icon: Icons.check,
-                  label: 'Watched',
+                  label: AppLocalizations.of(context).activeViewWatchedTitle,
                   accentColor: Colors.green[700],
                   // TODO implement add/remove watched list logic
                   onPressed: () {},
                 ),
                 IconOptionButton(
                   icon: Icons.watch_later,
-                  label: 'Watchlist',
+                  label: AppLocalizations.of(context).activeViewWatchlistTitle,
                   accentColor: Theme.of(context).colorScheme.secondary,
                   // TODO implement add/remove watchlist list logic
                   onPressed: () {},
@@ -51,12 +52,12 @@ class MovieTeaserBottomSheet extends StatelessWidget {
             ),
             const Divider(),
             TextOptionButton(
-              'Add to list',
+              AppLocalizations.of(context).movieTeaserBottomSheetAddToListButtonText,
               // TODO navigate to list management
               onPressed: () {},
             ),
             TextOptionButton(
-              'Show movie',
+              AppLocalizations.of(context).movieTeaserBottomSheetShowMovieButtonText,
               // TODO navigate to MovieDetails
               onPressed: () {},
             ),

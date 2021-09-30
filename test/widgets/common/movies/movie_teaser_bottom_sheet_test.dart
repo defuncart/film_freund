@@ -1,3 +1,4 @@
+import 'package:film_freund/generated/l10n.dart';
 import 'package:film_freund/widgets/common/movie/movie_teaser_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -25,7 +26,11 @@ void main() {
       expect(find.text(movieYear), findsOneWidget);
       expect(find.byType(Divider), findsNWidgets(2));
       expect(find.byType(IconOptionButton), findsNWidgets(2));
+      expect(find.text(AppLocalizations.current.activeViewWatchedTitle), findsOneWidget);
+      expect(find.text(AppLocalizations.current.activeViewWatchlistTitle), findsOneWidget);
       expect(find.byType(TextOptionButton), findsNWidgets(2));
+      expect(find.text(AppLocalizations.current.movieTeaserBottomSheetAddToListButtonText), findsOneWidget);
+      expect(find.text(AppLocalizations.current.movieTeaserBottomSheetShowMovieButtonText), findsOneWidget);
     });
   });
 }

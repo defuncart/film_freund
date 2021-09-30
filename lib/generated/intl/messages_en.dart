@@ -65,6 +65,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "generalInvalidPassword": MessageLookupByLibrary.simpleMessage(
             "Password must have at least six characters"),
         "generalPasswordHint": MessageLookupByLibrary.simpleMessage("Password"),
+        "movieTeaserBottomSheetAddToListButtonText":
+            MessageLookupByLibrary.simpleMessage("Add to list"),
+        "movieTeaserBottomSheetShowMovieButtonText":
+            MessageLookupByLibrary.simpleMessage("Show movie"),
         "settingsViewChangePasswordButtonText":
             MessageLookupByLibrary.simpleMessage("Change Password"),
         "settingsViewDeleteAccountButtonText":
