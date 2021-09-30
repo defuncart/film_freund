@@ -24,8 +24,6 @@ class UserManager {
   void setUp() {
     // list to changes in authentication
     _authService.watchIsUserAuthenticated().listen((isUserAuthenticated) {
-      print('isUserAuthenticated: $isUserAuthenticated');
-
       if (isUserAuthenticated) {
         // update local settings if user has changed display name on another device
         final id = _authService.authenticatedUserId;
@@ -33,7 +31,6 @@ class UserManager {
           _userDatabase.watchUser(id: id).listen((user) {
             if (user != null && user.displayName != _localSettings.displayName) {
               _localSettings.displayName = user.displayName;
-              print(_localSettings.displayName);
             }
           });
         }
