@@ -27,7 +27,7 @@ class _MyAppState extends ConsumerState<MyApp> {
   }
 
   Future<bool> _initApp() async {
-    ServiceLocator.initialize(ref.read);
+    await ServiceLocator.initialize(ref.read);
 
     await Firebase.initializeApp();
 
