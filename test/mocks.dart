@@ -1,3 +1,4 @@
+import 'package:film_freund/managers/movies/movie_manager.dart';
 import 'package:film_freund/managers/user/user_manager.dart';
 import 'package:film_freund/services/auth/i_auth_service.dart';
 import 'package:film_freund/services/date_time/date_time_service.dart';
@@ -11,6 +12,7 @@ export 'mocks.mocks.dart';
 
 @GenerateMocks([
   UserManager,
+  MovieManager,
   DateTimeService,
   IAuthService,
   IUserDatabase,

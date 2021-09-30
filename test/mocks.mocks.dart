@@ -4,15 +4,16 @@
 
 import 'dart:async' as _i4;
 
+import 'package:film_freund/managers/movies/movie_manager.dart' as _i6;
 import 'package:film_freund/managers/user/user_manager.dart' as _i3;
 import 'package:film_freund/services/auth/i_auth_service.dart' as _i5;
-import 'package:film_freund/services/date_time/date_time_service.dart' as _i6;
+import 'package:film_freund/services/date_time/date_time_service.dart' as _i8;
 import 'package:film_freund/services/local_settings/i_local_settings_database.dart'
-    as _i11;
-import 'package:film_freund/services/movies/i_movie_database.dart' as _i8;
-import 'package:film_freund/services/movies/models/movie.dart' as _i9;
-import 'package:film_freund/services/movies/models/movie_teaser.dart' as _i10;
-import 'package:film_freund/services/user/i_user_database.dart' as _i7;
+    as _i12;
+import 'package:film_freund/services/movies/i_movie_database.dart' as _i10;
+import 'package:film_freund/services/movies/models/movie.dart' as _i11;
+import 'package:film_freund/services/movies/models/movie_teaser.dart' as _i7;
+import 'package:film_freund/services/user/i_user_database.dart' as _i9;
 import 'package:film_freund/services/user/models/user.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -90,10 +91,32 @@ class MockUserManager extends _i1.Mock implements _i3.UserManager {
   String toString() => super.toString();
 }
 
+/// A class which mocks [MovieManager].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockMovieManager extends _i1.Mock implements _i6.MovieManager {
+  MockMovieManager() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.Future<List<_i7.MovieTeaser>> getPopular() => (super.noSuchMethod(
+          Invocation.method(#getPopular, []),
+          returnValue: Future<List<_i7.MovieTeaser>>.value(<_i7.MovieTeaser>[]))
+      as _i4.Future<List<_i7.MovieTeaser>>);
+  @override
+  _i4.Future<List<_i7.MovieTeaser>> getUpcoming() => (super.noSuchMethod(
+          Invocation.method(#getUpcoming, []),
+          returnValue: Future<List<_i7.MovieTeaser>>.value(<_i7.MovieTeaser>[]))
+      as _i4.Future<List<_i7.MovieTeaser>>);
+  @override
+  String toString() => super.toString();
+}
+
 /// A class which mocks [DateTimeService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockDateTimeService extends _i1.Mock implements _i6.DateTimeService {
+class MockDateTimeService extends _i1.Mock implements _i8.DateTimeService {
   MockDateTimeService() {
     _i1.throwOnMissingStub(this);
   }
@@ -157,7 +180,7 @@ class MockIAuthService extends _i1.Mock implements _i5.IAuthService {
 /// A class which mocks [IUserDatabase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIUserDatabase extends _i1.Mock implements _i7.IUserDatabase {
+class MockIUserDatabase extends _i1.Mock implements _i9.IUserDatabase {
   MockIUserDatabase() {
     _i1.throwOnMissingStub(this);
   }
@@ -207,27 +230,25 @@ class MockIUserDatabase extends _i1.Mock implements _i7.IUserDatabase {
 /// A class which mocks [IMovieDatabase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIMovieDatabase extends _i1.Mock implements _i8.IMovieDatabase {
+class MockIMovieDatabase extends _i1.Mock implements _i10.IMovieDatabase {
   MockIMovieDatabase() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i9.Movie?> getMovie(String? id) =>
+  _i4.Future<_i11.Movie?> getMovie(String? id) =>
       (super.noSuchMethod(Invocation.method(#getMovie, [id]),
-          returnValue: Future<_i9.Movie?>.value()) as _i4.Future<_i9.Movie?>);
+          returnValue: Future<_i11.Movie?>.value()) as _i4.Future<_i11.Movie?>);
   @override
-  _i4.Future<List<_i10.MovieTeaser>> getPopular() =>
-      (super.noSuchMethod(Invocation.method(#getPopular, []),
-              returnValue:
-                  Future<List<_i10.MovieTeaser>>.value(<_i10.MovieTeaser>[]))
-          as _i4.Future<List<_i10.MovieTeaser>>);
+  _i4.Future<List<_i7.MovieTeaser>> getPopular() => (super.noSuchMethod(
+          Invocation.method(#getPopular, []),
+          returnValue: Future<List<_i7.MovieTeaser>>.value(<_i7.MovieTeaser>[]))
+      as _i4.Future<List<_i7.MovieTeaser>>);
   @override
-  _i4.Future<List<_i10.MovieTeaser>> getUpcoming() =>
-      (super.noSuchMethod(Invocation.method(#getUpcoming, []),
-              returnValue:
-                  Future<List<_i10.MovieTeaser>>.value(<_i10.MovieTeaser>[]))
-          as _i4.Future<List<_i10.MovieTeaser>>);
+  _i4.Future<List<_i7.MovieTeaser>> getUpcoming() => (super.noSuchMethod(
+          Invocation.method(#getUpcoming, []),
+          returnValue: Future<List<_i7.MovieTeaser>>.value(<_i7.MovieTeaser>[]))
+      as _i4.Future<List<_i7.MovieTeaser>>);
   @override
   String toString() => super.toString();
 }
@@ -236,7 +257,7 @@ class MockIMovieDatabase extends _i1.Mock implements _i8.IMovieDatabase {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockILocalSettingsDatabase extends _i1.Mock
-    implements _i11.ILocalSettingsDatabase {
+    implements _i12.ILocalSettingsDatabase {
   MockILocalSettingsDatabase() {
     _i1.throwOnMissingStub(this);
   }
