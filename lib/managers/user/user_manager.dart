@@ -2,7 +2,6 @@ import 'package:film_freund/services/auth/i_auth_service.dart';
 import 'package:film_freund/services/local_settings/i_local_settings_database.dart';
 import 'package:film_freund/services/user/i_user_database.dart';
 import 'package:film_freund/services/user/models/user.dart';
-import 'package:flutter/material.dart';
 
 /// A manager which handles user authentication and performs user database operations
 class UserManager {
@@ -12,16 +11,13 @@ class UserManager {
     required ILocalSettingsDatabase localSettings,
   })  : _authService = authService,
         _userDatabase = userDatabase,
-        _localSettings = localSettings {
-    setUp();
-  }
+        _localSettings = localSettings;
 
   final IAuthService _authService;
   final IUserDatabase _userDatabase;
   final ILocalSettingsDatabase _localSettings;
 
-  @visibleForTesting
-  void setUp() {
+  void initialize() {
     // list to changes in authentication
     _authService.watchIsUserAuthenticated().listen((isUserAuthenticated) {
       if (isUserAuthenticated) {
