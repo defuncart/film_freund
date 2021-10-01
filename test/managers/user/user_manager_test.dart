@@ -1,6 +1,5 @@
 import 'package:film_freund/managers/user/user_manager.dart';
 import 'package:film_freund/services/auth/i_auth_service.dart';
-import 'package:film_freund/services/local_settings/i_local_settings_database.dart';
 import 'package:film_freund/services/user/i_user_database.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -12,17 +11,14 @@ void main() {
   group('$UserManager', () {
     late IAuthService mockAuthService;
     late IUserDatabase mockUserDatabase;
-    late ILocalSettingsDatabase mockLocalSettings;
     late UserManager userManager;
 
     setUp(() {
       mockAuthService = MockIAuthService();
       mockUserDatabase = MockIUserDatabase();
-      mockLocalSettings = MockILocalSettingsDatabase();
       userManager = UserManager(
         authService: mockAuthService,
         userDatabase: mockUserDatabase,
-        localSettings: mockLocalSettings,
       );
     });
 
@@ -114,9 +110,7 @@ void main() {
 
         when(mockAuthService.signin(email: email, password: password))
             .thenAnswer((_) => Future.value(AuthResult.createSuccess));
-        when(mockAuthService.isUserAuthenticated).thenReturn(true);
         when(mockAuthService.authenticatedUserId).thenReturn(id);
-        when(mockUserDatabase.getUser(id: id)).thenAnswer((_) => Future.value(user));
 
         expect(
           await userManager.signin(email: email, password: password),
@@ -124,26 +118,16 @@ void main() {
         );
 
         verify(mockUserDatabase.createUser(id: id, email: email));
-        verify(mockLocalSettings.displayName = displayName);
-      }, skip: true);
+      });
 
       test('$IAuthService.signin ${AuthResult.signinSuccess}', () async {
-        const id = 'id';
-        const displayName = 'displayName';
-        final user = TestInstance.user(displayName: displayName);
-
         when(mockAuthService.signin(email: email, password: password))
             .thenAnswer((_) => Future.value(AuthResult.signinSuccess));
-        when(mockAuthService.isUserAuthenticated).thenReturn(true);
-        when(mockAuthService.authenticatedUserId).thenReturn(id);
-        when(mockUserDatabase.getUser(id: id)).thenAnswer((_) => Future.value(user));
 
         expect(
           await userManager.signin(email: email, password: password),
           AuthResult.signinSuccess,
         );
-
-        verify(mockLocalSettings.displayName = displayName);
       });
 
       test('$IAuthService.signin ${AuthResult.signinIncorrectPassword}', () async {
@@ -182,12 +166,12 @@ void main() {
       when(mockUserDatabase.getUser(id: id)).thenAnswer((_) => Future.value(user));
 
       const updatedDisplayName = 'updatedDisplayName';
-      final updatedUser = user.copyWith(displayName: updatedDisplayName);
 
       userManager.updateDisplayName(updatedDisplayName);
 
       verify(mockUserDatabase.updateUser(
-        user: updatedUser,
+        user: user,
+        displayName: updatedDisplayName,
       ));
     }, skip: true);
 

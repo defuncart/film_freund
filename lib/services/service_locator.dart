@@ -35,7 +35,6 @@ final userManagerProvider = Provider<UserManager>(
   (ref) => UserManager(
     authService: FirebaseAuthService(),
     userDatabase: FirebaseUserDatabase(),
-    localSettings: ref.read(localSettingsDatabaseProvider),
   ),
 );
 

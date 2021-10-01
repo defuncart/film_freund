@@ -47,9 +47,6 @@ class MockUserManager extends _i1.Mock implements _i3.UserManager {
               returnValue: Future<_i2.User>.value(_FakeUser_0()))
           as _i4.Future<_i2.User>);
   @override
-  void setUp() => super.noSuchMethod(Invocation.method(#setUp, []),
-      returnValueForMissingStub: null);
-  @override
   _i4.Future<_i2.User?> getUser({String? id}) =>
       (super.noSuchMethod(Invocation.method(#getUser, [], {#id: id}),
           returnValue: Future<_i2.User?>.value()) as _i4.Future<_i2.User?>);
@@ -186,13 +183,13 @@ class MockIUserDatabase extends _i1.Mock implements _i9.IUserDatabase {
   }
 
   @override
-  _i4.Future<_i2.User> createUser(
+  _i4.Future<void> createUser(
           {String? id, String? email, String? displayName}) =>
       (super.noSuchMethod(
-              Invocation.method(#createUser, [],
-                  {#id: id, #email: email, #displayName: displayName}),
-              returnValue: Future<_i2.User>.value(_FakeUser_0()))
-          as _i4.Future<_i2.User>);
+          Invocation.method(#createUser, [],
+              {#id: id, #email: email, #displayName: displayName}),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
   @override
   _i4.Future<_i2.User?> getUser({String? id}) =>
       (super.noSuchMethod(Invocation.method(#getUser, [], {#id: id}),
@@ -271,14 +268,6 @@ class MockILocalSettingsDatabase extends _i1.Mock
   @override
   set region(String? value) =>
       super.noSuchMethod(Invocation.setter(#region, value),
-          returnValueForMissingStub: null);
-  @override
-  String get displayName =>
-      (super.noSuchMethod(Invocation.getter(#displayName), returnValue: '')
-          as String);
-  @override
-  set displayName(String? value) =>
-      super.noSuchMethod(Invocation.setter(#displayName, value),
           returnValueForMissingStub: null);
   @override
   _i4.Future<void> initialize() =>

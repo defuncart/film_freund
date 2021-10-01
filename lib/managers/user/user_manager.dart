@@ -1,5 +1,4 @@
 import 'package:film_freund/services/auth/i_auth_service.dart';
-import 'package:film_freund/services/local_settings/i_local_settings_database.dart';
 import 'package:film_freund/services/user/i_user_database.dart';
 import 'package:film_freund/services/user/models/user.dart';
 
@@ -8,34 +7,11 @@ class UserManager {
   UserManager({
     required IAuthService authService,
     required IUserDatabase userDatabase,
-    required ILocalSettingsDatabase localSettings,
   })  : _authService = authService,
-        _userDatabase = userDatabase,
-        _localSettings = localSettings;
+        _userDatabase = userDatabase;
 
   final IAuthService _authService;
   final IUserDatabase _userDatabase;
-  final ILocalSettingsDatabase _localSettings;
-
-  void initialize() {
-    // list to changes in authentication
-    _authService.watchIsUserAuthenticated().listen((isUserAuthenticated) {
-      if (isUserAuthenticated) {
-        // update local settings if user has changed display name on another device
-        final id = _authService.authenticatedUserId;
-        if (id != null) {
-          _userDatabase.watchUser(id: id).listen((user) {
-            if (user != null && user.displayName != _localSettings.displayName) {
-              _localSettings.displayName = user.displayName;
-            }
-          });
-        }
-      } else {
-        // user has logged out/deleted account, reset local settings
-        _localSettings.reset();
-      }
-    });
-  }
 
   /// Returns whether a user is currently authenicated on the device
   bool get isAuthenticated => _authService.isUserAuthenticated;
@@ -81,11 +57,6 @@ class UserManager {
       );
     }
 
-    // immediantely update local settings (i.e. dont wait on watchUser stream)
-    if (result == AuthResult.createSuccess || result == AuthResult.signinSuccess) {
-      _localSettings.displayName = (await currentUser).displayName;
-    }
-
     return result;
   }
 
@@ -95,13 +66,11 @@ class UserManager {
   /// Updates [displayName] for the current user
   Future<void> updateDisplayName(
     String displayName,
-  ) async {
-    await _userDatabase.updateUser(
-      user: await currentUser,
-    );
-
-    _localSettings.displayName = displayName;
-  }
+  ) async =>
+      _userDatabase.updateUser(
+        user: await currentUser,
+        displayName: displayName,
+      );
 
   /// Changes the current user's password from [currentPassword] to [newPassword]
   ///

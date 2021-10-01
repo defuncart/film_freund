@@ -30,7 +30,6 @@ class _MyAppState extends ConsumerState<MyApp> {
     await ServiceLocator.initialize(ref.read);
 
     await Firebase.initializeApp();
-    ServiceLocator.userManager.initialize();
 
     return true;
   }

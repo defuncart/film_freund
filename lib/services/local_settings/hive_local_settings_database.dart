@@ -17,12 +17,6 @@ class HiveLocalSettingsDatabase implements ILocalSettingsDatabase {
   set region(String value) => _box.put(_Keys.region, value);
 
   @override
-  String get displayName => _box.get(_Keys.displayName, defaultValue: _Defaults.displayName);
-
-  @override
-  set displayName(String value) => _box.put(_Keys.displayName, value);
-
-  @override
   Future<void> initialize() async {
     if (!kIsWeb) {
       final dir = await getApplicationDocumentsDirectory();
@@ -39,11 +33,9 @@ class HiveLocalSettingsDatabase implements ILocalSettingsDatabase {
 /// A class of keys used to store values
 class _Keys {
   static const region = 'region';
-  static const displayName = 'displayName';
 }
 
 /// A class of defaults for each key
 class _Defaults {
   static const region = 'de';
-  static const displayName = 'Film Freund';
 }
