@@ -12,17 +12,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 abstract class ServiceLocator {
   static late Reader _read;
 
-  static Future<void> initialize(Reader read) async {
-    _read = read;
-
-    await _read(localSettingsDatabaseProvider).initialize();
-  }
+  static void setReader(Reader read) => _read = read;
 
   static DateTimeService get dateTimeService => _read(dateTimeServiceProvider);
 
   static UserManager get userManager => _read(userManagerProvider);
 
   static MovieManager get movieManager => _read(movieManagerProvider);
+
+  static ILocalSettingsDatabase get localSettings => _read(localSettingsDatabaseProvider);
 }
 
 @visibleForTesting
@@ -32,7 +30,7 @@ final dateTimeServiceProvider = Provider<DateTimeService>(
 
 @visibleForTesting
 final userManagerProvider = Provider<UserManager>(
-  (ref) => UserManager(
+  (_) => UserManager(
     authService: FirebaseAuthService(),
     userDatabase: FirebaseUserDatabase(),
   ),
