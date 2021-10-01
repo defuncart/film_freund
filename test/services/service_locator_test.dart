@@ -7,14 +7,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../firebase_mocks.dart';
 import '../mocks.dart';
 import '../test_service_locator.dart';
 
 void main() {
   group('$ServiceLocator', () {
     test('When $ServiceLocator is initialized, expect access to services', () async {
-      setupFirebaseMocks();
+      MethodChannelMocks.setupFirebase();
       await Firebase.initializeApp();
       final container = ProviderContainer();
       ServiceLocator.setReader(container.read);
