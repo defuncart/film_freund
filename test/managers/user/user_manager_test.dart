@@ -105,8 +105,6 @@ void main() {
 
       test('when $IAuthService.signin ${AuthResult.createSuccess}, expect user is created on database', () async {
         const id = 'id';
-        const displayName = 'displayName';
-        final user = TestInstance.user(displayName: displayName);
 
         when(mockAuthService.signin(email: email, password: password))
             .thenAnswer((_) => Future.value(AuthResult.createSuccess));

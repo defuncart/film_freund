@@ -30,7 +30,7 @@ void main() {
         () => ServiceLocator.movieManager,
         returnsNormally,
       );
-    }, skip: true);
+    });
 
     group('ensure services can be mocked', () {
       late DateTimeService mockDateTimeService;
