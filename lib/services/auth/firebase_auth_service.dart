@@ -19,9 +19,6 @@ class FirebaseAuthService implements IAuthService {
   String? get authenticatedUserId => _firebaseAuth.currentUser?.uid;
 
   @override
-  Stream<bool> watchIsUserAuthenticated() => _firebaseAuth.authStateChanges().map((user) => user != null);
-
-  @override
   Future<AuthResult> signin({required String email, required String password}) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
