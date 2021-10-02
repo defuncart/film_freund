@@ -32,6 +32,8 @@ class FirebaseUserDatabase implements IUserDatabase {
     required String id,
     required String email,
     String? displayName,
+    required String watchedId,
+    required String watchlistId,
   }) async {
     final now = _dateTimeService.nowUtc;
     final user = User(
@@ -40,6 +42,8 @@ class FirebaseUserDatabase implements IUserDatabase {
       displayName: displayName ?? email.split('@').first,
       createdAt: now,
       updatedAt: now,
+      watchedId: watchedId,
+      watchlistId: watchlistId,
     );
 
     await _saveUser(user);
@@ -68,20 +72,16 @@ class FirebaseUserDatabase implements IUserDatabase {
   Future<void> updateUser({
     required User user,
     String? displayName,
-    List<String>? watched,
-    List<String>? watchlist,
     List<String>? lists,
   }) async {
     var updatedUser = user.copyWith(
       displayName: displayName,
-      watched: watched,
-      watchlist: watchlist,
       lists: lists,
     );
 
     if (updatedUser == user) {
       log('Warning! FirebaseUserDatabase.update nothing to update!');
-      log('displayName: $displayName, watched: $watched, watchlist: $watchlist, lists: $lists');
+      log('displayName: $displayName, lists: $lists');
 
       return;
     }

@@ -66,9 +66,13 @@ class UserManager {
     // if user was created, create user db object
     if (result == AuthResult.createSuccess) {
       await _userDatabase.createUser(
-        id: _authService.authenticatedUserId!,
-        email: email,
-      );
+          id: _authService.authenticatedUserId!,
+          email: email,
+          // TODO create lists
+          watchedId: 'watchedId',
+          watchlistId: 'watchlistId'
+          // pass in list ids
+          );
     }
 
     return result;

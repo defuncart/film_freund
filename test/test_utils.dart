@@ -36,8 +36,8 @@ class TestInstance {
     String? displayName,
     DateTime? createdAt,
     DateTime? updatedAt,
-    List<String>? watched,
-    List<String>? watchlist,
+    String? watchedId,
+    String? watchlistId,
     List<String>? lists,
   }) =>
       User(
@@ -46,8 +46,8 @@ class TestInstance {
         displayName: displayName ?? 'displayName',
         createdAt: createdAt ?? DateTime(1),
         updatedAt: updatedAt ?? DateTime(1),
-        watched: watched ?? [],
-        watchlist: watchlist ?? [],
+        watchedId: watchedId ?? '',
+        watchlistId: watchlistId ?? '',
         lists: lists ?? [],
       );
 

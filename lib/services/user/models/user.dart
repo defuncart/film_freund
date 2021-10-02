@@ -13,8 +13,8 @@ class User extends Equatable {
     this.displayName = '',
     required this.createdAt,
     required this.updatedAt,
-    this.watched = const [],
-    this.watchlist = const [],
+    required this.watchedId,
+    required this.watchlistId,
     this.lists = const [],
   });
 
@@ -23,8 +23,8 @@ class User extends Equatable {
   final String displayName;
   final DateTime createdAt;
   final DateTime updatedAt;
-  final List<String> watched;
-  final List<String> watchlist;
+  final String watchedId;
+  final String watchlistId;
   final List<String> lists;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
@@ -34,9 +34,6 @@ class User extends Equatable {
   /// Returns a copy of current instance with overriden params
   User copyWith({
     String? displayName,
-    String? lastName,
-    List<String>? watched,
-    List<String>? watchlist,
     List<String>? lists,
   }) =>
       User(
@@ -45,8 +42,8 @@ class User extends Equatable {
         displayName: displayName ?? this.displayName,
         createdAt: createdAt,
         updatedAt: updatedAt,
-        watched: watched ?? this.watched,
-        watchlist: watchlist ?? this.watchlist,
+        watchedId: watchedId,
+        watchlistId: watchlistId,
         lists: lists ?? this.lists,
       );
 
@@ -57,8 +54,8 @@ class User extends Equatable {
         displayName: displayName,
         createdAt: createdAt,
         updatedAt: updatedAt,
-        watched: watched,
-        watchlist: watchlist,
+        watchedId: watchedId,
+        watchlistId: watchlistId,
         lists: lists,
       );
 
@@ -69,8 +66,8 @@ class User extends Equatable {
         displayName,
         createdAt,
         updatedAt,
-        watched,
-        watchlist,
+        watchedId,
+        watchlistId,
         lists,
       ];
 }
