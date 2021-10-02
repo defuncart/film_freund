@@ -23,6 +23,7 @@ dependencies:
   cloud_firestore:
   hive:
   path_provider:
+  uuid:
 
 dev_dependencies:
   flutter_test:
