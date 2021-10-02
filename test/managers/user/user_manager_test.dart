@@ -1,5 +1,7 @@
 import 'package:film_freund/managers/user/user_manager.dart';
 import 'package:film_freund/services/auth/i_auth_service.dart';
+import 'package:film_freund/services/lists/enums/list_type.dart';
+import 'package:film_freund/services/lists/i_list_database.dart';
 import 'package:film_freund/services/user/i_user_database.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -12,13 +14,16 @@ void main() {
     late IAuthService mockAuthService;
     late IUserDatabase mockUserDatabase;
     late UserManager userManager;
+    late IListDatabase mockListDatabase;
 
     setUp(() {
       mockAuthService = MockIAuthService();
       mockUserDatabase = MockIUserDatabase();
+      mockListDatabase = MockIListDatabase();
       userManager = UserManager(
         authService: mockAuthService,
         userDatabase: mockUserDatabase,
+        listDatabase: mockListDatabase,
       );
     });
 
@@ -140,17 +145,26 @@ void main() {
 
       test('when $IAuthService.signin ${AuthResult.createSuccess}, expect user is created on database', () async {
         const id = 'id';
+        const watchedId = 'watchedId';
+        const watchlistId = 'watchlistId';
 
         when(mockAuthService.signin(email: email, password: password))
             .thenAnswer((_) => Future.value(AuthResult.createSuccess));
         when(mockAuthService.authenticatedUserId).thenReturn(id);
+        when(mockListDatabase.createList(type: ListType.watched)).thenAnswer((_) => Future.value(watchedId));
+        when(mockListDatabase.createList(type: ListType.watchlist)).thenAnswer((_) => Future.value(watchlistId));
 
         expect(
           await userManager.signin(email: email, password: password),
           AuthResult.createSuccess,
         );
 
-        verify(mockUserDatabase.createUser(id: id, email: email));
+        verify(mockUserDatabase.createUser(
+          id: id,
+          email: email,
+          watchedId: watchedId,
+          watchlistId: watchlistId,
+        ));
       });
 
       test('$IAuthService.signin ${AuthResult.signinSuccess}', () async {

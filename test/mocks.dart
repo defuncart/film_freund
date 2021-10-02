@@ -2,6 +2,7 @@ import 'package:film_freund/managers/movies/movie_manager.dart';
 import 'package:film_freund/managers/user/user_manager.dart';
 import 'package:film_freund/services/auth/i_auth_service.dart';
 import 'package:film_freund/services/date_time/date_time_service.dart';
+import 'package:film_freund/services/lists/i_list_database.dart';
 import 'package:film_freund/services/local_settings/i_local_settings_database.dart';
 import 'package:film_freund/services/movies/i_movie_database.dart';
 import 'package:film_freund/services/platform/i_platform_service.dart';
@@ -26,6 +27,7 @@ export 'mocks.mocks.dart';
   IAuthService,
   IUserDatabase,
   IMovieDatabase,
+  IListDatabase,
   ILocalSettingsDatabase,
   IPlatformService,
   HiveInterface,

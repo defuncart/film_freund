@@ -1,4 +1,6 @@
 import 'package:film_freund/services/auth/i_auth_service.dart';
+import 'package:film_freund/services/lists/enums/list_type.dart';
+import 'package:film_freund/services/lists/i_list_database.dart';
 import 'package:film_freund/services/user/i_user_database.dart';
 import 'package:film_freund/services/user/models/user.dart';
 
@@ -7,11 +9,14 @@ class UserManager {
   UserManager({
     required IAuthService authService,
     required IUserDatabase userDatabase,
+    required IListDatabase listDatabase,
   })  : _authService = authService,
-        _userDatabase = userDatabase;
+        _userDatabase = userDatabase,
+        _listDatabase = listDatabase;
 
   final IAuthService _authService;
   final IUserDatabase _userDatabase;
+  final IListDatabase _listDatabase;
 
   /// Returns whether a user is currently authenicated on the device
   bool get isAuthenticated => _authService.isUserAuthenticated;
@@ -65,14 +70,15 @@ class UserManager {
 
     // if user was created, create user db object
     if (result == AuthResult.createSuccess) {
+      final watchedId = await _listDatabase.createList(type: ListType.watched);
+      final watchlistId = await _listDatabase.createList(type: ListType.watchlist);
+
       await _userDatabase.createUser(
-          id: _authService.authenticatedUserId!,
-          email: email,
-          // TODO create lists
-          watchedId: 'watchedId',
-          watchlistId: 'watchlistId'
-          // pass in list ids
-          );
+        id: _authService.authenticatedUserId!,
+        email: email,
+        watchedId: watchedId,
+        watchlistId: watchlistId,
+      );
     }
 
     return result;
