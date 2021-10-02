@@ -8,6 +8,7 @@ import 'package:film_freund/services/movies/movie_database.dart';
 import 'package:film_freund/services/platform/i_platform_service.dart';
 import 'package:film_freund/services/platform/platform_service.dart';
 import 'package:film_freund/services/user/firebase_user_database.dart';
+import 'package:film_freund/services/uuid/uuid_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -28,6 +29,11 @@ abstract class ServiceLocator {
 @visibleForTesting
 final dateTimeServiceProvider = Provider<DateTimeService>(
   (_) => DateTimeService(),
+);
+
+@visibleForTesting
+final uuidServiceProvider = Provider<UUIDService>(
+  (_) => UUIDService(),
 );
 
 @visibleForTesting
