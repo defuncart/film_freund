@@ -2,26 +2,26 @@
 // in film_freund/test/mocks.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i5;
+import 'dart:async' as _i6;
 import 'dart:typed_data' as _i21;
 
-import 'package:film_freund/managers/movies/movie_manager.dart' as _i7;
-import 'package:film_freund/managers/user/user_manager.dart' as _i4;
-import 'package:film_freund/services/auth/i_auth_service.dart' as _i6;
-import 'package:film_freund/services/date_time/date_time_service.dart' as _i9;
-import 'package:film_freund/services/lists/enums/list_type.dart' as _i14;
-import 'package:film_freund/services/lists/i_list_database.dart' as _i13;
-import 'package:film_freund/services/lists/models/movie_list.dart' as _i15;
+import 'package:film_freund/managers/movies/movie_manager.dart' as _i8;
+import 'package:film_freund/managers/user/user_manager.dart' as _i5;
+import 'package:film_freund/services/auth/i_auth_service.dart' as _i7;
+import 'package:film_freund/services/date_time/date_time_service.dart' as _i10;
+import 'package:film_freund/services/lists/enums/list_type.dart' as _i15;
+import 'package:film_freund/services/lists/i_list_database.dart' as _i14;
+import 'package:film_freund/services/lists/models/movie_list.dart' as _i3;
 import 'package:film_freund/services/local_settings/i_local_settings_database.dart'
     as _i16;
 import 'package:film_freund/services/local_settings/region.dart' as _i17;
-import 'package:film_freund/services/movies/i_movie_database.dart' as _i11;
-import 'package:film_freund/services/movies/models/movie.dart' as _i12;
-import 'package:film_freund/services/movies/models/movie_teaser.dart' as _i8;
+import 'package:film_freund/services/movies/i_movie_database.dart' as _i12;
+import 'package:film_freund/services/movies/models/movie.dart' as _i13;
+import 'package:film_freund/services/movies/models/movie_teaser.dart' as _i9;
 import 'package:film_freund/services/platform/i_platform_service.dart' as _i18;
-import 'package:film_freund/services/user/i_user_database.dart' as _i10;
+import 'package:film_freund/services/user/i_user_database.dart' as _i11;
 import 'package:film_freund/services/user/models/user.dart' as _i2;
-import 'package:hive/hive.dart' as _i3;
+import 'package:hive/hive.dart' as _i4;
 import 'package:hive/src/box/default_compaction_strategy.dart' as _i20;
 import 'package:hive/src/box/default_key_comparator.dart' as _i19;
 import 'package:mockito/mockito.dart' as _i1;
@@ -36,16 +36,18 @@ import 'package:mockito/mockito.dart' as _i1;
 
 class _FakeUser_0 extends _i1.Fake implements _i2.User {}
 
-class _FakeDateTime_1 extends _i1.Fake implements DateTime {}
+class _FakeMovieList_1 extends _i1.Fake implements _i3.MovieList {}
 
-class _FakeBox_2<E> extends _i1.Fake implements _i3.Box<E> {}
+class _FakeDateTime_2 extends _i1.Fake implements DateTime {}
 
-class _FakeLazyBox_3<E> extends _i1.Fake implements _i3.LazyBox<E> {}
+class _FakeBox_3<E> extends _i1.Fake implements _i4.Box<E> {}
+
+class _FakeLazyBox_4<E> extends _i1.Fake implements _i4.LazyBox<E> {}
 
 /// A class which mocks [UserManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserManager extends _i1.Mock implements _i4.UserManager {
+class MockUserManager extends _i1.Mock implements _i5.UserManager {
   MockUserManager() {
     _i1.throwOnMissingStub(this);
   }
@@ -55,52 +57,62 @@ class MockUserManager extends _i1.Mock implements _i4.UserManager {
           .noSuchMethod(Invocation.getter(#isAuthenticated), returnValue: false)
       as bool);
   @override
-  _i5.Future<_i2.User> get currentUser =>
+  _i6.Future<_i2.User> get currentUser =>
       (super.noSuchMethod(Invocation.getter(#currentUser),
               returnValue: Future<_i2.User>.value(_FakeUser_0()))
-          as _i5.Future<_i2.User>);
+          as _i6.Future<_i2.User>);
   @override
-  _i5.Stream<_i2.User?> get watchCurrentUser =>
+  _i6.Stream<_i2.User?> get watchCurrentUser =>
       (super.noSuchMethod(Invocation.getter(#watchCurrentUser),
-          returnValue: Stream<_i2.User?>.empty()) as _i5.Stream<_i2.User?>);
+          returnValue: Stream<_i2.User?>.empty()) as _i6.Stream<_i2.User?>);
   @override
-  _i5.Future<_i2.User?> getUser({String? id}) =>
+  _i6.Future<_i3.MovieList> get watchedMoviesForCurrentUser =>
+      (super.noSuchMethod(Invocation.getter(#watchedMoviesForCurrentUser),
+              returnValue: Future<_i3.MovieList>.value(_FakeMovieList_1()))
+          as _i6.Future<_i3.MovieList>);
+  @override
+  _i6.Future<_i3.MovieList> get watchlistMoviesForCurrentUser =>
+      (super.noSuchMethod(Invocation.getter(#watchlistMoviesForCurrentUser),
+              returnValue: Future<_i3.MovieList>.value(_FakeMovieList_1()))
+          as _i6.Future<_i3.MovieList>);
+  @override
+  _i6.Future<_i2.User?> getUser({String? id}) =>
       (super.noSuchMethod(Invocation.method(#getUser, [], {#id: id}),
-          returnValue: Future<_i2.User?>.value()) as _i5.Future<_i2.User?>);
+          returnValue: Future<_i2.User?>.value()) as _i6.Future<_i2.User?>);
   @override
-  _i5.Future<_i6.AuthResult> signin({String? email, String? password}) =>
+  _i6.Future<_i7.AuthResult> signin({String? email, String? password}) =>
       (super.noSuchMethod(
           Invocation.method(#signin, [], {#email: email, #password: password}),
           returnValue:
-              Future<_i6.AuthResult>.value(_i6.AuthResult.createSuccess)) as _i5
-          .Future<_i6.AuthResult>);
+              Future<_i7.AuthResult>.value(_i7.AuthResult.createSuccess)) as _i6
+          .Future<_i7.AuthResult>);
   @override
-  _i5.Future<void> signout() =>
+  _i6.Future<void> signout() =>
       (super.noSuchMethod(Invocation.method(#signout, []),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<void> updateDisplayName(String? displayName) =>
+  _i6.Future<void> updateDisplayName(String? displayName) =>
       (super.noSuchMethod(Invocation.method(#updateDisplayName, [displayName]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<_i6.ChangePasswordResult> changePassword(
+  _i6.Future<_i7.ChangePasswordResult> changePassword(
           {String? currentPassword, String? newPassword}) =>
       (super.noSuchMethod(
               Invocation.method(#changePassword, [], {
                 #currentPassword: currentPassword,
                 #newPassword: newPassword
               }),
-              returnValue: Future<_i6.ChangePasswordResult>.value(
-                  _i6.ChangePasswordResult.success))
-          as _i5.Future<_i6.ChangePasswordResult>);
+              returnValue: Future<_i7.ChangePasswordResult>.value(
+                  _i7.ChangePasswordResult.success))
+          as _i6.Future<_i7.ChangePasswordResult>);
   @override
-  _i5.Future<_i6.DeleteResult> deleteUser({String? password}) => (super
+  _i6.Future<_i7.DeleteResult> deleteUser({String? password}) => (super
       .noSuchMethod(Invocation.method(#deleteUser, [], {#password: password}),
           returnValue:
-              Future<_i6.DeleteResult>.value(_i6.DeleteResult.success)) as _i5
-      .Future<_i6.DeleteResult>);
+              Future<_i7.DeleteResult>.value(_i7.DeleteResult.success)) as _i6
+      .Future<_i7.DeleteResult>);
   @override
   String toString() => super.toString();
 }
@@ -108,21 +120,21 @@ class MockUserManager extends _i1.Mock implements _i4.UserManager {
 /// A class which mocks [MovieManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockMovieManager extends _i1.Mock implements _i7.MovieManager {
+class MockMovieManager extends _i1.Mock implements _i8.MovieManager {
   MockMovieManager() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<List<_i8.MovieTeaser>> getPopular() => (super.noSuchMethod(
+  _i6.Future<List<_i9.MovieTeaser>> getPopular() => (super.noSuchMethod(
           Invocation.method(#getPopular, []),
-          returnValue: Future<List<_i8.MovieTeaser>>.value(<_i8.MovieTeaser>[]))
-      as _i5.Future<List<_i8.MovieTeaser>>);
+          returnValue: Future<List<_i9.MovieTeaser>>.value(<_i9.MovieTeaser>[]))
+      as _i6.Future<List<_i9.MovieTeaser>>);
   @override
-  _i5.Future<List<_i8.MovieTeaser>> getUpcoming() => (super.noSuchMethod(
+  _i6.Future<List<_i9.MovieTeaser>> getUpcoming() => (super.noSuchMethod(
           Invocation.method(#getUpcoming, []),
-          returnValue: Future<List<_i8.MovieTeaser>>.value(<_i8.MovieTeaser>[]))
-      as _i5.Future<List<_i8.MovieTeaser>>);
+          returnValue: Future<List<_i9.MovieTeaser>>.value(<_i9.MovieTeaser>[]))
+      as _i6.Future<List<_i9.MovieTeaser>>);
   @override
   String toString() => super.toString();
 }
@@ -130,14 +142,14 @@ class MockMovieManager extends _i1.Mock implements _i7.MovieManager {
 /// A class which mocks [DateTimeService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockDateTimeService extends _i1.Mock implements _i9.DateTimeService {
+class MockDateTimeService extends _i1.Mock implements _i10.DateTimeService {
   MockDateTimeService() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
   DateTime get nowUtc => (super.noSuchMethod(Invocation.getter(#nowUtc),
-      returnValue: _FakeDateTime_1()) as DateTime);
+      returnValue: _FakeDateTime_2()) as DateTime);
   @override
   String toString() => super.toString();
 }
@@ -145,7 +157,7 @@ class MockDateTimeService extends _i1.Mock implements _i9.DateTimeService {
 /// A class which mocks [IAuthService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIAuthService extends _i1.Mock implements _i6.IAuthService {
+class MockIAuthService extends _i1.Mock implements _i7.IAuthService {
   MockIAuthService() {
     _i1.throwOnMissingStub(this);
   }
@@ -155,34 +167,34 @@ class MockIAuthService extends _i1.Mock implements _i6.IAuthService {
       (super.noSuchMethod(Invocation.getter(#isUserAuthenticated),
           returnValue: false) as bool);
   @override
-  _i5.Future<_i6.AuthResult> signin({String? email, String? password}) =>
+  _i6.Future<_i7.AuthResult> signin({String? email, String? password}) =>
       (super.noSuchMethod(
           Invocation.method(#signin, [], {#email: email, #password: password}),
           returnValue:
-              Future<_i6.AuthResult>.value(_i6.AuthResult.createSuccess)) as _i5
-          .Future<_i6.AuthResult>);
+              Future<_i7.AuthResult>.value(_i7.AuthResult.createSuccess)) as _i6
+          .Future<_i7.AuthResult>);
   @override
-  _i5.Future<void> signout() =>
+  _i6.Future<void> signout() =>
       (super.noSuchMethod(Invocation.method(#signout, []),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<_i6.ChangePasswordResult> changePassword(
+  _i6.Future<_i7.ChangePasswordResult> changePassword(
           {String? currentPassword, String? newPassword}) =>
       (super.noSuchMethod(
               Invocation.method(#changePassword, [], {
                 #currentPassword: currentPassword,
                 #newPassword: newPassword
               }),
-              returnValue: Future<_i6.ChangePasswordResult>.value(
-                  _i6.ChangePasswordResult.success))
-          as _i5.Future<_i6.ChangePasswordResult>);
+              returnValue: Future<_i7.ChangePasswordResult>.value(
+                  _i7.ChangePasswordResult.success))
+          as _i6.Future<_i7.ChangePasswordResult>);
   @override
-  _i5.Future<_i6.DeleteResult> delete({String? password}) =>
+  _i6.Future<_i7.DeleteResult> delete({String? password}) =>
       (super.noSuchMethod(Invocation.method(#delete, [], {#password: password}),
               returnValue:
-                  Future<_i6.DeleteResult>.value(_i6.DeleteResult.success))
-          as _i5.Future<_i6.DeleteResult>);
+                  Future<_i7.DeleteResult>.value(_i7.DeleteResult.success))
+          as _i6.Future<_i7.DeleteResult>);
   @override
   String toString() => super.toString();
 }
@@ -190,13 +202,13 @@ class MockIAuthService extends _i1.Mock implements _i6.IAuthService {
 /// A class which mocks [IUserDatabase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIUserDatabase extends _i1.Mock implements _i10.IUserDatabase {
+class MockIUserDatabase extends _i1.Mock implements _i11.IUserDatabase {
   MockIUserDatabase() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<void> createUser(
+  _i6.Future<void> createUser(
           {String? id,
           String? email,
           String? displayName,
@@ -211,28 +223,28 @@ class MockIUserDatabase extends _i1.Mock implements _i10.IUserDatabase {
             #watchlistId: watchlistId
           }),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<_i2.User?> getUser({String? id}) =>
+  _i6.Future<_i2.User?> getUser({String? id}) =>
       (super.noSuchMethod(Invocation.method(#getUser, [], {#id: id}),
-          returnValue: Future<_i2.User?>.value()) as _i5.Future<_i2.User?>);
+          returnValue: Future<_i2.User?>.value()) as _i6.Future<_i2.User?>);
   @override
-  _i5.Stream<_i2.User?> watchUser({String? id}) =>
+  _i6.Stream<_i2.User?> watchUser({String? id}) =>
       (super.noSuchMethod(Invocation.method(#watchUser, [], {#id: id}),
-          returnValue: Stream<_i2.User?>.empty()) as _i5.Stream<_i2.User?>);
+          returnValue: Stream<_i2.User?>.empty()) as _i6.Stream<_i2.User?>);
   @override
-  _i5.Future<void> updateUser(
+  _i6.Future<void> updateUser(
           {_i2.User? user, String? displayName, List<String>? lists}) =>
       (super.noSuchMethod(
           Invocation.method(#updateUser, [],
               {#user: user, #displayName: displayName, #lists: lists}),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<void> deleteUser({String? id}) =>
+  _i6.Future<void> deleteUser({String? id}) =>
       (super.noSuchMethod(Invocation.method(#deleteUser, [], {#id: id}),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
   String toString() => super.toString();
 }
@@ -240,27 +252,27 @@ class MockIUserDatabase extends _i1.Mock implements _i10.IUserDatabase {
 /// A class which mocks [IMovieDatabase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIMovieDatabase extends _i1.Mock implements _i11.IMovieDatabase {
+class MockIMovieDatabase extends _i1.Mock implements _i12.IMovieDatabase {
   MockIMovieDatabase() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<_i12.Movie?> getMovie(String? id) =>
+  _i6.Future<_i13.Movie?> getMovie(String? id) =>
       (super.noSuchMethod(Invocation.method(#getMovie, [id]),
-          returnValue: Future<_i12.Movie?>.value()) as _i5.Future<_i12.Movie?>);
+          returnValue: Future<_i13.Movie?>.value()) as _i6.Future<_i13.Movie?>);
   @override
-  _i5.Future<List<_i8.MovieTeaser>> getPopular({String? region}) =>
+  _i6.Future<List<_i9.MovieTeaser>> getPopular({String? region}) =>
       (super.noSuchMethod(Invocation.method(#getPopular, [], {#region: region}),
               returnValue:
-                  Future<List<_i8.MovieTeaser>>.value(<_i8.MovieTeaser>[]))
-          as _i5.Future<List<_i8.MovieTeaser>>);
+                  Future<List<_i9.MovieTeaser>>.value(<_i9.MovieTeaser>[]))
+          as _i6.Future<List<_i9.MovieTeaser>>);
   @override
-  _i5.Future<List<_i8.MovieTeaser>> getUpcoming({String? region}) => (super
+  _i6.Future<List<_i9.MovieTeaser>> getUpcoming({String? region}) => (super
           .noSuchMethod(Invocation.method(#getUpcoming, [], {#region: region}),
               returnValue:
-                  Future<List<_i8.MovieTeaser>>.value(<_i8.MovieTeaser>[]))
-      as _i5.Future<List<_i8.MovieTeaser>>);
+                  Future<List<_i9.MovieTeaser>>.value(<_i9.MovieTeaser>[]))
+      as _i6.Future<List<_i9.MovieTeaser>>);
   @override
   String toString() => super.toString();
 }
@@ -268,40 +280,40 @@ class MockIMovieDatabase extends _i1.Mock implements _i11.IMovieDatabase {
 /// A class which mocks [IListDatabase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIListDatabase extends _i1.Mock implements _i13.IListDatabase {
+class MockIListDatabase extends _i1.Mock implements _i14.IListDatabase {
   MockIListDatabase() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<String> createList({_i14.ListType? type, String? title}) =>
+  _i6.Future<String> createList({_i15.ListType? type, String? title}) =>
       (super.noSuchMethod(
           Invocation.method(#createList, [], {#type: type, #title: title}),
-          returnValue: Future<String>.value('')) as _i5.Future<String>);
+          returnValue: Future<String>.value('')) as _i6.Future<String>);
   @override
-  _i5.Future<_i15.MovieList?> getList({String? id}) =>
+  _i6.Future<_i3.MovieList?> getList({String? id}) =>
       (super.noSuchMethod(Invocation.method(#getList, [], {#id: id}),
-              returnValue: Future<_i15.MovieList?>.value())
-          as _i5.Future<_i15.MovieList?>);
+              returnValue: Future<_i3.MovieList?>.value())
+          as _i6.Future<_i3.MovieList?>);
   @override
-  _i5.Future<void> deleteList({String? id}) =>
+  _i6.Future<void> deleteList({String? id}) =>
       (super.noSuchMethod(Invocation.method(#deleteList, [], {#id: id}),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<void> addMovieToList({String? listId, int? movieId}) =>
+  _i6.Future<void> addMovieToList({String? listId, int? movieId}) =>
       (super.noSuchMethod(
           Invocation.method(
               #addMovieToList, [], {#listId: listId, #movieId: movieId}),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<void> removeMovieFromList({String? listId, int? movieId}) =>
+  _i6.Future<void> removeMovieFromList({String? listId, int? movieId}) =>
       (super.noSuchMethod(
           Invocation.method(
               #removeMovieFromList, [], {#listId: listId, #movieId: movieId}),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
   String toString() => super.toString();
 }
@@ -323,14 +335,14 @@ class MockILocalSettingsDatabase extends _i1.Mock
       super.noSuchMethod(Invocation.setter(#region, value),
           returnValueForMissingStub: null);
   @override
-  _i5.Future<void> initialize() =>
+  _i6.Future<void> initialize() =>
       (super.noSuchMethod(Invocation.method(#initialize, []),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<void> reset() => (super.noSuchMethod(Invocation.method(#reset, []),
+  _i6.Future<void> reset() => (super.noSuchMethod(Invocation.method(#reset, []),
       returnValue: Future<void>.value(),
-      returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+      returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
   String toString() => super.toString();
 }
@@ -354,7 +366,7 @@ class MockIPlatformService extends _i1.Mock implements _i18.IPlatformService {
 /// A class which mocks [HiveInterface].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHiveInterface extends _i1.Mock implements _i3.HiveInterface {
+class MockHiveInterface extends _i1.Mock implements _i4.HiveInterface {
   MockHiveInterface() {
     _i1.throwOnMissingStub(this);
   }
@@ -364,10 +376,10 @@ class MockHiveInterface extends _i1.Mock implements _i3.HiveInterface {
       super.noSuchMethod(Invocation.method(#init, [path]),
           returnValueForMissingStub: null);
   @override
-  _i5.Future<_i3.Box<E>> openBox<E>(String? name,
-          {_i3.HiveCipher? encryptionCipher,
-          _i3.KeyComparator? keyComparator = _i19.defaultKeyComparator,
-          _i3.CompactionStrategy? compactionStrategy =
+  _i6.Future<_i4.Box<E>> openBox<E>(String? name,
+          {_i4.HiveCipher? encryptionCipher,
+          _i4.KeyComparator? keyComparator = _i19.defaultKeyComparator,
+          _i4.CompactionStrategy? compactionStrategy =
               _i20.defaultCompactionStrategy,
           bool? crashRecovery = true,
           String? path,
@@ -385,13 +397,13 @@ class MockHiveInterface extends _i1.Mock implements _i3.HiveInterface {
                 #bytes: bytes,
                 #encryptionKey: encryptionKey
               }),
-              returnValue: Future<_i3.Box<E>>.value(_FakeBox_2<E>()))
-          as _i5.Future<_i3.Box<E>>);
+              returnValue: Future<_i4.Box<E>>.value(_FakeBox_3<E>()))
+          as _i6.Future<_i4.Box<E>>);
   @override
-  _i5.Future<_i3.LazyBox<E>> openLazyBox<E>(String? name,
-          {_i3.HiveCipher? encryptionCipher,
-          _i3.KeyComparator? keyComparator = _i19.defaultKeyComparator,
-          _i3.CompactionStrategy? compactionStrategy =
+  _i6.Future<_i4.LazyBox<E>> openLazyBox<E>(String? name,
+          {_i4.HiveCipher? encryptionCipher,
+          _i4.KeyComparator? keyComparator = _i19.defaultKeyComparator,
+          _i4.CompactionStrategy? compactionStrategy =
               _i20.defaultCompactionStrategy,
           bool? crashRecovery = true,
           String? path,
@@ -407,46 +419,46 @@ class MockHiveInterface extends _i1.Mock implements _i3.HiveInterface {
                 #path: path,
                 #encryptionKey: encryptionKey
               }),
-              returnValue: Future<_i3.LazyBox<E>>.value(_FakeLazyBox_3<E>()))
-          as _i5.Future<_i3.LazyBox<E>>);
+              returnValue: Future<_i4.LazyBox<E>>.value(_FakeLazyBox_4<E>()))
+          as _i6.Future<_i4.LazyBox<E>>);
   @override
-  _i3.Box<E> box<E>(String? name) =>
+  _i4.Box<E> box<E>(String? name) =>
       (super.noSuchMethod(Invocation.method(#box, [name]),
-          returnValue: _FakeBox_2<E>()) as _i3.Box<E>);
+          returnValue: _FakeBox_3<E>()) as _i4.Box<E>);
   @override
-  _i3.LazyBox<E> lazyBox<E>(String? name) =>
+  _i4.LazyBox<E> lazyBox<E>(String? name) =>
       (super.noSuchMethod(Invocation.method(#lazyBox, [name]),
-          returnValue: _FakeLazyBox_3<E>()) as _i3.LazyBox<E>);
+          returnValue: _FakeLazyBox_4<E>()) as _i4.LazyBox<E>);
   @override
   bool isBoxOpen(String? name) =>
       (super.noSuchMethod(Invocation.method(#isBoxOpen, [name]),
           returnValue: false) as bool);
   @override
-  _i5.Future<void> close() => (super.noSuchMethod(Invocation.method(#close, []),
+  _i6.Future<void> close() => (super.noSuchMethod(Invocation.method(#close, []),
       returnValue: Future<void>.value(),
-      returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+      returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<void> deleteBoxFromDisk(String? name) =>
+  _i6.Future<void> deleteBoxFromDisk(String? name) =>
       (super.noSuchMethod(Invocation.method(#deleteBoxFromDisk, [name]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<void> deleteFromDisk() =>
+  _i6.Future<void> deleteFromDisk() =>
       (super.noSuchMethod(Invocation.method(#deleteFromDisk, []),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
   List<int> generateSecureKey() =>
       (super.noSuchMethod(Invocation.method(#generateSecureKey, []),
           returnValue: <int>[]) as List<int>);
   @override
-  _i5.Future<bool> boxExists(String? name) =>
+  _i6.Future<bool> boxExists(String? name) =>
       (super.noSuchMethod(Invocation.method(#boxExists, [name]),
-          returnValue: Future<bool>.value(false)) as _i5.Future<bool>);
+          returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
   @override
   String toString() => super.toString();
   @override
-  void registerAdapter<T>(_i3.TypeAdapter<T>? adapter,
+  void registerAdapter<T>(_i4.TypeAdapter<T>? adapter,
           {bool? internal = false, bool? override = false}) =>
       super.noSuchMethod(
           Invocation.method(#registerAdapter, [adapter],
@@ -465,7 +477,7 @@ class MockHiveInterface extends _i1.Mock implements _i3.HiveInterface {
 /// A class which mocks [Box].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockBox<E> extends _i1.Mock implements _i3.Box<E> {
+class MockBox<E> extends _i1.Mock implements _i4.Box<E> {
   MockBox() {
     _i1.throwOnMissingStub(this);
   }
@@ -518,67 +530,67 @@ class MockBox<E> extends _i1.Mock implements _i3.Box<E> {
   dynamic keyAt(int? index) =>
       super.noSuchMethod(Invocation.method(#keyAt, [index]));
   @override
-  _i5.Stream<_i3.BoxEvent> watch({dynamic key}) => (super.noSuchMethod(
+  _i6.Stream<_i4.BoxEvent> watch({dynamic key}) => (super.noSuchMethod(
       Invocation.method(#watch, [], {#key: key}),
-      returnValue: Stream<_i3.BoxEvent>.empty()) as _i5.Stream<_i3.BoxEvent>);
+      returnValue: Stream<_i4.BoxEvent>.empty()) as _i6.Stream<_i4.BoxEvent>);
   @override
   bool containsKey(dynamic key) =>
       (super.noSuchMethod(Invocation.method(#containsKey, [key]),
           returnValue: false) as bool);
   @override
-  _i5.Future<void> put(dynamic key, E? value) =>
+  _i6.Future<void> put(dynamic key, E? value) =>
       (super.noSuchMethod(Invocation.method(#put, [key, value]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<void> putAt(int? index, E? value) =>
+  _i6.Future<void> putAt(int? index, E? value) =>
       (super.noSuchMethod(Invocation.method(#putAt, [index, value]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<void> putAll(Map<dynamic, E>? entries) =>
+  _i6.Future<void> putAll(Map<dynamic, E>? entries) =>
       (super.noSuchMethod(Invocation.method(#putAll, [entries]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<int> add(E? value) =>
+  _i6.Future<int> add(E? value) =>
       (super.noSuchMethod(Invocation.method(#add, [value]),
-          returnValue: Future<int>.value(0)) as _i5.Future<int>);
+          returnValue: Future<int>.value(0)) as _i6.Future<int>);
   @override
-  _i5.Future<Iterable<int>> addAll(Iterable<E>? values) =>
+  _i6.Future<Iterable<int>> addAll(Iterable<E>? values) =>
       (super.noSuchMethod(Invocation.method(#addAll, [values]),
               returnValue: Future<Iterable<int>>.value(<int>[]))
-          as _i5.Future<Iterable<int>>);
+          as _i6.Future<Iterable<int>>);
   @override
-  _i5.Future<void> delete(dynamic key) =>
+  _i6.Future<void> delete(dynamic key) =>
       (super.noSuchMethod(Invocation.method(#delete, [key]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<void> deleteAt(int? index) =>
+  _i6.Future<void> deleteAt(int? index) =>
       (super.noSuchMethod(Invocation.method(#deleteAt, [index]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<void> deleteAll(Iterable<dynamic>? keys) =>
+  _i6.Future<void> deleteAll(Iterable<dynamic>? keys) =>
       (super.noSuchMethod(Invocation.method(#deleteAll, [keys]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<void> compact() =>
+  _i6.Future<void> compact() =>
       (super.noSuchMethod(Invocation.method(#compact, []),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<int> clear() => (super.noSuchMethod(Invocation.method(#clear, []),
-      returnValue: Future<int>.value(0)) as _i5.Future<int>);
+  _i6.Future<int> clear() => (super.noSuchMethod(Invocation.method(#clear, []),
+      returnValue: Future<int>.value(0)) as _i6.Future<int>);
   @override
-  _i5.Future<void> close() => (super.noSuchMethod(Invocation.method(#close, []),
+  _i6.Future<void> close() => (super.noSuchMethod(Invocation.method(#close, []),
       returnValue: Future<void>.value(),
-      returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+      returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
-  _i5.Future<void> deleteFromDisk() =>
+  _i6.Future<void> deleteFromDisk() =>
       (super.noSuchMethod(Invocation.method(#deleteFromDisk, []),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
 }

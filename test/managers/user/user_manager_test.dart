@@ -283,5 +283,107 @@ void main() {
         );
       });
     });
+
+    group('watchedMoviesForCurrentUser', () {
+      const userId = 'userId';
+      const watchedId = 'watchedId';
+      final user = TestInstance.user(id: userId, watchedId: watchedId);
+      final list = TestInstance.movieList(id: watchedId);
+
+      test('when user not authenticated, expect error', () {
+        when(mockAuthService.isUserAuthenticated).thenReturn(false);
+
+        expect(
+          () => userManager.watchedMoviesForCurrentUser,
+          throwsAssertionError,
+        );
+      });
+
+      test('when user not found, expect error', () {
+        when(mockAuthService.isUserAuthenticated).thenReturn(true);
+        when(mockAuthService.authenticatedUserId).thenReturn(userId);
+        when(mockUserDatabase.getUser(id: userId)).thenAnswer((_) => Future.value(null));
+
+        expect(
+          () => userManager.watchedMoviesForCurrentUser,
+          throwsArgumentError,
+        );
+      });
+
+      test('when user authenticated and list does not exists, expect error', () async {
+        when(mockAuthService.isUserAuthenticated).thenReturn(true);
+        when(mockAuthService.authenticatedUserId).thenReturn(userId);
+        when(mockUserDatabase.getUser(id: userId)).thenAnswer((_) => Future.value(user));
+        when(mockListDatabase.getList(id: watchedId)).thenAnswer((_) => Future.value(null));
+
+        expect(
+          () => userManager.watchedMoviesForCurrentUser,
+          throwsArgumentError,
+        );
+      });
+
+      test('when user authenticated and list exists, expect list', () async {
+        when(mockAuthService.isUserAuthenticated).thenReturn(true);
+        when(mockAuthService.authenticatedUserId).thenReturn(userId);
+        when(mockUserDatabase.getUser(id: userId)).thenAnswer((_) => Future.value(user));
+        when(mockListDatabase.getList(id: watchedId)).thenAnswer((_) => Future.value(list));
+
+        expect(
+          await userManager.watchedMoviesForCurrentUser,
+          list,
+        );
+      });
+    });
+
+    group('watchlistMoviesForCurrentUser', () {
+      const userId = 'userId';
+      const watchlistId = 'watchlistId';
+      final user = TestInstance.user(id: userId, watchlistId: watchlistId);
+      final list = TestInstance.movieList(id: watchlistId);
+
+      test('when user not authenticated, expect error', () {
+        when(mockAuthService.isUserAuthenticated).thenReturn(false);
+
+        expect(
+          () => userManager.watchlistMoviesForCurrentUser,
+          throwsAssertionError,
+        );
+      });
+
+      test('when user not found, expect error', () {
+        when(mockAuthService.isUserAuthenticated).thenReturn(true);
+        when(mockAuthService.authenticatedUserId).thenReturn(userId);
+        when(mockUserDatabase.getUser(id: userId)).thenAnswer((_) => Future.value(null));
+
+        expect(
+          () => userManager.watchlistMoviesForCurrentUser,
+          throwsArgumentError,
+        );
+      });
+
+      test('when user authenticated and list does not exists, expect error', () async {
+        when(mockAuthService.isUserAuthenticated).thenReturn(true);
+        when(mockAuthService.authenticatedUserId).thenReturn(userId);
+        when(mockUserDatabase.getUser(id: userId)).thenAnswer((_) => Future.value(user));
+        when(mockListDatabase.getList(id: watchlistId)).thenAnswer((_) => Future.value(null));
+
+        expect(
+          () => userManager.watchlistMoviesForCurrentUser,
+          throwsArgumentError,
+        );
+      });
+
+      test('when user authenticated and list exists, expect list', () async {
+        when(mockAuthService.isUserAuthenticated).thenReturn(true);
+        when(mockAuthService.authenticatedUserId).thenReturn(userId);
+        when(mockUserDatabase.getUser(id: userId)).thenAnswer((_) => Future.value(user));
+        when(mockListDatabase.getList(id: watchlistId)).thenAnswer((_) => Future.value(list));
+
+        expect(
+          await userManager.watchlistMoviesForCurrentUser,
+          list,
+        );
+      });
+    });
   });
 }
