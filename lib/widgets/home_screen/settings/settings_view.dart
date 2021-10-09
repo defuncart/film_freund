@@ -5,6 +5,7 @@ import 'package:film_freund/state/current_user_provider.dart';
 import 'package:film_freund/widgets/home_screen/active_view.dart';
 import 'package:film_freund/widgets/home_screen/settings/change_password_dialog.dart';
 import 'package:film_freund/widgets/home_screen/settings/delete_account_confirmation_dialog.dart';
+import 'package:film_freund/widgets/home_screen/settings/region_button_panel.dart';
 import 'package:film_freund/widgets/home_screen/settings/sign_out_confirmation_dialog.dart';
 import 'package:film_freund/widgets/signin_screen/signin_screen.dart';
 import 'package:flutter/material.dart';
@@ -125,6 +126,14 @@ class _SettingsViewContentState extends State<SettingsViewContent> {
               );
             }
           },
+        ),
+        const Gap(16),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(AppLocalizations.of(context).settingsViewRegionPanelText),
+            const RegionButtonPanel(),
+          ],
         ),
         const Gap(16),
         ElevatedButton(

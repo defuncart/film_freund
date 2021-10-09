@@ -22,6 +22,7 @@ settingsViewChangePasswordButtonText;Text for change password button;Change Pass
 settingsViewSignOutButtonText;Text for sign out button;Sign Out
 settingsViewDisplayNameHintText;Hint text for display name input field;Display Name
 settingsViewDisplayNameErrorText;Error text when display name is invalid;Display Name must have at least one character
+settingsViewRegionPanelText;Text for region's panel;Region
 settingsViewDeleteAccountButtonText;Button text for delete account dialog;Delete Account
 signOutConfirmationDialogDescriptionText;Description text for sign out dialog;Are you sure you want to sign out?
 signOutConfirmationDialogConfirmButtonText;Confirmation text for sign out dialog;Sign Out

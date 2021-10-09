@@ -311,6 +311,16 @@ class AppLocalizations {
     );
   }
 
+  /// `Region`
+  String get settingsViewRegionPanelText {
+    return Intl.message(
+      'Region',
+      name: 'settingsViewRegionPanelText',
+      desc: 'Text for region\'s panel',
+      args: [],
+    );
+  }
+
   /// `Sign Out`
   String get settingsViewSignOutButtonText {
     return Intl.message(
