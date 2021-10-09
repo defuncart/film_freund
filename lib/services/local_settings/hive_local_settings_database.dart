@@ -4,6 +4,12 @@ import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
 class HiveLocalSettingsDatabase implements ILocalSettingsDatabase {
+  HiveLocalSettingsDatabase({
+    HiveInterface? hive,
+  }) : _hive = hive ?? Hive;
+
+  final HiveInterface _hive;
+
   /// A box to store objects
   late Box<dynamic> _box;
 
@@ -20,10 +26,10 @@ class HiveLocalSettingsDatabase implements ILocalSettingsDatabase {
   Future<void> initialize() async {
     if (!kIsWeb) {
       final dir = await getApplicationDocumentsDirectory();
-      Hive.init(dir.path);
+      _hive.init(dir.path);
     }
 
-    _box = await Hive.openBox<dynamic>(_boxName);
+    _box = await _hive.openBox<dynamic>(_boxName);
   }
 
   @override
