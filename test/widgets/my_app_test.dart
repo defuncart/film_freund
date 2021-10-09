@@ -1,4 +1,5 @@
 import 'package:film_freund/managers/user/user_manager.dart';
+import 'package:film_freund/services/local_settings/i_local_settings_database.dart';
 import 'package:film_freund/widgets/home_screen/home_screen.dart';
 import 'package:film_freund/widgets/my_app.dart';
 import 'package:film_freund/widgets/signin_screen/signin_screen.dart';
@@ -6,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../firebase_mocks.dart';
 import '../mocks.dart';
 import '../test_service_locator.dart';
 
@@ -23,11 +23,13 @@ void main() {
     });
 
     testWidgets('Ensure data state', (tester) async {
-      setupFirebaseMocks();
+      MethodChannelMocks.setupFirebase();
 
       final UserManager mockUserManager = MockUserManager();
+      final ILocalSettingsDatabase mockLocalSettings = MockILocalSettingsDatabase();
       TestServiceLocator.register(
         userManager: mockUserManager,
+        localSettings: mockLocalSettings,
       );
       when(mockUserManager.isAuthenticated).thenReturn(false);
 
@@ -46,11 +48,14 @@ void main() {
 
   group('$MyAppContent', () {
     late UserManager mockUserManager;
+    late ILocalSettingsDatabase mockLocalSettings;
 
     setUp(() {
       mockUserManager = MockUserManager();
+      mockLocalSettings = MockILocalSettingsDatabase();
       TestServiceLocator.register(
         userManager: mockUserManager,
+        localSettings: mockLocalSettings,
       );
     });
 

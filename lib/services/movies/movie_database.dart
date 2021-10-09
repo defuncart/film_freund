@@ -19,7 +19,6 @@ class MovieDatabase implements IMovieDatabase {
 
   static const _baseUrl = 'https://api.themoviedb.org/3';
   static const _language = 'en-US';
-  static const _region = 'de';
 
   /// TODO if multi-language, then retrieve using
   /// $_baseUrl/genre/movie/list?api_key=$apiKey&language=$_language
@@ -86,8 +85,8 @@ class MovieDatabase implements IMovieDatabase {
   }
 
   @override
-  Future<List<MovieTeaser>> getPopular() async {
-    final response = await _get('$_baseUrl/movie/popular?api_key=$apiKey&language=$_language&page=1&region=$_region');
+  Future<List<MovieTeaser>> getPopular({required String region}) async {
+    final response = await _get('$_baseUrl/movie/popular?api_key=$apiKey&language=$_language&page=1&region=$region');
     final parsedResponse = PopularResponse.fromJson(jsonDecode(response.body));
     final movieTeasers = parsedResponse.results
         .where((result) => result.posterPath != null)
@@ -98,8 +97,8 @@ class MovieDatabase implements IMovieDatabase {
   }
 
   @override
-  Future<List<MovieTeaser>> getUpcoming() async {
-    final response = await _get('$_baseUrl/movie/upcoming?api_key=$apiKey&language=$_language&page=1&region=$_region');
+  Future<List<MovieTeaser>> getUpcoming({required String region}) async {
+    final response = await _get('$_baseUrl/movie/upcoming?api_key=$apiKey&language=$_language&page=1&region=$region');
     final parsedResponse = UpcomingResponse.fromJson(jsonDecode(response.body));
     final movieTeasers = parsedResponse.results
         .where((result) => result.posterPath != null)

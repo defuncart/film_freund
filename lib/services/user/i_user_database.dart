@@ -12,6 +12,9 @@ abstract class IUserDatabase {
   /// Returns a user with [id]. If no such user exists, null is returned.
   Future<User?> getUser({required String id});
 
+  /// Watches a user with [id]
+  Stream<User?> watchUser({required String id});
+
   /// Updates a user with given overriden parameters [displayName],
   /// [watched], [watchlist] and/or [lists]
   Future<void> updateUser({

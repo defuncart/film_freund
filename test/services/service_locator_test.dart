@@ -1,22 +1,22 @@
+import 'package:film_freund/managers/movies/movie_manager.dart';
 import 'package:film_freund/managers/user/user_manager.dart';
 import 'package:film_freund/services/date_time/date_time_service.dart';
-import 'package:film_freund/services/movies/i_movie_database.dart';
+import 'package:film_freund/services/local_settings/i_local_settings_database.dart';
 import 'package:film_freund/services/service_locator.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../firebase_mocks.dart';
 import '../mocks.dart';
 import '../test_service_locator.dart';
 
 void main() {
   group('$ServiceLocator', () {
     test('When $ServiceLocator is initialized, expect access to services', () async {
-      setupFirebaseMocks();
+      MethodChannelMocks.setupFirebase();
       await Firebase.initializeApp();
       final container = ProviderContainer();
-      ServiceLocator.initialize(container.read);
+      ServiceLocator.setReader(container.read);
 
       expect(
         () => ServiceLocator.dateTimeService,
@@ -27,7 +27,11 @@ void main() {
         returnsNormally,
       );
       expect(
-        () => ServiceLocator.movieDatabase,
+        () => ServiceLocator.movieManager,
+        returnsNormally,
+      );
+      expect(
+        () => ServiceLocator.localSettings,
         returnsNormally,
       );
     });
@@ -35,16 +39,19 @@ void main() {
     group('ensure services can be mocked', () {
       late DateTimeService mockDateTimeService;
       late UserManager mockUserManager;
-      late IMovieDatabase mockMovieDatabase;
+      late MovieManager mockMovieManager;
+      late ILocalSettingsDatabase mockLocalSettings;
 
       setUp(() {
         mockDateTimeService = MockDateTimeService();
         mockUserManager = MockUserManager();
-        mockMovieDatabase = MockIMovieDatabase();
+        mockMovieManager = MockMovieManager();
+        mockLocalSettings = MockILocalSettingsDatabase();
         TestServiceLocator.register(
           dateTimeService: mockDateTimeService,
           userManager: mockUserManager,
-          movieDatabase: mockMovieDatabase,
+          movieManager: mockMovieManager,
+          localSettings: mockLocalSettings,
         );
       });
 
@@ -60,7 +67,11 @@ void main() {
           returnsNormally,
         );
         expect(
-          () => ServiceLocator.movieDatabase,
+          () => ServiceLocator.movieManager,
+          returnsNormally,
+        );
+        expect(
+          () => ServiceLocator.localSettings,
           returnsNormally,
         );
       });
