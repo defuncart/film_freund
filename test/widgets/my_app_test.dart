@@ -26,8 +26,10 @@ void main() {
       MethodChannelMocks.setupFirebase();
 
       final UserManager mockUserManager = MockUserManager();
+      final ILocalSettingsDatabase mockLocalSettings = MockILocalSettingsDatabase();
       TestServiceLocator.register(
         userManager: mockUserManager,
+        localSettings: mockLocalSettings,
       );
       when(mockUserManager.isAuthenticated).thenReturn(false);
 
@@ -41,7 +43,7 @@ void main() {
       expect(find.byType(MyApp), findsOneWidget);
       expect(find.byType(CircularProgressIndicator), findsNothing);
       expect(find.byType(MyAppContent), findsOneWidget);
-    }, skip: true);
+    });
   });
 
   group('$MyAppContent', () {

@@ -7,10 +7,13 @@ import 'package:film_freund/services/movies/i_movie_database.dart';
 import 'package:film_freund/services/user/i_user_database.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_core_platform_interface/firebase_core_platform_interface.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:hive/hive.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 
 export 'mocks.mocks.dart';
 
@@ -22,6 +25,9 @@ export 'mocks.mocks.dart';
   IUserDatabase,
   IMovieDatabase,
   ILocalSettingsDatabase,
+  PathProviderPlatform,
+  HiveInterface,
+  Box,
 ])
 void main() {}
 
@@ -38,7 +44,7 @@ class MockVoidCallback extends Mock {
 typedef Callback = void Function(MethodCall call);
 
 class MethodChannelMocks {
-// Copied from https://github.com/FirebaseExtended/flutterfire/blob/master/packages/firebase_auth/firebase_auth/test/mock.dart
+  // taken from https://github.com/FirebaseExtended/flutterfire/blob/master/packages/firebase_auth/firebase_auth/test/mock.dart
   static void setupFirebase([Callback? customHandlers]) {
     TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -73,4 +79,38 @@ class MethodChannelMocks {
       return null;
     });
   }
+
+  static void setupPathProvider(PathProviderPlatform instance) {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    PathProviderPlatform.instance = instance;
+  }
 }
+
+// class _MockPathProviderPlatform extends Mock with MockPlatformInterfaceMixin implements PathProviderPlatform {
+//   @override
+//   Future<String> getTemporaryPath() async => 'TemporaryPath';
+
+//   @override
+//   Future<String> getApplicationSupportPath() async => 'ApplicationSupportPath';
+
+//   @override
+//   Future<String> getLibraryPath() async => 'LibraryPath';
+
+//   @override
+//   Future<String> getApplicationDocumentsPath() async => 'ApplicationDocumentsPath';
+
+//   @override
+//   Future<String> getExternalStoragePath() async => 'ExternalStoragePath';
+
+//   @override
+//   Future<List<String>> getExternalCachePaths() async => ['ExternalCachePath'];
+
+//   @override
+//   Future<List<String>> getExternalStoragePaths({
+//     StorageDirectory? type,
+//   }) async =>
+//       ['ExternalStoragePath'];
+
+//   @override
+//   Future<String> getDownloadsPath() async => 'DownloadsPath';
+// }
