@@ -4,6 +4,7 @@ import 'package:film_freund/services/auth/i_auth_service.dart';
 import 'package:film_freund/services/date_time/date_time_service.dart';
 import 'package:film_freund/services/local_settings/i_local_settings_database.dart';
 import 'package:film_freund/services/movies/i_movie_database.dart';
+import 'package:film_freund/services/platform/i_platform_service.dart';
 import 'package:film_freund/services/user/i_user_database.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_core_platform_interface/firebase_core_platform_interface.dart';
@@ -14,6 +15,7 @@ import 'package:hive/hive.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 export 'mocks.mocks.dart';
 
@@ -25,7 +27,7 @@ export 'mocks.mocks.dart';
   IUserDatabase,
   IMovieDatabase,
   ILocalSettingsDatabase,
-  PathProviderPlatform,
+  IPlatformService,
   HiveInterface,
   Box,
 ])
@@ -86,31 +88,32 @@ class MethodChannelMocks {
   }
 }
 
-// class _MockPathProviderPlatform extends Mock with MockPlatformInterfaceMixin implements PathProviderPlatform {
-//   @override
-//   Future<String> getTemporaryPath() async => 'TemporaryPath';
+// Manually created as without `MockPlatformInterfaceMixin` PathProviderPlatform.instance will fail
+class MockPathProviderPlatform extends Mock with MockPlatformInterfaceMixin implements PathProviderPlatform {
+  @override
+  Future<String> getTemporaryPath() async => 'TemporaryPath';
 
-//   @override
-//   Future<String> getApplicationSupportPath() async => 'ApplicationSupportPath';
+  @override
+  Future<String> getApplicationSupportPath() async => 'ApplicationSupportPath';
 
-//   @override
-//   Future<String> getLibraryPath() async => 'LibraryPath';
+  @override
+  Future<String> getLibraryPath() async => 'LibraryPath';
 
-//   @override
-//   Future<String> getApplicationDocumentsPath() async => 'ApplicationDocumentsPath';
+  @override
+  Future<String> getApplicationDocumentsPath() async => 'ApplicationDocumentsPath';
 
-//   @override
-//   Future<String> getExternalStoragePath() async => 'ExternalStoragePath';
+  @override
+  Future<String> getExternalStoragePath() async => 'ExternalStoragePath';
 
-//   @override
-//   Future<List<String>> getExternalCachePaths() async => ['ExternalCachePath'];
+  @override
+  Future<List<String>> getExternalCachePaths() async => ['ExternalCachePath'];
 
-//   @override
-//   Future<List<String>> getExternalStoragePaths({
-//     StorageDirectory? type,
-//   }) async =>
-//       ['ExternalStoragePath'];
+  @override
+  Future<List<String>> getExternalStoragePaths({
+    StorageDirectory? type,
+  }) async =>
+      ['ExternalStoragePath'];
 
-//   @override
-//   Future<String> getDownloadsPath() async => 'DownloadsPath';
-// }
+  @override
+  Future<String> getDownloadsPath() async => 'DownloadsPath';
+}
