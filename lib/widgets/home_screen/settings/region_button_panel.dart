@@ -62,8 +62,8 @@ class RegionButton extends StatelessWidget {
             duration: const Duration(milliseconds: 250),
             child: Image.network(
               imageUrl,
-              width: 40,
-              height: 40,
+              width: 32,
+              height: 32,
             ),
           ),
         ),
