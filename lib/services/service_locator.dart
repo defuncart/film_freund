@@ -5,6 +5,8 @@ import 'package:film_freund/services/date_time/date_time_service.dart';
 import 'package:film_freund/services/local_settings/hive_local_settings_database.dart';
 import 'package:film_freund/services/local_settings/i_local_settings_database.dart';
 import 'package:film_freund/services/movies/movie_database.dart';
+import 'package:film_freund/services/platform/i_platform_service.dart';
+import 'package:film_freund/services/platform/platform_service.dart';
 import 'package:film_freund/services/user/firebase_user_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -46,5 +48,12 @@ final movieManagerProvider = Provider<MovieManager>(
 
 @visibleForTesting
 final localSettingsDatabaseProvider = Provider<ILocalSettingsDatabase>(
-  (_) => HiveLocalSettingsDatabase(),
+  (ref) => HiveLocalSettingsDatabase(
+    platformService: ref.read(platformServiceProvider),
+  ),
+);
+
+@visibleForTesting
+final platformServiceProvider = Provider<IPlatformService>(
+  (_) => PlatformService(),
 );

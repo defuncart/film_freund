@@ -1,14 +1,17 @@
 import 'package:film_freund/services/local_settings/i_local_settings_database.dart';
-import 'package:flutter/foundation.dart';
+import 'package:film_freund/services/platform/i_platform_service.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
 class HiveLocalSettingsDatabase implements ILocalSettingsDatabase {
   HiveLocalSettingsDatabase({
+    required IPlatformService platformService,
     HiveInterface? hive,
-  }) : _hive = hive ?? Hive;
+  })  : _platformService = platformService,
+        _hive = hive ?? Hive;
 
   final HiveInterface _hive;
+  final IPlatformService _platformService;
 
   /// A box to store objects
   late Box<dynamic> _box;
@@ -24,7 +27,7 @@ class HiveLocalSettingsDatabase implements ILocalSettingsDatabase {
 
   @override
   Future<void> initialize() async {
-    if (!kIsWeb) {
+    if (!_platformService.isRunningOnWeb) {
       final dir = await getApplicationDocumentsDirectory();
       _hive.init(dir.path);
     }
