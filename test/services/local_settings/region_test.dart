@@ -6,7 +6,7 @@ void main() {
     test('countryCode', () {
       expect(Region.de.countryCode, 'de');
       expect(Region.pl.countryCode, 'pl');
-      expect(Region.us.countryCode, 'gb');
+      expect(Region.gb.countryCode, 'gb');
       expect(Region.us.countryCode, 'us');
     });
   });

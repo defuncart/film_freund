@@ -49,8 +49,8 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
-            currentUserProvider.overrideWithProvider(
-              FutureProvider.autoDispose((_) => Future.error(error)),
+            currentUserProvider.overrideWithValue(
+              AsyncValue.error(error),
             )
           ],
           child: MaterialApp(

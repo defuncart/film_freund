@@ -1,5 +1,6 @@
 import 'dart:ui' show Size;
 
+import 'package:film_freund/services/local_settings/region.dart';
 import 'package:film_freund/services/movies/models/movie_teaser.dart';
 import 'package:film_freund/state/current_user_provider.dart';
 import 'package:film_freund/utils/sizes.dart';
@@ -12,8 +13,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
+import 'package:network_image_mock/network_image_mock.dart';
 
+import '../../mocks.dart';
 import '../../riverpod_overrides.dart';
+import '../../test_service_locator.dart';
 import '../../test_utils.dart';
 
 void main() {
@@ -166,26 +171,32 @@ void main() {
     });
 
     testWidgets('When ${ActiveView.settings}, expect $SettingsView', (tester) async {
-      final widget = ProviderScope(
-        overrides: [
-          currentUserProvider.overrideWithValue(
-            AsyncValue.data(TestInstance.user()),
-          ),
-        ],
-        child: wrapWithMaterialAppLocalizationDelegates(
-          const Scaffold(
-            body: HomeScreenContent(
-              activeView: ActiveView.settings,
+      mockNetworkImagesFor(() async {
+        final mockLocalSettings = MockILocalSettingsDatabase();
+        TestServiceLocator.register(localSettings: mockLocalSettings);
+        when(mockLocalSettings.region).thenReturn(Region.de);
+
+        final widget = ProviderScope(
+          overrides: [
+            currentUserProvider.overrideWithValue(
+              AsyncValue.data(TestInstance.user()),
+            ),
+          ],
+          child: wrapWithMaterialAppLocalizationDelegates(
+            const Scaffold(
+              body: HomeScreenContent(
+                activeView: ActiveView.settings,
+              ),
             ),
           ),
-        ),
-      );
+        );
 
-      await tester.pumpWidget(widget);
-      await tester.pumpAndSettle();
+        await tester.pumpWidget(widget);
+        await tester.pumpAndSettle();
 
-      expect(find.byType(HomeScreenContent), findsOneWidget);
-      expect(find.byType(SettingsView), findsOneWidget);
+        expect(find.byType(HomeScreenContent), findsOneWidget);
+        expect(find.byType(SettingsView), findsOneWidget);
+      });
     });
   });
 }
