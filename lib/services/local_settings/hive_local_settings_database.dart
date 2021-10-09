@@ -1,4 +1,5 @@
 import 'package:film_freund/services/local_settings/i_local_settings_database.dart';
+import 'package:film_freund/services/local_settings/region.dart';
 import 'package:film_freund/services/platform/i_platform_service.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -22,10 +23,10 @@ class HiveLocalSettingsDatabase implements ILocalSettingsDatabase {
   static const boxName = 'settings';
 
   @override
-  String get region => _box.get(_Keys.region, defaultValue: _Defaults.region);
+  Region get region => Region.values[_box.get(_Keys.region, defaultValue: _Defaults.region)];
 
   @override
-  set region(String value) => _box.put(_Keys.region, value);
+  set region(Region value) => _box.put(_Keys.region, value.index);
 
   @override
   Future<void> initialize() async {
@@ -48,5 +49,5 @@ class _Keys {
 
 /// A class of defaults for each key
 class _Defaults {
-  static const region = 'de';
+  static const region = 0;
 }

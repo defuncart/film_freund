@@ -1,10 +1,12 @@
+import 'package:film_freund/services/local_settings/region.dart';
+
 /// A local database of user's settings
 abstract class ILocalSettingsDatabase {
   /// Returns the user's region
-  String get region;
+  Region get region;
 
   /// Sets the user's region
-  set region(String value);
+  set region(Region value);
 
   /// Initializes the database
   Future<void> initialize();
