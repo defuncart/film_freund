@@ -3,7 +3,7 @@
 // Do not manually edit this file.
 
 import 'dart:async' as _i5;
-import 'dart:typed_data' as _i17;
+import 'dart:typed_data' as _i18;
 
 import 'package:film_freund/managers/movies/movie_manager.dart' as _i7;
 import 'package:film_freund/managers/user/user_manager.dart' as _i4;
@@ -11,15 +11,16 @@ import 'package:film_freund/services/auth/i_auth_service.dart' as _i6;
 import 'package:film_freund/services/date_time/date_time_service.dart' as _i9;
 import 'package:film_freund/services/local_settings/i_local_settings_database.dart'
     as _i13;
+import 'package:film_freund/services/local_settings/region.dart' as _i14;
 import 'package:film_freund/services/movies/i_movie_database.dart' as _i11;
 import 'package:film_freund/services/movies/models/movie.dart' as _i12;
 import 'package:film_freund/services/movies/models/movie_teaser.dart' as _i8;
-import 'package:film_freund/services/platform/i_platform_service.dart' as _i14;
+import 'package:film_freund/services/platform/i_platform_service.dart' as _i15;
 import 'package:film_freund/services/user/i_user_database.dart' as _i10;
 import 'package:film_freund/services/user/models/user.dart' as _i2;
 import 'package:hive/hive.dart' as _i3;
-import 'package:hive/src/box/default_compaction_strategy.dart' as _i16;
-import 'package:hive/src/box/default_key_comparator.dart' as _i15;
+import 'package:hive/src/box/default_compaction_strategy.dart' as _i17;
+import 'package:hive/src/box/default_key_comparator.dart' as _i16;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: avoid_redundant_argument_values
@@ -267,11 +268,10 @@ class MockILocalSettingsDatabase extends _i1.Mock
   }
 
   @override
-  String get region =>
-      (super.noSuchMethod(Invocation.getter(#region), returnValue: '')
-          as String);
+  _i14.Region get region => (super.noSuchMethod(Invocation.getter(#region),
+      returnValue: _i14.Region.de) as _i14.Region);
   @override
-  set region(String? value) =>
+  set region(_i14.Region? value) =>
       super.noSuchMethod(Invocation.setter(#region, value),
           returnValueForMissingStub: null);
   @override
@@ -290,7 +290,7 @@ class MockILocalSettingsDatabase extends _i1.Mock
 /// A class which mocks [IPlatformService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIPlatformService extends _i1.Mock implements _i14.IPlatformService {
+class MockIPlatformService extends _i1.Mock implements _i15.IPlatformService {
   MockIPlatformService() {
     _i1.throwOnMissingStub(this);
   }
@@ -318,12 +318,12 @@ class MockHiveInterface extends _i1.Mock implements _i3.HiveInterface {
   @override
   _i5.Future<_i3.Box<E>> openBox<E>(String? name,
           {_i3.HiveCipher? encryptionCipher,
-          _i3.KeyComparator? keyComparator = _i15.defaultKeyComparator,
+          _i3.KeyComparator? keyComparator = _i16.defaultKeyComparator,
           _i3.CompactionStrategy? compactionStrategy =
-              _i16.defaultCompactionStrategy,
+              _i17.defaultCompactionStrategy,
           bool? crashRecovery = true,
           String? path,
-          _i17.Uint8List? bytes,
+          _i18.Uint8List? bytes,
           List<int>? encryptionKey}) =>
       (super.noSuchMethod(
               Invocation.method(#openBox, [
@@ -342,9 +342,9 @@ class MockHiveInterface extends _i1.Mock implements _i3.HiveInterface {
   @override
   _i5.Future<_i3.LazyBox<E>> openLazyBox<E>(String? name,
           {_i3.HiveCipher? encryptionCipher,
-          _i3.KeyComparator? keyComparator = _i15.defaultKeyComparator,
+          _i3.KeyComparator? keyComparator = _i16.defaultKeyComparator,
           _i3.CompactionStrategy? compactionStrategy =
-              _i16.defaultCompactionStrategy,
+              _i17.defaultCompactionStrategy,
           bool? crashRecovery = true,
           String? path,
           List<int>? encryptionKey}) =>

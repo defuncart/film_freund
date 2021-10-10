@@ -74,6 +74,8 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Display Name must have at least one character"),
         "settingsViewDisplayNameHintText":
             MessageLookupByLibrary.simpleMessage("Display Name"),
+        "settingsViewRegionPanelText":
+            MessageLookupByLibrary.simpleMessage("Region"),
         "settingsViewSignOutButtonText":
             MessageLookupByLibrary.simpleMessage("Sign Out"),
         "settingsViewSignedInAsText": m0,

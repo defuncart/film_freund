@@ -1,4 +1,5 @@
 import 'package:film_freund/services/local_settings/i_local_settings_database.dart';
+import 'package:film_freund/services/local_settings/region.dart';
 import 'package:film_freund/services/platform/i_platform_service.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -22,10 +23,10 @@ class HiveLocalSettingsDatabase implements ILocalSettingsDatabase {
   static const boxName = 'settings';
 
   @override
-  String get region => _box.get(_Keys.region, defaultValue: _Defaults.region);
+  Region get region =>  (_box.get(_Keys.region, defaultValue: Defaults.region) as int).asRegion;
 
   @override
-  set region(String value) => _box.put(_Keys.region, value);
+  set region(Region value) => _box.put(_Keys.region, value.index);
 
   @override
   Future<void> initialize() async {
@@ -41,12 +42,22 @@ class HiveLocalSettingsDatabase implements ILocalSettingsDatabase {
   Future<void> reset() => _box.deleteAll(_box.keys);
 }
 
+extension IntExtensions on int {
+  @visibleForTesting
+  Region get asRegion {
+    assert(this >= 0 && this < Region.values.length, '$this is an invalid index for $Region');
+
+    return Region.values[this];
+  }
+}
+
 /// A class of keys used to store values
 class _Keys {
   static const region = 'region';
 }
 
 /// A class of defaults for each key
-class _Defaults {
-  static const region = 'de';
+@visibleForTesting
+class Defaults {
+  static const region = 0;
 }

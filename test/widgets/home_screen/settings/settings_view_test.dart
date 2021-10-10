@@ -1,19 +1,31 @@
 import 'package:film_freund/generated/l10n.dart';
 import 'package:film_freund/managers/user/user_manager.dart';
+import 'package:film_freund/services/local_settings/i_local_settings_database.dart';
+import 'package:film_freund/services/local_settings/region.dart';
 import 'package:film_freund/state/current_user_provider.dart';
 import 'package:film_freund/widgets/home_screen/settings/change_password_dialog.dart';
 import 'package:film_freund/widgets/home_screen/settings/delete_account_confirmation_dialog.dart';
+import 'package:film_freund/widgets/home_screen/settings/region_button_panel.dart';
 import 'package:film_freund/widgets/home_screen/settings/settings_view.dart';
 import 'package:film_freund/widgets/home_screen/settings/sign_out_confirmation_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
+import 'package:network_image_mock/network_image_mock.dart';
 
 import '../../../mocks.dart';
 import '../../../test_service_locator.dart';
 import '../../../test_utils.dart';
 
 void main() {
+  ILocalSettingsDatabase mockLocalSettings = MockILocalSettingsDatabase();
+
+  setUp(() {
+    TestServiceLocator.register(localSettings: mockLocalSettings);
+    when(mockLocalSettings.region).thenReturn(Region.de);
+  });
+
   group('$SettingsView', () {
     testWidgets('SettingsView loading', (tester) async {
       await tester.pumpWidget(
@@ -37,8 +49,8 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
-            currentUserProvider.overrideWithProvider(
-              FutureProvider.autoDispose((_) => Future.error(error)),
+            currentUserProvider.overrideWithValue(
+              AsyncValue.error(error),
             )
           ],
           child: MaterialApp(
@@ -58,27 +70,29 @@ void main() {
     });
 
     testWidgets('SettingsView user', (tester) async {
-      final user = TestInstance.user();
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [
-            currentUserProvider.overrideWithProvider(
-              FutureProvider.autoDispose((_) => Future.value(user)),
-            )
-          ],
-          child: wrapWithMaterialAppLocalizationDelegates(
-            Scaffold(
-              body: SettingsView(
-                onSignOutConfirmed: () {},
+      mockNetworkImagesFor(() async {
+        final user = TestInstance.user();
+        await tester.pumpWidget(
+          ProviderScope(
+            overrides: [
+              currentUserProvider.overrideWithProvider(
+                FutureProvider.autoDispose((_) => Future.value(user)),
+              ),
+            ],
+            child: wrapWithMaterialAppLocalizationDelegates(
+              Scaffold(
+                body: SettingsView(
+                  onSignOutConfirmed: () {},
+                ),
               ),
             ),
           ),
-        ),
-      );
+        );
 
-      await tester.pumpAndSettle();
+        await tester.pumpAndSettle();
 
-      expect(find.byType(SettingsViewContent), findsOneWidget);
+        expect(find.byType(SettingsViewContent), findsOneWidget);
+      });
     });
   });
 
@@ -119,6 +133,14 @@ void main() {
         findsOneWidget,
       );
       expect(
+        find.text(AppLocalizations.current.settingsViewRegionPanelText),
+        findsOneWidget,
+      );
+      expect(
+        find.byType(RegionButtonPanel),
+        findsOneWidget,
+      );
+      expect(
         find.byType(ElevatedButton),
         findsOneWidget,
       );
@@ -154,6 +176,7 @@ void main() {
       final UserManager mockUserManager = MockUserManager();
       TestServiceLocator.register(
         userManager: mockUserManager,
+        localSettings: mockLocalSettings,
       );
 
       await tester.pumpWidget(widget);
