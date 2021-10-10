@@ -74,6 +74,41 @@ void main() {
       });
     });
 
+    group('watchCurrentUser', () {
+      test('$IAuthService user not authenticated, expect AssertionError', () {
+        when(mockAuthService.isUserAuthenticated).thenReturn(false);
+
+        expect(
+          () => userManager.watchCurrentUser,
+          throwsAssertionError,
+        );
+      });
+
+      test('$IAuthService user id null, expect ArgumentError', () {
+        when(mockAuthService.isUserAuthenticated).thenReturn(true);
+        when(mockAuthService.authenticatedUserId).thenReturn(null);
+
+        expect(
+          () => userManager.watchCurrentUser,
+          throwsArgumentError,
+        );
+      });
+
+      test('$IAuthService user authenticated, $IUserDatabase user found, expect user', () async {
+        const id = 'id';
+        final user = TestInstance.user(id: 'id');
+
+        when(mockAuthService.isUserAuthenticated).thenReturn(true);
+        when(mockAuthService.authenticatedUserId).thenReturn(id);
+        when(mockUserDatabase.watchUser(id: id)).thenAnswer((_) => Stream.value(user));
+
+        expect(
+          await userManager.watchCurrentUser.first,
+          user,
+        );
+      });
+    });
+
     group('getUser', () {
       test('$IUserDatabase no user found, expect isNull', () async {
         const id = 'id';
