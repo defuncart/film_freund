@@ -23,7 +23,7 @@ class HiveLocalSettingsDatabase implements ILocalSettingsDatabase {
   static const boxName = 'settings';
 
   @override
-  Region get region => Region.values[_box.get(_Keys.region, defaultValue: _Defaults.region)];
+  Region get region =>  (_box.get(_Keys.region, defaultValue: Defaults.region) as int).asRegion;
 
   @override
   set region(Region value) => _box.put(_Keys.region, value.index);
@@ -42,12 +42,22 @@ class HiveLocalSettingsDatabase implements ILocalSettingsDatabase {
   Future<void> reset() => _box.deleteAll(_box.keys);
 }
 
+extension IntExtensions on int {
+  @visibleForTesting
+  Region get asRegion {
+    assert(this >= 0 && this < Region.values.length, '$this is an invalid index for $Region');
+
+    return Region.values[this];
+  }
+}
+
 /// A class of keys used to store values
 class _Keys {
   static const region = 'region';
 }
 
 /// A class of defaults for each key
-class _Defaults {
+@visibleForTesting
+class Defaults {
   static const region = 0;
 }
