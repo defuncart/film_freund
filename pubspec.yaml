@@ -15,7 +15,7 @@ dependencies:
   cupertino_icons:
   gap:
   email_validator:
-  flutter_riverpod:
+  flutter_riverpod: ^1.0.0-dev.11
   equatable:
   http:
   firebase_core:
