@@ -3,6 +3,7 @@ import 'package:film_freund/services/local_settings/region.dart';
 import 'package:film_freund/widgets/home_screen/settings/region_button_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_test_ui/flutter_test_ui.dart';
 import 'package:gap/gap.dart';
 import 'package:mockito/mockito.dart';
 import 'package:network_image_mock/network_image_mock.dart';
@@ -22,18 +23,26 @@ void main() {
       when(mockLocalSettings.region).thenReturn(Region.de);
     });
 
-    testWidgets('Expect widget tree is correct', (tester) async {
-      mockNetworkImagesFor(() async {
+    setUpUI((tester) async {
+      await mockNetworkImagesFor(() async {
         await tester.pumpWidget(wrapWithMaterialApp(
           const RegionButtonPanel(),
         ));
         await tester.pumpAndSettle();
-
-        expect(find.byType(RegionButtonPanel), findsOneWidget);
-        // expect(find.byType(Row), findsOneWidget);
-        expect(find.byType(RegionButton), findsNWidgets(Region.values.length));
-        expect(find.byType(Gap), findsNWidgets(Region.values.length));
       });
+    });
+
+    testUI('Expect widget tree is correct', (tester) async {
+      expect(find.byType(RegionButtonPanel), findsOneWidget);
+      expect(find.byType(Row), findsOneWidget);
+      expect(find.byType(RegionButton), findsNWidgets(Region.values.length));
+      expect(find.byType(Gap), findsNWidgets(Region.values.length));
+    });
+
+    testUI('When a $RegionButton is pressed, ensure settings updated', (tester) async {
+      await tester.tap(find.byKey(Key(Region.pl.countryCode)));
+
+      verify(mockLocalSettings.region = Region.pl);
     });
   });
 
