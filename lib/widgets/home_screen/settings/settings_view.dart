@@ -26,8 +26,8 @@ class SettingsView extends ConsumerWidget {
     final user = ref.watch(currentUserProvider);
 
     return user.when(
-      loading: () => const CircularProgressIndicator(),
-      error: (err, stack) => Text(err.toString()),
+      loading: (_) => const CircularProgressIndicator(),
+      error: (err, _, __) => Text(err.toString()),
       data: (user) => SettingsViewContent(
         user: user,
         onSignOutConfirmed: onSignOutConfirmed,

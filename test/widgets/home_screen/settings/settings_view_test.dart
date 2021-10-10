@@ -31,8 +31,8 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
-            currentUserProvider.overrideWithProvider(
-              FutureProvider.autoDispose((_) => Future.error('')),
+            currentUserProvider.overrideWithValue(
+              const AsyncValue.loading(),
             ),
           ],
           child: SettingsView(
@@ -50,7 +50,7 @@ void main() {
         ProviderScope(
           overrides: [
             currentUserProvider.overrideWithValue(
-              AsyncValue.error(error),
+              const AsyncValue.error(error),
             )
           ],
           child: MaterialApp(
@@ -75,8 +75,8 @@ void main() {
         await tester.pumpWidget(
           ProviderScope(
             overrides: [
-              currentUserProvider.overrideWithProvider(
-                FutureProvider.autoDispose((_) => Future.value(user)),
+              currentUserProvider.overrideWithValue(
+                AsyncValue.data(user),
               ),
             ],
             child: wrapWithMaterialAppLocalizationDelegates(
