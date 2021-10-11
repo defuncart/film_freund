@@ -34,6 +34,20 @@ class UserManager {
     throw ArgumentError('User should be authenticated');
   }
 
+  /// Watches the current user
+  ///
+  /// Throws an error if no user is authenticated
+  Stream<User?> get watchCurrentUser {
+    assert(isAuthenticated, 'User should be authenticated');
+
+    final id = _authService.authenticatedUserId;
+    if (id != null) {
+      return _userDatabase.watchUser(id: id);
+    }
+
+    throw ArgumentError('User should be authenticated');
+  }
+
   /// Returns a user with [id]. If no such user exists, null is returned.
   Future<User?> getUser({required String id}) => _userDatabase.getUser(id: id);
 
