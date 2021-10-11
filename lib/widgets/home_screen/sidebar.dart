@@ -1,7 +1,10 @@
+import 'package:film_freund/services/service_locator.dart';
 import 'package:film_freund/utils/sizes.dart';
 import 'package:film_freund/widgets/common/user/user_avatar.dart';
 import 'package:film_freund/widgets/home_screen/active_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gap/gap.dart';
 
 class Sidebar extends StatelessWidget {
   const Sidebar({
@@ -17,22 +20,9 @@ class Sidebar extends StatelessWidget {
       child: ListView(
         children: [
           const SizedBox(height: 8),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                const UserAvatar(
-                  initial: 'T',
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Text(
-                    'Test\nAccount',
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
-                ),
-              ],
-            ),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: UserPanelConsumer(),
           ),
           for (final element in elements)
             ListTile(
@@ -50,6 +40,60 @@ class Sidebar extends StatelessWidget {
     );
   }
 }
+
+/// Displays [UserPanel] from a Provider
+@visibleForTesting
+class UserPanelConsumer extends ConsumerWidget {
+  const UserPanelConsumer({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final displayName = ref.watch(watchCurrentUserDisplayNameProvider);
+
+    return displayName.when(
+      loading: (_) => const UserPanel(
+        displayName: 'Film Freund',
+      ),
+      error: (err, _, __) => Text(err.toString()),
+      data: (displayName) => UserPanel(
+        displayName: displayName,
+      ),
+    );
+  }
+}
+
+/// Displays a user panel for a given user's display name
+@visibleForTesting
+class UserPanel extends StatelessWidget {
+  const UserPanel({
+    required this.displayName,
+    Key? key,
+  }) : super(key: key);
+
+  final String displayName;
+
+  @override
+  Widget build(BuildContext context) => Row(
+        children: [
+          UserAvatar(
+            initial: displayName[0],
+          ),
+          const Gap(16),
+          Expanded(
+            child: Text(
+              displayName,
+              style: Theme.of(context).textTheme.headline6,
+            ),
+          ),
+        ],
+      );
+}
+
+@visibleForTesting
+final watchCurrentUserDisplayNameProvider =
+    StreamProvider.autoDispose<String>((ref) => ServiceLocator.userManager.watchCurrentUser.map(
+          (user) => user?.displayName ?? '',
+        ));
 
 @visibleForTesting
 const elements = [

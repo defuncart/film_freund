@@ -57,6 +57,10 @@ class MockUserManager extends _i1.Mock implements _i4.UserManager {
               returnValue: Future<_i2.User>.value(_FakeUser_0()))
           as _i5.Future<_i2.User>);
   @override
+  _i5.Stream<_i2.User?> get watchCurrentUser =>
+      (super.noSuchMethod(Invocation.getter(#watchCurrentUser),
+          returnValue: Stream<_i2.User?>.empty()) as _i5.Stream<_i2.User?>);
+  @override
   _i5.Future<_i2.User?> getUser({String? id}) =>
       (super.noSuchMethod(Invocation.method(#getUser, [], {#id: id}),
           returnValue: Future<_i2.User?>.value()) as _i5.Future<_i2.User?>);
