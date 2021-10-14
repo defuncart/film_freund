@@ -1,7 +1,6 @@
 import 'package:film_freund/services/auth/i_auth_service.dart';
 import 'package:film_freund/services/lists/enums/list_type.dart';
 import 'package:film_freund/services/lists/i_list_database.dart';
-import 'package:film_freund/services/lists/models/movie_list.dart';
 import 'package:film_freund/services/user/i_user_database.dart';
 import 'package:film_freund/services/user/models/user.dart';
 
@@ -119,33 +118,5 @@ class UserManager {
     }
 
     return result;
-  }
-
-  /// Returns the current user's watched list
-  ///
-  /// Assumes that a user is currently authenticated
-  Future<MovieList> get watchedMoviesForCurrentUser async {
-    final watchedId = (await currentUser).watchedId;
-    final list = await _listDatabase.getList(id: watchedId);
-
-    if (list != null) {
-      return list;
-    }
-
-    throw ArgumentError('No list $watchedId for current user');
-  }
-
-  /// Returns the current user's watchlist list
-  ///
-  /// Assumes that a user is currently authenticated
-  Future<MovieList> get watchlistMoviesForCurrentUser async {
-    final watchedId = (await currentUser).watchlistId;
-    final list = await _listDatabase.getList(id: watchedId);
-
-    if (list != null) {
-      return list;
-    }
-
-    throw ArgumentError('No list $watchedId for current user');
   }
 }

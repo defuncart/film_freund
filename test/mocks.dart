@@ -45,6 +45,11 @@ class MockVoidCallback extends Mock {
   void call();
 }
 
+class MockFutureStringCallback extends Mock {
+  // Future<String> call({required String value});
+  Future<String> call();
+}
+
 typedef Callback = void Function(MethodCall call);
 
 class MethodChannelMocks {

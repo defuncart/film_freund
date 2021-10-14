@@ -66,16 +66,6 @@ class MockUserManager extends _i1.Mock implements _i5.UserManager {
       (super.noSuchMethod(Invocation.getter(#watchCurrentUser),
           returnValue: Stream<_i2.User?>.empty()) as _i6.Stream<_i2.User?>);
   @override
-  _i6.Future<_i3.MovieList> get watchedMoviesForCurrentUser =>
-      (super.noSuchMethod(Invocation.getter(#watchedMoviesForCurrentUser),
-              returnValue: Future<_i3.MovieList>.value(_FakeMovieList_1()))
-          as _i6.Future<_i3.MovieList>);
-  @override
-  _i6.Future<_i3.MovieList> get watchlistMoviesForCurrentUser =>
-      (super.noSuchMethod(Invocation.getter(#watchlistMoviesForCurrentUser),
-              returnValue: Future<_i3.MovieList>.value(_FakeMovieList_1()))
-          as _i6.Future<_i3.MovieList>);
-  @override
   _i6.Future<_i2.User?> getUser({String? id}) =>
       (super.noSuchMethod(Invocation.method(#getUser, [], {#id: id}),
           returnValue: Future<_i2.User?>.value()) as _i6.Future<_i2.User?>);
@@ -125,6 +115,16 @@ class MockMovieManager extends _i1.Mock implements _i8.MovieManager {
     _i1.throwOnMissingStub(this);
   }
 
+  @override
+  _i6.Future<_i3.MovieList> get watchedMovieModels =>
+      (super.noSuchMethod(Invocation.getter(#watchedMovieModels),
+              returnValue: Future<_i3.MovieList>.value(_FakeMovieList_1()))
+          as _i6.Future<_i3.MovieList>);
+  @override
+  _i6.Future<_i3.MovieList> get watchlistMovieModels =>
+      (super.noSuchMethod(Invocation.getter(#watchlistMovieModels),
+              returnValue: Future<_i3.MovieList>.value(_FakeMovieList_1()))
+          as _i6.Future<_i3.MovieList>);
   @override
   _i6.Future<List<_i9.MovieTeaser>> getPopular() => (super.noSuchMethod(
           Invocation.method(#getPopular, []),

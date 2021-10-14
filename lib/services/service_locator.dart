@@ -54,6 +54,11 @@ final movieManagerProvider = Provider<MovieManager>(
   (ref) => MovieManager(
     movieDatabase: MovieDatabase(),
     localSettings: ref.read(localSettingsDatabaseProvider),
+    listDatabase: FirebaseListDatabase(
+      uuidService: ref.read(uuidServiceProvider),
+      dateTimeService: ref.read(dateTimeServiceProvider),
+    ),
+    userManager: ref.read(userManagerProvider),
   ),
 );
 
