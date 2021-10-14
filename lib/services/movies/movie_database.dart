@@ -1,5 +1,5 @@
-import 'dart:convert';
-import 'dart:developer';
+import 'dart:convert' show jsonDecode;
+import 'dart:developer' show log;
 
 import 'package:film_freund/services/movies/i_movie_database.dart';
 import 'package:film_freund/services/movies/models/movie.dart';
@@ -82,6 +82,24 @@ class MovieDatabase implements IMovieDatabase {
     }
 
     return null;
+  }
+
+  @override
+  Future<List<Movie>> getMovies(List<String> ids) async {
+    assert(ids.isNotEmpty, 'No ids supplied');
+
+    final movies = <Movie>[];
+    for (final id in ids) {
+      final movie = await getMovie(id);
+
+      if (movie != null) {
+        movies.add(movie);
+      } else {
+        log('No movie found for $id');
+      }
+    }
+
+    return movies;
   }
 
   @override

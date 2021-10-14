@@ -6,6 +6,9 @@ abstract class IMovieDatabase {
   /// Returns a movie for a given [id], else null
   Future<Movie?> getMovie(String id);
 
+  /// Returns a list of movies for a given [ids]
+  Future<List<Movie>> getMovies(List<String> ids);
+
   /// Returns a list of the 20 most popular movies for [region]
   Future<List<MovieTeaser>> getPopular({required String region});
 
