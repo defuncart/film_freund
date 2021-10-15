@@ -258,9 +258,14 @@ class MockIMovieDatabase extends _i1.Mock implements _i12.IMovieDatabase {
   }
 
   @override
-  _i6.Future<_i13.Movie?> getMovie(String? id) =>
+  _i6.Future<_i13.Movie?> getMovie(int? id) =>
       (super.noSuchMethod(Invocation.method(#getMovie, [id]),
           returnValue: Future<_i13.Movie?>.value()) as _i6.Future<_i13.Movie?>);
+  @override
+  _i6.Future<List<_i13.Movie>> getMovies(List<int>? ids) =>
+      (super.noSuchMethod(Invocation.method(#getMovies, [ids]),
+              returnValue: Future<List<_i13.Movie>>.value(<_i13.Movie>[]))
+          as _i6.Future<List<_i13.Movie>>);
   @override
   _i6.Future<List<_i9.MovieTeaser>> getPopular({String? region}) =>
       (super.noSuchMethod(Invocation.method(#getPopular, [], {#region: region}),

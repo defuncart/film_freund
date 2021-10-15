@@ -56,7 +56,7 @@ class MovieDatabase implements IMovieDatabase {
   }
 
   @override
-  Future<Movie?> getMovie(String id) async {
+  Future<Movie?> getMovie(int id) async {
     final response = await _get('$_baseUrl/movie/$id?api_key=$apiKey&language=$_language');
     if (response.statusCode == 200) {
       final parsedResponse = MovieResponse.fromJson(jsonDecode(response.body));
@@ -85,7 +85,7 @@ class MovieDatabase implements IMovieDatabase {
   }
 
   @override
-  Future<List<Movie>> getMovies(List<String> ids) async {
+  Future<List<Movie>> getMovies(List<int> ids) async {
     assert(ids.isNotEmpty, 'No ids supplied');
 
     final movies = <Movie>[];
