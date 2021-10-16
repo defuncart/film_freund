@@ -56,4 +56,28 @@ class MovieManager {
 
     throw ArgumentError('No list $watchlistId for current user');
   }
+
+  /// Adds [movieId] to the current user's watched movies
+  Future<void> addWatchedMovie(int movieId) async {
+    final watchedId = (await _userManager.currentUser).watchedId;
+    await _listDatabase.addMovieToList(listId: watchedId, movieId: movieId);
+  }
+
+  /// Removeis [movieId] from the current user's watched movies
+  Future<void> removeWatchedMovie(int movieId) async {
+    final watchedId = (await _userManager.currentUser).watchedId;
+    await _listDatabase.removeMovieFromList(listId: watchedId, movieId: movieId);
+  }
+
+  /// Adds [movieId] to the current user's watchlist movies
+  Future<void> addWatchlistMovie(int movieId) async {
+    final watchlistId = (await _userManager.currentUser).watchlistId;
+    await _listDatabase.addMovieToList(listId: watchlistId, movieId: movieId);
+  }
+
+  /// Removeis [movieId] from the current user's watchlist movies
+  Future<void> removeWatchlistMovie(int movieId) async {
+    final watchlistId = (await _userManager.currentUser).watchlistId;
+    await _listDatabase.removeMovieFromList(listId: watchlistId, movieId: movieId);
+  }
 }

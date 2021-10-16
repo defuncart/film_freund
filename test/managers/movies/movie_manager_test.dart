@@ -114,5 +114,57 @@ void main() {
         );
       });
     });
+
+    group('addWatchedMovie', () {
+      test('when movie added to watched, expect list database is updated', () async {
+        const movieId = 111;
+
+        expect(
+          () async => await movieManager.addWatchedMovie(movieId),
+          returnsNormally,
+        );
+
+        verify(mockListDatabase.addMovieToList(listId: watchedId, movieId: movieId));
+      }, skip: true);
+    });
+
+    group('removeWatchedMovie', () {
+      test('when movie removed from watched, expect list database is updated', () async {
+        const movieId = 111;
+
+        expect(
+          () async => await movieManager.removeWatchedMovie(movieId),
+          returnsNormally,
+        );
+
+        verify(mockListDatabase.removeMovieFromList(listId: watchedId, movieId: movieId));
+      }, skip: true);
+    });
+
+    group('addWatchlistMovie', () {
+      test('when movie added to watchlist, expect list database is updated', () async {
+        const movieId = 111;
+
+        expect(
+          () async => await movieManager.addWatchlistMovie(movieId),
+          returnsNormally,
+        );
+
+        verify(mockListDatabase.addMovieToList(listId: watchlistId, movieId: movieId));
+      }, skip: true);
+    });
+
+    group('removeWatchedMovie', () {
+      test('when movie removed from watchlist, expect list database is updated', () async {
+        const movieId = 111;
+
+        expect(
+          () async => await movieManager.removeWatchlistMovie(movieId),
+          returnsNormally,
+        );
+
+        verify(mockListDatabase.removeMovieFromList(listId: watchlistId, movieId: movieId));
+      }, skip: true);
+    });
   });
 }
