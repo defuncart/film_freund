@@ -5,6 +5,9 @@ abstract class IAuthService {
   /// When [isUserAuthenticated] is true, returns the user's id, otherwise null
   String? get authenticatedUserId;
 
+  /// Returns a stream of events when a user is authententicated or not
+  Stream<bool> get onAuthStateChanged;
+
   /// Attempts to sign in a user with [email] and [password]
   ///
   /// Returns [AuthResult.createSuccess] if no account exists for [email] but one was successfully created

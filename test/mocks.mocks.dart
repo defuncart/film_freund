@@ -165,6 +165,10 @@ class MockIAuthService extends _i1.Mock implements _i6.IAuthService {
       (super.noSuchMethod(Invocation.getter(#isUserAuthenticated),
           returnValue: false) as bool);
   @override
+  _i5.Stream<bool> get onAuthStateChanged =>
+      (super.noSuchMethod(Invocation.getter(#onAuthStateChanged),
+          returnValue: Stream<bool>.empty()) as _i5.Stream<bool>);
+  @override
   _i5.Future<_i6.AuthResult> signin({String? email, String? password}) =>
       (super.noSuchMethod(
           Invocation.method(#signin, [], {#email: email, #password: password}),
