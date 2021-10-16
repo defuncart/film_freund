@@ -4,6 +4,8 @@ import 'package:uuid/uuid.dart';
 class UUIDService {
   static const _uuid = Uuid();
 
+  const UUIDService();
+
   /// Generates a RNG version 4 UUID
-  String generated() => _uuid.v4();
+  String generate() => _uuid.v4();
 }

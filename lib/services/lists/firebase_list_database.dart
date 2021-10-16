@@ -33,7 +33,7 @@ class FirebaseListDatabase implements IListDatabase {
 
     final now = _dateTimeService.nowUtc;
     final list = MovieList(
-      id: _uuidService.generated(),
+      id: _uuidService.generate(),
       type: type,
       // TODO decide if watched, watchlist need a title
       title: title ?? '',
