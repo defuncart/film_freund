@@ -134,6 +134,26 @@ class MockMovieManager extends _i1.Mock implements _i7.MovieManager {
           returnValue: Future<List<_i9.MovieTeaser>>.value(<_i9.MovieTeaser>[]))
       as _i5.Future<List<_i9.MovieTeaser>>);
   @override
+  _i5.Future<void> addWatchedMovie(int? movieId) =>
+      (super.noSuchMethod(Invocation.method(#addWatchedMovie, [movieId]),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+  @override
+  _i5.Future<void> removeWatchedMovie(int? movieId) =>
+      (super.noSuchMethod(Invocation.method(#removeWatchedMovie, [movieId]),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+  @override
+  _i5.Future<void> addWatchlistMovie(int? movieId) =>
+      (super.noSuchMethod(Invocation.method(#addWatchlistMovie, [movieId]),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+  @override
+  _i5.Future<void> removeWatchlistMovie(int? movieId) =>
+      (super.noSuchMethod(Invocation.method(#removeWatchlistMovie, [movieId]),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+  @override
   String toString() => super.toString();
 }
 
@@ -302,6 +322,11 @@ class MockIListDatabase extends _i1.Mock implements _i13.IListDatabase {
       (super.noSuchMethod(Invocation.method(#getList, [], {#id: id}),
               returnValue: Future<_i15.MovieList?>.value())
           as _i5.Future<_i15.MovieList?>);
+  @override
+  _i5.Stream<_i15.MovieList?> watchList({String? id}) =>
+      (super.noSuchMethod(Invocation.method(#watchList, [], {#id: id}),
+              returnValue: Stream<_i15.MovieList?>.empty())
+          as _i5.Stream<_i15.MovieList?>);
   @override
   _i5.Future<void> deleteList({String? id}) =>
       (super.noSuchMethod(Invocation.method(#deleteList, [], {#id: id}),
