@@ -18,12 +18,16 @@ abstract class IListDatabase {
   Future<void> deleteList({required String id});
 
   /// Adds [movieId] to list [listId]
+  ///
+  /// Note that if [listId] already contains [movieId], no warning is returned.
   Future<void> addMovieToList({
     required String listId,
     required int movieId,
   });
 
   /// Removes [movieId] from list [listId]
+  ///
+  /// Note that if [listId] doesn't contains [movieId], no warning is returned.
   Future<void> removeMovieFromList({
     required String listId,
     required int movieId,

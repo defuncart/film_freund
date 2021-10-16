@@ -71,10 +71,15 @@ class FirebaseListDatabase implements IListDatabase {
     required String listId,
     required int movieId,
   }) async {
-    // TODO array union
-    await _firebaseFirestore.collection(_collection).doc(listId).set({});
+    try {
+      await _firebaseFirestore.collection(_collection).doc(listId).update({
+        'movies': FieldValue.arrayUnion([movieId]),
+      });
 
-    log('FirebaseListDatabase add movie $movieId to list $listId');
+      log('FirebaseListDatabase add movie $movieId to list $listId');
+    } catch (e) {
+      log(e.toString());
+    }
   }
 
   @override
@@ -82,9 +87,14 @@ class FirebaseListDatabase implements IListDatabase {
     required String listId,
     required int movieId,
   }) async {
-    // TODO array delete element
-    await _firebaseFirestore.collection(_collection).doc(listId).set({});
+    try {
+      await _firebaseFirestore.collection(_collection).doc(listId).update({
+        'movies': FieldValue.arrayRemove([movieId]),
+      });
 
-    log('FirebaseListDatabase remove movie $movieId from list $listId');
+      log('FirebaseListDatabase remove movie $movieId from list $listId');
+    } catch (e) {
+      log(e.toString());
+    }
   }
 }
