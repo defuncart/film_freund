@@ -16,6 +16,8 @@ void main() {
           movieId: movieId,
           movieTitle: movieTitle,
           movieYear: movieYear,
+          isWatched: true,
+          isWatchlist: true,
         ),
       );
 

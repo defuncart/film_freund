@@ -2,17 +2,23 @@ import 'package:film_freund/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
+// TODO add MovieTeaserBottomSheetConsumer
+
 class MovieTeaserBottomSheet extends StatelessWidget {
   const MovieTeaserBottomSheet({
     required this.movieId,
     required this.movieTitle,
     required this.movieYear,
+    required this.isWatched,
+    required this.isWatchlist,
     Key? key,
   }) : super(key: key);
 
   final int movieId;
   final String movieTitle;
   final String movieYear;
+  final bool isWatched;
+  final bool isWatchlist;
 
   @override
   Widget build(BuildContext context) => Padding(
@@ -35,16 +41,16 @@ class MovieTeaserBottomSheet extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 IconOptionButton(
-                  icon: Icons.check,
+                  icon: isWatched ? Icons.check_circle : Icons.check_circle_outline,
                   label: AppLocalizations.of(context).activeViewWatchedTitle,
-                  accentColor: Colors.green[700],
+                  accentColor: isWatched ? Colors.green[700] : Colors.grey,
                   // TODO implement add/remove watched list logic
                   onPressed: () {},
                 ),
                 IconOptionButton(
-                  icon: Icons.watch_later,
+                  icon: isWatchlist ? Icons.watch_later : Icons.watch_later_outlined,
                   label: AppLocalizations.of(context).activeViewWatchlistTitle,
-                  accentColor: Theme.of(context).colorScheme.secondary,
+                  accentColor: isWatchlist ? Theme.of(context).colorScheme.secondary : Colors.grey,
                   // TODO implement add/remove watchlist list logic
                   onPressed: () {},
                 ),
@@ -54,12 +60,12 @@ class MovieTeaserBottomSheet extends StatelessWidget {
             TextOptionButton(
               AppLocalizations.of(context).movieTeaserBottomSheetAddToListButtonText,
               // TODO navigate to list management
-              onPressed: () {},
+              onPressed: null,
             ),
             TextOptionButton(
               AppLocalizations.of(context).movieTeaserBottomSheetShowMovieButtonText,
               // TODO navigate to MovieDetails
-              onPressed: () {},
+              onPressed: null,
             ),
           ],
         ),
@@ -116,7 +122,7 @@ class TextOptionButton extends StatelessWidget {
   }) : super(key: key);
 
   final String text;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
