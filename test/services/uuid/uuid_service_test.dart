@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('$UUIDService', () {
-    const uuidService = UUIDService();
+    final uuidService = UUIDService();
 
     group('generate', () {
       test('expect generated uuids are valid', () {
