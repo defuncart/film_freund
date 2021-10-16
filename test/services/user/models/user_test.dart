@@ -27,38 +27,8 @@ void main() {
         expect(user2.displayName, displayName);
         expect(user2.createdAt, user1.createdAt);
         expect(user2.updatedAt, user1.updatedAt);
-        expect(user2.watched, user1.watched);
-        expect(user2.watchlist, user1.watchlist);
-        expect(user2.lists, user1.lists);
-        expect(user1 == user2, isFalse);
-      });
-
-      test('watched', () {
-        const watched = ['1'];
-        final user2 = user1.copyWith(watched: watched);
-
-        expect(user2.id, user1.id);
-        expect(user2.email, user1.email);
-        expect(user2.displayName, user1.displayName);
-        expect(user2.createdAt, user1.createdAt);
-        expect(user2.updatedAt, user1.updatedAt);
-        expect(user2.watched, watched);
-        expect(user2.watchlist, user1.watchlist);
-        expect(user2.lists, user1.lists);
-        expect(user1 == user2, isFalse);
-      });
-
-      test('watchlist', () {
-        const watchlist = ['1'];
-        final user2 = user1.copyWith(watchlist: watchlist);
-
-        expect(user2.id, user1.id);
-        expect(user2.email, user1.email);
-        expect(user2.displayName, user1.displayName);
-        expect(user2.createdAt, user1.createdAt);
-        expect(user2.updatedAt, user1.updatedAt);
-        expect(user2.watched, user1.watched);
-        expect(user2.watchlist, watchlist);
+        expect(user2.watchedId, user1.watchedId);
+        expect(user2.watchlistId, user1.watchlistId);
         expect(user2.lists, user1.lists);
         expect(user1 == user2, isFalse);
       });
@@ -72,8 +42,8 @@ void main() {
         expect(user2.displayName, user1.displayName);
         expect(user2.createdAt, user1.createdAt);
         expect(user2.updatedAt, user1.updatedAt);
-        expect(user2.watched, user1.watched);
-        expect(user2.watchlist, user1.watchlist);
+        expect(user2.watchedId, user1.watchedId);
+        expect(user2.watchlistId, user1.watchlistId);
         expect(user2.lists, lists);
         expect(user1 == user2, isFalse);
       });
@@ -89,8 +59,8 @@ void main() {
       expect(user2.displayName, user1.displayName);
       expect(user2.createdAt, user1.createdAt);
       expect(user2.updatedAt, updatedAt);
-      expect(user2.watched, user1.watched);
-      expect(user2.watchlist, user1.watchlist);
+      expect(user2.watchedId, user1.watchedId);
+      expect(user2.watchlistId, user1.watchlistId);
       expect(user2.lists, user1.lists);
       expect(user1 == user2, isFalse);
     });
@@ -99,33 +69,25 @@ void main() {
       final expectedUser = TestInstance.user(
         id: 'id',
         email: 'max@test.de',
-        displayName: 'max@test.de',
+        displayName: 'max',
         createdAt: DateTime.utc(2021),
         updatedAt: DateTime.utc(2021, 2),
-        watched: [
-          '1',
-          '2',
-        ],
-        watchlist: ['3'],
-        lists: ['4'],
+        watchedId: 'id1',
+        watchlistId: 'id2',
+        lists: ['id3'],
       );
 
       const jsonString = '''
 {
   "id": "id",
   "email": "max@test.de",
-  "displayName": "max@test.de",
+  "displayName": "max",
   "createdAt": "2021-01-01T00:00:00.000Z",
   "updatedAt": "2021-02-01T00:00:00.000Z",
-  "watched": [
-    "1",
-    "2"
-  ],
-  "watchlist": [
-    "3"
-  ],
+  "watchedId": "id1",
+  "watchlistId": "id2",
   "lists": [
-    "4"
+    "id3"
   ]
 }
 ''';

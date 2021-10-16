@@ -1,5 +1,5 @@
-import 'dart:convert';
-import 'dart:developer';
+import 'dart:convert' show jsonDecode;
+import 'dart:developer' show log;
 
 import 'package:film_freund/services/movies/i_movie_database.dart';
 import 'package:film_freund/services/movies/models/movie.dart';
@@ -56,7 +56,7 @@ class MovieDatabase implements IMovieDatabase {
   }
 
   @override
-  Future<Movie?> getMovie(String id) async {
+  Future<Movie?> getMovie(int id) async {
     final response = await _get('$_baseUrl/movie/$id?api_key=$apiKey&language=$_language');
     if (response.statusCode == 200) {
       final parsedResponse = MovieResponse.fromJson(jsonDecode(response.body));
@@ -82,6 +82,24 @@ class MovieDatabase implements IMovieDatabase {
     }
 
     return null;
+  }
+
+  @override
+  Future<List<Movie>> getMovies(List<int> ids) async {
+    assert(ids.isNotEmpty, 'No ids supplied');
+
+    final movies = <Movie>[];
+    for (final id in ids) {
+      final movie = await getMovie(id);
+
+      if (movie != null) {
+        movies.add(movie);
+      } else {
+        log('No movie found for $id');
+      }
+    }
+
+    return movies;
   }
 
   @override

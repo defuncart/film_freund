@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:film_freund/generated/l10n.dart';
+import 'package:film_freund/services/lists/enums/list_type.dart';
+import 'package:film_freund/services/lists/models/movie_list.dart';
 import 'package:film_freund/services/movies/models/movie.dart';
 import 'package:film_freund/services/movies/models/movie_teaser.dart';
 import 'package:film_freund/services/user/models/user.dart';
@@ -36,8 +38,8 @@ class TestInstance {
     String? displayName,
     DateTime? createdAt,
     DateTime? updatedAt,
-    List<String>? watched,
-    List<String>? watchlist,
+    String? watchedId,
+    String? watchlistId,
     List<String>? lists,
   }) =>
       User(
@@ -46,8 +48,8 @@ class TestInstance {
         displayName: displayName ?? 'displayName',
         createdAt: createdAt ?? DateTime(1),
         updatedAt: updatedAt ?? DateTime(1),
-        watched: watched ?? [],
-        watchlist: watchlist ?? [],
+        watchedId: watchedId ?? '',
+        watchlistId: watchlistId ?? '',
         lists: lists ?? [],
       );
 
@@ -117,6 +119,24 @@ class TestInstance {
         title: title ?? 'title',
         voteAverage: voteAverage ?? 0,
         voteCount: voteCount ?? 0,
+      );
+
+  /// Returns a [MovieList] model with given overriden parameters
+  static MovieList movieList({
+    String? id,
+    ListType? type,
+    String? title,
+    List<int>? movies,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) =>
+      MovieList(
+        id: id ?? 'id',
+        type: type ?? ListType.custom,
+        title: title ?? 'title',
+        movies: movies ?? [],
+        createdAt: createdAt ?? DateTime(1),
+        updatedAt: updatedAt ?? DateTime(1),
       );
 }
 

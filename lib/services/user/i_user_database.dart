@@ -7,6 +7,8 @@ abstract class IUserDatabase {
     required String id,
     required String email,
     String? displayName,
+    required String watchedId,
+    required String watchlistId,
   });
 
   /// Returns a user with [id]. If no such user exists, null is returned.
@@ -20,8 +22,6 @@ abstract class IUserDatabase {
   Future<void> updateUser({
     required User user,
     String? displayName,
-    List<String>? watched,
-    List<String>? watchlist,
     List<String>? lists,
   });
 
