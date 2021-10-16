@@ -116,12 +116,13 @@ void main() {
     });
 
     group('addWatchedMovie', () {
-      test('when movie added to watched, expect list database is updated', () async {
-        const movieId = 111;
+      const movieId = 111;
 
+      test('when movie added to watched, expect list database is updated', () async {
         await movieManager.addWatchedMovie(movieId);
 
         verify(mockListDatabase.addMovieToList(listId: watchedId, movieId: movieId));
+        verify(mockListDatabase.removeMovieFromList(listId: watchlistId, movieId: movieId));
       });
     });
 
