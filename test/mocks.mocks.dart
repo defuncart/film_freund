@@ -3,27 +3,28 @@
 // Do not manually edit this file.
 
 import 'dart:async' as _i5;
-import 'dart:typed_data' as _i21;
+import 'dart:typed_data' as _i22;
 
+import 'package:film_freund/managers/cache/cache_manager.dart' as _i10;
 import 'package:film_freund/managers/movies/movie_manager.dart' as _i7;
 import 'package:film_freund/managers/user/user_manager.dart' as _i4;
 import 'package:film_freund/services/auth/i_auth_service.dart' as _i6;
-import 'package:film_freund/services/date_time/date_time_service.dart' as _i10;
-import 'package:film_freund/services/lists/enums/list_type.dart' as _i14;
-import 'package:film_freund/services/lists/i_list_database.dart' as _i13;
-import 'package:film_freund/services/lists/models/movie_list.dart' as _i15;
+import 'package:film_freund/services/date_time/date_time_service.dart' as _i11;
+import 'package:film_freund/services/lists/enums/list_type.dart' as _i15;
+import 'package:film_freund/services/lists/i_list_database.dart' as _i14;
+import 'package:film_freund/services/lists/models/movie_list.dart' as _i16;
 import 'package:film_freund/services/local_settings/i_local_settings_database.dart'
-    as _i16;
-import 'package:film_freund/services/local_settings/region.dart' as _i17;
-import 'package:film_freund/services/movies/i_movie_database.dart' as _i12;
+    as _i17;
+import 'package:film_freund/services/local_settings/region.dart' as _i18;
+import 'package:film_freund/services/movies/i_movie_database.dart' as _i13;
 import 'package:film_freund/services/movies/models/movie.dart' as _i8;
 import 'package:film_freund/services/movies/models/movie_teaser.dart' as _i9;
-import 'package:film_freund/services/platform/i_platform_service.dart' as _i18;
-import 'package:film_freund/services/user/i_user_database.dart' as _i11;
+import 'package:film_freund/services/platform/i_platform_service.dart' as _i19;
+import 'package:film_freund/services/user/i_user_database.dart' as _i12;
 import 'package:film_freund/services/user/models/user.dart' as _i2;
 import 'package:hive/hive.dart' as _i3;
-import 'package:hive/src/box/default_compaction_strategy.dart' as _i20;
-import 'package:hive/src/box/default_key_comparator.dart' as _i19;
+import 'package:hive/src/box/default_compaction_strategy.dart' as _i21;
+import 'package:hive/src/box/default_key_comparator.dart' as _i20;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: avoid_redundant_argument_values
@@ -157,10 +158,49 @@ class MockMovieManager extends _i1.Mock implements _i7.MovieManager {
   String toString() => super.toString();
 }
 
+/// A class which mocks [CacheManager].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockCacheManager extends _i1.Mock implements _i10.CacheManager {
+  MockCacheManager() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  set onAuthStateChangedSubscription(
+          _i5.StreamSubscription<bool>? _onAuthStateChangedSubscription) =>
+      super.noSuchMethod(
+          Invocation.setter(
+              #onAuthStateChangedSubscription, _onAuthStateChangedSubscription),
+          returnValueForMissingStub: null);
+  @override
+  String get watchedId =>
+      (super.noSuchMethod(Invocation.getter(#watchedId), returnValue: '')
+          as String);
+  @override
+  String get watchlistId =>
+      (super.noSuchMethod(Invocation.getter(#watchlistId), returnValue: '')
+          as String);
+  @override
+  void start() => super.noSuchMethod(Invocation.method(#start, []),
+      returnValueForMissingStub: null);
+  @override
+  _i5.Future<void> onAuthStateChanged(bool? isUserAuthenticated) =>
+      (super.noSuchMethod(
+          Invocation.method(#onAuthStateChanged, [isUserAuthenticated]),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+  @override
+  void stop() => super.noSuchMethod(Invocation.method(#stop, []),
+      returnValueForMissingStub: null);
+  @override
+  String toString() => super.toString();
+}
+
 /// A class which mocks [DateTimeService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockDateTimeService extends _i1.Mock implements _i10.DateTimeService {
+class MockDateTimeService extends _i1.Mock implements _i11.DateTimeService {
   MockDateTimeService() {
     _i1.throwOnMissingStub(this);
   }
@@ -224,7 +264,7 @@ class MockIAuthService extends _i1.Mock implements _i6.IAuthService {
 /// A class which mocks [IUserDatabase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIUserDatabase extends _i1.Mock implements _i11.IUserDatabase {
+class MockIUserDatabase extends _i1.Mock implements _i12.IUserDatabase {
   MockIUserDatabase() {
     _i1.throwOnMissingStub(this);
   }
@@ -274,7 +314,7 @@ class MockIUserDatabase extends _i1.Mock implements _i11.IUserDatabase {
 /// A class which mocks [IMovieDatabase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIMovieDatabase extends _i1.Mock implements _i12.IMovieDatabase {
+class MockIMovieDatabase extends _i1.Mock implements _i13.IMovieDatabase {
   MockIMovieDatabase() {
     _i1.throwOnMissingStub(this);
   }
@@ -307,26 +347,26 @@ class MockIMovieDatabase extends _i1.Mock implements _i12.IMovieDatabase {
 /// A class which mocks [IListDatabase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIListDatabase extends _i1.Mock implements _i13.IListDatabase {
+class MockIListDatabase extends _i1.Mock implements _i14.IListDatabase {
   MockIListDatabase() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<String> createList({_i14.ListType? type, String? title}) =>
+  _i5.Future<String> createList({_i15.ListType? type, String? title}) =>
       (super.noSuchMethod(
           Invocation.method(#createList, [], {#type: type, #title: title}),
           returnValue: Future<String>.value('')) as _i5.Future<String>);
   @override
-  _i5.Future<_i15.MovieList?> getList({String? id}) =>
+  _i5.Future<_i16.MovieList?> getList({String? id}) =>
       (super.noSuchMethod(Invocation.method(#getList, [], {#id: id}),
-              returnValue: Future<_i15.MovieList?>.value())
-          as _i5.Future<_i15.MovieList?>);
+              returnValue: Future<_i16.MovieList?>.value())
+          as _i5.Future<_i16.MovieList?>);
   @override
-  _i5.Stream<_i15.MovieList?> watchList({String? id}) =>
+  _i5.Stream<_i16.MovieList?> watchList({String? id}) =>
       (super.noSuchMethod(Invocation.method(#watchList, [], {#id: id}),
-              returnValue: Stream<_i15.MovieList?>.empty())
-          as _i5.Stream<_i15.MovieList?>);
+              returnValue: Stream<_i16.MovieList?>.empty())
+          as _i5.Stream<_i16.MovieList?>);
   @override
   _i5.Future<void> deleteList({String? id}) =>
       (super.noSuchMethod(Invocation.method(#deleteList, [], {#id: id}),
@@ -354,16 +394,16 @@ class MockIListDatabase extends _i1.Mock implements _i13.IListDatabase {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockILocalSettingsDatabase extends _i1.Mock
-    implements _i16.ILocalSettingsDatabase {
+    implements _i17.ILocalSettingsDatabase {
   MockILocalSettingsDatabase() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i17.Region get region => (super.noSuchMethod(Invocation.getter(#region),
-      returnValue: _i17.Region.de) as _i17.Region);
+  _i18.Region get region => (super.noSuchMethod(Invocation.getter(#region),
+      returnValue: _i18.Region.de) as _i18.Region);
   @override
-  set region(_i17.Region? value) =>
+  set region(_i18.Region? value) =>
       super.noSuchMethod(Invocation.setter(#region, value),
           returnValueForMissingStub: null);
   @override
@@ -382,7 +422,7 @@ class MockILocalSettingsDatabase extends _i1.Mock
 /// A class which mocks [IPlatformService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIPlatformService extends _i1.Mock implements _i18.IPlatformService {
+class MockIPlatformService extends _i1.Mock implements _i19.IPlatformService {
   MockIPlatformService() {
     _i1.throwOnMissingStub(this);
   }
@@ -410,12 +450,12 @@ class MockHiveInterface extends _i1.Mock implements _i3.HiveInterface {
   @override
   _i5.Future<_i3.Box<E>> openBox<E>(String? name,
           {_i3.HiveCipher? encryptionCipher,
-          _i3.KeyComparator? keyComparator = _i19.defaultKeyComparator,
+          _i3.KeyComparator? keyComparator = _i20.defaultKeyComparator,
           _i3.CompactionStrategy? compactionStrategy =
-              _i20.defaultCompactionStrategy,
+              _i21.defaultCompactionStrategy,
           bool? crashRecovery = true,
           String? path,
-          _i21.Uint8List? bytes,
+          _i22.Uint8List? bytes,
           List<int>? encryptionKey}) =>
       (super.noSuchMethod(
               Invocation.method(#openBox, [
@@ -434,9 +474,9 @@ class MockHiveInterface extends _i1.Mock implements _i3.HiveInterface {
   @override
   _i5.Future<_i3.LazyBox<E>> openLazyBox<E>(String? name,
           {_i3.HiveCipher? encryptionCipher,
-          _i3.KeyComparator? keyComparator = _i19.defaultKeyComparator,
+          _i3.KeyComparator? keyComparator = _i20.defaultKeyComparator,
           _i3.CompactionStrategy? compactionStrategy =
-              _i20.defaultCompactionStrategy,
+              _i21.defaultCompactionStrategy,
           bool? crashRecovery = true,
           String? path,
           List<int>? encryptionKey}) =>

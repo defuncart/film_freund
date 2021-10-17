@@ -22,8 +22,6 @@ abstract class ServiceLocator {
 
   static void setReader(Reader read) => _read = read;
 
-  static DateTimeService get dateTimeService => _read(dateTimeServiceProvider);
-
   static UserManager get userManager => _read(userManagerProvider);
 
   static MovieManager get movieManager => _read(movieManagerProvider);
@@ -32,16 +30,6 @@ abstract class ServiceLocator {
 
   static ILocalSettingsDatabase get localSettings => _read(localSettingsDatabaseProvider);
 }
-
-@visibleForTesting
-final dateTimeServiceProvider = Provider<DateTimeService>(
-  (_) => DateTimeService(),
-);
-
-@visibleForTesting
-final uuidServiceProvider = Provider<UUIDService>(
-  (_) => UUIDService(),
-);
 
 @visibleForTesting
 final userManagerProvider = Provider<UserManager>(
@@ -77,7 +65,9 @@ final authServiceProvider = Provider<IAuthService>(
 
 @visibleForTesting
 final userDatabaseProvider = Provider<IUserDatabase>(
-  (_) => FirebaseUserDatabase(),
+  (ref) => FirebaseUserDatabase(
+    dateTimeService: ref.read(dateTimeServiceProvider),
+  ),
 );
 
 @visibleForTesting
@@ -98,4 +88,14 @@ final localSettingsDatabaseProvider = Provider<ILocalSettingsDatabase>(
 @visibleForTesting
 final platformServiceProvider = Provider<IPlatformService>(
   (_) => PlatformService(),
+);
+
+@visibleForTesting
+final dateTimeServiceProvider = Provider<DateTimeService>(
+  (_) => DateTimeService(),
+);
+
+@visibleForTesting
+final uuidServiceProvider = Provider<UUIDService>(
+  (_) => UUIDService(),
 );
