@@ -6,6 +6,7 @@ import 'package:film_freund/services/local_settings/region.dart';
 import 'package:film_freund/services/movies/i_movie_database.dart';
 import 'package:film_freund/services/movies/models/movie.dart';
 import 'package:film_freund/services/movies/models/movie_teaser.dart';
+import 'package:flutter/material.dart';
 
 /// A manager which handles movie database requests and updating user's movie lists
 class MovieManager {
@@ -61,25 +62,22 @@ class MovieManager {
   /// Watches the user's watched list for changes
   Stream<MovieList> get watchWatched {
     final watchedId = _cacheManager.watchedId;
-    return _listDatabase.watchList(id: watchedId).map((list) {
-      if (list != null) {
-        return list;
-      }
-
-      throw ArgumentError('watched list not found for current user');
-    });
+    return _listDatabase.watchList(id: watchedId).map(returnListOrThrow);
   }
 
   /// Watches the user's watchlist list for changes
   Stream<MovieList> get watchWatchlist {
     final watchlistId = _cacheManager.watchlistId;
-    return _listDatabase.watchList(id: watchlistId).map((list) {
-      if (list != null) {
-        return list;
-      }
+    return _listDatabase.watchList(id: watchlistId).map(returnListOrThrow);
+  }
 
-      throw ArgumentError('watchlist list not found for current user');
-    });
+  @visibleForTesting
+  MovieList returnListOrThrow(MovieList? list) {
+    if (list != null) {
+      return list;
+    }
+
+    throw ArgumentError('list not found for current user');
   }
 
   /// Adds [movieId] to the current user's watched movies

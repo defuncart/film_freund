@@ -113,6 +113,23 @@ void main() {
       });
     });
 
+    group('returnListOrThrow', () {
+      test('when null, expect throw', () {
+        expect(
+          () => movieManager.returnListOrThrow(null),
+          throwsArgumentError,
+        );
+      });
+
+      test('when not null, expect list', () {
+        final list = TestInstance.movieList();
+        expect(
+          movieManager.returnListOrThrow(list),
+          list,
+        );
+      });
+    });
+
     group('watchWatched', () {
       test('when watched found, expect stream', () {
         final watched = TestInstance.movieList(
