@@ -46,7 +46,7 @@ final movieManagerProvider = Provider<MovieManager>(
     movieDatabase: MovieDatabase(),
     localSettings: ref.read(localSettingsDatabaseProvider),
     listDatabase: ref.read(listDatabaseProvider),
-    userManager: ref.read(userManagerProvider),
+    cacheManager: ref.read(cacheManagerProvider),
   ),
 );
 

@@ -1,5 +1,5 @@
+import 'package:film_freund/managers/cache/cache_manager.dart';
 import 'package:film_freund/managers/movies/movie_manager.dart';
-import 'package:film_freund/managers/user/user_manager.dart';
 import 'package:film_freund/services/lists/enums/list_type.dart';
 import 'package:film_freund/services/lists/i_list_database.dart';
 import 'package:film_freund/services/local_settings/i_local_settings_database.dart';
@@ -19,30 +19,27 @@ void main() {
 
     const watchedId = 'watchedId';
     const watchlistId = 'watchlistId';
-    final user = TestInstance.user(
-      watchedId: watchedId,
-      watchlistId: watchlistId,
-    );
 
     late IMovieDatabase mockMovieDatabase;
     late ILocalSettingsDatabase mockLocalSettings;
     late IListDatabase mockListDatabase;
-    late UserManager mockUserManager;
+    late CacheManager mockCacheManager;
     late MovieManager movieManager;
 
     setUp(() {
       mockMovieDatabase = MockIMovieDatabase();
       mockLocalSettings = MockILocalSettingsDatabase();
       mockListDatabase = MockIListDatabase();
-      mockUserManager = MockUserManager();
+      mockCacheManager = MockCacheManager();
       movieManager = MovieManager(
         movieDatabase: mockMovieDatabase,
         localSettings: mockLocalSettings,
         listDatabase: mockListDatabase,
-        userManager: mockUserManager,
+        cacheManager: mockCacheManager,
       );
 
-      when(mockUserManager.currentUser).thenAnswer((_) => Future.value(user));
+      when(mockCacheManager.watchedId).thenReturn(watchedId);
+      when(mockCacheManager.watchlistId).thenReturn(watchlistId);
     });
 
     final teasers = [TestInstance.movieTeaser()];

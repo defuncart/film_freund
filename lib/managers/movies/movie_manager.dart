@@ -1,4 +1,4 @@
-import 'package:film_freund/managers/user/user_manager.dart';
+import 'package:film_freund/managers/cache/cache_manager.dart';
 import 'package:film_freund/services/lists/i_list_database.dart';
 import 'package:film_freund/services/local_settings/i_local_settings_database.dart';
 import 'package:film_freund/services/local_settings/region.dart';
@@ -12,16 +12,16 @@ class MovieManager {
     required IMovieDatabase movieDatabase,
     required ILocalSettingsDatabase localSettings,
     required IListDatabase listDatabase,
-    required UserManager userManager,
+    required CacheManager cacheManager,
   })  : _movieDatabase = movieDatabase,
         _localSettings = localSettings,
         _listDatabase = listDatabase,
-        _userManager = userManager;
+        _cacheManager = cacheManager;
 
   final IMovieDatabase _movieDatabase;
   final ILocalSettingsDatabase _localSettings;
   final IListDatabase _listDatabase;
-  final UserManager _userManager;
+  final CacheManager _cacheManager;
 
   /// Returns a list of the 20 most popular movies
   Future<List<MovieTeaser>> getPopular() => _movieDatabase.getPopular(
@@ -35,7 +35,7 @@ class MovieManager {
 
   /// Returns the current user's watched movies
   Future<List<Movie>> get watchedMovies async {
-    final watchedId = (await _userManager.currentUser).watchedId;
+    final watchedId = _cacheManager.watchedId;
     final list = await _listDatabase.getList(id: watchedId);
 
     if (list != null) {
@@ -47,7 +47,7 @@ class MovieManager {
 
   /// Returns the current user's watchlist movies
   Future<List<Movie>> get watchlistMovies async {
-    final watchlistId = (await _userManager.currentUser).watchlistId;
+    final watchlistId = _cacheManager.watchlistId;
     final list = await _listDatabase.getList(id: watchlistId);
 
     if (list != null) {
@@ -59,7 +59,7 @@ class MovieManager {
 
   /// Adds [movieId] to the current user's watched movies
   Future<void> addWatchedMovie(int movieId) async {
-    final watchedId = (await _userManager.currentUser).watchedId;
+    final watchedId = _cacheManager.watchedId;
     await _listDatabase.addMovieToList(listId: watchedId, movieId: movieId);
 
     // in case the movie is on the watchlist, remove it
@@ -68,19 +68,19 @@ class MovieManager {
 
   /// Removes [movieId] from the current user's watched movies
   Future<void> removeWatchedMovie(int movieId) async {
-    final watchedId = (await _userManager.currentUser).watchedId;
+    final watchedId = _cacheManager.watchedId;
     await _listDatabase.removeMovieFromList(listId: watchedId, movieId: movieId);
   }
 
   /// Adds [movieId] to the current user's watchlist movies
   Future<void> addWatchlistMovie(int movieId) async {
-    final watchlistId = (await _userManager.currentUser).watchlistId;
+    final watchlistId = _cacheManager.watchlistId;
     await _listDatabase.addMovieToList(listId: watchlistId, movieId: movieId);
   }
 
   /// Removes [movieId] from the current user's watchlist movies
   Future<void> removeWatchlistMovie(int movieId) async {
-    final watchlistId = (await _userManager.currentUser).watchlistId;
+    final watchlistId = _cacheManager.watchlistId;
     await _listDatabase.removeMovieFromList(listId: watchlistId, movieId: movieId);
   }
 }
