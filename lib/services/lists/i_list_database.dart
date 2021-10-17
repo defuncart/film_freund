@@ -12,6 +12,9 @@ abstract class IListDatabase {
   /// Returns a list with [id]. If no such user exists, null is returned.
   Future<MovieList?> getList({required String id});
 
+  /// Watches a list with [id]. If no such user exists, null is returned.
+  Stream<MovieList?> watchList({required String id});
+
   /// Deletes a list by [id]
   ///
   /// Note that if no such list exists, no warning is returned.

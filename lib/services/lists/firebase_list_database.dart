@@ -49,15 +49,24 @@ class FirebaseListDatabase implements IListDatabase {
     return list.id;
   }
 
-  @override
-  Future<MovieList?> getList({required String id}) async {
-    final snapshot = await _firebaseFirestore.collection(_collection).doc(id).get();
+  /// Maps [DocumentSnapshot] to [MovieList]
+  MovieList? _snapshotToMovieList(DocumentSnapshot<Map<String, dynamic>> snapshot) {
     if (snapshot.exists) {
       return MovieList.fromJson(snapshot.data()!);
     }
 
     return null;
   }
+
+  @override
+  Future<MovieList?> getList({required String id}) async {
+    final snapshot = await _firebaseFirestore.collection(_collection).doc(id).get();
+    return _snapshotToMovieList(snapshot);
+  }
+
+  @override
+  Stream<MovieList?> watchList({required String id}) =>
+      _firebaseFirestore.collection(_collection).doc(id).snapshots().map(_snapshotToMovieList);
 
   @override
   Future<void> deleteList({required String id}) async {

@@ -1,7 +1,8 @@
+import 'package:film_freund/managers/cache/cache_manager.dart';
 import 'package:film_freund/managers/movies/movie_manager.dart';
-import 'package:film_freund/managers/user/user_manager.dart';
 import 'package:film_freund/services/lists/enums/list_type.dart';
 import 'package:film_freund/services/lists/i_list_database.dart';
+import 'package:film_freund/services/lists/models/movie_list.dart';
 import 'package:film_freund/services/local_settings/i_local_settings_database.dart';
 import 'package:film_freund/services/local_settings/region.dart';
 import 'package:film_freund/services/movies/i_movie_database.dart';
@@ -19,30 +20,27 @@ void main() {
 
     const watchedId = 'watchedId';
     const watchlistId = 'watchlistId';
-    final user = TestInstance.user(
-      watchedId: watchedId,
-      watchlistId: watchlistId,
-    );
 
     late IMovieDatabase mockMovieDatabase;
     late ILocalSettingsDatabase mockLocalSettings;
     late IListDatabase mockListDatabase;
-    late UserManager mockUserManager;
+    late CacheManager mockCacheManager;
     late MovieManager movieManager;
 
     setUp(() {
       mockMovieDatabase = MockIMovieDatabase();
       mockLocalSettings = MockILocalSettingsDatabase();
       mockListDatabase = MockIListDatabase();
-      mockUserManager = MockUserManager();
+      mockCacheManager = MockCacheManager();
       movieManager = MovieManager(
         movieDatabase: mockMovieDatabase,
         localSettings: mockLocalSettings,
         listDatabase: mockListDatabase,
-        userManager: mockUserManager,
+        cacheManager: mockCacheManager,
       );
 
-      when(mockUserManager.currentUser).thenAnswer((_) => Future.value(user));
+      when(mockCacheManager.watchedId).thenReturn(watchedId);
+      when(mockCacheManager.watchlistId).thenReturn(watchlistId);
     });
 
     final teasers = [TestInstance.movieTeaser()];
@@ -111,6 +109,53 @@ void main() {
         expect(
           await movieManager.watchlistMovies,
           movies,
+        );
+      });
+    });
+
+    group('returnListOrThrow', () {
+      test('when null, expect throw', () {
+        expect(
+          () => movieManager.returnListOrThrow(null),
+          throwsArgumentError,
+        );
+      });
+
+      test('when not null, expect list', () {
+        final list = TestInstance.movieList();
+        expect(
+          movieManager.returnListOrThrow(list),
+          list,
+        );
+      });
+    });
+
+    group('watchWatched', () {
+      test('expect correct stream', () {
+        final watched = TestInstance.movieList(
+          type: ListType.watched,
+        );
+        final stream = Stream.value(watched).map<MovieList>((event) => event);
+        when(mockListDatabase.watchList(id: watchedId)).thenAnswer((_) => stream);
+
+        expect(
+          movieManager.watchWatched,
+          emitsInOrder([watched]),
+        );
+      });
+    });
+
+    group('watchWatchlist', () {
+      test('expect correct stream', () {
+        final watchlist = TestInstance.movieList(
+          type: ListType.watched,
+        );
+        final stream = Stream.value(watchlist).map<MovieList>((event) => event);
+        when(mockListDatabase.watchList(id: watchlistId)).thenAnswer((_) => stream);
+
+        expect(
+          movieManager.watchWatchlist,
+          emitsInOrder([watchlist]),
         );
       });
     });

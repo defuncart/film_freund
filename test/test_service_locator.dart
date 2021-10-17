@@ -1,6 +1,6 @@
+import 'package:film_freund/managers/cache/cache_manager.dart';
 import 'package:film_freund/managers/movies/movie_manager.dart';
 import 'package:film_freund/managers/user/user_manager.dart';
-import 'package:film_freund/services/date_time/date_time_service.dart';
 import 'package:film_freund/services/local_settings/i_local_settings_database.dart';
 import 'package:film_freund/services/service_locator.dart';
 import 'package:flutter/widgets.dart';
@@ -14,17 +14,13 @@ class TestServiceLocator {
 
   /// Register services for tests. This is generally called in `setUp`
   static void register({
-    DateTimeService? dateTimeService,
     UserManager? userManager,
     MovieManager? movieManager,
+    CacheManager? cacheManager,
     ILocalSettingsDatabase? localSettings,
   }) {
     _container = ProviderContainer(
       overrides: [
-        if (dateTimeService != null)
-          dateTimeServiceProvider.overrideWithValue(
-            dateTimeService,
-          ),
         if (userManager != null)
           userManagerProvider.overrideWithValue(
             userManager,
@@ -32,6 +28,10 @@ class TestServiceLocator {
         if (movieManager != null)
           movieManagerProvider.overrideWithValue(
             movieManager,
+          ),
+        if (cacheManager != null)
+          cacheManagerProvider.overrideWithValue(
+            cacheManager,
           ),
         if (localSettings != null)
           localSettingsDatabaseProvider.overrideWithValue(
