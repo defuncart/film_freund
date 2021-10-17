@@ -131,7 +131,7 @@ void main() {
     });
 
     group('watchWatched', () {
-      test('when watched found, expect stream', () {
+      test('expect correct stream', () {
         final watched = TestInstance.movieList(
           type: ListType.watched,
         );
@@ -140,9 +140,24 @@ void main() {
 
         expect(
           movieManager.watchWatched,
-          stream,
+          emitsInOrder([watched]),
         );
-      }, skip: true);
+      });
+    });
+
+    group('watchWatchlist', () {
+      test('expect correct stream', () {
+        final watchlist = TestInstance.movieList(
+          type: ListType.watched,
+        );
+        final stream = Stream.value(watchlist).map<MovieList>((event) => event);
+        when(mockListDatabase.watchList(id: watchlistId)).thenAnswer((_) => stream);
+
+        expect(
+          movieManager.watchWatchlist,
+          emitsInOrder([watchlist]),
+        );
+      });
     });
 
     group('addWatchedMovie', () {
