@@ -46,25 +46,19 @@ class _MovieTeaserCardState extends State<MovieTeaserCard> {
       // TODO: Desktop open options menu
       onSecondaryTap: () => showModalBottomSheet(
         context: context,
-        // TODO use consumer
-        builder: (_) => MovieTeaserBottomSheet(
+        builder: (_) => MovieTeaserBottomSheetConsumer(
           movieId: widget.movieTeaser.id,
           movieTitle: widget.movieTeaser.title,
           movieYear: widget.movieTeaser.releaseDate.year.toString(),
-          isWatched: false,
-          isWatchlist: false,
         ),
       ),
       // TODO: Only show on mobile when desktop context menu integrated
       onLongPress: () => showModalBottomSheet(
         context: context,
-        // TODO use consumer
-        builder: (_) => MovieTeaserBottomSheet(
+        builder: (_) => MovieTeaserBottomSheetConsumer(
           movieId: widget.movieTeaser.id,
           movieTitle: widget.movieTeaser.title,
           movieYear: widget.movieTeaser.releaseDate.year.toString(),
-          isWatched: true,
-          isWatchlist: true,
         ),
       ),
       child: MouseRegion(

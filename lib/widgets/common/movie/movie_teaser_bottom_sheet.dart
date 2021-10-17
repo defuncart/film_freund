@@ -1,9 +1,43 @@
 import 'package:film_freund/generated/l10n.dart';
+import 'package:film_freund/services/service_locator.dart';
+import 'package:film_freund/state/movie_watch_status_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 
-// TODO add MovieTeaserBottomSheetConsumer
+/// Displays [MovieTeaserBottomSheet] from a Provider
+class MovieTeaserBottomSheetConsumer extends ConsumerWidget {
+  const MovieTeaserBottomSheetConsumer({
+    required this.movieId,
+    required this.movieTitle,
+    required this.movieYear,
+    Key? key,
+  }) : super(key: key);
 
+  final int movieId;
+  final String movieTitle;
+  final String movieYear;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final movieWatchStatus = ref.watch(movieWatchStatusProvider(movieId));
+
+    return movieWatchStatus.when(
+      loading: (_) => const CircularProgressIndicator(),
+      error: (err, _, __) => Text(err.toString()),
+      data: (movieWatchStatus) => MovieTeaserBottomSheet(
+        movieId: movieId,
+        movieTitle: movieTitle,
+        movieYear: movieYear,
+        isWatched: movieWatchStatus.isWatched,
+        isWatchlist: movieWatchStatus.isWatchlist,
+      ),
+    );
+  }
+}
+
+/// A bottom sheet with list operations for a movie
+@visibleForTesting
 class MovieTeaserBottomSheet extends StatelessWidget {
   const MovieTeaserBottomSheet({
     required this.movieId,
@@ -44,15 +78,17 @@ class MovieTeaserBottomSheet extends StatelessWidget {
                   icon: isWatched ? Icons.check_circle : Icons.check_circle_outline,
                   label: AppLocalizations.of(context).activeViewWatchedTitle,
                   accentColor: isWatched ? Colors.green[700] : Colors.grey,
-                  // TODO implement add/remove watched list logic
-                  onPressed: () {},
+                  onPressed: isWatched
+                      ? () => ServiceLocator.movieManager.removeWatchedMovie(movieId)
+                      : () => ServiceLocator.movieManager.addWatchedMovie(movieId),
                 ),
                 IconOptionButton(
                   icon: isWatchlist ? Icons.watch_later : Icons.watch_later_outlined,
                   label: AppLocalizations.of(context).activeViewWatchlistTitle,
                   accentColor: isWatchlist ? Theme.of(context).colorScheme.secondary : Colors.grey,
-                  // TODO implement add/remove watchlist list logic
-                  onPressed: () {},
+                  onPressed: isWatchlist
+                      ? () => ServiceLocator.movieManager.removeWatchlistMovie(movieId)
+                      : () => ServiceLocator.movieManager.addWatchlistMovie(movieId),
                 ),
               ],
             ),
