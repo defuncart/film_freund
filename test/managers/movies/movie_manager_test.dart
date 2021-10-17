@@ -2,6 +2,7 @@ import 'package:film_freund/managers/cache/cache_manager.dart';
 import 'package:film_freund/managers/movies/movie_manager.dart';
 import 'package:film_freund/services/lists/enums/list_type.dart';
 import 'package:film_freund/services/lists/i_list_database.dart';
+import 'package:film_freund/services/lists/models/movie_list.dart';
 import 'package:film_freund/services/local_settings/i_local_settings_database.dart';
 import 'package:film_freund/services/local_settings/region.dart';
 import 'package:film_freund/services/movies/i_movie_database.dart';
@@ -110,6 +111,21 @@ void main() {
           movies,
         );
       });
+    });
+
+    group('watchWatched', () {
+      test('when watched found, expect stream', () {
+        final watched = TestInstance.movieList(
+          type: ListType.watched,
+        );
+        final stream = Stream.value(watched).map<MovieList>((event) => event);
+        when(mockListDatabase.watchList(id: watchedId)).thenAnswer((_) => stream);
+
+        expect(
+          movieManager.watchWatched,
+          stream,
+        );
+      }, skip: true);
     });
 
     group('addWatchedMovie', () {

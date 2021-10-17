@@ -1,5 +1,6 @@
 import 'package:film_freund/managers/cache/cache_manager.dart';
 import 'package:film_freund/services/lists/i_list_database.dart';
+import 'package:film_freund/services/lists/models/movie_list.dart';
 import 'package:film_freund/services/local_settings/i_local_settings_database.dart';
 import 'package:film_freund/services/local_settings/region.dart';
 import 'package:film_freund/services/movies/i_movie_database.dart';
@@ -55,6 +56,30 @@ class MovieManager {
     }
 
     throw ArgumentError('No list $watchlistId for current user');
+  }
+
+  /// Watches the user's watched list for changes
+  Stream<MovieList> get watchWatched {
+    final watchedId = _cacheManager.watchedId;
+    return _listDatabase.watchList(id: watchedId).map((list) {
+      if (list != null) {
+        return list;
+      }
+
+      throw ArgumentError('watched list not found for current user');
+    });
+  }
+
+  /// Watches the user's watchlist list for changes
+  Stream<MovieList> get watchWatchlist {
+    final watchlistId = _cacheManager.watchlistId;
+    return _listDatabase.watchList(id: watchlistId).map((list) {
+      if (list != null) {
+        return list;
+      }
+
+      throw ArgumentError('watchlist list not found for current user');
+    });
   }
 
   /// Adds [movieId] to the current user's watched movies
