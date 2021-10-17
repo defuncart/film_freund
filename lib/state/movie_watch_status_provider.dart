@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:film_freund/services/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,7 +24,7 @@ final isMovieWatchlistProvider = StreamProvider.family<bool, int>((ref, id) {
   return ServiceLocator.movieManager.watchWatchlist.map((list) => list.movies.contains(id));
 });
 
-class MovieWatchStatus {
+class MovieWatchStatus extends Equatable {
   const MovieWatchStatus({
     required this.isWatched,
     required this.isWatchlist,
@@ -31,4 +32,10 @@ class MovieWatchStatus {
 
   final bool isWatched;
   final bool isWatchlist;
+
+  @override
+  List<Object?> get props => [
+        isWatched,
+        isWatchlist,
+      ];
 }
