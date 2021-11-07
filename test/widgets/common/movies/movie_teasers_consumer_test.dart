@@ -1,5 +1,6 @@
 import 'package:film_freund/services/movies/models/movie_teaser.dart';
 import 'package:film_freund/widgets/common/movie/movie_teasers.dart';
+import 'package:film_freund/widgets/common/movie/movie_teasers_async_value.dart';
 import 'package:film_freund/widgets/common/movie/movie_teasers_consumer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -26,6 +27,7 @@ void main() {
       );
 
       expect(find.byType(MovieTeasersConsumer), findsOneWidget);
+      expect(find.byType(MovieTeasersAsyncValue), findsOneWidget);
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
     });
 
@@ -40,6 +42,7 @@ void main() {
         );
 
         expect(find.byType(MovieTeasersConsumer), findsOneWidget);
+        expect(find.byType(MovieTeasersAsyncValue), findsOneWidget);
         expect(find.byType(CircularProgressIndicator), findsOneWidget);
 
         await tester.pumpAndSettle();
@@ -62,6 +65,7 @@ void main() {
       );
 
       expect(find.byType(MovieTeasersConsumer), findsOneWidget);
+      expect(find.byType(MovieTeasersAsyncValue), findsOneWidget);
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
 
       await tester.pumpAndSettle();

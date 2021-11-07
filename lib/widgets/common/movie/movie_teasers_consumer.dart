@@ -1,9 +1,9 @@
 import 'package:film_freund/services/movies/models/movie_teaser.dart';
-import 'package:film_freund/widgets/common/movie/movie_teasers.dart';
+import 'package:film_freund/widgets/common/movie/movie_teasers_async_value.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-/// A [ConsumerWidget] which takes a [provider] of `List<MovieTeasers>` and displays appropriate state
+/// A [ConsumerWidget] which takes a `AutoDisposeFutureProvider` [provider] of `List<MovieTeasers>` and displays appropriate state
 class MovieTeasersConsumer extends ConsumerWidget {
   const MovieTeasersConsumer({
     required this.provider,
@@ -16,12 +16,6 @@ class MovieTeasersConsumer extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final movies = ref.watch(provider);
 
-    return movies.when(
-      loading: () => const CircularProgressIndicator(),
-      error: (err, _) => Text(err.toString()),
-      data: (movies) => MovieTeasers(
-        movieTeasers: movies,
-      ),
-    );
+    return MovieTeasersAsyncValue(movies);
   }
 }
