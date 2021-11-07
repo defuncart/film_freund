@@ -170,4 +170,75 @@ void main() {
       });
     });
   });
+
+  group('$IconOptionButton', () {
+    const icon = Icons.code;
+    const label = 'Label';
+    late VoidCallback mockVoidCallback;
+
+    setUp(() {
+      mockVoidCallback = MockVoidCallback();
+    });
+
+    setUpUI((tester) async {
+      final widget = wrapWithMaterialApp(
+        IconOptionButton(
+          icon: icon,
+          label: label,
+          onPressed: mockVoidCallback,
+        ),
+      );
+
+      await tester.pumpWidget(widget);
+    });
+
+    testUI('Ensure widget tree is correct', (tester) async {
+      expect(find.byType(IconOptionButton), findsOneWidget);
+      expect(find.byType(MaterialButton), findsOneWidget);
+      expect(find.byType(Icon), findsOneWidget);
+      expect(find.byIcon(icon), findsOneWidget);
+      expect(find.byType(Text), findsOneWidget);
+      expect(find.text(label), findsOneWidget);
+    });
+
+    testUI('Ensure onPressed can be invoked', (tester) async {
+      await tester.tap(find.byType(IconOptionButton));
+      await tester.pumpAndSettle();
+
+      verify(mockVoidCallback.call());
+    });
+  });
+
+  group('$TextOptionButton', () {
+    const text = 'Text';
+    late VoidCallback mockVoidCallback;
+
+    setUp(() {
+      mockVoidCallback = MockVoidCallback();
+    });
+
+    setUpUI((tester) async {
+      final widget = wrapWithMaterialApp(
+        TextOptionButton(
+          text,
+          onPressed: mockVoidCallback,
+        ),
+      );
+
+      await tester.pumpWidget(widget);
+    });
+
+    testUI('Ensure widget tree is correct', (tester) async {
+      expect(find.byType(TextOptionButton), findsOneWidget);
+      expect(find.byType(TextButton), findsOneWidget);
+      expect(find.text(text), findsOneWidget);
+    });
+
+    testUI('Ensure onPressed can be invoked', (tester) async {
+      await tester.tap(find.byType(TextOptionButton));
+      await tester.pumpAndSettle();
+
+      verify(mockVoidCallback.call());
+    });
+  });
 }
