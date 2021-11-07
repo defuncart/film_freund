@@ -1,10 +1,15 @@
 import 'package:film_freund/generated/l10n.dart';
+import 'package:film_freund/managers/movies/movie_manager.dart';
 import 'package:film_freund/state/movie_watch_status_provider.dart';
 import 'package:film_freund/widgets/common/movie/movie_teaser_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_test_ui/flutter_test_ui.dart';
+import 'package:mockito/mockito.dart';
 
+import '../../../mocks.dart';
+import '../../../test_service_locator.dart';
 import '../../../test_utils.dart';
 
 void main() {
@@ -83,32 +88,86 @@ void main() {
   });
 
   group('$MovieTeaserBottomSheet', () {
-    testWidgets('Ensure widget tree is correct', (tester) async {
-      const movieId = 0;
-      const movieTitle = 'Title';
-      const movieYear = 'Year';
-      final widget = wrapWithMaterialAppLocalizationDelegates(
-        const MovieTeaserBottomSheet(
-          movieId: movieId,
-          movieTitle: movieTitle,
-          movieYear: movieYear,
-          isWatched: true,
-          isWatchlist: true,
-        ),
-      );
+    const movieId = 0;
+    const movieTitle = 'Title';
+    const movieYear = 'Year';
+    late MovieManager mockMovieManager;
 
-      await tester.pumpWidget(widget);
-      await tester.pumpAndSettle();
+    setUp(() {
+      mockMovieManager = MockMovieManager();
+      TestServiceLocator.register(movieManager: mockMovieManager);
+    });
 
-      expect(find.text(movieTitle), findsOneWidget);
-      expect(find.text(movieYear), findsOneWidget);
-      expect(find.byType(Divider), findsNWidgets(2));
-      expect(find.byType(IconOptionButton), findsNWidgets(2));
-      expect(find.text(AppLocalizations.current.activeViewWatchedTitle), findsOneWidget);
-      expect(find.text(AppLocalizations.current.activeViewWatchlistTitle), findsOneWidget);
-      expect(find.byType(TextOptionButton), findsNWidgets(2));
-      expect(find.text(AppLocalizations.current.movieTeaserBottomSheetAddToListButtonText), findsOneWidget);
-      expect(find.text(AppLocalizations.current.movieTeaserBottomSheetShowMovieButtonText), findsOneWidget);
+    tearDown(TestServiceLocator.reset);
+
+    group('isWatched, isWatchlist are true', () {
+      setUpUI((tester) async {
+        final widget = wrapWithMaterialAppLocalizationDelegates(
+          const MovieTeaserBottomSheet(
+            movieId: movieId,
+            movieTitle: movieTitle,
+            movieYear: movieYear,
+            isWatched: true,
+            isWatchlist: true,
+          ),
+        );
+
+        await tester.pumpWidget(widget);
+        await tester.pumpAndSettle();
+      });
+
+      testUI('Ensure widget tree is correct', (tester) async {
+        expect(find.text(movieTitle), findsOneWidget);
+        expect(find.text(movieYear), findsOneWidget);
+        expect(find.byType(Divider), findsNWidgets(2));
+        expect(find.byType(IconOptionButton), findsNWidgets(2));
+        expect(find.text(AppLocalizations.current.activeViewWatchedTitle), findsOneWidget);
+        expect(find.text(AppLocalizations.current.activeViewWatchlistTitle), findsOneWidget);
+        expect(find.byType(TextOptionButton), findsNWidgets(2));
+        expect(find.text(AppLocalizations.current.movieTeaserBottomSheetAddToListButtonText), findsOneWidget);
+        expect(find.text(AppLocalizations.current.movieTeaserBottomSheetShowMovieButtonText), findsOneWidget);
+      });
+
+      testUI('on watched tap, expect remove', (tester) async {
+        await tester.tap(find.byType(IconOptionButton).first);
+
+        verify(mockMovieManager.removeWatchedMovie(movieId));
+      });
+
+      testUI('on watchlist tap, expect remove', (tester) async {
+        await tester.tap(find.byType(IconOptionButton).last);
+
+        verify(mockMovieManager.removeWatchlistMovie(movieId));
+      });
+    });
+
+    group('isWatched, isWatchlist are false', () {
+      setUpUI((tester) async {
+        final widget = wrapWithMaterialAppLocalizationDelegates(
+          const MovieTeaserBottomSheet(
+            movieId: movieId,
+            movieTitle: movieTitle,
+            movieYear: movieYear,
+            isWatched: false,
+            isWatchlist: false,
+          ),
+        );
+
+        await tester.pumpWidget(widget);
+        await tester.pumpAndSettle();
+      });
+
+      testUI('on watched tap, expect add', (tester) async {
+        await tester.tap(find.byType(IconOptionButton).first);
+
+        verify(mockMovieManager.addWatchedMovie(movieId));
+      });
+
+      testUI('on watchlist tap, expect add', (tester) async {
+        await tester.tap(find.byType(IconOptionButton).last);
+
+        verify(mockMovieManager.addWatchlistMovie(movieId));
+      });
     });
   });
 }
