@@ -15,12 +15,12 @@ final movieWatchStatusProvider = StreamProvider.family<MovieWatchStatus, int>((r
 });
 
 @visibleForTesting
-final isMovieWatchedProvider = StreamProvider.family<bool, int>((ref, id) {
+final isMovieWatchedProvider = StreamProvider.family<bool, int>((_, id) {
   return ServiceLocator.movieManager.watchWatched.map((list) => list.movies.contains(id));
 });
 
 @visibleForTesting
-final isMovieWatchlistProvider = StreamProvider.family<bool, int>((ref, id) {
+final isMovieWatchlistProvider = StreamProvider.family<bool, int>((_, id) {
   return ServiceLocator.movieManager.watchWatchlist.map((list) => list.movies.contains(id));
 });
 
