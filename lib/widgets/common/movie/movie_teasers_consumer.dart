@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// A [ConsumerWidget] which takes a [provider] of `List<MovieTeasers>` and displays appropriate state
-class MovieTeasersContainer extends ConsumerWidget {
-  const MovieTeasersContainer({
+class MovieTeasersConsumer extends ConsumerWidget {
+  const MovieTeasersConsumer({
     required this.provider,
     Key? key,
   }) : super(key: key);
