@@ -1,5 +1,6 @@
 import 'package:film_freund/services/movies/models/movie_teaser.dart';
 import 'package:film_freund/widgets/common/movie/movie_rating.dart';
+import 'package:film_freund/widgets/common/movie/movie_teaser_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -43,9 +44,23 @@ class _MovieTeaserCardState extends State<MovieTeaserCard> {
       // TODO: open movie details
       onTap: () {},
       // TODO: Desktop open options menu
-      onSecondaryTap: () {},
-      // TODO: Mobile open options menu
-      onLongPress: () {},
+      onSecondaryTap: () => showModalBottomSheet(
+        context: context,
+        builder: (_) => MovieTeaserBottomSheetConsumer(
+          movieId: widget.movieTeaser.id,
+          movieTitle: widget.movieTeaser.title,
+          movieYear: widget.movieTeaser.releaseDate.year.toString(),
+        ),
+      ),
+      // TODO: Only show on mobile when desktop context menu integrated
+      onLongPress: () => showModalBottomSheet(
+        context: context,
+        builder: (_) => MovieTeaserBottomSheetConsumer(
+          movieId: widget.movieTeaser.id,
+          movieTitle: widget.movieTeaser.title,
+          movieYear: widget.movieTeaser.releaseDate.year.toString(),
+        ),
+      ),
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
         child: Container(

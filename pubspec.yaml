@@ -24,6 +24,7 @@ dependencies:
   hive:
   path_provider:
   uuid:
+  stream_transform:
 
 dev_dependencies:
   flutter_test:

@@ -271,6 +271,26 @@ class AppLocalizations {
     );
   }
 
+  /// `Add to list`
+  String get movieTeaserBottomSheetAddToListButtonText {
+    return Intl.message(
+      'Add to list',
+      name: 'movieTeaserBottomSheetAddToListButtonText',
+      desc: 'Button text for add to list',
+      args: [],
+    );
+  }
+
+  /// `Show movie`
+  String get movieTeaserBottomSheetShowMovieButtonText {
+    return Intl.message(
+      'Show movie',
+      name: 'movieTeaserBottomSheetShowMovieButtonText',
+      desc: 'Button text for show movie',
+      args: [],
+    );
+  }
+
   /// `Change Password`
   String get settingsViewChangePasswordButtonText {
     return Intl.message(

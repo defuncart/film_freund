@@ -36,3 +36,5 @@ changePasswordDialogRepeatNewPasswordHintText;Hint text for repeat password text
 changePasswordDialogNewPasswordErrorText;Error text for new password text field;New password should not be identical to existing
 changePasswordDialogRepeatNewPasswordErrorText;Error text for repeat password text field;Must match new password
 changePasswordDialogConfirmButtonText;Confirmation text for change password dialog;Continue
+movieTeaserBottomSheetAddToListButtonText;Button text for add to list;Add to list
+movieTeaserBottomSheetShowMovieButtonText;Button text for show movie;Show movie

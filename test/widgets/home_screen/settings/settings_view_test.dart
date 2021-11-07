@@ -69,7 +69,7 @@ void main() {
       expect(find.text(error), findsOneWidget);
     });
 
-    testWidgets('SettingsView user', (tester) async {
+    testWidgets('SettingsView data', (tester) async {
       mockNetworkImagesFor(() async {
         final user = TestInstance.user();
         await tester.pumpWidget(
