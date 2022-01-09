@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 
 @visibleForTesting
 const singlePageBreakpoint = 440.0;

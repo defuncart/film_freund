@@ -2,7 +2,6 @@ import 'package:film_freund/services/movies/models/movie_teaser.dart';
 import 'package:film_freund/widgets/common/movie/movie_rating.dart';
 import 'package:film_freund/widgets/common/movie/movie_teaser_bottom_sheet.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 /// A card to tease a movie
 ///

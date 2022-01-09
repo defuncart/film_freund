@@ -1,7 +1,6 @@
 import 'dart:math' show pi;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 /// Displays the rating for a movie
 ///

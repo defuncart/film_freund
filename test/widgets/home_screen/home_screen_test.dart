@@ -1,5 +1,3 @@
-import 'dart:ui' show Size;
-
 import 'package:film_freund/services/local_settings/region.dart';
 import 'package:film_freund/services/movies/models/movie_teaser.dart';
 import 'package:film_freund/state/current_user_provider.dart';
@@ -10,7 +8,6 @@ import 'package:film_freund/widgets/home_screen/popular/popular_view.dart';
 import 'package:film_freund/widgets/home_screen/settings/settings_view.dart';
 import 'package:film_freund/widgets/home_screen/upcoming/upcoming_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
