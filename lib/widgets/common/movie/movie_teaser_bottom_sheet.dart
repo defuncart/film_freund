@@ -23,8 +23,8 @@ class MovieTeaserBottomSheetConsumer extends ConsumerWidget {
     final movieWatchStatus = ref.watch(movieWatchStatusProvider(movieId));
 
     return movieWatchStatus.when(
-      loading: (_) => const CircularProgressIndicator(),
-      error: (err, _, __) => Text(err.toString()),
+      loading: () => const CircularProgressIndicator(),
+      error: (err, _) => Text(err.toString()),
       data: (movieWatchStatus) => MovieTeaserBottomSheet(
         movieId: movieId,
         movieTitle: movieTitle,

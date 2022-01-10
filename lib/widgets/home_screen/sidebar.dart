@@ -51,10 +51,10 @@ class UserPanelConsumer extends ConsumerWidget {
     final displayName = ref.watch(watchCurrentUserDisplayNameProvider);
 
     return displayName.when(
-      loading: (_) => const UserPanel(
+      loading: () => const UserPanel(
         displayName: 'Film Freund',
       ),
-      error: (err, _, __) => Text(err.toString()),
+      error: (err, _) => Text(err.toString()),
       data: (displayName) => UserPanel(
         displayName: displayName,
       ),

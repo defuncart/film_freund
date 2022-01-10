@@ -17,8 +17,8 @@ class MovieTeasersContainer extends ConsumerWidget {
     final movies = ref.watch(provider);
 
     return movies.when(
-      loading: (_) => const CircularProgressIndicator(),
-      error: (err, _, __) => Text(err.toString()),
+      loading: () => const CircularProgressIndicator(),
+      error: (err, _) => Text(err.toString()),
       data: (movies) => MovieTeasers(
         movieTeasers: movies,
       ),
