@@ -15,9 +15,6 @@ import '../../test_utils.dart';
 void main() {
   group('$MovieManager', () {
     const region = Region.de;
-    const movieIds = [1, 2, 3];
-    final movies = movieIds.map((id) => TestInstance.movie(id: id)).toList();
-
     const watchedId = 'watchedId';
     const watchlistId = 'watchlistId';
 
@@ -60,55 +57,38 @@ void main() {
     });
 
     group('watchedMovies', () {
-      final list = TestInstance.movieList(
-        id: watchedId,
-        type: ListType.watched,
-        movies: movieIds,
-      );
-
-      test('when list does not exist, expect error', () async {
-        when(mockListDatabase.getList(id: watchedId)).thenAnswer((_) => Future.value(null));
-
-        expect(
-          () => movieManager.watchedMovies,
-          throwsArgumentError,
+      test('expect correct stream', () {
+        final watched = TestInstance.movieList(
+          type: ListType.watched,
+          movies: [1],
         );
-      });
+        when(mockListDatabase.watchList(id: watchedId)).thenAnswer((_) => Stream.value(watched));
 
-      test('when list exists, expect movies', () async {
-        when(mockListDatabase.getList(id: watchedId)).thenAnswer((_) => Future.value(list));
-        when(mockMovieDatabase.getMovies(movieIds)).thenAnswer((_) => Future.value(movies));
+        final watchedMovies = watched.movies.map((id) => TestInstance.movieTeaser(id: id));
+        when(mockMovieDatabase.getMovies(watched.movies)).thenAnswer((_) => Future.value([TestInstance.movie(id: 1)]));
 
         expect(
-          await movieManager.watchedMovies,
-          movies,
+          movieManager.watchedMovies,
+          emitsInOrder([watchedMovies]),
         );
       });
     });
 
     group('watchlistMovies', () {
-      final list = TestInstance.movieList(
-        id: watchlistId,
-        type: ListType.watchlist,
-        movies: movieIds,
-      );
-
-      test('when list does not exist, expect error', () async {
-        when(mockListDatabase.getList(id: watchlistId)).thenAnswer((_) => Future.value(null));
-
-        expect(
-          () => movieManager.watchlistMovies,
-          throwsArgumentError,
+      test('expect correct stream', () {
+        final watchlist = TestInstance.movieList(
+          type: ListType.watchlist,
+          movies: [1],
         );
-      });
+        when(mockListDatabase.watchList(id: watchlistId)).thenAnswer((_) => Stream.value(watchlist));
 
-      test('when list exists, expect movies', () async {
-        when(mockListDatabase.getList(id: watchlistId)).thenAnswer((_) => Future.value(list));
-        when(mockMovieDatabase.getMovies(movieIds)).thenAnswer((_) => Future.value(movies));
+        final watchlistMovies = watchlist.movies.map((id) => TestInstance.movieTeaser(id: id));
+        when(mockMovieDatabase.getMovies(watchlist.movies))
+            .thenAnswer((_) => Future.value([TestInstance.movie(id: 1)]));
 
         expect(
-          await movieManager.watchlistMovies,
-          movies,
+          movieManager.watchlistMovies,
+          emitsInOrder([watchlistMovies]),
         );
       });
     });

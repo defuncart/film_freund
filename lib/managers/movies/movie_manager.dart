@@ -1,16 +1,18 @@
+import 'dart:async';
+
+import 'package:film_freund/extensions/movie_extensions.dart';
 import 'package:film_freund/managers/cache/cache_manager.dart';
 import 'package:film_freund/services/lists/i_list_database.dart';
 import 'package:film_freund/services/lists/models/movie_list.dart';
 import 'package:film_freund/services/local_settings/i_local_settings_database.dart';
 import 'package:film_freund/services/local_settings/region.dart';
 import 'package:film_freund/services/movies/i_movie_database.dart';
-import 'package:film_freund/services/movies/models/movie.dart';
 import 'package:film_freund/services/movies/models/movie_teaser.dart';
 import 'package:flutter/material.dart';
 
 /// A manager which handles movie database requests and updating user's movie lists
 class MovieManager {
-  const MovieManager({
+  MovieManager({
     required IMovieDatabase movieDatabase,
     required ILocalSettingsDatabase localSettings,
     required IListDatabase listDatabase,
@@ -35,28 +37,38 @@ class MovieManager {
         region: _localSettings.region.countryCode,
       );
 
-  /// Returns the current user's watched movies
-  Future<List<Movie>> get watchedMovies async {
-    final watchedId = _cacheManager.watchedId;
-    final list = await _listDatabase.getList(id: watchedId);
+  StreamController<List<MovieTeaser>>? _watchedMoviesController;
+  StreamSubscription<MovieList>? _watchWatchedSubscription;
 
-    if (list != null) {
-      return _movieDatabase.getMovies(list.movies);
-    }
+  /// Returns a steam of the current user's watched movies
+  Stream<List<MovieTeaser>> get watchedMovies {
+    _watchWatchedSubscription?.cancel();
+    _watchedMoviesController?.close();
+    _watchedMoviesController = StreamController<List<MovieTeaser>>();
+    _watchWatchedSubscription = watchWatched.listen((list) {
+      _movieDatabase.getMovies(list.movies).then(
+            (movies) => _watchedMoviesController!.add(movies.toMovieTeasers()),
+          );
+    });
 
-    throw ArgumentError('No list $watchedId for current user');
+    return _watchedMoviesController!.stream;
   }
 
-  /// Returns the current user's watchlist movies
-  Future<List<Movie>> get watchlistMovies async {
-    final watchlistId = _cacheManager.watchlistId;
-    final list = await _listDatabase.getList(id: watchlistId);
+  StreamController<List<MovieTeaser>>? _watchlistMoviesController;
+  StreamSubscription<MovieList>? _watchWatchlistSubscription;
 
-    if (list != null) {
-      return _movieDatabase.getMovies(list.movies);
-    }
+  /// Returns a steam of the current user's watchlist movies
+  Stream<List<MovieTeaser>> get watchlistMovies {
+    _watchlistMoviesController?.close();
+    _watchlistMoviesController = StreamController<List<MovieTeaser>>();
+    _watchWatchlistSubscription?.cancel();
+    _watchWatchlistSubscription = watchWatchlist.listen((list) {
+      _movieDatabase.getMovies(list.movies).then(
+            (movies) => _watchlistMoviesController!.add(movies.toMovieTeasers()),
+          );
+    });
 
-    throw ArgumentError('No list $watchlistId for current user');
+    return _watchlistMoviesController!.stream;
   }
 
   /// Watches the user's watched list for changes
