@@ -17,5 +17,5 @@ class UpcomingView extends StatelessWidget {
 
 @visibleForTesting
 final upcomingMoviesProvider = FutureProvider.autoDispose<List<MovieTeaser>>(
-  (ref) => ServiceLocator.movieManager.getUpcoming(),
+  (_) => ServiceLocator.movieManager.getUpcoming(),
 );
