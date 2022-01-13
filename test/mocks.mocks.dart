@@ -5,22 +5,22 @@
 import 'dart:async' as _i6;
 import 'dart:typed_data' as _i22;
 
-import 'package:film_freund/managers/cache/cache_manager.dart' as _i11;
+import 'package:film_freund/managers/cache/cache_manager.dart' as _i10;
 import 'package:film_freund/managers/movies/movie_manager.dart' as _i8;
 import 'package:film_freund/managers/user/user_manager.dart' as _i5;
 import 'package:film_freund/services/auth/i_auth_service.dart' as _i7;
-import 'package:film_freund/services/date_time/date_time_service.dart' as _i12;
+import 'package:film_freund/services/date_time/date_time_service.dart' as _i11;
 import 'package:film_freund/services/lists/enums/list_type.dart' as _i16;
 import 'package:film_freund/services/lists/i_list_database.dart' as _i15;
 import 'package:film_freund/services/lists/models/movie_list.dart' as _i3;
 import 'package:film_freund/services/local_settings/i_local_settings_database.dart'
     as _i17;
 import 'package:film_freund/services/local_settings/region.dart' as _i18;
-import 'package:film_freund/services/movies/i_movie_database.dart' as _i14;
-import 'package:film_freund/services/movies/models/movie.dart' as _i9;
-import 'package:film_freund/services/movies/models/movie_teaser.dart' as _i10;
+import 'package:film_freund/services/movies/i_movie_database.dart' as _i13;
+import 'package:film_freund/services/movies/models/movie.dart' as _i14;
+import 'package:film_freund/services/movies/models/movie_teaser.dart' as _i9;
 import 'package:film_freund/services/platform/i_platform_service.dart' as _i19;
-import 'package:film_freund/services/user/i_user_database.dart' as _i13;
+import 'package:film_freund/services/user/i_user_database.dart' as _i12;
 import 'package:film_freund/services/user/models/user.dart' as _i2;
 import 'package:hive/hive.dart' as _i4;
 import 'package:hive/src/box/default_compaction_strategy.dart' as _i21;
@@ -116,15 +116,15 @@ class MockMovieManager extends _i1.Mock implements _i8.MovieManager {
   }
 
   @override
-  _i6.Future<List<_i9.Movie>> get watchedMovies =>
+  _i6.Stream<List<_i9.MovieTeaser>> get watchedMovies =>
       (super.noSuchMethod(Invocation.getter(#watchedMovies),
-              returnValue: Future<List<_i9.Movie>>.value(<_i9.Movie>[]))
-          as _i6.Future<List<_i9.Movie>>);
+              returnValue: Stream<List<_i9.MovieTeaser>>.empty())
+          as _i6.Stream<List<_i9.MovieTeaser>>);
   @override
-  _i6.Future<List<_i9.Movie>> get watchlistMovies =>
+  _i6.Stream<List<_i9.MovieTeaser>> get watchlistMovies =>
       (super.noSuchMethod(Invocation.getter(#watchlistMovies),
-              returnValue: Future<List<_i9.Movie>>.value(<_i9.Movie>[]))
-          as _i6.Future<List<_i9.Movie>>);
+              returnValue: Stream<List<_i9.MovieTeaser>>.empty())
+          as _i6.Stream<List<_i9.MovieTeaser>>);
   @override
   _i6.Stream<_i3.MovieList> get watchWatched => (super.noSuchMethod(
       Invocation.getter(#watchWatched),
@@ -134,17 +134,15 @@ class MockMovieManager extends _i1.Mock implements _i8.MovieManager {
       Invocation.getter(#watchWatchlist),
       returnValue: Stream<_i3.MovieList>.empty()) as _i6.Stream<_i3.MovieList>);
   @override
-  _i6.Future<List<_i10.MovieTeaser>> getPopular() =>
-      (super.noSuchMethod(Invocation.method(#getPopular, []),
-              returnValue:
-                  Future<List<_i10.MovieTeaser>>.value(<_i10.MovieTeaser>[]))
-          as _i6.Future<List<_i10.MovieTeaser>>);
+  _i6.Future<List<_i9.MovieTeaser>> getPopular() => (super.noSuchMethod(
+          Invocation.method(#getPopular, []),
+          returnValue: Future<List<_i9.MovieTeaser>>.value(<_i9.MovieTeaser>[]))
+      as _i6.Future<List<_i9.MovieTeaser>>);
   @override
-  _i6.Future<List<_i10.MovieTeaser>> getUpcoming() =>
-      (super.noSuchMethod(Invocation.method(#getUpcoming, []),
-              returnValue:
-                  Future<List<_i10.MovieTeaser>>.value(<_i10.MovieTeaser>[]))
-          as _i6.Future<List<_i10.MovieTeaser>>);
+  _i6.Future<List<_i9.MovieTeaser>> getUpcoming() => (super.noSuchMethod(
+          Invocation.method(#getUpcoming, []),
+          returnValue: Future<List<_i9.MovieTeaser>>.value(<_i9.MovieTeaser>[]))
+      as _i6.Future<List<_i9.MovieTeaser>>);
   @override
   _i3.MovieList returnListOrThrow(_i3.MovieList? list) =>
       (super.noSuchMethod(Invocation.method(#returnListOrThrow, [list]),
@@ -174,7 +172,7 @@ class MockMovieManager extends _i1.Mock implements _i8.MovieManager {
 /// A class which mocks [CacheManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockCacheManager extends _i1.Mock implements _i11.CacheManager {
+class MockCacheManager extends _i1.Mock implements _i10.CacheManager {
   MockCacheManager() {
     _i1.throwOnMissingStub(this);
   }
@@ -211,7 +209,7 @@ class MockCacheManager extends _i1.Mock implements _i11.CacheManager {
 /// A class which mocks [DateTimeService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockDateTimeService extends _i1.Mock implements _i12.DateTimeService {
+class MockDateTimeService extends _i1.Mock implements _i11.DateTimeService {
   MockDateTimeService() {
     _i1.throwOnMissingStub(this);
   }
@@ -271,7 +269,7 @@ class MockIAuthService extends _i1.Mock implements _i7.IAuthService {
 /// A class which mocks [IUserDatabase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIUserDatabase extends _i1.Mock implements _i13.IUserDatabase {
+class MockIUserDatabase extends _i1.Mock implements _i12.IUserDatabase {
   MockIUserDatabase() {
     _i1.throwOnMissingStub(this);
   }
@@ -319,32 +317,32 @@ class MockIUserDatabase extends _i1.Mock implements _i13.IUserDatabase {
 /// A class which mocks [IMovieDatabase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIMovieDatabase extends _i1.Mock implements _i14.IMovieDatabase {
+class MockIMovieDatabase extends _i1.Mock implements _i13.IMovieDatabase {
   MockIMovieDatabase() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.Future<_i9.Movie?> getMovie(int? id) =>
+  _i6.Future<_i14.Movie?> getMovie(int? id) =>
       (super.noSuchMethod(Invocation.method(#getMovie, [id]),
-          returnValue: Future<_i9.Movie?>.value()) as _i6.Future<_i9.Movie?>);
+          returnValue: Future<_i14.Movie?>.value()) as _i6.Future<_i14.Movie?>);
   @override
-  _i6.Future<List<_i9.Movie>> getMovies(List<int>? ids) =>
+  _i6.Future<List<_i14.Movie>> getMovies(List<int>? ids) =>
       (super.noSuchMethod(Invocation.method(#getMovies, [ids]),
-              returnValue: Future<List<_i9.Movie>>.value(<_i9.Movie>[]))
-          as _i6.Future<List<_i9.Movie>>);
+              returnValue: Future<List<_i14.Movie>>.value(<_i14.Movie>[]))
+          as _i6.Future<List<_i14.Movie>>);
   @override
-  _i6.Future<List<_i10.MovieTeaser>> getPopular({String? region}) =>
+  _i6.Future<List<_i9.MovieTeaser>> getPopular({String? region}) =>
       (super.noSuchMethod(Invocation.method(#getPopular, [], {#region: region}),
               returnValue:
-                  Future<List<_i10.MovieTeaser>>.value(<_i10.MovieTeaser>[]))
-          as _i6.Future<List<_i10.MovieTeaser>>);
+                  Future<List<_i9.MovieTeaser>>.value(<_i9.MovieTeaser>[]))
+          as _i6.Future<List<_i9.MovieTeaser>>);
   @override
-  _i6.Future<List<_i10.MovieTeaser>> getUpcoming({String? region}) => (super
+  _i6.Future<List<_i9.MovieTeaser>> getUpcoming({String? region}) => (super
           .noSuchMethod(Invocation.method(#getUpcoming, [], {#region: region}),
               returnValue:
-                  Future<List<_i10.MovieTeaser>>.value(<_i10.MovieTeaser>[]))
-      as _i6.Future<List<_i10.MovieTeaser>>);
+                  Future<List<_i9.MovieTeaser>>.value(<_i9.MovieTeaser>[]))
+      as _i6.Future<List<_i9.MovieTeaser>>);
 }
 
 /// A class which mocks [IListDatabase].

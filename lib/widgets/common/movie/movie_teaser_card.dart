@@ -29,6 +29,17 @@ class _MovieTeaserCardState extends State<MovieTeaserCard> {
   void initState() {
     super.initState();
 
+    _downloadImage();
+  }
+
+  @override
+  void didUpdateWidget(MovieTeaserCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    _downloadImage();
+  }
+
+  void _downloadImage() {
     _image = Image.network(widget.movieTeaser.posterPath);
     _image.image.resolve(const ImageConfiguration()).addListener(ImageStreamListener((_, __) {
       if (mounted) {

@@ -7,6 +7,8 @@ import 'package:film_freund/widgets/home_screen/home_screen.dart';
 import 'package:film_freund/widgets/home_screen/popular/popular_view.dart';
 import 'package:film_freund/widgets/home_screen/settings/settings_view.dart';
 import 'package:film_freund/widgets/home_screen/upcoming/upcoming_view.dart';
+import 'package:film_freund/widgets/home_screen/watched/watched_view.dart';
+import 'package:film_freund/widgets/home_screen/watchlist/watchlist_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -126,9 +128,16 @@ void main() {
     });
 
     testWidgets('When ${ActiveView.watched}, expect $ActiveViewPlaceholder', (tester) async {
-      final widget = wrapWithMaterialAppLocalizationDelegates(
-        const HomeScreenContent(
-          activeView: ActiveView.watched,
+      final widget = ProviderScope(
+        overrides: [
+          watchedMoviesProvider.overrideWithValue(
+            const AsyncValue.data(<MovieTeaser>[]),
+          ),
+        ],
+        child: wrapWithMaterialAppLocalizationDelegates(
+          const HomeScreenContent(
+            activeView: ActiveView.watched,
+          ),
         ),
       );
 
@@ -136,13 +145,20 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.byType(HomeScreenContent), findsOneWidget);
-      expect(find.byType(ActiveViewPlaceholder), findsOneWidget);
+      expect(find.byType(WatchedView), findsOneWidget);
     });
 
     testWidgets('When ${ActiveView.watchlist}, expect $ActiveViewPlaceholder', (tester) async {
-      final widget = wrapWithMaterialAppLocalizationDelegates(
-        const HomeScreenContent(
-          activeView: ActiveView.watchlist,
+      final widget = ProviderScope(
+        overrides: [
+          watchlistMoviesProvider.overrideWithValue(
+            const AsyncValue.data(<MovieTeaser>[]),
+          ),
+        ],
+        child: wrapWithMaterialAppLocalizationDelegates(
+          const HomeScreenContent(
+            activeView: ActiveView.watchlist,
+          ),
         ),
       );
 
@@ -150,7 +166,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.byType(HomeScreenContent), findsOneWidget);
-      expect(find.byType(ActiveViewPlaceholder), findsOneWidget);
+      expect(find.byType(WatchlistView), findsOneWidget);
     });
 
     testWidgets('When ${ActiveView.lists}, expect $ActiveViewPlaceholder', (tester) async {

@@ -7,6 +7,8 @@ import 'package:film_freund/widgets/home_screen/popular/popular_view.dart';
 import 'package:film_freund/widgets/home_screen/settings/settings_view.dart';
 import 'package:film_freund/widgets/home_screen/sidebar.dart';
 import 'package:film_freund/widgets/home_screen/upcoming/upcoming_view.dart';
+import 'package:film_freund/widgets/home_screen/watched/watched_view.dart';
+import 'package:film_freund/widgets/home_screen/watchlist/watchlist_view.dart';
 import 'package:film_freund/widgets/signin_screen/signin_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -128,6 +130,10 @@ class HomeScreenContent extends StatelessWidget {
                   return const PopularView();
                 case ActiveView.upcoming:
                   return const UpcomingView();
+                case ActiveView.watched:
+                  return const WatchedView();
+                case ActiveView.watchlist:
+                  return const WatchlistView();
                 case ActiveView.settings:
                   return SettingsView(
                     onSignOutConfirmed: () {

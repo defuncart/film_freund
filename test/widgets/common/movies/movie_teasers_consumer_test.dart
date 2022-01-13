@@ -1,6 +1,7 @@
 import 'package:film_freund/services/movies/models/movie_teaser.dart';
 import 'package:film_freund/widgets/common/movie/movie_teasers.dart';
-import 'package:film_freund/widgets/common/movie/movie_teasers_container.dart';
+import 'package:film_freund/widgets/common/movie/movie_teasers_async_value.dart';
+import 'package:film_freund/widgets/common/movie/movie_teasers_consumer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -9,7 +10,7 @@ import 'package:network_image_mock/network_image_mock.dart';
 import '../../../test_utils.dart';
 
 void main() {
-  group('$MovieTeasersContainer', () {
+  group('$MovieTeasersConsumer', () {
     final provider = FutureProvider.autoDispose<List<MovieTeaser>>(
       (ref) => Future.value([
         TestInstance.movieTeaser(),
@@ -20,12 +21,13 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           child: wrapWithMaterialApp(
-            MovieTeasersContainer(provider: provider),
+            MovieTeasersConsumer(provider: provider),
           ),
         ),
       );
 
-      expect(find.byType(MovieTeasersContainer), findsOneWidget);
+      expect(find.byType(MovieTeasersConsumer), findsOneWidget);
+      expect(find.byType(MovieTeasersAsyncValue), findsOneWidget);
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
     });
 
@@ -34,12 +36,13 @@ void main() {
         await tester.pumpWidget(
           ProviderScope(
             child: wrapWithMaterialApp(
-              MovieTeasersContainer(provider: provider),
+              MovieTeasersConsumer(provider: provider),
             ),
           ),
         );
 
-        expect(find.byType(MovieTeasersContainer), findsOneWidget);
+        expect(find.byType(MovieTeasersConsumer), findsOneWidget);
+        expect(find.byType(MovieTeasersAsyncValue), findsOneWidget);
         expect(find.byType(CircularProgressIndicator), findsOneWidget);
 
         await tester.pumpAndSettle();
@@ -56,12 +59,13 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           child: wrapWithMaterialApp(
-            MovieTeasersContainer(provider: provider),
+            MovieTeasersConsumer(provider: provider),
           ),
         ),
       );
 
-      expect(find.byType(MovieTeasersContainer), findsOneWidget);
+      expect(find.byType(MovieTeasersConsumer), findsOneWidget);
+      expect(find.byType(MovieTeasersAsyncValue), findsOneWidget);
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
 
       await tester.pumpAndSettle();
