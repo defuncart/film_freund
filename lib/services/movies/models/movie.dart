@@ -1,6 +1,9 @@
 import 'package:film_freund/services/movies/models/base_movie.dart';
+import 'package:flutter/foundation.dart' show listEquals;
+import 'package:meta/meta.dart';
 
 /// A model representing full information about a movie
+@immutable
 class Movie extends BaseMovie {
   const Movie({
     required String? backdropPath,
@@ -43,4 +46,50 @@ class Movie extends BaseMovie {
 
   @override
   String toString() => '$Movie{id: $id, title: $title}';
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+
+    return other is Movie &&
+        other.backdropPath == backdropPath &&
+        other.budget == budget &&
+        listEquals(other.genres, genres) &&
+        other.homepage == homepage &&
+        other.id == id &&
+        other.originalLanguage == originalLanguage &&
+        other.originalTitle == originalTitle &&
+        other.overview == overview &&
+        other.popularity == popularity &&
+        other.posterPath == posterPath &&
+        other.releaseDate == releaseDate &&
+        other.revenue == revenue &&
+        other.runtime == runtime &&
+        other.tagline == tagline &&
+        other.title == title &&
+        other.voteAverage == voteAverage &&
+        other.voteCount == voteCount;
+  }
+
+  @override
+  int get hashCode =>
+      backdropPath.hashCode ^
+      budget.hashCode ^
+      genres.hashCode ^
+      homepage.hashCode ^
+      id.hashCode ^
+      originalLanguage.hashCode ^
+      originalTitle.hashCode ^
+      overview.hashCode ^
+      popularity.hashCode ^
+      posterPath.hashCode ^
+      releaseDate.hashCode ^
+      revenue.hashCode ^
+      runtime.hashCode ^
+      tagline.hashCode ^
+      title.hashCode ^
+      voteAverage.hashCode ^
+      voteCount.hashCode;
 }

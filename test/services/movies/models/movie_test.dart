@@ -11,5 +11,12 @@ void main() {
         isNot('Instance of \'$Movie\''),
       );
     });
+
+    test('Expect equality', () {
+      final movie1 = TestInstance.movie();
+      final movie2 = TestInstance.movie();
+
+      expect(movie1, movie2);
+    });
   });
 }
