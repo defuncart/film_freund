@@ -8,10 +8,10 @@ An application to discover new films and organize what to watch next.
 
 To build the app locally, the following tools are required:
 
-- Flutter stable >= 2.5
-- Dart >= 2.14
+- Flutter stable >= 2.8
+- Dart >= 2.15
 - macOS:
-    - Xcode >= 12.4
+    - Xcode >= 13.0
     - CocoaPods >= 1.11.0
 - Web:
     - Chrome
