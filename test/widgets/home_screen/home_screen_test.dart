@@ -5,6 +5,7 @@ import 'package:film_freund/utils/sizes.dart';
 import 'package:film_freund/widgets/home_screen/active_view.dart';
 import 'package:film_freund/widgets/home_screen/home_screen.dart';
 import 'package:film_freund/widgets/home_screen/popular/popular_view.dart';
+import 'package:film_freund/widgets/home_screen/search/search_view.dart';
 import 'package:film_freund/widgets/home_screen/settings/settings_view.dart';
 import 'package:film_freund/widgets/home_screen/upcoming/upcoming_view.dart';
 import 'package:film_freund/widgets/home_screen/watched/watched_view.dart';
@@ -113,10 +114,20 @@ void main() {
       expect(find.byType(UpcomingView), findsOneWidget);
     });
 
-    testWidgets('When ${ActiveView.search}, expect $ActiveViewPlaceholder', (tester) async {
-      final widget = wrapWithMaterialAppLocalizationDelegates(
-        const HomeScreenContent(
-          activeView: ActiveView.search,
+    testWidgets('When ${ActiveView.search}, expect $SearchView', (tester) async {
+      final widget = ProviderScope(
+        overrides: [
+          searchMoviesProvider.overrideWithProvider(
+            FutureProvider.family.autoDispose<List<MovieTeaser>, String>(
+              (_, searchTerm) => const [],
+            ),
+          ),
+        ],
+        child: wrapWithMaterialAppLocalizationDelegates(
+          const HomeScreenContent(
+            activeView: ActiveView.search,
+          ),
+          useScaffold: true,
         ),
       );
 
@@ -124,7 +135,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.byType(HomeScreenContent), findsOneWidget);
-      expect(find.byType(ActiveViewPlaceholder), findsOneWidget);
+      expect(find.byType(SearchView), findsOneWidget);
     });
 
     testWidgets('When ${ActiveView.watched}, expect $ActiveViewPlaceholder', (tester) async {

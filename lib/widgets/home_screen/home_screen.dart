@@ -4,6 +4,7 @@ import 'package:film_freund/services/service_locator.dart';
 import 'package:film_freund/utils/sizes.dart';
 import 'package:film_freund/widgets/home_screen/active_view.dart';
 import 'package:film_freund/widgets/home_screen/popular/popular_view.dart';
+import 'package:film_freund/widgets/home_screen/search/search_view.dart';
 import 'package:film_freund/widgets/home_screen/settings/settings_view.dart';
 import 'package:film_freund/widgets/home_screen/sidebar.dart';
 import 'package:film_freund/widgets/home_screen/upcoming/upcoming_view.dart';
@@ -132,6 +133,8 @@ class HomeScreenContent extends StatelessWidget {
                   return const UpcomingView();
                 case ActiveView.watched:
                   return const WatchedView();
+                case ActiveView.search:
+                  return const SearchView();
                 case ActiveView.watchlist:
                   return const WatchlistView();
                 case ActiveView.settings:
