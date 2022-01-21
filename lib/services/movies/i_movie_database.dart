@@ -14,4 +14,7 @@ abstract class IMovieDatabase {
 
   /// Returns a list of upcoming movies for [region]
   Future<List<MovieTeaser>> getUpcoming({required String region});
+
+  /// Returns a list of movies for [searchTerm] and [region]
+  Future<List<MovieTeaser>> searchMovies({required String searchTerm, required String region});
 }

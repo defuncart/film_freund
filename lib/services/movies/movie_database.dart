@@ -126,6 +126,20 @@ class MovieDatabase implements IMovieDatabase {
     return movieTeasers;
   }
 
+  @override
+  Future<List<MovieTeaser>> searchMovies({required String searchTerm, required String region}) async {
+    final response = await _get(
+      '$_baseUrl/search/movie?api_key=$apiKey&query=$searchTerm&language=$_language&page=1&region=$region',
+    );
+    final parsedResponse = PopularResponse.fromJson(jsonDecode(response.body));
+    final movieTeasers = parsedResponse.results
+        .where((result) => result.posterPath != null)
+        .map((result) => _movieListResultToMovieTeaser(result))
+        .toList();
+
+    return movieTeasers;
+  }
+
   /// Returns a full image path for a given relative [path]
   String? _composeImagePath(String? path) => path != null ? 'https://image.tmdb.org/t/p/w500/$path' : null;
 

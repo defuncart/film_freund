@@ -343,6 +343,15 @@ class MockIMovieDatabase extends _i1.Mock implements _i13.IMovieDatabase {
               returnValue:
                   Future<List<_i9.MovieTeaser>>.value(<_i9.MovieTeaser>[]))
       as _i6.Future<List<_i9.MovieTeaser>>);
+  @override
+  _i6.Future<List<_i9.MovieTeaser>> searchMovies(
+          {String? searchTerm, String? region}) =>
+      (super.noSuchMethod(
+          Invocation.method(
+              #searchMovies, [], {#searchTerm: searchTerm, #region: region}),
+          returnValue:
+              Future<List<_i9.MovieTeaser>>.value(<_i9.MovieTeaser>[])) as _i6
+          .Future<List<_i9.MovieTeaser>>);
 }
 
 /// A class which mocks [IListDatabase].
