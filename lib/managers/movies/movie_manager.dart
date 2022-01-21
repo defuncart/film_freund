@@ -40,15 +40,15 @@ class MovieManager {
   StreamController<List<MovieTeaser>>? _watchedMoviesController;
   StreamSubscription<MovieList>? _watchWatchedSubscription;
 
-  /// Returns a steam of the current user's watched movies
+  /// Returns a steam of the current user's watched movies (ordered by last added)
   Stream<List<MovieTeaser>> get watchedMovies {
     _watchWatchedSubscription?.cancel();
     _watchedMoviesController?.close();
     _watchedMoviesController = StreamController<List<MovieTeaser>>();
     _watchWatchedSubscription = watchWatched.listen((list) {
-      _movieDatabase.getMovies(list.movies).then(
-            (movies) => _watchedMoviesController!.add(movies.toMovieTeasers()),
-          );
+      _movieDatabase
+          .getMovies(list.movies)
+          .then((movies) => _watchedMoviesController!.add(movies.reversed.toList().toMovieTeasers()));
     });
 
     return _watchedMoviesController!.stream;
@@ -57,15 +57,15 @@ class MovieManager {
   StreamController<List<MovieTeaser>>? _watchlistMoviesController;
   StreamSubscription<MovieList>? _watchWatchlistSubscription;
 
-  /// Returns a steam of the current user's watchlist movies
+  /// Returns a steam of the current user's watchlist movies (ordered by last added)
   Stream<List<MovieTeaser>> get watchlistMovies {
     _watchlistMoviesController?.close();
     _watchlistMoviesController = StreamController<List<MovieTeaser>>();
     _watchWatchlistSubscription?.cancel();
     _watchWatchlistSubscription = watchWatchlist.listen((list) {
-      _movieDatabase.getMovies(list.movies).then(
-            (movies) => _watchlistMoviesController!.add(movies.toMovieTeasers()),
-          );
+      _movieDatabase
+          .getMovies(list.movies)
+          .then((movies) => _watchlistMoviesController!.add(movies.reversed.toList().toMovieTeasers()));
     });
 
     return _watchlistMoviesController!.stream;
