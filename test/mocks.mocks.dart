@@ -144,6 +144,12 @@ class MockMovieManager extends _i1.Mock implements _i8.MovieManager {
           returnValue: Future<List<_i9.MovieTeaser>>.value(<_i9.MovieTeaser>[]))
       as _i6.Future<List<_i9.MovieTeaser>>);
   @override
+  _i6.Future<List<_i9.MovieTeaser>> searchMovies(String? searchTerm) =>
+      (super.noSuchMethod(Invocation.method(#searchMovies, [searchTerm]),
+              returnValue:
+                  Future<List<_i9.MovieTeaser>>.value(<_i9.MovieTeaser>[]))
+          as _i6.Future<List<_i9.MovieTeaser>>);
+  @override
   _i3.MovieList returnListOrThrow(_i3.MovieList? list) =>
       (super.noSuchMethod(Invocation.method(#returnListOrThrow, [list]),
           returnValue: _FakeMovieList_1()) as _i3.MovieList);

@@ -56,6 +56,16 @@ void main() {
       expect(await movieManager.getUpcoming(), teasers);
     });
 
+    test('searchMovies', () async {
+      const searchTerm = 'searchTerm';
+
+      when(mockLocalSettings.region).thenReturn(region);
+      when(mockMovieDatabase.searchMovies(searchTerm: searchTerm, region: region.countryCode))
+          .thenAnswer((_) => Future.value(teasers));
+
+      expect(await movieManager.searchMovies(searchTerm), teasers);
+    });
+
     group('watchedMovies', () {
       test('expect correct stream', () {
         final watched = TestInstance.movieList(

@@ -37,6 +37,12 @@ class MovieManager {
         region: _localSettings.region.countryCode,
       );
 
+  /// Returns a list of upcoming movies
+  Future<List<MovieTeaser>> searchMovies(String searchTerm) => _movieDatabase.searchMovies(
+        searchTerm: searchTerm,
+        region: _localSettings.region.countryCode,
+      );
+
   StreamController<List<MovieTeaser>>? _watchedMoviesController;
   StreamSubscription<MovieList>? _watchWatchedSubscription;
 
