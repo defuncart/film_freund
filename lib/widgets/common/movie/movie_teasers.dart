@@ -19,6 +19,7 @@ class MovieTeasers extends StatelessWidget {
         final width = max(100.0, min(200.0, constraints.maxWidth / 4));
 
         return ListView(
+          shrinkWrap: true,
           children: [
             Wrap(
               spacing: 16,
