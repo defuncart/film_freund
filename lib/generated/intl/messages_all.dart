@@ -7,7 +7,6 @@
 // ignore_for_file:unnecessary_brace_in_string_interps, directives_ordering
 // ignore_for_file:argument_type_not_assignable, invalid_assignment
 // ignore_for_file:prefer_single_quotes, prefer_generic_function_type_aliases
-// ignore_for_file: avoid_catches_without_on_clauses, always_use_package_imports
 // ignore_for_file:comment_references
 
 import 'dart:async';

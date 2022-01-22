@@ -56,16 +56,28 @@ void main() {
       expect(await movieManager.getUpcoming(), teasers);
     });
 
+    test('searchMovies', () async {
+      const searchTerm = 'searchTerm';
+
+      when(mockLocalSettings.region).thenReturn(region);
+      when(mockMovieDatabase.searchMovies(searchTerm: searchTerm, region: region.countryCode))
+          .thenAnswer((_) => Future.value(teasers));
+
+      expect(await movieManager.searchMovies(searchTerm), teasers);
+    });
+
     group('watchedMovies', () {
       test('expect correct stream', () {
         final watched = TestInstance.movieList(
           type: ListType.watched,
-          movies: [1],
+          movies: [1, 2],
         );
         when(mockListDatabase.watchList(id: watchedId)).thenAnswer((_) => Stream.value(watched));
 
-        final watchedMovies = watched.movies.map((id) => TestInstance.movieTeaser(id: id));
-        when(mockMovieDatabase.getMovies(watched.movies)).thenAnswer((_) => Future.value([TestInstance.movie(id: 1)]));
+        final watchedMovies = watched.movies.reversed.map((id) => TestInstance.movieTeaser(id: id));
+        when(mockMovieDatabase.getMovies(watched.movies)).thenAnswer(
+          (_) => Future.value([TestInstance.movie(id: 1), TestInstance.movie(id: 2)]),
+        );
 
         expect(
           movieManager.watchedMovies,
@@ -78,13 +90,14 @@ void main() {
       test('expect correct stream', () {
         final watchlist = TestInstance.movieList(
           type: ListType.watchlist,
-          movies: [1],
+          movies: [1, 2],
         );
         when(mockListDatabase.watchList(id: watchlistId)).thenAnswer((_) => Stream.value(watchlist));
 
-        final watchlistMovies = watchlist.movies.map((id) => TestInstance.movieTeaser(id: id));
-        when(mockMovieDatabase.getMovies(watchlist.movies))
-            .thenAnswer((_) => Future.value([TestInstance.movie(id: 1)]));
+        final watchlistMovies = watchlist.movies.reversed.map((id) => TestInstance.movieTeaser(id: id));
+        when(mockMovieDatabase.getMovies(watchlist.movies)).thenAnswer(
+          (_) => Future.value([TestInstance.movie(id: 1), TestInstance.movie(id: 2)]),
+        );
 
         expect(
           movieManager.watchlistMovies,

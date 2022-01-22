@@ -17,6 +17,7 @@ activeViewWatchedTitle;Title for ActiveView.watched;Watched
 activeViewWatchlistTitle;Title for ActiveView.watchlist;Watchlist
 activeViewListsTitle;Title for ActiveView.lists;Lists
 activeViewSettingsTitle;Title for ActiveView.settings;Settings
+searchViewNoMoviesFoundText;Text when no movies for a search term where found;No movies found
 settingsViewSignedInAsText;Text to denote which email user is signed in as;Signed in as {email}
 settingsViewChangePasswordButtonText;Text for change password button;Change Password
 settingsViewSignOutButtonText;Text for sign out button;Sign Out

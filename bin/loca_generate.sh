@@ -5,13 +5,14 @@
 dart pub global activate arb_utils
 
 # generate from csv
+dart pub get
 dart run arb_generator
 
 # sort arbs
-pub global run arb_utils:sort assets_dev/l10n/intl_en.arb
+dart pub global run arb_utils:sort assets_dev/l10n/intl_en.arb
 
 # generate localization delegates
-flutter pub run intl_utils:generate
+dart pub run intl_utils:generate
 
 # format loca delegates
-flutter format lib/generated
+dart format lib/generated
