@@ -118,15 +118,15 @@ void main() {
 
       group('start', () {
         test('expect subscription is not null', () {
-          cacheManager.start();
           when(mockAuthService.onAuthStateChanged).thenAnswer((_) => Stream.value(false));
+          cacheManager.start();
 
           expect(
             cacheManager.onAuthStateChangedSubscription,
             isNotNull,
           );
         });
-      }, skip: true);
+      });
 
       group('stop', () {
         test('expect subscription is  null', () {
