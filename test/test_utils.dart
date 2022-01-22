@@ -11,10 +11,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 /// Wraps [widget] with in [MaterialApp]
-Widget wrapWithMaterialApp(Widget widget) => MaterialApp(home: widget);
+Widget wrapWithMaterialApp(
+  Widget widget, {
+  bool useScaffold = false,
+}) =>
+    MaterialApp(
+      home: _optionallyWrapWithScaffold(widget, useScaffold: useScaffold),
+    );
 
 /// Wraps [widget] with in [MaterialApp] while also setting en as locale
-Widget wrapWithMaterialAppLocalizationDelegates(Widget widget) => MaterialApp(
+Widget wrapWithMaterialAppLocalizationDelegates(
+  Widget widget, {
+  bool useScaffold = false,
+}) =>
+    MaterialApp(
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -23,9 +33,15 @@ Widget wrapWithMaterialAppLocalizationDelegates(Widget widget) => MaterialApp(
       ],
       supportedLocales: AppLocalizations.delegate.supportedLocales,
       locale: const Locale('en'),
-      home: widget,
+      home: _optionallyWrapWithScaffold(widget, useScaffold: useScaffold),
       routes: routes,
     );
+
+Widget _optionallyWrapWithScaffold(
+  Widget widget, {
+  bool useScaffold = false,
+}) =>
+    useScaffold ? Scaffold(body: widget) : widget;
 
 /// A test util to create model instances for testing
 class TestInstance {
