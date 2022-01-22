@@ -62,7 +62,7 @@ class FirebaseAuthService implements IAuthService {
   Future<ChangePasswordResult> changePassword({required String currentPassword, required String newPassword}) async {
     assert(isUserAuthenticated, 'No signed-in user to delete');
 
-    final user = FirebaseAuth.instance.currentUser;
+    final user = _firebaseAuth.currentUser;
     if (user != null && user.email != null) {
       final credentials = EmailAuthProvider.credential(email: user.email!, password: currentPassword);
 
@@ -113,7 +113,7 @@ class FirebaseAuthService implements IAuthService {
   }
 }
 
-extension on String {
+extension AuthStringExtensions on String {
   static const _userNotFound = 'user-not-found';
   static const _wrongPassword = 'wrong-password';
 
