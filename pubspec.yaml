@@ -38,6 +38,7 @@ dev_dependencies:
   flutter_test_ui:
   network_image_mock:
   fake_cloud_firestore:
+  firebase_auth_mocks:
   alchemist:
 
 flutter:
