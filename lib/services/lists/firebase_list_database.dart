@@ -51,8 +51,10 @@ class FirebaseListDatabase implements IListDatabase {
 
   /// Maps [DocumentSnapshot] to [MovieList]
   MovieList? _snapshotToMovieList(DocumentSnapshot<Map<String, dynamic>> snapshot) {
-    if (snapshot.exists) {
-      return MovieList.fromJson(snapshot.data()!);
+    if (snapshot.exists && snapshot.data() != null) {
+      try {
+        return MovieList.fromJson(snapshot.data()!);
+      } catch (_) {}
     }
 
     return null;
@@ -83,6 +85,7 @@ class FirebaseListDatabase implements IListDatabase {
     try {
       await _firebaseFirestore.collection(_collection).doc(listId).update({
         'movies': FieldValue.arrayUnion([movieId]),
+        'updatedAt': _dateTimeService.nowUtc.toIso8601String(),
       });
 
       log('FirebaseListDatabase add movie $movieId to list $listId');
@@ -99,6 +102,7 @@ class FirebaseListDatabase implements IListDatabase {
     try {
       await _firebaseFirestore.collection(_collection).doc(listId).update({
         'movies': FieldValue.arrayRemove([movieId]),
+        'updatedAt': _dateTimeService.nowUtc.toIso8601String(),
       });
 
       log('FirebaseListDatabase remove movie $movieId from list $listId');

@@ -64,8 +64,8 @@ class TestInstance {
         displayName: displayName ?? 'displayName',
         createdAt: createdAt ?? DateTime(1),
         updatedAt: updatedAt ?? DateTime(1),
-        watchedId: watchedId ?? '',
-        watchlistId: watchlistId ?? '',
+        watchedId: watchedId ?? 'watchedId',
+        watchlistId: watchlistId ?? 'watchlistId',
         lists: lists ?? [],
       );
 

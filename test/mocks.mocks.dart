@@ -3,28 +3,29 @@
 // Do not manually edit this file.
 
 import 'dart:async' as _i6;
-import 'dart:typed_data' as _i22;
+import 'dart:typed_data' as _i23;
 
 import 'package:film_freund/managers/cache/cache_manager.dart' as _i10;
 import 'package:film_freund/managers/movies/movie_manager.dart' as _i8;
 import 'package:film_freund/managers/user/user_manager.dart' as _i5;
 import 'package:film_freund/services/auth/i_auth_service.dart' as _i7;
 import 'package:film_freund/services/date_time/date_time_service.dart' as _i11;
-import 'package:film_freund/services/lists/enums/list_type.dart' as _i16;
-import 'package:film_freund/services/lists/i_list_database.dart' as _i15;
+import 'package:film_freund/services/lists/enums/list_type.dart' as _i17;
+import 'package:film_freund/services/lists/i_list_database.dart' as _i16;
 import 'package:film_freund/services/lists/models/movie_list.dart' as _i3;
 import 'package:film_freund/services/local_settings/i_local_settings_database.dart'
-    as _i17;
-import 'package:film_freund/services/local_settings/region.dart' as _i18;
-import 'package:film_freund/services/movies/i_movie_database.dart' as _i13;
-import 'package:film_freund/services/movies/models/movie.dart' as _i14;
+    as _i18;
+import 'package:film_freund/services/local_settings/region.dart' as _i19;
+import 'package:film_freund/services/movies/i_movie_database.dart' as _i14;
+import 'package:film_freund/services/movies/models/movie.dart' as _i15;
 import 'package:film_freund/services/movies/models/movie_teaser.dart' as _i9;
-import 'package:film_freund/services/platform/i_platform_service.dart' as _i19;
-import 'package:film_freund/services/user/i_user_database.dart' as _i12;
+import 'package:film_freund/services/platform/i_platform_service.dart' as _i20;
+import 'package:film_freund/services/user/i_user_database.dart' as _i13;
 import 'package:film_freund/services/user/models/user.dart' as _i2;
+import 'package:film_freund/services/uuid/uuid_service.dart' as _i12;
 import 'package:hive/hive.dart' as _i4;
-import 'package:hive/src/box/default_compaction_strategy.dart' as _i21;
-import 'package:hive/src/box/default_key_comparator.dart' as _i20;
+import 'package:hive/src/box/default_compaction_strategy.dart' as _i22;
+import 'package:hive/src/box/default_key_comparator.dart' as _i21;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: avoid_redundant_argument_values
@@ -225,6 +226,20 @@ class MockDateTimeService extends _i1.Mock implements _i11.DateTimeService {
       returnValue: _FakeDateTime_2()) as DateTime);
 }
 
+/// A class which mocks [UUIDService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockUUIDService extends _i1.Mock implements _i12.UUIDService {
+  MockUUIDService() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  String generate() =>
+      (super.noSuchMethod(Invocation.method(#generate, []), returnValue: '')
+          as String);
+}
+
 /// A class which mocks [IAuthService].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -275,7 +290,7 @@ class MockIAuthService extends _i1.Mock implements _i7.IAuthService {
 /// A class which mocks [IUserDatabase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIUserDatabase extends _i1.Mock implements _i12.IUserDatabase {
+class MockIUserDatabase extends _i1.Mock implements _i13.IUserDatabase {
   MockIUserDatabase() {
     _i1.throwOnMissingStub(this);
   }
@@ -323,20 +338,20 @@ class MockIUserDatabase extends _i1.Mock implements _i12.IUserDatabase {
 /// A class which mocks [IMovieDatabase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIMovieDatabase extends _i1.Mock implements _i13.IMovieDatabase {
+class MockIMovieDatabase extends _i1.Mock implements _i14.IMovieDatabase {
   MockIMovieDatabase() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.Future<_i14.Movie?> getMovie(int? id) =>
+  _i6.Future<_i15.Movie?> getMovie(int? id) =>
       (super.noSuchMethod(Invocation.method(#getMovie, [id]),
-          returnValue: Future<_i14.Movie?>.value()) as _i6.Future<_i14.Movie?>);
+          returnValue: Future<_i15.Movie?>.value()) as _i6.Future<_i15.Movie?>);
   @override
-  _i6.Future<List<_i14.Movie>> getMovies(List<int>? ids) =>
+  _i6.Future<List<_i15.Movie>> getMovies(List<int>? ids) =>
       (super.noSuchMethod(Invocation.method(#getMovies, [ids]),
-              returnValue: Future<List<_i14.Movie>>.value(<_i14.Movie>[]))
-          as _i6.Future<List<_i14.Movie>>);
+              returnValue: Future<List<_i15.Movie>>.value(<_i15.Movie>[]))
+          as _i6.Future<List<_i15.Movie>>);
   @override
   _i6.Future<List<_i9.MovieTeaser>> getPopular({String? region}) =>
       (super.noSuchMethod(Invocation.method(#getPopular, [], {#region: region}),
@@ -363,13 +378,13 @@ class MockIMovieDatabase extends _i1.Mock implements _i13.IMovieDatabase {
 /// A class which mocks [IListDatabase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIListDatabase extends _i1.Mock implements _i15.IListDatabase {
+class MockIListDatabase extends _i1.Mock implements _i16.IListDatabase {
   MockIListDatabase() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.Future<String> createList({_i16.ListType? type, String? title}) =>
+  _i6.Future<String> createList({_i17.ListType? type, String? title}) =>
       (super.noSuchMethod(
           Invocation.method(#createList, [], {#type: type, #title: title}),
           returnValue: Future<String>.value('')) as _i6.Future<String>);
@@ -408,16 +423,16 @@ class MockIListDatabase extends _i1.Mock implements _i15.IListDatabase {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockILocalSettingsDatabase extends _i1.Mock
-    implements _i17.ILocalSettingsDatabase {
+    implements _i18.ILocalSettingsDatabase {
   MockILocalSettingsDatabase() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i18.Region get region => (super.noSuchMethod(Invocation.getter(#region),
-      returnValue: _i18.Region.de) as _i18.Region);
+  _i19.Region get region => (super.noSuchMethod(Invocation.getter(#region),
+      returnValue: _i19.Region.de) as _i19.Region);
   @override
-  set region(_i18.Region? value) =>
+  set region(_i19.Region? value) =>
       super.noSuchMethod(Invocation.setter(#region, value),
           returnValueForMissingStub: null);
   @override
@@ -434,7 +449,7 @@ class MockILocalSettingsDatabase extends _i1.Mock
 /// A class which mocks [IPlatformService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIPlatformService extends _i1.Mock implements _i19.IPlatformService {
+class MockIPlatformService extends _i1.Mock implements _i20.IPlatformService {
   MockIPlatformService() {
     _i1.throwOnMissingStub(this);
   }
@@ -460,12 +475,12 @@ class MockHiveInterface extends _i1.Mock implements _i4.HiveInterface {
   @override
   _i6.Future<_i4.Box<E>> openBox<E>(String? name,
           {_i4.HiveCipher? encryptionCipher,
-          _i4.KeyComparator? keyComparator = _i20.defaultKeyComparator,
+          _i4.KeyComparator? keyComparator = _i21.defaultKeyComparator,
           _i4.CompactionStrategy? compactionStrategy =
-              _i21.defaultCompactionStrategy,
+              _i22.defaultCompactionStrategy,
           bool? crashRecovery = true,
           String? path,
-          _i22.Uint8List? bytes,
+          _i23.Uint8List? bytes,
           List<int>? encryptionKey}) =>
       (super.noSuchMethod(
               Invocation.method(#openBox, [
@@ -484,9 +499,9 @@ class MockHiveInterface extends _i1.Mock implements _i4.HiveInterface {
   @override
   _i6.Future<_i4.LazyBox<E>> openLazyBox<E>(String? name,
           {_i4.HiveCipher? encryptionCipher,
-          _i4.KeyComparator? keyComparator = _i20.defaultKeyComparator,
+          _i4.KeyComparator? keyComparator = _i21.defaultKeyComparator,
           _i4.CompactionStrategy? compactionStrategy =
-              _i21.defaultCompactionStrategy,
+              _i22.defaultCompactionStrategy,
           bool? crashRecovery = true,
           String? path,
           List<int>? encryptionKey}) =>

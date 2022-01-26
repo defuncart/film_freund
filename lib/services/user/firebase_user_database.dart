@@ -50,8 +50,10 @@ class FirebaseUserDatabase implements IUserDatabase {
 
   /// Maps [DocumentSnapshot] to [User]
   User? _snapshotToUser(DocumentSnapshot<Map<String, dynamic>> snapshot) {
-    if (snapshot.exists) {
-      return User.fromJson(snapshot.data()!);
+    if (snapshot.exists && snapshot.data() != null) {
+      try {
+        return User.fromJson(snapshot.data()!);
+      } catch (_) {}
     }
 
     return null;
