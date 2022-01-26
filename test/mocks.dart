@@ -8,6 +8,7 @@ import 'package:film_freund/services/local_settings/i_local_settings_database.da
 import 'package:film_freund/services/movies/i_movie_database.dart';
 import 'package:film_freund/services/platform/i_platform_service.dart';
 import 'package:film_freund/services/user/i_user_database.dart';
+import 'package:film_freund/services/uuid/uuid_service.dart';
 import 'package:firebase_core_platform_interface/firebase_core_platform_interface.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,6 +26,7 @@ export 'mocks.mocks.dart';
   MovieManager,
   CacheManager,
   DateTimeService,
+  UUIDService,
   IAuthService,
   IUserDatabase,
   IMovieDatabase,
