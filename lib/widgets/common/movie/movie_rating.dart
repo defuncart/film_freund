@@ -86,9 +86,9 @@ class Ring extends CustomPainter {
     final radius = size.shortestSide / 2;
 
     final rect = Rect.fromCircle(center: center, radius: radius);
-    final startAngle = -pi / 2;
+    const startAngle = -pi / 2;
     final sweepAngle = (percentage / 100) * pi * 2;
-    final endAngle = 2 * pi;
+    const endAngle = 2 * pi;
     const strokeWidth = 2.0;
 
     final backgroundPaint = Paint()
