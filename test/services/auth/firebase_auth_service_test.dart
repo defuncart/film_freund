@@ -89,17 +89,19 @@ void main() async {
     });
 
     group('signin', () {
-      setUp(() {
-        mockFirebaseAuth = MockFirebaseAuth(signedIn: false);
-        service = FirebaseAuthService(mockFirebaseAuth);
-      });
+      group('when user exists and user is signed out', () {
+        setUp(() {
+          mockFirebaseAuth = MockFirebaseAuth(signedIn: false);
+          service = FirebaseAuthService(mockFirebaseAuth);
+        });
 
-      test('expect user is signed out correctly', () async {
-        expect(
-          await service.signin(email: 'email', password: 'password'),
-          AuthResult.signinSuccess,
-        );
-        expect(service.isUserAuthenticated, isTrue);
+        test('expect user is signed in correctly', () async {
+          expect(
+            await service.signin(email: 'email', password: 'password'),
+            AuthResult.signinSuccess,
+          );
+          expect(service.isUserAuthenticated, isTrue);
+        });
       });
     });
 
@@ -177,6 +179,23 @@ void main() async {
           expect(
             await service.changePassword(currentPassword: 'currentPassword', newPassword: 'newPassword'),
             ChangePasswordResult.incorrectPassword,
+          );
+        });
+      });
+
+      group('and another exception occurs', () {
+        setUp(() {
+          mockFirebaseAuth = MockFirebaseAuth(
+            signedIn: true,
+            mockUser: MockUser(email: 'email')..exception = FirebaseAuthException(code: 'bla'),
+          );
+          service = FirebaseAuthService(mockFirebaseAuth);
+        });
+
+        test('expect ${ChangePasswordResult.other}', () async {
+          expect(
+            await service.changePassword(currentPassword: 'currentPassword', newPassword: 'newPassword'),
+            ChangePasswordResult.other,
           );
         });
       });
