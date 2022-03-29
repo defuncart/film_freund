@@ -103,6 +103,45 @@ void main() async {
           expect(service.isUserAuthenticated, isTrue);
         });
       });
+
+      group('when user exists, user is signed out and gives incorrect password', () {
+        setUp(() {
+          mockFirebaseAuth = MockFirebaseAuth(
+            signedIn: false,
+            authExceptions: AuthExceptions(signInWithEmailAndPassword: FirebaseAuthException(code: 'wrong-password')),
+          );
+          service = FirebaseAuthService(mockFirebaseAuth);
+        });
+
+        test('expect ${AuthResult.signInIncorrectPassword}', () async {
+          expect(
+            await service.signIn(email: 'email', password: 'password'),
+            AuthResult.signInIncorrectPassword,
+          );
+          expect(service.isUserAuthenticated, isFalse);
+        });
+      });
+
+      group('when user does not exist', () {
+        group('and account is created', () {
+          setUp(() {
+            mockFirebaseAuth = MockFirebaseAuth(
+              signedIn: false,
+              authExceptions: AuthExceptions(signInWithEmailAndPassword: FirebaseAuthException(code: 'user-not-found')),
+            );
+            service = FirebaseAuthService(mockFirebaseAuth);
+            MethodChannelMocks.setupFirebase();
+          });
+
+          test('expect ${AuthResult.createSuccess}', () async {
+            expect(
+              await service.signIn(email: 'email', password: 'password'),
+              AuthResult.createSuccess,
+            );
+            expect(service.isUserAuthenticated, isTrue);
+          }, skip: true);
+        });
+      });
     });
 
     group('signOut', () {
@@ -164,54 +203,54 @@ void main() async {
             );
           });
         });
-      });
 
-      group('and currentPassword is incorrect', () {
-        setUp(() {
-          mockFirebaseAuth = MockFirebaseAuth(
-            signedIn: true,
-            mockUser: MockUser(email: 'email')..exception = FirebaseAuthException(code: 'wrong-password'),
-          );
-          service = FirebaseAuthService(mockFirebaseAuth);
+        group('and currentPassword is incorrect', () {
+          setUp(() {
+            mockFirebaseAuth = MockFirebaseAuth(
+              signedIn: true,
+              mockUser: MockUser(email: 'email')..exception = FirebaseAuthException(code: 'wrong-password'),
+            );
+            service = FirebaseAuthService(mockFirebaseAuth);
+          });
+
+          test('expect ${ChangePasswordResult.incorrectPassword}', () async {
+            expect(
+              await service.changePassword(currentPassword: 'currentPassword', newPassword: 'newPassword'),
+              ChangePasswordResult.incorrectPassword,
+            );
+          });
         });
 
-        test('expect ${ChangePasswordResult.incorrectPassword}', () async {
-          expect(
-            await service.changePassword(currentPassword: 'currentPassword', newPassword: 'newPassword'),
-            ChangePasswordResult.incorrectPassword,
-          );
-        });
-      });
+        group('and another exception occurs', () {
+          setUp(() {
+            mockFirebaseAuth = MockFirebaseAuth(
+              signedIn: true,
+              mockUser: MockUser(email: 'email')..exception = FirebaseAuthException(code: 'bla'),
+            );
+            service = FirebaseAuthService(mockFirebaseAuth);
+          });
 
-      group('and another exception occurs', () {
-        setUp(() {
-          mockFirebaseAuth = MockFirebaseAuth(
-            signedIn: true,
-            mockUser: MockUser(email: 'email')..exception = FirebaseAuthException(code: 'bla'),
-          );
-          service = FirebaseAuthService(mockFirebaseAuth);
-        });
-
-        test('expect ${ChangePasswordResult.other}', () async {
-          expect(
-            await service.changePassword(currentPassword: 'currentPassword', newPassword: 'newPassword'),
-            ChangePasswordResult.other,
-          );
-        });
-      });
-
-      group('and user email is not null', () {
-        setUp(() {
-          mockFirebaseAuth = MockFirebaseAuth(signedIn: true, mockUser: MockUser(email: 'email'));
-          service = FirebaseAuthService(mockFirebaseAuth);
-          MethodChannelMocks.setupFirebase();
+          test('expect ${ChangePasswordResult.other}', () async {
+            expect(
+              await service.changePassword(currentPassword: 'currentPassword', newPassword: 'newPassword'),
+              ChangePasswordResult.other,
+            );
+          });
         });
 
-        test('expect ${ChangePasswordResult.success}', () async {
-          expect(
-            await service.changePassword(currentPassword: 'currentPassword', newPassword: 'newPassword'),
-            ChangePasswordResult.success,
-          );
+        group('and user email is not null', () {
+          setUp(() {
+            mockFirebaseAuth = MockFirebaseAuth(signedIn: true, mockUser: MockUser(email: 'email'));
+            service = FirebaseAuthService(mockFirebaseAuth);
+            MethodChannelMocks.setupFirebase();
+          });
+
+          test('expect ${ChangePasswordResult.success}', () async {
+            expect(
+              await service.changePassword(currentPassword: 'currentPassword', newPassword: 'newPassword'),
+              ChangePasswordResult.success,
+            );
+          });
         });
       });
     });
