@@ -148,14 +148,14 @@ void main() {
         const watchedId = 'watchedId';
         const watchlistId = 'watchlistId';
 
-        when(mockAuthService.signin(email: email, password: password))
+        when(mockAuthService.signIn(email: email, password: password))
             .thenAnswer((_) => Future.value(AuthResult.createSuccess));
         when(mockAuthService.authenticatedUserId).thenReturn(id);
         when(mockListDatabase.createList(type: ListType.watched)).thenAnswer((_) => Future.value(watchedId));
         when(mockListDatabase.createList(type: ListType.watchlist)).thenAnswer((_) => Future.value(watchlistId));
 
         expect(
-          await userManager.signin(email: email, password: password),
+          await userManager.signIn(email: email, password: password),
           AuthResult.createSuccess,
         );
 
@@ -167,41 +167,41 @@ void main() {
         ));
       });
 
-      test('$IAuthService.signin ${AuthResult.signinSuccess}', () async {
-        when(mockAuthService.signin(email: email, password: password))
-            .thenAnswer((_) => Future.value(AuthResult.signinSuccess));
+      test('$IAuthService.signin ${AuthResult.signInSuccess}', () async {
+        when(mockAuthService.signIn(email: email, password: password))
+            .thenAnswer((_) => Future.value(AuthResult.signInSuccess));
 
         expect(
-          await userManager.signin(email: email, password: password),
-          AuthResult.signinSuccess,
+          await userManager.signIn(email: email, password: password),
+          AuthResult.signInSuccess,
         );
       });
 
-      test('$IAuthService.signin ${AuthResult.signinIncorrectPassword}', () async {
-        when(mockAuthService.signin(email: email, password: password))
-            .thenAnswer((_) => Future.value(AuthResult.signinIncorrectPassword));
+      test('$IAuthService.signin ${AuthResult.signInIncorrectPassword}', () async {
+        when(mockAuthService.signIn(email: email, password: password))
+            .thenAnswer((_) => Future.value(AuthResult.signInIncorrectPassword));
 
         expect(
-          await userManager.signin(email: email, password: password),
-          AuthResult.signinIncorrectPassword,
+          await userManager.signIn(email: email, password: password),
+          AuthResult.signInIncorrectPassword,
         );
       });
 
       test('$IAuthService.signin ${AuthResult.other}', () async {
-        when(mockAuthService.signin(email: email, password: password))
+        when(mockAuthService.signIn(email: email, password: password))
             .thenAnswer((_) => Future.value(AuthResult.other));
 
         expect(
-          await userManager.signin(email: email, password: password),
+          await userManager.signIn(email: email, password: password),
           AuthResult.other,
         );
       });
     });
 
     test('signout', () {
-      userManager.signout();
+      userManager.signOut();
 
-      verify(mockAuthService.signout());
+      verify(mockAuthService.signOut());
     });
 
     test('updateDisplayName', () {

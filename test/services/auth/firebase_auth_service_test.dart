@@ -88,7 +88,7 @@ void main() async {
       });
     });
 
-    group('signin', () {
+    group('signIn', () {
       group('when user exists and user is signed out', () {
         setUp(() {
           mockFirebaseAuth = MockFirebaseAuth(signedIn: false);
@@ -97,22 +97,22 @@ void main() async {
 
         test('expect user is signed in correctly', () async {
           expect(
-            await service.signin(email: 'email', password: 'password'),
-            AuthResult.signinSuccess,
+            await service.signIn(email: 'email', password: 'password'),
+            AuthResult.signInSuccess,
           );
           expect(service.isUserAuthenticated, isTrue);
         });
       });
     });
 
-    group('signout', () {
+    group('signOut', () {
       setUp(() {
         mockFirebaseAuth = MockFirebaseAuth();
         service = FirebaseAuthService(mockFirebaseAuth);
       });
 
       test('description', () async {
-        await service.signout();
+        await service.signOut();
 
         expect(service.isUserAuthenticated, isFalse);
       });

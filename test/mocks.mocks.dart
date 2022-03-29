@@ -73,15 +73,15 @@ class MockUserManager extends _i1.Mock implements _i5.UserManager {
       (super.noSuchMethod(Invocation.method(#getUser, [], {#id: id}),
           returnValue: Future<_i2.User?>.value()) as _i6.Future<_i2.User?>);
   @override
-  _i6.Future<_i7.AuthResult> signin({String? email, String? password}) =>
+  _i6.Future<_i7.AuthResult> signIn({String? email, String? password}) =>
       (super.noSuchMethod(
-          Invocation.method(#signin, [], {#email: email, #password: password}),
+          Invocation.method(#signIn, [], {#email: email, #password: password}),
           returnValue:
               Future<_i7.AuthResult>.value(_i7.AuthResult.createSuccess)) as _i6
           .Future<_i7.AuthResult>);
   @override
-  _i6.Future<void> signout() =>
-      (super.noSuchMethod(Invocation.method(#signout, []),
+  _i6.Future<void> signOut() =>
+      (super.noSuchMethod(Invocation.method(#signOut, []),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override
@@ -257,15 +257,15 @@ class MockIAuthService extends _i1.Mock implements _i7.IAuthService {
       (super.noSuchMethod(Invocation.getter(#onAuthStateChanged),
           returnValue: Stream<bool>.empty()) as _i6.Stream<bool>);
   @override
-  _i6.Future<_i7.AuthResult> signin({String? email, String? password}) =>
+  _i6.Future<_i7.AuthResult> signIn({String? email, String? password}) =>
       (super.noSuchMethod(
-          Invocation.method(#signin, [], {#email: email, #password: password}),
+          Invocation.method(#signIn, [], {#email: email, #password: password}),
           returnValue:
               Future<_i7.AuthResult>.value(_i7.AuthResult.createSuccess)) as _i6
           .Future<_i7.AuthResult>);
   @override
-  _i6.Future<void> signout() =>
-      (super.noSuchMethod(Invocation.method(#signout, []),
+  _i6.Future<void> signOut() =>
+      (super.noSuchMethod(Invocation.method(#signOut, []),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override

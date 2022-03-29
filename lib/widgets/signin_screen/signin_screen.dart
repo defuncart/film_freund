@@ -101,7 +101,7 @@ class _SigninScreenState extends State<SigninScreen> {
   void _signin() async {
     ModalProgressIndicator.show(context);
 
-    final result = await ServiceLocator.userManager.signin(
+    final result = await ServiceLocator.userManager.signIn(
       email: _emailController.text,
       password: _passwordController.text,
     );
@@ -110,10 +110,10 @@ class _SigninScreenState extends State<SigninScreen> {
 
     switch (result) {
       case AuthResult.createSuccess:
-      case AuthResult.signinSuccess:
+      case AuthResult.signInSuccess:
         Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
         break;
-      case AuthResult.signinIncorrectPassword:
+      case AuthResult.signInIncorrectPassword:
       case AuthResult.other:
         showDialog(
           context: context,
