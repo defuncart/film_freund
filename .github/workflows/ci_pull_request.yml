@@ -2,7 +2,7 @@ name: ci_pull_request
 on: pull_request
 jobs:
   lint-unit-test:
-    name: Lint + Unit Tests
+    name: Lint + Tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -20,7 +20,7 @@ jobs:
         run: flutter analyze
       - name: Generate coverage helper
         run: sh bin/test_include_all_files.sh film_freund
-      - name: Unit tests
+      - name: Tests
         run: flutter test --coverage
       - name: Publish codecov report
         uses: codecov/codecov-action@v1
