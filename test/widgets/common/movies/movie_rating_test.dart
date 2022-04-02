@@ -1,3 +1,4 @@
+import 'package:alchemist/alchemist.dart';
 import 'package:film_freund/widgets/common/movie/movie_rating.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -78,93 +79,42 @@ void main() {
       expect(find.text('50'), findsOneWidget);
     });
 
-    testWidgets('when showRating && percentage >= 70, expect match golden', (tester) async {
-      final widget = wrapWithMaterialApp(
-        const RepaintBoundary(
-          child: MovieRating(
-            showRating: true,
-            rating: 70,
+    goldenTest(
+      'renders correctly',
+      fileName: 'movie_rating',
+      builder: () => GoldenTestGroup(
+        children: [
+          GoldenTestScenario(
+            name: 'showRating && percentage >= 70',
+            child: const MovieRating(
+              showRating: true,
+              rating: 70,
+            ),
           ),
-        ),
-      );
-
-      await tester.pumpWidget(widget);
-      await tester.pumpAndSettle();
-
-      await expectLater(
-        find.byType(MovieRating),
-        matchesGoldenFile(GoldenUtils.generateFilepath(
-          testFilepath: 'common/movies/movie_rating',
-          imageName: 'green',
-        )),
-      );
-    }, tags: GoldenUtils.tag);
-
-    testWidgets('when showRating && percentage >= 40, expect match golden', (tester) async {
-      final widget = wrapWithMaterialApp(
-        const RepaintBoundary(
-          child: MovieRating(
-            showRating: true,
-            rating: 40,
+          GoldenTestScenario(
+            name: 'showRating && percentage >= 40',
+            child: const MovieRating(
+              showRating: true,
+              rating: 40,
+            ),
           ),
-        ),
-      );
-
-      await tester.pumpWidget(widget);
-      await tester.pumpAndSettle();
-
-      await expectLater(
-        find.byType(MovieRating),
-        matchesGoldenFile(GoldenUtils.generateFilepath(
-          testFilepath: 'common/movies/movie_rating',
-          imageName: 'yellow',
-        )),
-      );
-    }, tags: GoldenUtils.tag);
-
-    testWidgets('when showRating && percentage < 40, expect match golden', (tester) async {
-      final widget = wrapWithMaterialApp(
-        const RepaintBoundary(
-          child: MovieRating(
-            showRating: true,
-            rating: 30,
+          GoldenTestScenario(
+            name: 'showRating && percentage < 40',
+            child: const MovieRating(
+              showRating: true,
+              rating: 30,
+            ),
           ),
-        ),
-      );
-
-      await tester.pumpWidget(widget);
-      await tester.pumpAndSettle();
-
-      await expectLater(
-        find.byType(MovieRating),
-        matchesGoldenFile(GoldenUtils.generateFilepath(
-          testFilepath: 'common/movies/movie_rating',
-          imageName: 'red',
-        )),
-      );
-    }, tags: GoldenUtils.tag);
-
-    testWidgets('when !showRating, expect match golden', (tester) async {
-      final widget = wrapWithMaterialApp(
-        const RepaintBoundary(
-          child: MovieRating(
-            showRating: false,
-            rating: 30,
+          GoldenTestScenario(
+            name: '!showRating',
+            child: const MovieRating(
+              showRating: false,
+              rating: 30,
+            ),
           ),
-        ),
-      );
-
-      await tester.pumpWidget(widget);
-      await tester.pumpAndSettle();
-
-      await expectLater(
-        find.byType(MovieRating),
-        matchesGoldenFile(GoldenUtils.generateFilepath(
-          testFilepath: 'common/movies/movie_rating',
-          imageName: 'gray',
-        )),
-      );
-    }, tags: GoldenUtils.tag);
+        ],
+      ),
+    );
   });
 
   group('$Ring', () {
