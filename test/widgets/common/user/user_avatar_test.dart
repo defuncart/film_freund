@@ -1,3 +1,4 @@
+import 'package:alchemist/alchemist.dart';
 import 'package:film_freund/widgets/common/user/user_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -37,18 +38,19 @@ void main() {
       expect(find.text(usersInitial), findsOneWidget);
     });
 
-    testWidgets('expect match golden', (tester) async {
-      await tester.pumpWidget(RepaintBoundary(
-        child: widget,
-      ));
-
-      await expectLater(
-        find.byType(UserAvatar),
-        matchesGoldenFile(GoldenUtils.generateFilepath(
-          testFilepath: 'common/user/user_avatar',
-          imageName: 'm',
-        )),
-      );
-    }, tags: GoldenUtils.tag);
+    goldenTest(
+      'renders correctly',
+      fileName: 'user_avatar',
+      builder: () => GoldenTestGroup(
+        children: [
+          GoldenTestScenario(
+            name: 'initial $usersInitial',
+            child: const UserAvatar(
+              initial: usersInitial,
+            ),
+          ),
+        ],
+      ),
+    );
   });
 }

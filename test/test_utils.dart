@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:film_freund/generated/l10n.dart';
 import 'package:film_freund/services/lists/enums/list_type.dart';
 import 'package:film_freund/services/lists/models/movie_list.dart';
@@ -154,17 +152,4 @@ class TestInstance {
         createdAt: createdAt ?? DateTime(1),
         updatedAt: updatedAt ?? DateTime(1),
       );
-}
-
-/// Utils for golden tests
-abstract class GoldenUtils {
-  /// A tag to mark a test as a golden test
-  static const tag = 'goldens';
-
-  /// Generates a filepath for a golden for a [testFilepath] and [imageName]
-  static String generateFilepath({
-    required String testFilepath,
-    required String imageName,
-  }) =>
-      '${Directory.current.path}/test/goldens/$testFilepath/$imageName.png';
 }

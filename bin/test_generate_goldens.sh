@@ -1,3 +1,3 @@
 #!/bin/sh
 
-flutter test --tags 'goldens' --update-goldens
+flutter test --tags 'golden' --update-goldens

@@ -48,11 +48,7 @@ sh bin/test_local_coverage_report.sh
 
 and viewed by opening `coverage/index.html`.
 
-Golden tests are used to verify that widgets appear as they should. These goldens are generated on macOS, however the CI pipeline runs on Linux which can result in discrepancies. As stated in [#56383](https://github.com/flutter/flutter/issues/56383), one solution is to disable font smoothing on macOS:
-
-```
-defaults -currentHost write -g AppleFontSmoothing -int 0
-```
+Golden tests are used to verify that widgets appear as they should. [alchemist](https://pub.dev/packages/alchemist) is used to ensure goldens can be generated platform agnostic and not be successible to discrepancies on CI pipeline.
 
 ## Credits
 
