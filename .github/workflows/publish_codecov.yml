@@ -22,7 +22,7 @@ jobs:
       - name: Generate coverage helper
         run: sh bin/test_include_all_files.sh film_freund
       - name: Unit tests
-        run: flutter test --coverage
+        run: flutter test --dart-define CI=true --coverage
       - name: Publish codecov report
         uses: codecov/codecov-action@v1
         with:
