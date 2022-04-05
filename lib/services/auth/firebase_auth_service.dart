@@ -22,7 +22,7 @@ class FirebaseAuthService implements IAuthService {
   Stream<bool> get onAuthStateChanged => _firebaseAuth.authStateChanges().map((user) => user != null);
 
   @override
-  Future<AuthResult> signin({required String email, required String password}) async {
+  Future<AuthResult> signIn({required String email, required String password}) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
         email: email,
@@ -30,7 +30,7 @@ class FirebaseAuthService implements IAuthService {
       );
 
       log('Signed in');
-      return AuthResult.signinSuccess;
+      return AuthResult.signInSuccess;
     } on FirebaseAuthException catch (authException) {
       if (authException.code.userNotFound) {
         log('No user found for that email.');
@@ -48,7 +48,7 @@ class FirebaseAuthService implements IAuthService {
         }
       } else if (authException.code.wrongPassword) {
         log('Wrong password provided for that user.');
-        return AuthResult.signinIncorrectPassword;
+        return AuthResult.signInIncorrectPassword;
       }
     }
 
@@ -56,13 +56,13 @@ class FirebaseAuthService implements IAuthService {
   }
 
   @override
-  Future<void> signout() => _firebaseAuth.signOut();
+  Future<void> signOut() => _firebaseAuth.signOut();
 
   @override
   Future<ChangePasswordResult> changePassword({required String currentPassword, required String newPassword}) async {
     assert(isUserAuthenticated, 'No signed-in user to delete');
 
-    final user = FirebaseAuth.instance.currentUser;
+    final user = _firebaseAuth.currentUser;
     if (user != null && user.email != null) {
       final credentials = EmailAuthProvider.credential(email: user.email!, password: currentPassword);
 
@@ -113,7 +113,7 @@ class FirebaseAuthService implements IAuthService {
   }
 }
 
-extension on String {
+extension AuthStringExtensions on String {
   static const _userNotFound = 'user-not-found';
   static const _wrongPassword = 'wrong-password';
 

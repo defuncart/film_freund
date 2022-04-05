@@ -173,7 +173,7 @@ void main() {
 
       group('when signin button is pressed', () {
         testUI('and ${AuthResult.createSuccess}, ensure callback is invoked', (tester) async {
-          when(mockUserManager.signin(email: email, password: password))
+          when(mockUserManager.signIn(email: email, password: password))
               .thenAnswer((_) => Future.value(AuthResult.createSuccess));
 
           await tester.tap(find.text(
@@ -185,9 +185,9 @@ void main() {
           expect(find.byType(HomeScreen), findsOneWidget);
         });
 
-        testUI('and ${AuthResult.signinSuccess}, ensure callback is invoked', (tester) async {
-          when(mockUserManager.signin(email: email, password: password))
-              .thenAnswer((_) => Future.value(AuthResult.signinSuccess));
+        testUI('and ${AuthResult.signInSuccess}, ensure callback is invoked', (tester) async {
+          when(mockUserManager.signIn(email: email, password: password))
+              .thenAnswer((_) => Future.value(AuthResult.signInSuccess));
 
           await tester.tap(find.text(
             AppLocalizations.current.signinScreenSigninButtonText,
@@ -198,9 +198,9 @@ void main() {
           expect(find.byType(HomeScreen), findsOneWidget);
         });
 
-        testUI('and ${AuthResult.signinIncorrectPassword}, ensure callback is invoked', (tester) async {
-          when(mockUserManager.signin(email: email, password: password))
-              .thenAnswer((_) => Future.value(AuthResult.signinIncorrectPassword));
+        testUI('and ${AuthResult.signInIncorrectPassword}, ensure callback is invoked', (tester) async {
+          when(mockUserManager.signIn(email: email, password: password))
+              .thenAnswer((_) => Future.value(AuthResult.signInIncorrectPassword));
 
           await tester.tap(find.text(
             AppLocalizations.current.signinScreenSigninButtonText,
@@ -213,7 +213,7 @@ void main() {
         });
 
         testUI('and ${AuthResult.other}, ensure callback is invoked', (tester) async {
-          when(mockUserManager.signin(email: email, password: password))
+          when(mockUserManager.signIn(email: email, password: password))
               .thenAnswer((_) => Future.value(AuthResult.other));
 
           await tester.tap(find.text(

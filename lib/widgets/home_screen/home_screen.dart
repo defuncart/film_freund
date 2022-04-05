@@ -140,7 +140,7 @@ class HomeScreenContent extends StatelessWidget {
                 case ActiveView.settings:
                   return SettingsView(
                     onSignOutConfirmed: () {
-                      ServiceLocator.userManager.signout();
+                      ServiceLocator.userManager.signOut();
                       Navigator.of(context).pushReplacementNamed(SigninScreen.routeName);
                     },
                   );

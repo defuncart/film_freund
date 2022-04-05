@@ -18,7 +18,7 @@ class UserManager {
   final IUserDatabase _userDatabase;
   final IListDatabase _listDatabase;
 
-  /// Returns whether a user is currently authenicated on the device
+  /// Returns whether a user is currently authenticated on the device
   bool get isAuthenticated => _authService.isUserAuthenticated;
 
   /// Returns the current user
@@ -59,11 +59,11 @@ class UserManager {
   /// Attempts to sign in a user with [email] and [password]
   ///
   /// See [IAuthService] for more info
-  Future<AuthResult> signin({
+  Future<AuthResult> signIn({
     required String email,
     required String password,
   }) async {
-    final result = await _authService.signin(
+    final result = await _authService.signIn(
       email: email,
       password: password,
     );
@@ -85,7 +85,7 @@ class UserManager {
   }
 
   /// Signs out a user
-  Future<void> signout() => _authService.signout();
+  Future<void> signOut() => _authService.signOut();
 
   /// Updates [displayName] for the current user
   Future<void> updateDisplayName(
