@@ -10,7 +10,6 @@ import 'package:film_freund/services/platform/i_platform_service.dart';
 import 'package:film_freund/services/user/i_user_database.dart';
 import 'package:film_freund/services/uuid/uuid_service.dart';
 import 'package:firebase_core_platform_interface/firebase_core_platform_interface.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive/hive.dart';

@@ -164,12 +164,12 @@ class TextOptionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: onPressed,
-      child: Text(text),
       style: ButtonStyle(
         padding: MaterialStateProperty.all(
           EdgeInsets.zero,
         ),
       ),
+      child: Text(text),
     );
   }
 }

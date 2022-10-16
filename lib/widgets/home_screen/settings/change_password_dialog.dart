@@ -130,16 +130,22 @@ class _ChangePasswordDialogState extends State<ChangePasswordDialog> {
 
                   ModalProgressIndicator.hide();
 
-                  switch (result) {
-                    case ChangePasswordResult.success:
-                      Navigator.of(context).pop();
-                      break;
-                    case ChangePasswordResult.incorrectPassword:
-                      setState(() => _currentPasswordErrorText = AppLocalizations.of(context).generalIncorrectPassword);
-                      break;
-                    case ChangePasswordResult.other:
-                      setState(() => _currentPasswordErrorText = AppLocalizations.of(context).generalErrorOccured);
-                      break;
+                  if (mounted) {
+                    switch (result) {
+                      case ChangePasswordResult.success:
+                        Navigator.of(context).pop();
+                        break;
+                      case ChangePasswordResult.incorrectPassword:
+                        setState(
+                          () => _currentPasswordErrorText = AppLocalizations.of(context).generalIncorrectPassword,
+                        );
+                        break;
+                      case ChangePasswordResult.other:
+                        setState(
+                          () => _currentPasswordErrorText = AppLocalizations.of(context).generalErrorOccured,
+                        );
+                        break;
+                    }
                   }
                 }
               : null,

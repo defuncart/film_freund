@@ -7,7 +7,7 @@ class RegionButtonPanel extends StatefulWidget {
   const RegionButtonPanel({Key? key}) : super(key: key);
 
   @override
-  _RegionButtonPanelState createState() => _RegionButtonPanelState();
+  State<RegionButtonPanel> createState() => _RegionButtonPanelState();
 }
 
 class _RegionButtonPanelState extends State<RegionButtonPanel> {
