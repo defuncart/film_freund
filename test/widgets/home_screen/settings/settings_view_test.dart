@@ -15,6 +15,7 @@ import 'package:mockito/mockito.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 
 import '../../../mocks.dart';
+import '../../../riverpod_provider_extension.dart';
 import '../../../test_service_locator.dart';
 import '../../../test_utils.dart';
 
@@ -50,7 +51,7 @@ void main() {
         ProviderScope(
           overrides: [
             currentUserProvider.overrideWithValue(
-              const AsyncValue.error(error),
+              const AsyncValue.error(error, StackTrace.empty),
             )
           ],
           child: MaterialApp(

@@ -18,6 +18,7 @@ import 'package:network_image_mock/network_image_mock.dart';
 
 import '../../mocks.dart';
 import '../../riverpod_overrides.dart';
+import '../../riverpod_provider_extension.dart';
 import '../../test_service_locator.dart';
 import '../../test_utils.dart';
 
