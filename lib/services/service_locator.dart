@@ -17,6 +17,8 @@ import 'package:film_freund/services/uuid/uuid_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+typedef Reader<T> = T Function(ProviderListenable<T> provider);
+
 abstract class ServiceLocator {
   static late Reader _read;
 
