@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:film_freund/managers/cache/cache_manager.dart';
 import 'package:film_freund/managers/movies/movie_manager.dart';
 import 'package:film_freund/managers/user/user_manager.dart';
@@ -59,36 +61,38 @@ class MethodChannelMocks {
   static void setupFirebase([Callback? customHandlers]) {
     TestWidgetsFlutterBinding.ensureInitialized();
 
-    MethodChannelFirebase.channel.setMockMethodCallHandler((call) async {
-      if (call.method == 'Firebase#initializeCore') {
-        return [
-          {
-            'name': defaultFirebaseAppName,
-            'options': {
-              'apiKey': '123',
-              'appId': '123',
-              'messagingSenderId': '123',
-              'projectId': '123',
-            },
-            'pluginConstants': {},
-          }
-        ];
-      }
+    setupFirebaseCoreMocks();
 
-      if (call.method == 'Firebase#initializeApp') {
-        return {
-          'name': call.arguments['appName'],
-          'options': call.arguments['options'],
-          'pluginConstants': {},
-        };
-      }
+    // MethodChannelFirebase.channel.setMockMethodCallHandler((call) async {
+    //   if (call.method == 'Firebase#initializeCore') {
+    //     return [
+    //       {
+    //         'name': defaultFirebaseAppName,
+    //         'options': {
+    //           'apiKey': '123',
+    //           'appId': '123',
+    //           'messagingSenderId': '123',
+    //           'projectId': '123',
+    //         },
+    //         'pluginConstants': {},
+    //       }
+    //     ];
+    //   }
 
-      if (customHandlers != null) {
-        customHandlers(call);
-      }
+    //   if (call.method == 'Firebase#initializeApp') {
+    //     return {
+    //       'name': call.arguments['appName'],
+    //       'options': call.arguments['options'],
+    //       'pluginConstants': {},
+    //     };
+    //   }
 
-      return null;
-    });
+    //   if (customHandlers != null) {
+    //     customHandlers(call);
+    //   }
+
+    //   return null;
+    // });
   }
 
   static void setupPathProvider(PathProviderPlatform instance) {
