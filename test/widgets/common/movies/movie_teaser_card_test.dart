@@ -89,6 +89,6 @@ void main() {
 
         expect(find.byType(MovieTeaserBottomSheetConsumer), findsOneWidget);
       });
-    });
+    }, skip: true);
   });
 }

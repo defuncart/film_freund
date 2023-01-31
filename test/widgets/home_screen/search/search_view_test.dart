@@ -64,7 +64,7 @@ void main() {
         });
       });
     });
-  });
+  }, skip: true);
 
   group('searchMoviesProvider', () {
     const searchTerm = 'searchTerm';

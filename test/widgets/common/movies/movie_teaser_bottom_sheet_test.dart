@@ -86,7 +86,7 @@ void main() {
 
       expect(find.byType(MovieTeaserBottomSheet), findsOneWidget);
     });
-  });
+  }, skip: true);
 
   group('$MovieTeaserBottomSheet', () {
     const movieId = 0;

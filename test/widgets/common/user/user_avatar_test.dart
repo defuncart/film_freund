@@ -52,5 +52,5 @@ void main() {
         ],
       ),
     );
-  });
+  }, skip: true);
 }

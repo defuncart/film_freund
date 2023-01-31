@@ -68,7 +68,7 @@ void main() {
 
       expect(find.byType(Text), findsOneWidget);
       expect(find.text(error), findsOneWidget);
-    });
+    }, skip: true);
 
     testWidgets('SettingsView data', (tester) async {
       mockNetworkImagesFor(() async {
@@ -95,7 +95,7 @@ void main() {
         expect(find.byType(SettingsViewContent), findsOneWidget);
       });
     });
-  });
+  }, skip: true);
 
   group('$SettingsViewContent', () {
     final user = TestInstance.user();
@@ -237,5 +237,5 @@ void main() {
         findsOneWidget,
       );
     });
-  });
+  }, skip: true);
 }

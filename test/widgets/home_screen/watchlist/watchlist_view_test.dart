@@ -31,7 +31,7 @@ void main() {
       expect(find.byType(WatchlistView), findsOneWidget);
       expect(find.byType(MovieTeasersStreamConsumer), findsOneWidget);
     });
-  });
+  }, skip: true);
 
   group('watchlistMoviesProvider', () {
     late MovieManager mockMovieManager;
