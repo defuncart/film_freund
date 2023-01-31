@@ -53,10 +53,12 @@ test/coverage_helper_test.dart
 assets_dev/l10n
 
 # firebase
+lib/firebase_options.dart
 android/app/google-services.json
 ios/Runner/GoogleService-Info.plist
+ios/firebase_app_id_file.json
 macos/Runner/GoogleService-Info.plist
-web/firebase-config.js
+macos/firebase_app_id_file.json
 
 # api keys
 lib/services/movies/movie_database.secrets.dart

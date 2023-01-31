@@ -1,4 +1,5 @@
 import 'package:film_freund/configs/app_themes.dart';
+import 'package:film_freund/firebase_options.dart';
 import 'package:film_freund/generated/l10n.dart';
 import 'package:film_freund/services/service_locator.dart';
 import 'package:film_freund/widgets/home_screen/home_screen.dart';
@@ -29,7 +30,9 @@ class _MyAppState extends ConsumerState<MyApp> {
   Future<bool> _initApp() async {
     ServiceLocator.setReader(ref.read);
 
-    await Firebase.initializeApp();
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
     await ServiceLocator.localSettings.initialize();
     ServiceLocator.cacheManager.start();
 
