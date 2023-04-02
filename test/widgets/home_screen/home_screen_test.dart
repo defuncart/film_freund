@@ -118,7 +118,7 @@ void main() {
   //   testWidgets('When ${ActiveView.search}, expect $SearchView', (tester) async {
   //     final widget = ProviderScope(
   //       overrides: [
-  //         searchMoviesProvider.overrideWithProvider(
+  //         searchMoviesProvider.overrideWith(
   //           FutureProvider.family.autoDispose<List<MovieTeaser>, String>(
   //             (_, searchTerm) => const [],
   //           ),

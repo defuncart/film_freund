@@ -16,10 +16,8 @@ void main() {
     setUpUI((tester) async {
       final widget = ProviderScope(
         overrides: [
-          searchMoviesProvider.overrideWithProvider(
-            FutureProvider.family.autoDispose<List<MovieTeaser>, String>(
-              (_, searchTerm) => const [],
-            ),
+          searchMoviesProvider.overrideWith(
+            (_, searchTerm) => const [],
           ),
         ],
         child: wrapWithMaterialAppLocalizationDelegates(
