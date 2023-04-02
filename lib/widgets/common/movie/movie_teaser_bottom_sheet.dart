@@ -63,12 +63,12 @@ class MovieTeaserBottomSheet extends StatelessWidget {
           children: [
             Text(
               movieTitle,
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             const Gap(4),
             Text(
               movieYear,
-              style: Theme.of(context).textTheme.bodyText2,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
             const Divider(),
             Row(
