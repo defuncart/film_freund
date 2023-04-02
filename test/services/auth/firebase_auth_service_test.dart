@@ -192,7 +192,7 @@ void main() async {
               ChangePasswordResult.other,
             );
           });
-        }, skip: true);
+        });
 
         group('and user email is null', () {
           setUp(() {
@@ -209,15 +209,19 @@ void main() async {
               ChangePasswordResult.other,
             );
           });
-        }, skip: false);
+        });
 
         group('and currentPassword is incorrect', () {
           setUp(() {
+            final mockUser = MockUser(email: 'email');
             mockFirebaseAuth = MockFirebaseAuth(
               signedIn: true,
-              mockUser: MockUser(email: 'email')..exception = FirebaseAuthException(code: 'wrong-password'),
+              mockUser: mockUser,
             );
             service = FirebaseAuthService(mockFirebaseAuth);
+            whenCalling(Invocation.method(#reauthenticateWithCredential, null))
+                .on(mockUser)
+                .thenThrow(FirebaseAuthException(code: 'wrong-password'));
           });
 
           test('expect ${ChangePasswordResult.incorrectPassword}', () async {
@@ -230,11 +234,15 @@ void main() async {
 
         group('and another exception occurs', () {
           setUp(() {
+            final mockUser = MockUser(email: 'email');
             mockFirebaseAuth = MockFirebaseAuth(
               signedIn: true,
-              mockUser: MockUser(email: 'email')..exception = FirebaseAuthException(code: 'bla'),
+              mockUser: mockUser,
             );
             service = FirebaseAuthService(mockFirebaseAuth);
+            whenCalling(Invocation.method(#reauthenticateWithCredential, null))
+                .on(mockUser)
+                .thenThrow(FirebaseAuthException(code: 'bla'));
           });
 
           test('expect ${ChangePasswordResult.other}', () async {
@@ -290,7 +298,7 @@ void main() async {
               DeleteResult.other,
             );
           });
-        }, skip: true);
+        });
       });
 
       group('and user email is null', () {
@@ -307,16 +315,20 @@ void main() async {
             await service.delete(password: 'password'),
             DeleteResult.other,
           );
-        }, skip: true);
+        });
       });
 
       group('and password is incorrect', () {
         setUp(() {
+          final mockUser = MockUser(email: 'email');
           mockFirebaseAuth = MockFirebaseAuth(
             signedIn: true,
-            mockUser: MockUser(email: 'email')..exception = FirebaseAuthException(code: 'wrong-password'),
+            mockUser: mockUser,
           );
           service = FirebaseAuthService(mockFirebaseAuth);
+          whenCalling(Invocation.method(#reauthenticateWithCredential, null))
+              .on(mockUser)
+              .thenThrow(FirebaseAuthException(code: 'wrong-password'));
         });
 
         test('expect ${DeleteResult.incorrectPassword}', () async {
@@ -367,4 +379,18 @@ void main() async {
       });
     });
   });
+}
+
+class MockUserCredential implements UserCredential {
+  @override
+  // TODO: implement additionalUserInfo
+  AdditionalUserInfo? get additionalUserInfo => throw UnimplementedError();
+
+  @override
+  // TODO: implement credential
+  AuthCredential? get credential => throw UnimplementedError();
+
+  @override
+  // TODO: implement user
+  User? get user => throw UnimplementedError();
 }
