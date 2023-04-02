@@ -115,7 +115,7 @@ void main() {
         ],
       ),
     );
-  }, skip: true);
+  });
 
   group('$Ring', () {
     group('percentage', () {
