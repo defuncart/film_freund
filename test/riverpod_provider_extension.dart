@@ -11,9 +11,9 @@ extension Temp2 on AutoDisposeFutureProvider {
 }
 
 extension Temp3 on AutoDisposeStreamProvider {
-  Override overrideWithValue<T>(T value) => overrideWith((_) => Stream.value(value));
+  Override overrideWithValue<T>(T value) => overrideWith((_) => Stream<T>.value(value));
 }
 
 extension Temp4 on StreamProvider {
-  Override overrideWithValue<T>(T value) => overrideWith((_) => Stream.value(value));
+  Override overrideWithValue<T>(T value) => overrideWith((_) => Stream<T>.value(value));
 }

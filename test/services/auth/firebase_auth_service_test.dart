@@ -200,7 +200,6 @@ void main() async {
               signedIn: true,
               mockUser: MockUser(email: null),
             );
-            print(mockFirebaseAuth.currentUser?.email);
             service = FirebaseAuthService(mockFirebaseAuth);
           });
 
