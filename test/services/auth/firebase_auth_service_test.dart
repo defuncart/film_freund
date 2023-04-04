@@ -4,11 +4,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mock_exceptions/mock_exceptions.dart';
 
 import '../../mocks.dart';
 
 void main() async {
-  MethodChannelMocks.setupFirebase((call) {});
+  MethodChannelMocks.setupFirebase();
   await Firebase.initializeApp();
 
   group('$FirebaseAuthService', () {
@@ -108,9 +109,12 @@ void main() async {
         setUp(() {
           mockFirebaseAuth = MockFirebaseAuth(
             signedIn: false,
-            authExceptions: AuthExceptions(signInWithEmailAndPassword: FirebaseAuthException(code: 'wrong-password')),
           );
           service = FirebaseAuthService(mockFirebaseAuth);
+
+          whenCalling(Invocation.method(#signInWithEmailAndPassword, null))
+              .on(mockFirebaseAuth)
+              .thenThrow(FirebaseAuthException(code: 'wrong-password'));
         });
 
         test('expect ${AuthResult.signInIncorrectPassword}', () async {
@@ -127,10 +131,13 @@ void main() async {
           setUp(() {
             mockFirebaseAuth = MockFirebaseAuth(
               signedIn: false,
-              authExceptions: AuthExceptions(signInWithEmailAndPassword: FirebaseAuthException(code: 'user-not-found')),
             );
             service = FirebaseAuthService(mockFirebaseAuth);
             MethodChannelMocks.setupFirebase();
+
+            whenCalling(Invocation.method(#signInWithEmailAndPassword, null))
+                .on(mockFirebaseAuth)
+                .thenThrow(FirebaseAuthException(code: 'user-not-found'));
           });
 
           test('expect ${AuthResult.createSuccess}', () async {
@@ -175,7 +182,7 @@ void main() async {
       group('when user is authenticated', () {
         group('and user is null', () {
           setUp(() async {
-            mockFirebaseAuth = MockFirebaseAuth(signedIn: true);
+            mockFirebaseAuth = MockFirebaseAuth(signedIn: true, mockUser: null);
             service = FirebaseAuthService(mockFirebaseAuth);
           });
 
@@ -191,7 +198,7 @@ void main() async {
           setUp(() {
             mockFirebaseAuth = MockFirebaseAuth(
               signedIn: true,
-              mockUser: MockUser(),
+              mockUser: MockUser(email: null),
             );
             service = FirebaseAuthService(mockFirebaseAuth);
           });
@@ -206,11 +213,15 @@ void main() async {
 
         group('and currentPassword is incorrect', () {
           setUp(() {
+            final mockUser = MockUser(email: 'email');
             mockFirebaseAuth = MockFirebaseAuth(
               signedIn: true,
-              mockUser: MockUser(email: 'email')..exception = FirebaseAuthException(code: 'wrong-password'),
+              mockUser: mockUser,
             );
             service = FirebaseAuthService(mockFirebaseAuth);
+            whenCalling(Invocation.method(#reauthenticateWithCredential, null))
+                .on(mockUser)
+                .thenThrow(FirebaseAuthException(code: 'wrong-password'));
           });
 
           test('expect ${ChangePasswordResult.incorrectPassword}', () async {
@@ -223,11 +234,15 @@ void main() async {
 
         group('and another exception occurs', () {
           setUp(() {
+            final mockUser = MockUser(email: 'email');
             mockFirebaseAuth = MockFirebaseAuth(
               signedIn: true,
-              mockUser: MockUser(email: 'email')..exception = FirebaseAuthException(code: 'bla'),
+              mockUser: mockUser,
             );
             service = FirebaseAuthService(mockFirebaseAuth);
+            whenCalling(Invocation.method(#reauthenticateWithCredential, null))
+                .on(mockUser)
+                .thenThrow(FirebaseAuthException(code: 'bla'));
           });
 
           test('expect ${ChangePasswordResult.other}', () async {
@@ -305,11 +320,15 @@ void main() async {
 
       group('and password is incorrect', () {
         setUp(() {
+          final mockUser = MockUser(email: 'email');
           mockFirebaseAuth = MockFirebaseAuth(
             signedIn: true,
-            mockUser: MockUser(email: 'email')..exception = FirebaseAuthException(code: 'wrong-password'),
+            mockUser: mockUser,
           );
           service = FirebaseAuthService(mockFirebaseAuth);
+          whenCalling(Invocation.method(#reauthenticateWithCredential, null))
+              .on(mockUser)
+              .thenThrow(FirebaseAuthException(code: 'wrong-password'));
         });
 
         test('expect ${DeleteResult.incorrectPassword}', () async {

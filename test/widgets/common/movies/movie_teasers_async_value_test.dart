@@ -91,7 +91,7 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           child: wrapWithMaterialApp(
-            const MovieTeasersAsyncValue(AsyncValue.error(errorDescription)),
+            const MovieTeasersAsyncValue(AsyncValue.error(errorDescription, StackTrace.empty)),
           ),
         ),
       );

@@ -51,7 +51,7 @@ class MovieRating extends StatelessWidget {
         child: Center(
           child: Text(
             text,
-            style: Theme.of(context).textTheme.caption?.copyWith(
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   fontSize: 10,
                   color: Colors.white,
                 ),

@@ -14,6 +14,21 @@ jobs:
           channel: 'stable'
       - name: Generate fake TMDB api key
         run: echo "part of 'movie_database.dart'; const apiKey = 'apiKey';" >lib/services/movies/movie_database.secrets.dart
+      - name: Generate fake Firebase config
+        run: |
+          cat > lib/firebase_options.dart << EOL
+          import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
+          class DefaultFirebaseOptions {
+          static FirebaseOptions get currentPlatform => const FirebaseOptions(
+            apiKey: '',
+            appId: '',
+            messagingSenderId: '',
+            projectId: '',
+            authDomain: '',
+            storageBucket: '',
+          );
+          }
+          EOL
       - name: Install packages
         run: flutter pub get
       - name: Lint

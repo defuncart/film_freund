@@ -26,7 +26,7 @@ class SigninScreen extends StatefulWidget {
   const SigninScreen({Key? key}) : super(key: key);
 
   @override
-  _SigninScreenState createState() => _SigninScreenState();
+  State<SigninScreen> createState() => _SigninScreenState();
 }
 
 class _SigninScreenState extends State<SigninScreen> {
@@ -108,17 +108,19 @@ class _SigninScreenState extends State<SigninScreen> {
 
     ModalProgressIndicator.hide();
 
-    switch (result) {
-      case AuthResult.createSuccess:
-      case AuthResult.signInSuccess:
-        Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
-        break;
-      case AuthResult.signInIncorrectPassword:
-      case AuthResult.other:
-        showDialog(
-          context: context,
-          builder: (_) => const SignInErrorDialog(),
-        );
+    if (mounted) {
+      switch (result) {
+        case AuthResult.createSuccess:
+        case AuthResult.signInSuccess:
+          Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
+          break;
+        case AuthResult.signInIncorrectPassword:
+        case AuthResult.other:
+          showDialog(
+            context: context,
+            builder: (_) => const SignInErrorDialog(),
+          );
+      }
     }
   }
 }

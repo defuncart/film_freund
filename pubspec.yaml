@@ -4,15 +4,18 @@ publish_to: 'none'
 version: 0.0.0+1
 
 environment:
-  sdk: ">=2.16.0 <3.0.0"
-  flutter: ">=2.10.0 < 3.0.0"
+  sdk: ">=2.19.0 <3.0.0"
+  flutter: ">=3.7.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  intl:
   cupertino_icons:
+  json_annotation: ^4.7.0
+  meta:
   gap:
   email_validator:
   flutter_riverpod:
@@ -39,6 +42,7 @@ dev_dependencies:
   network_image_mock:
   fake_cloud_firestore:
   firebase_auth_mocks:
+  mock_exceptions:
   alchemist:
 
 flutter:

@@ -15,7 +15,7 @@ class ModalProgressIndicator {
         ),
       ),
     );
-    overlayState?.insert(_overlayEntry!);
+    overlayState.insert(_overlayEntry!);
   }
 
   static hide() {

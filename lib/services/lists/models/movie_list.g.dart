@@ -17,7 +17,7 @@ MovieList _$MovieListFromJson(Map<String, dynamic> json) => MovieList(
 
 Map<String, dynamic> _$MovieListToJson(MovieList instance) => <String, dynamic>{
       'id': instance.id,
-      'type': _$ListTypeEnumMap[instance.type],
+      'type': _$ListTypeEnumMap[instance.type]!,
       'title': instance.title,
       'movies': instance.movies,
       'createdAt': instance.createdAt.toIso8601String(),
