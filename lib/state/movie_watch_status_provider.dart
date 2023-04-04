@@ -5,7 +5,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:stream_transform/stream_transform.dart';
 
 final movieWatchStatusProvider = StreamProvider.family<MovieWatchStatus, int>((ref, id) {
+  // ignore: deprecated_member_use
   final isWatched = ref.read(isMovieWatchedProvider(id).stream);
+  // ignore: deprecated_member_use
   final isWatchlist = ref.read(isMovieWatchlistProvider(id).stream);
 
   return isWatched.combineLatest(
