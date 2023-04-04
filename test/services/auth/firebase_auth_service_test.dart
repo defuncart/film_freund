@@ -9,7 +9,7 @@ import 'package:mock_exceptions/mock_exceptions.dart';
 import '../../mocks.dart';
 
 void main() async {
-  MethodChannelMocks.setupFirebase((call) {});
+  MethodChannelMocks.setupFirebase();
   await Firebase.initializeApp();
 
   group('$FirebaseAuthService', () {
@@ -379,18 +379,4 @@ void main() async {
       });
     });
   });
-}
-
-class MockUserCredential implements UserCredential {
-  @override
-  // TODO: implement additionalUserInfo
-  AdditionalUserInfo? get additionalUserInfo => throw UnimplementedError();
-
-  @override
-  // TODO: implement credential
-  AuthCredential? get credential => throw UnimplementedError();
-
-  @override
-  // TODO: implement user
-  User? get user => throw UnimplementedError();
 }
